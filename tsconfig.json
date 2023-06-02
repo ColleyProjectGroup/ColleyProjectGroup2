@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "declaration": true, //컴파일시 .d.ts 파일도 자동으로 함께생성 (현재쓰는 모든 타입이 정의된 파일)
+    "allowImportingTsExtensions": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "esModuleInterop": true, //기본값 - false, CommonJS에서 존재하지 않는 기본 내보내기 설정
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "removeComments": true, //컴파일시 주석제거
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true, //함수에서 return 빼먹으면 에러내기
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": ["src/**/*.ts"], //컴파일할 파일 경로 목록
+  "exclude": [
+    //컴파일에서 제외할 파일 경로 목록
+    "node_modules"
+  ],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}
