@@ -33,10 +33,9 @@
   "references": [{ "path": "./tsconfig.node.json" }],
   "baseUrl": ".", // baseUrl을 기준으로 관련된 위치에 모듈 이름의 경로 매핑 목록을 나열합니다.
   "paths": {
-    "@/*": ["./src/*", "./dist/*", ""],
-
-    "routes/*": ["./src/routes/*"],
-    "components/*": ["./src/components/*"],
-    "services/*": ["./src/services/*"]
+    // "@/*": ["./src/*", "./dist/*", ""],
+    // "routes/*": ["./src/routes/*"],
+    // "components/*": ["./src/components/*"],
+    // "services/*": ["./src/services/*"]
   }
 }
