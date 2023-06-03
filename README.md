@@ -7,4 +7,4 @@
 1. 경로별칭 vite.config.ts파일 참고해서 사용해주세요!(오류발생 가능성 있고 해당 케이스도 댓글에 작성해뒀습니다.)
 1. BrowserRouter/**createBrowserRouter** 우선 협의된 사항이 없어서 임의로 설정해뒀습니다. 자세한 건 comment 확인해주세요
 1. 추가로 모든 tsx파일 작성시 named export사용해주시면 감사하겠습니다! (export default X) - index.ts를 사용하기 위함! 마찬가지로 comment확인해주세요
-1. scss변수설정만 남아서 빠른 시간내에 추가하도록 하겠습니다.......
+1. 컴포넌트 생성시마다 components디렉토리 내부 index.ts에 작성된 형식으로 export 한 줄 추가해주세요!

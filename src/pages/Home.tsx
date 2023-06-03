@@ -1,10 +1,11 @@
 import React from 'react';
-import { Footer } from 'components/Footer';
+import { Footer, Modal } from 'components';
 
 export const Home = () => {
   return (
     <div>
       Home
+      <Modal />
       <Footer />
     </div>
   );
