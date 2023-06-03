@@ -12,9 +12,9 @@
   left: 0;
 }
 .Modal {
+  background-color: $color-primary;
   width: 500px;
   height: 250px;
-  background-color: $color-primary;
   font-weight: 400;
   display: flex;
   align-items: center;
@@ -24,18 +24,17 @@
   > span {
     margin-left: 40px;
     font-size: 20px;
-    // font-weight: bold;
   }
   .Title {
+    background-color: $color-black-0;
     width: 500px;
     height: 60px;
     position: absolute;
     top: 0;
     left: 0;
-    background-color: #000;
     border-radius: 10px 10px 0 0;
     span {
-      color: #fff;
+      color: $color-primary;
       font-size: 20px;
       font-weight: 400;
       text-align: left;
@@ -45,12 +44,12 @@
   }
 
   .Close {
+    background-color: $color-black-D9;
     position: absolute;
     right: 20px;
     bottom: 20px;
     width: 70px;
     height: 35px;
-    background-color: #d9d9d9;
     text-align: center;
     line-height: 35px;
     border: none;
