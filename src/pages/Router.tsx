@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { App, ErrorComponent, NotFound } from 'components';
-import { Home, About } from 'pages';
+import { Home, About, Admin } from 'pages';
 
 export const router = createBrowserRouter([
   {
@@ -20,5 +20,10 @@ export const router = createBrowserRouter([
         errorElement: <ErrorComponent />,
       },
     ],
+  },
+  {
+    path: '/admin',
+    element: <Admin />,
+    errorElement: <NotFound />,
   },
 ]);
