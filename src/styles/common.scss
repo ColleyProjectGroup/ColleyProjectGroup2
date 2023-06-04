@@ -20,6 +20,9 @@ button {
   &.next {
     @include size(135px, 40px);
   }
+  &.add {
+    @include size(100px, 40px);
+  }
 }
 .white {
   background-color: $color-primary;
@@ -34,4 +37,15 @@ button {
   &.loadMore {
     @include size(300px, 550x);
   }
+}
+
+// Admin에서 사용하는 common styles
+.admin-title {
+  color: $color-black-0;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.admin-content-wrapper {
+  padding: 40px 50px;
 }

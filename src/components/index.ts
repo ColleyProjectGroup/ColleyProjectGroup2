@@ -5,3 +5,4 @@ export * from 'components/Header';
 export * from 'components/ErrorComponent';
 export * from 'components/NotFound';
 export * from 'components/Modal';
+export * from 'components/admin';
