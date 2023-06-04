@@ -8,8 +8,7 @@
     "declaration": true, //컴파일시 .d.ts 파일도 자동으로 함께생성 (현재쓰는 모든 타입이 정의된 파일)
     "allowImportingTsExtensions": true,
     "allowSyntheticDefaultImports": true, // default export가 없는 모듈에서 default imports를 허용합니다. 코드 방출에는 영향을 주지 않으며, 타입 검사만 수행합니다
-    "typeRoots" : ["./@types", "./node_modules/@types"],
-
+    "typeRoots": ["./@types", "./node_modules/@types"],
 
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -27,7 +26,7 @@
     "noImplicitReturns": true, //함수에서 return 빼먹으면 에러내기
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src/**/*.ts"], //컴파일할 파일 경로 목록
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.js", "src/**/*.d.ts"], //컴파일할 파일 경로 목록
   "exclude": [
     //컴파일에서 제외할 파일 경로 목록
     "node_modules"
