@@ -1,0 +1,37 @@
+@import 'mixins';
+@import 'variables';
+
+button {
+  display: block;
+}
+
+.black {
+  background-color: $color-black-0;
+  color: $color-primary;
+  &.buy {
+    @include size(580px, 50px);
+  }
+  &.loadMore {
+    @include size(300px, 550x);
+  }
+  &.login {
+    @include size(420px, 50px);
+  }
+  &.next {
+    @include size(135px, 40px);
+  }
+}
+.white {
+  background-color: $color-primary;
+  color: $color-black-0;
+  //장바구니와 위시리스트가 텍스트 제외 스타일이 같아서 우선 이렇게 명명해뒀습니다
+  &.toLIst {
+    @include size(285px, 50px);
+  }
+  &.cancel {
+    @include size(135px, 40px);
+  }
+  &.loadMore {
+    @include size(300px, 550x);
+  }
+}
