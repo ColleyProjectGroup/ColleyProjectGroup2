@@ -2,3 +2,4 @@
 export * from 'pages/Home'
 export * from 'pages/About'
 export * from 'pages/AdminProducts'
+export * from 'pages/AdminProductAdd'

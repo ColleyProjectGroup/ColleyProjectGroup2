@@ -1,0 +1,44 @@
+@import 'styles/common';
+
+form.form-wrapper {
+  margin-top: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+
+  label {
+    color: $color-black-5;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  input {
+    margin-left: 2px;
+    // 임시 style
+    // TODO : 공통 스타일 적용 필요
+    display: inline-block;
+    max-width: 500px;
+    height: 40px;
+
+    &[type='number'] {
+      width: 300px;
+    }
+  }
+
+  textarea {
+    max-width: 500px;
+    height: 100px;
+  }
+
+  button {
+    @include size(80px, 40px);
+  }
+}
+
+.input-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}

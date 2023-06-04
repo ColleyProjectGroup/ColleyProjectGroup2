@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom'
 import { App, ErrorComponent, NotFound, Admin } from 'components'
-import { Home, About, AdminProducts } from 'pages'
+import { Home, About, AdminProducts, AdminProductAdd } from 'pages'
 
 export const router = createBrowserRouter([
   {
@@ -29,6 +29,11 @@ export const router = createBrowserRouter([
       {
         path: 'products',
         element: <AdminProducts />,
+        errorElement: <ErrorComponent />
+      },
+      {
+        path: 'product-add',
+        element: <AdminProductAdd />,
         errorElement: <ErrorComponent />
       }
     ]
