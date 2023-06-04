@@ -1,0 +1,33 @@
+@import 'styles/variables';
+
+div.wrapper {
+  height: 72px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid $color-admin-border;
+  background-color: $color-primary;
+  margin-top: 140px; // test
+
+  div {
+    color: $color-black-0;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  div.name {
+    flex-grow: 2;
+    padding-left: 60px;
+  }
+
+  div.tag {
+    flex-grow: 2;
+  }
+
+  div.price {
+    flex-grow: 1;
+  }
+
+  div.discount {
+    flex-grow: 1;
+  }
+}
