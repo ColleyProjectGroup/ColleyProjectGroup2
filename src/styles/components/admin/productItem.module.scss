@@ -1,12 +1,12 @@
 @import 'src/styles/common.scss';
 
 div.wrapper {
-  height: 60px;
+  min-height: 40px;
+  padding: 5px 0;
   display: flex;
   align-items: center;
   border-bottom: 1px solid $color-admin-border;
   background-color: $color-primary;
-  margin-top: 140px; // test
 
   div {
     color: $color-black-0;
@@ -20,10 +20,13 @@ div.wrapper {
     flex-basis: 0;
   }
 
-  div.tag {
+  div.tags {
     flex-grow: 1.5;
     flex-shrink: 0;
     flex-basis: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
   }
 
   div.price {
@@ -35,7 +38,21 @@ div.wrapper {
   div.discount {
     flex-grow: 0.5;
     flex-shrink: 0;
-    margin-right: 40px;
     flex-basis: 0;
   }
+
+  div.more {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.tag {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 10px;
+  font-size: 14px;
+  border-radius: 20px;
+  color: $color-primary;
 }
