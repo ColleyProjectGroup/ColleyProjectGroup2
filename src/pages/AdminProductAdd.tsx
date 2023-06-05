@@ -1,21 +1,31 @@
-import React from 'react'
-import { ProductAddForm } from 'components'
+import React, { useState, useCallback } from 'react'
+import { ProductAddForm, AdminLoading } from 'components'
 import styled from 'styles/pages/adminProductAdd.module.scss'
 import { Product } from 'types'
+import { adminInsertProduct } from 'api'
 
 export const AdminProductAdd = () => {
-  const onSubmitAddForm = (product: Product) => {
-    console.log(product)
-  }
+  const [isLoading, setLoading] = useState<boolean>(false)
 
-  const insertProduct = () => {
-    // TODO : 상품 추가 API 호출
+  const onSubmitAddForm = useCallback((product: Product) => {
+    setLoading(true)
+    handleInsertProduct(product)
+  }, [])
+
+  const handleInsertProduct = (product: Product) => {
+    adminInsertProduct(product).then(res => {
+      console.log(res)
+
+      setLoading(false)
+      history.back()
+    })
   }
 
   return (
     <section className={styled['admin-content-wrapper']}>
       <h1 className={styled['admin-title']}>상품 추가</h1>
       <ProductAddForm onSubmit={onSubmitAddForm} />
+      {isLoading && <AdminLoading />}
     </section>
   )
 }
