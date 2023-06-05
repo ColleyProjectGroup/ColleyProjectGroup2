@@ -1,7 +1,6 @@
-import React from 'react';
-import styles from 'styles/Modal.module.scss';
+import styles from 'styles/Modal.module.scss'
 
-export const Modal = (props) => {
+export const Modal = (props: any) => {
   return (
     <div>
       <div className={styles.ModalBackground}>
@@ -16,5 +15,5 @@ export const Modal = (props) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
