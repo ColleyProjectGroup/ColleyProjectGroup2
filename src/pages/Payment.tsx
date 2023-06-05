@@ -5,7 +5,7 @@ import {
   PriceInfo,
   PaymentMethods,
   Confirmation
-} from 'components/index'
+} from 'components/payment/index'
 
 export const Payment = () => {
   return (
