@@ -1,8 +1,8 @@
-import React, { useState, useCallback } from 'react'
-import { ProductAddForm, AdminLoading } from 'components'
+import { useState, useCallback } from 'react'
+import { ProductAddForm, AdminLoading } from 'components/index'
 import styled from 'styles/pages/adminProductAdd.module.scss'
-import { Product } from 'types'
-import { adminInsertProduct } from 'api'
+import { Product } from 'types/index'
+import { adminInsertProduct } from 'api/index'
 
 export const AdminProductAdd = () => {
   const [isLoading, setLoading] = useState<boolean>(false)

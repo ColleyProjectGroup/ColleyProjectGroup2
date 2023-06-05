@@ -1,5 +1,4 @@
-import React from 'react'
-import { ProductItemHeader } from 'components'
+import { ProductItemHeader } from 'components/index'
 import styled from 'styles/pages/adminProducts.module.scss'
 import { Link } from 'react-router-dom'
 

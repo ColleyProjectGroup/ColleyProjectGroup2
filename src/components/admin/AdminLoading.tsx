@@ -1,4 +1,3 @@
-import React from 'react'
 import styled from 'styles/pages/admin.module.scss'
 
 export const AdminLoading = () => {

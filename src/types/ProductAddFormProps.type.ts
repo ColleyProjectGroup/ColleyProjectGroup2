@@ -1,5 +1,5 @@
-import { Product } from 'types'
+import { Product } from 'types/index'
 
-export type AdminProductAddPros = {
+export type ProductAddFormProps = {
   onSubmit: (product: Product) => void
 }

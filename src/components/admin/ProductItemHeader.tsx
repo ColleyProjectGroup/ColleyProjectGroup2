@@ -1,4 +1,3 @@
-import React from 'react'
 import styled from 'styles/components/admin/productItemHeader.module.scss'
 
 export const ProductItemHeader = () => {

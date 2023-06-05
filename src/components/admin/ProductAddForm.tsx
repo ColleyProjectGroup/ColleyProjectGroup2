@@ -1,6 +1,6 @@
-import React, { useCallback, useRef, useState } from 'react'
+import { useCallback, useRef, useState } from 'react'
 import styled from 'styles/components/admin/productAddForm.module.scss'
-import { ProductAddFormProps } from 'types'
+import { ProductAddFormProps } from 'types/index'
 
 export const ProductAddForm = ({ onSubmit }: ProductAddFormProps) => {
   const [title, setTitle] = useState<string>('')
