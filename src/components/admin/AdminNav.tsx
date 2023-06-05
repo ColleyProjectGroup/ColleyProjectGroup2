@@ -15,7 +15,12 @@ export const AdminNav = () => {
         <li className={path === '/admin/customers' ? styled.active : null}>
           <Link to="/admin/customers">Customers</Link>
         </li>
-        <li className={path === '/admin/products' ? styled.active : null}>
+        <li
+          className={
+            path === '/admin/products' || path === '/admin/product-add'
+              ? styled.active
+              : null
+          }>
           <Link to="/admin/products">Products</Link>
         </li>
         <li className={path === '/admin/sales' ? styled.active : null}>
