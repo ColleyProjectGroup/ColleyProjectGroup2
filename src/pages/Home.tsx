@@ -1,5 +1,5 @@
-import React from 'react';
-import { Footer } from 'components';
+import React from 'react'
+import { Footer } from 'components/index'
 
 export const Home = () => {
   return (
@@ -7,5 +7,5 @@ export const Home = () => {
       Home
       <Footer />
     </div>
-  );
-};
+  )
+}
