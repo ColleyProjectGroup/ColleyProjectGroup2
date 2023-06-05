@@ -1,22 +1,17 @@
-import {
-  PaymentInfo,
-  ProductInfo,
+import {  ProductInfo,
   UserAddress,
   PriceInfo,
   PaymentMethods,
-  Confirmation
-} from 'components/payment/index'
+  Confirmation } from 'components/payment/index'
 
 export const Payment = () => {
   return (
-    <>
-      <PaymentInfo>
-        <ProductInfo />
-        <UserAddress />
-        <PriceInfo />
-        <PaymentMethods />
-        <Confirmation />
-      </PaymentInfo>
-    </>
+    <div>
+    <ProductInfo />
+      <UserAddress />
+      <PriceInfo />
+      <PaymentMethods />
+      <Confirmation />
+    </div>
   )
 }
