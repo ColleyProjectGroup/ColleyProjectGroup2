@@ -25,7 +25,20 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true, //함수에서 return 빼먹으면 에러내기
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "baseUrl":"./",
+    "paths":{
+      "@/*":["src/*"],
+      "pages/*":["src/pages/*"],
+      "components/*":["src/components/*"],
+      "services/*":["src/services/*"],
+      "hooks/*":["src/hooks/*"],
+      "contexts/*":["src/contexts/*"],
+      "styles/*":["src/styles/*"],
+      "types/*":["src/types/*"],
+      "utils/*":["src/utils/*"],
+      "api/*":["src/api/*"]
+    }
   },
   "include": ["src/**/*.ts"], //컴파일할 파일 경로 목록
   "exclude": [

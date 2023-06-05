@@ -1,7 +1,7 @@
-import { defineConfig, Alias } from 'vite';
-import react from '@vitejs/plugin-react-swc';
-import tsconfigPaths from 'vite-tsconfig-paths';
-import path from 'path';
+import { defineConfig, Alias } from 'vite'
+import react from '@vitejs/plugin-react-swc'
+import tsconfigPaths from 'vite-tsconfig-paths'
+import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -21,4 +21,4 @@ export default defineConfig({
       api: `${path.resolve(__dirname, './src/api/')}`
     }
   }
-});
+})
