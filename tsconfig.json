@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "types": ["node"],
     "target": "ES2020",
     "useDefineForClassFields": true,
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
@@ -24,13 +25,34 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true, //함수에서 return 빼먹으면 에러내기
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "baseUrl": "./", // baseUrl을 기준으로 관련된 위치에 모듈 이름의 경로 매핑 목록을 나열합니다.
+    "paths": {
+      "@/*": ["src/*"],
+      "pages/*": ["src/pages/*"],
+      "components/*": ["src/components/*"],
+      "services/*": ["src/services/*"],
+      "hooks/*": ["src/hooks/*"],
+      "contexts/*": ["src/contexts/*"],
+      "styles/*": ["src/styles/*"],
+      "types/*": ["src/types/*"],
+      "utils/*": ["src/utils/*"],
+      "api/*": ["src/api/*"]
+    }
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.js", "src/**/*.d.ts"], //컴파일할 파일 경로 목록
+  "include": [
+    "src",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.js",
+    "src/**/*.d.ts"
+  ], //컴파일할 파일 경로 목록
   "exclude": [
     //컴파일에서 제외할 파일 경로 목록
     "node_modules"
   ],
-  "references": [{ "path": "./tsconfig.node.json" }],
-  "baseUrl": "." // baseUrl을 기준으로 관련된 위치에 모듈 이름의 경로 매핑 목록을 나열합니다.
+  "ts-node": {
+    "require": ["tsconfig-paths/register"]
+  },
+  "references": [{ "path": "./tsconfig.node.json" }]
 }
