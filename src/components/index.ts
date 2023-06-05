@@ -5,3 +5,11 @@ export * from 'components/Header'
 export * from 'components/ErrorComponent'
 export * from 'components/NotFound'
 export * from 'components/Modal'
+export * from 'components/PaymentInfo'
+export * from 'components/ProductInfo'
+export * from 'components/UserAddress'
+export * from 'components/PriceInfo'
+export * from 'components/PaymentMethods'
+export * from 'components/Confirmation'
+
+
