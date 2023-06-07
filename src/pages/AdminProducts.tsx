@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { AdminProductItem, AdminProductItemHeader } from 'components/index'
 import styled from 'styles/pages/adminProducts.module.scss'
 import { Link } from 'react-router-dom'
@@ -9,7 +9,7 @@ import { useOutsideClick } from 'hooks/index'
 export const AdminProducts = () => {
   const [products, setProducts] = useState<Array<Product>>([])
   const [shownMenuId, setShownMenuId] = useState<string | null>(null)
-
+  const addButtonRef = useRef<HTMLButtonElement | null>(null)
   useEffect(() => {
     adminFetchProducts().then(res => {
       setProducts(res)
@@ -17,16 +17,20 @@ export const AdminProducts = () => {
   }, [])
 
   // 바깥쪽 클릭 시 메뉴 hidden 처리
-  useOutsideClick(() => {
+  useOutsideClick(addButtonRef, () => {
     setShownMenuId(null)
   })
 
   return (
     <section className={styled['admin-content-wrapper']}>
       <h1 className={styled['admin-title']}>상품 관리</h1>
-      <button className={`${styled.black} ${styled.add} ${styled.right}`}>
-        <Link to="/admin/product-add">상품 추가</Link>
-      </button>
+      <Link to="/admin/product-add">
+        <button
+          className={`${styled.black} ${styled.add} ${styled.right}`}
+          ref={addButtonRef}>
+          상품 추가
+        </button>
+      </Link>
       <AdminProductItemHeader />
       {products.map(product => {
         return (

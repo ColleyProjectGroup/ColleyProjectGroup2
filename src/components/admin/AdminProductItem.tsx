@@ -45,7 +45,11 @@ export const AdminProductItem = ({
         })}
       </div>
       <div className={styled.price}>{product.price.toLocaleString()}원</div>
-      <div className={styled.discount}>{product.discountRate}%</div>
+      <div className={styled.discount}>
+        {product.discountRate === 0 || !product.discountRate
+          ? '-'
+          : `${product.discountRate}%`}
+      </div>
       <div className={styled.more}>
         <AdminMoreButton
           isShow={isMenuShow}

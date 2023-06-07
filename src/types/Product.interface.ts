@@ -4,7 +4,7 @@ export interface Product {
   price: number
   description: string
   tags: string[]
-  thumbnailBase64?: string
-  photoBase64?: string
+  thumbnailBase64?: string | null
+  photoBase64?: string | null
   discountRate?: number
 }

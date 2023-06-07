@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import styled from 'styles/components/admin/productAddForm.module.scss'
 import { ProductAddFormProps } from 'types/index'
 
@@ -8,6 +8,24 @@ export const ProductAddForm = ({ onSubmit }: ProductAddFormProps) => {
   const [tagStr, setTagStr] = useState<string>('')
   const [price, setPrice] = useState<string>('')
   const [discountRate, setDiscountRate] = useState<string>('')
+  const [isValid, setIsValid] = useState<boolean>(false)
+
+  // 유효성 검사
+  useEffect(() => {
+    if (
+      title &&
+      description &&
+      price &&
+      tagStr &&
+      !isNaN(parseInt(price)) &&
+      !isNaN(parseInt(discountRate === '' ? '0' : discountRate)) &&
+      parseInt(price) > 0
+    ) {
+      setIsValid(true)
+    } else {
+      setIsValid(false)
+    }
+  }, [title, description, price, tagStr, discountRate])
 
   // 대표이미지
   const fileInputRef = useRef<HTMLInputElement | null>(null)
@@ -61,15 +79,16 @@ export const ProductAddForm = ({ onSubmit }: ProductAddFormProps) => {
     detailInputRef.current.click()
   }, [])
 
-  const handleSumitAddForm = e => {
+  const handleSumitAddForm = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault()
+    if (!isValid) return
     const tags: string[] = tagStr.split(', ')
     const product = {
       title,
       description,
       tags,
       price: parseInt(price),
-      discountRate: parseInt(discountRate),
+      discountRate: parseInt(discountRate === '' ? '0' : discountRate),
       thumbnailBase64: thumbnailImage,
       photoBase64: detailImage
     }
@@ -114,7 +133,7 @@ export const ProductAddForm = ({ onSubmit }: ProductAddFormProps) => {
             value={price ?? ''}
             type="number"
             placeholder="가격 입력"
-            onChange={e => setPrice(e.target.value)}
+            onChange={e => setPrice(e.target.value.trim())}
           />
         </label>
         <label>
@@ -123,13 +142,13 @@ export const ProductAddForm = ({ onSubmit }: ProductAddFormProps) => {
             value={discountRate ?? ''}
             type="number"
             placeholder="할인율 입력"
-            onChange={e => setDiscountRate(e.target.value)}
+            onChange={e => setDiscountRate(e.target.value.trim())}
           />
         </label>
       </div>
-      {/* TODO: 이미지 추가 버튼들 */}
+
       <div className={styled['input-row']}>
-        <label>
+        <label htmlFor="">
           대표 이미지
           <input
             id="thumbnail-upload"
@@ -138,6 +157,7 @@ export const ProductAddForm = ({ onSubmit }: ProductAddFormProps) => {
             onChange={handleUploadImage}
           />
           <button
+            type="button"
             className={`${styled.white}`}
             onClick={onClickThumbnailImageUpload}>
             이미지 업로드
@@ -151,7 +171,7 @@ export const ProductAddForm = ({ onSubmit }: ProductAddFormProps) => {
             style={{ backgroundImage: `url(${thumbnailImage})` }}></div>
         </label>
 
-        <label>
+        <label htmlFor="">
           상세 이미지
           <input
             id="detail-upload"
@@ -160,6 +180,7 @@ export const ProductAddForm = ({ onSubmit }: ProductAddFormProps) => {
             onChange={handleUploadImage}
           />
           <button
+            type="button"
             className={`${styled.white}`}
             onClick={onClickDetailImageUpload}>
             이미지 업로드
@@ -173,7 +194,12 @@ export const ProductAddForm = ({ onSubmit }: ProductAddFormProps) => {
             style={{ backgroundImage: `url(${detailImage})` }}></div>
         </label>
       </div>
-      <button className={styled['black']}>저장</button>
+
+      <button
+        className={styled['black']}
+        disabled={!isValid}>
+        저장
+      </button>
     </form>
   )
 }

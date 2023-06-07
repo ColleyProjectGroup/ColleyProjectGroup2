@@ -23,7 +23,11 @@ button {
   &.add {
     @include size(100px, 40px);
   }
+  &:disabled {
+    background-color: $color-black-D9;
+  }
 }
+
 .white {
   background-color: $color-primary;
   color: $color-black-0;
