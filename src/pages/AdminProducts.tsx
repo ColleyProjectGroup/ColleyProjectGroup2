@@ -4,14 +4,22 @@ import styled from 'styles/pages/adminProducts.module.scss'
 import { Link } from 'react-router-dom'
 import { adminFetchProducts } from 'api/index'
 import { Product } from 'types/index'
+import { useOutsideClick } from 'hooks/index'
 
 export const AdminProducts = () => {
   const [products, setProducts] = useState<Array<Product>>([])
+  const [shownMenuId, setShownMenuId] = useState<string | null>(null)
+
   useEffect(() => {
     adminFetchProducts().then(res => {
       setProducts(res)
     })
   }, [])
+
+  // 바깥쪽 클릭 시 메뉴 hidden 처리
+  useOutsideClick(() => {
+    setShownMenuId(null)
+  })
 
   return (
     <section className={styled['admin-content-wrapper']}>
@@ -25,6 +33,13 @@ export const AdminProducts = () => {
           <AdminProductItem
             key={product.id}
             product={product}
+            isMenuShow={shownMenuId === product.id}
+            showMenu={() => {
+              setShownMenuId(product.id ?? '')
+            }}
+            hideMenu={() => {
+              setShownMenuId(null)
+            }}
           />
         )
       })}
