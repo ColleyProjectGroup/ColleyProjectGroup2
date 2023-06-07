@@ -1,8 +1,8 @@
-import { ProductItemProps, Product } from 'types/index'
+import { ProductItemProps } from 'types/index'
 import styled from 'styles/components/admin/productItem.module.scss'
 import { convertTagColor } from 'utils/index'
 
-export const ProductItem = ({ product }: ProductItemProps) => {
+export const AdminProductItem = ({ product }: ProductItemProps) => {
   return (
     <div className={styled.wrapper}>
       <div className={styled.name}>{product.title}</div>

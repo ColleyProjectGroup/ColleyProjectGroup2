@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { ProductItem, ProductItemHeader } from 'components/index'
+import { AdminProductItem, AdminProductItemHeader } from 'components/index'
 import styled from 'styles/pages/adminProducts.module.scss'
 import { Link } from 'react-router-dom'
 import { adminFetchProducts } from 'api/index'
@@ -19,10 +19,10 @@ export const AdminProducts = () => {
       <button className={`${styled.black} ${styled.add} ${styled.right}`}>
         <Link to="/admin/product-add">상품 추가</Link>
       </button>
-      <ProductItemHeader />
+      <AdminProductItemHeader />
       {products.map(product => {
         return (
-          <ProductItem
+          <AdminProductItem
             key={product.id}
             product={product}
           />

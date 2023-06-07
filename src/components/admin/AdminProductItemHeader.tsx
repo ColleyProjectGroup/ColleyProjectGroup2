@@ -1,6 +1,6 @@
 import styled from 'styles/components/admin/productItemHeader.module.scss'
 
-export const ProductItemHeader = () => {
+export const AdminProductItemHeader = () => {
   return (
     <div className={styled.wrapper}>
       <div className={styled.name}>상품명</div>
