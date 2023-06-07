@@ -1,1 +1,6 @@
-@import 'common' 
+@import 'src/styles/abstracts/variables';
+.container {
+  background-color: $color-gray-FA;
+  margin: 20px 0;
+  width: 1240px;
+}
