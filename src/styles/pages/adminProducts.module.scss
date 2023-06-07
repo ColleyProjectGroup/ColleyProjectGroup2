@@ -1,0 +1,12 @@
+@import 'src/styles/common.scss';
+
+// 상품 추가 버튼
+button.right {
+  position: absolute;
+  right: 50px;
+
+  a {
+    color: $color-primary;
+    text-decoration: none;
+  }
+}
