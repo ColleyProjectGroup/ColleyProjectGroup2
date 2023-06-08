@@ -1,0 +1,73 @@
+@import 'src/styles/common.scss';
+
+form.form-wrapper {
+  margin-top: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+
+  label {
+    color: $color-black-5;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  input {
+    box-sizing: border-box;
+    margin-left: 2px;
+    // 임시 style
+    // TODO : 공통 스타일 적용 필요
+    display: inline-block;
+    max-width: 500px;
+    height: 40px;
+
+    &::-webkit-inner-spin-button {
+      appearance: none;
+      -moz-appearance: none;
+      -webkit-appearance: none;
+    }
+
+    &[type='number'] {
+      width: 300px;
+    }
+
+    &[type='file'] {
+      display: none;
+
+      + button {
+        @include size(120px, 30px);
+      }
+    }
+  }
+
+  textarea {
+    max-width: 500px;
+    height: 100px;
+  }
+
+  button {
+    @include size(80px, 40px);
+  }
+}
+
+.input-row {
+  display: flex;
+  align-items: start;
+  gap: 20px;
+}
+
+.thumbnail,
+.detail {
+  width: 300px;
+  height: 0px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-left: 2px;
+
+  &.show {
+    height: 300px;
+  }
+}
