@@ -62,7 +62,9 @@ form.form-wrapper {
 .detail {
   width: 300px;
   height: 0px;
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
   margin-left: 2px;
 
   &.show {

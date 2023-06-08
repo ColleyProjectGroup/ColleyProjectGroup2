@@ -21,7 +21,7 @@ div.wrapper {
   }
 
   div.tag {
-    flex-grow: 1.5;
+    flex-grow: 2;
     flex-shrink: 0;
     flex-basis: 0;
   }
@@ -37,11 +37,12 @@ div.wrapper {
   }
 
   div.discount {
-    flex-grow: 0.5;
+    flex-grow: 1;
     flex-shrink: 0;
-    margin-right: 75px;
+    margin-right: 55px;
     flex-basis: 0;
     text-align: right;
-    max-width: 150px;
+    max-width: 100px;
+    padding-right: 30px;
   }
 }
