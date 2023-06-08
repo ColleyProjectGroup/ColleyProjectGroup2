@@ -3,6 +3,6 @@ import { Product } from 'types/index'
 export type ProductItemProps = {
   product: Product
   isMenuShow: boolean
-  showMenu: () => void
+  showMenu: (id: string) => void
   hideMenu: () => void
 }

@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef, useCallback } from 'react'
 import { AdminProductItem, AdminProductItemHeader } from 'components/index'
 import styled from 'styles/pages/adminProducts.module.scss'
 import { Link } from 'react-router-dom'
@@ -21,6 +21,14 @@ export const AdminProducts = () => {
     setShownMenuId(null)
   })
 
+  const handleShow = useCallback((id: string) => {
+    setShownMenuId(id)
+  }, [])
+
+  const handleHide = useCallback(() => {
+    setShownMenuId('')
+  }, [])
+
   return (
     <section className={styled['admin-content-wrapper']}>
       <h1 className={styled['admin-title']}>상품 관리</h1>
@@ -33,17 +41,14 @@ export const AdminProducts = () => {
       </Link>
       <AdminProductItemHeader />
       {products.map(product => {
+        const isMenuShow = shownMenuId === product.id
         return (
           <AdminProductItem
             key={product.id}
             product={product}
-            isMenuShow={shownMenuId === product.id}
-            showMenu={() => {
-              setShownMenuId(product.id ?? '')
-            }}
-            hideMenu={() => {
-              setShownMenuId(null)
-            }}
+            isMenuShow={isMenuShow}
+            showMenu={handleShow}
+            hideMenu={handleHide}
           />
         )
       })}
