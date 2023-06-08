@@ -5,7 +5,7 @@ import {
   PaymentMethods,
   Confirmation
 } from 'components/payment/index'
-import styles from 'stylesComponents/payment/Payment.module.scss'
+import styles from 'styles/components/payment/Payment.module.scss'
 
 export const Payment = () => {
   return (
