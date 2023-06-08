@@ -2,7 +2,7 @@ import { useEffect, useState, useRef, useCallback, useMemo } from 'react'
 import { AdminProductItem, AdminProductItemHeader } from 'components/index'
 import styled from 'styles/pages/adminProducts.module.scss'
 import { Link } from 'react-router-dom'
-import { adminFetchProducts } from 'api/index'
+import { adminFetchProducts, adminDeleteProduct } from 'api/index'
 import { Product } from 'types/index'
 import { useOutsideClick } from 'hooks/index'
 
@@ -16,6 +16,10 @@ export const AdminProducts = () => {
   )
   const addButtonRef = useRef<HTMLButtonElement | null>(null)
   useEffect(() => {
+    fetchProducts()
+  }, [])
+
+  const fetchProducts = useCallback(() => {
     adminFetchProducts().then(res => {
       setProducts(res)
     })
@@ -40,6 +44,24 @@ export const AdminProducts = () => {
     },
     []
   )
+
+  // 상품 삭제 이벤트
+  const onDeleteProduct = useCallback((id: string) => {
+    adminDeleteProduct(id).then(
+      isSuccess => {
+        if (isSuccess) {
+          fetchProducts()
+        } else {
+          // TODO: 삭제 실패 팝업
+          console.log('삭제 실패')
+        }
+      },
+      error => {
+        // TODO: 삭제 실패 팝업
+        console.log(error)
+      }
+    )
+  }, [])
 
   return (
     <section className={styled['admin-content-wrapper']}>
@@ -68,6 +90,7 @@ export const AdminProducts = () => {
             isMenuShow={isMenuShow}
             showMenu={handleShow}
             hideMenu={handleHide}
+            onDeleteProduct={onDeleteProduct}
           />
         )
       })}

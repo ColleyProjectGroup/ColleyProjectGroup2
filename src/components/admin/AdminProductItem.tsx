@@ -2,12 +2,17 @@ import React, { useState } from 'react'
 import { ProductItemProps } from 'types/index'
 import { convertTagColor } from 'utils/index'
 import { AdminMoreButton, Modal } from 'components/index'
-import { adminDeleteProduct } from 'api/index'
 
 import styled from 'styles/components/admin/productItem.module.scss'
 
 export const AdminProductItem = React.memo(
-  ({ product, isMenuShow, showMenu, hideMenu }: ProductItemProps) => {
+  ({
+    product,
+    isMenuShow,
+    showMenu,
+    hideMenu,
+    onDeleteProduct
+  }: ProductItemProps) => {
     const [isModalShow, setIsModalShow] = useState<boolean>(false)
 
     const handleToogleMenu = React.useCallback(() => {
@@ -35,6 +40,9 @@ export const AdminProductItem = React.memo(
     const onClickDeleteModalOk = React.useCallback(() => {
       setIsModalShow(false)
       // 삭제 API 호출
+      if (product.id) {
+        onDeleteProduct(product.id)
+      }
     }, [])
 
     const onClickDeleteModalCancel = React.useCallback(() => {
