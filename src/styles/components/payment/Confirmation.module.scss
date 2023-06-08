@@ -3,19 +3,26 @@
 .container {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
   margin: 20px 0;
   width: 1240px;
+  // border: 1px solid black;
+  background-color: $color-primary;
+
   .agree {
     border: 1px solid $color-gray-EA;
     background-color: $color-gray-FA;
+    margin: 20px;
     padding: 20px;
   }
   .check {
-    border: 1px solid $color-gray-EA;
-    background-color: $color-gray-FA;
-    padding: 20px;
+    display: flex;
+    justify-content: center;
+    // border: 1px solid $color-gray-EA;
+    // background-color: $color-gray-FA;
+    // padding: 20px;
+    margin-bottom: 20px;
+    font-weight: 700;
   }
   .confirm {
     display: block;
@@ -25,5 +32,6 @@
     font-size: 18px;
     background-color: $color-confirm;
     color: $color-primary;
+    cursor: pointer;
   }
 }
