@@ -82,7 +82,7 @@ export const ProductAddForm = ({ onSubmit }: ProductAddFormProps) => {
   const handleSumitAddForm = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (!isValid) return
-    const tags: string[] = tagStr.split(', ')
+    const tags: string[] = tagStr.toUpperCase().split(', ')
     const product = {
       title,
       description,
