@@ -5,28 +5,24 @@
   flex-direction: column;
   justify-content: center;
   margin: 20px 0;
-  width: 1240px;
-  // border: 1px solid black;
+  width: 900px;
   background-color: $color-primary;
 
   .agree {
     border: 1px solid $color-gray-EA;
     background-color: $color-gray-FA;
-    margin: 20px;
+    margin: 30px;
     padding: 20px;
   }
   .check {
     display: flex;
     justify-content: center;
-    // border: 1px solid $color-gray-EA;
-    // background-color: $color-gray-FA;
-    // padding: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     font-weight: 700;
   }
   .confirm {
     display: block;
-    width: 1240px;
+    width: 900px;
     border: none;
     padding: 10px;
     font-size: 18px;

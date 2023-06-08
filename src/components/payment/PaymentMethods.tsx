@@ -3,7 +3,10 @@ export const PaymentMethods = () => {
   return (
     <div className={styles.container}>
       <h3>결제수단</h3>
-      <div>계좌연동API</div>
+      <div className={styles.addAccout}>
+        <span>+</span>
+        <span>계좌추가</span>
+      </div>
     </div>
   )
 }
