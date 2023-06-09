@@ -1,0 +1,19 @@
+@import 'src/styles/common.scss';
+
+// 상품 추가 버튼
+button.right {
+  position: absolute;
+  right: 50px;
+
+  a {
+    color: $color-primary;
+    text-decoration: none;
+  }
+}
+
+// 검색 Input
+input.search {
+  margin-top: 80px;
+  width: 200px;
+  height: 40px;
+}

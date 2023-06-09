@@ -1,6 +1,6 @@
 @import 'abstracts/variables';
 
-.ModalBackground {
+.modalbackground {
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.4);
@@ -11,27 +11,20 @@
   top: 0;
   left: 0;
 }
-.Modal {
+
+.modal {
   background-color: $color-primary;
   width: 500px;
   height: 250px;
   font-weight: 400;
   display: flex;
-  align-items: center;
-  position: absolute;
+  flex-direction: column;
   border-radius: 10px;
 
-  > span {
-    margin-left: 40px;
-    font-size: 20px;
-  }
-  .Title {
+  .title {
     background-color: $color-black-0;
     width: 500px;
     height: 60px;
-    position: absolute;
-    top: 0;
-    left: 0;
     border-radius: 10px 10px 0 0;
     span {
       color: $color-primary;
@@ -43,11 +36,23 @@
     }
   }
 
-  .Close {
+  .content {
+    margin-top: 40px;
+    margin-left: 40px;
+    font-size: 20px;
+    flex-grow: 1;
+  }
+
+  .buttons {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 20px;
+    padding: 0 20px 20px 0;
+  }
+
+  .button {
     background-color: $color-black-D9;
-    position: absolute;
-    right: 20px;
-    bottom: 20px;
     width: 70px;
     height: 35px;
     text-align: center;

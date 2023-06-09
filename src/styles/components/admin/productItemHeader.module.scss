@@ -1,0 +1,48 @@
+@import 'src/styles/common.scss';
+
+div.wrapper {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid $color-admin-border;
+  background-color: $color-primary;
+  margin-top: 40px; // test
+
+  div {
+    color: $color-black-0;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  div.name {
+    flex-grow: 2;
+    margin-left: 60px;
+    flex-basis: 0;
+  }
+
+  div.tag {
+    flex-grow: 2;
+    flex-shrink: 0;
+    flex-basis: 0;
+  }
+
+  div.price {
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: 0;
+    text-align: right;
+    max-width: 150px;
+    margin-right: 40px;
+    padding-right: 30px;
+  }
+
+  div.discount {
+    flex-grow: 1;
+    flex-shrink: 0;
+    margin-right: 55px;
+    flex-basis: 0;
+    text-align: right;
+    max-width: 100px;
+    padding-right: 30px;
+  }
+}
