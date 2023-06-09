@@ -5,4 +5,5 @@ export type ProductItemProps = {
   isMenuShow: boolean
   showMenu: (id: string) => void
   hideMenu: () => void
+  onClickDelete: (product: Product) => void
 }

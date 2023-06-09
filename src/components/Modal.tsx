@@ -1,17 +1,29 @@
 import styles from 'styles/Modal.module.scss'
+import { ModalProps } from 'types/index'
 
-export const Modal = (props: any) => {
+export const Modal = (props: ModalProps) => {
   return (
     <div>
-      <div className={styles.ModalBackground}>
-        <div className={styles.Modal}>
-          <div className={styles.Title}>
+      <div className={styles.modalbackground}>
+        <div className={styles.modal}>
+          <div className={styles.title}>
             <span>{props.title}</span>
           </div>
-          <span>{props.content}</span>
-          <button className={styles.Close}>
-            <span>{props.buttonContent}</span>
-          </button>
+          <span className={styles.content}>{props.content}</span>
+          <div className={styles.buttons}>
+            <button
+              className={styles.button}
+              onClick={props.onClickOkButton}>
+              <span>{props.okButtonText}</span>
+            </button>
+            {props.isTwoButton ? (
+              <button
+                className={styles.button}
+                onClick={props.onClickCancelButton}>
+                <span>{props.cancelButtonText}</span>
+              </button>
+            ) : null}
+          </div>
         </div>
       </div>
     </div>

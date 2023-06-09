@@ -2,10 +2,17 @@ import React from 'react'
 import { ProductItemProps } from 'types/index'
 import { convertTagColor } from 'utils/index'
 import { AdminMoreButton } from 'components/index'
+
 import styled from 'styles/components/admin/productItem.module.scss'
 
 export const AdminProductItem = React.memo(
-  ({ product, isMenuShow, showMenu, hideMenu }: ProductItemProps) => {
+  ({
+    product,
+    isMenuShow,
+    showMenu,
+    hideMenu,
+    onClickDelete
+  }: ProductItemProps) => {
     const handleToogleMenu = React.useCallback(() => {
       if (isMenuShow) {
         hideMenu()
@@ -15,12 +22,6 @@ export const AdminProductItem = React.memo(
     }, [hideMenu, showMenu, isMenuShow, product])
 
     const onClickProductEdit = React.useCallback(() => {
-      if (isMenuShow) {
-        hideMenu()
-      }
-    }, [isMenuShow, hideMenu])
-
-    const onClickProductDelete = React.useCallback(() => {
       if (isMenuShow) {
         hideMenu()
       }
@@ -52,7 +53,7 @@ export const AdminProductItem = React.memo(
             isShow={isMenuShow}
             onToggleMenu={handleToogleMenu}
             onClickEdit={onClickProductEdit}
-            onClickDelete={onClickProductDelete}
+            onClickDelete={onClickDelete.bind(null, product)}
           />
         </div>
       </div>
