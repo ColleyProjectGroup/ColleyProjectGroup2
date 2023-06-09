@@ -19,7 +19,7 @@ export const Modal = (props: ModalProps) => {
             {props.isTwoButton ? (
               <button
                 className={styles.button}
-                onClick={props.onClickOkButton}>
+                onClick={props.onClickCancelButton}>
                 <span>{props.cancelButtonText}</span>
               </button>
             ) : null}
