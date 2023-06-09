@@ -1,0 +1,53 @@
+@import 'src/styles/abstracts/variables.scss';
+.sideSpace {
+  display: flex;
+  justify-content: center;
+  background-color: $color-mypage-background;
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    width: 1240px;
+    background-color: $color-mypage-background;
+    .sideLeft {
+      display: flex;
+      flex-direction: column;
+      .csinfo {
+        .tel {
+          font-size: 32px;
+        }
+        .call {
+          font-size: 12px;
+          padding: 25px 0 0;
+          white-space: pre-line;
+        }
+        span {
+          display: block;
+        }
+      }
+      .companyinfo {
+        display: flex;
+        flex-direction: column;
+        font-size: 11px;
+        padding: 30px 0 0;
+      }
+      .bottom {
+        margin: 84px 0 0;
+
+        .copyright {
+          font-size: 13px;
+        }
+        ul {
+          display: flex;
+          justify-content: space-between;
+          li {
+            font-size: 15px;
+          }
+        }
+      }
+    }
+    .sideRight {
+      border-left: 1px solid black;
+    }
+  }
+}
