@@ -17,8 +17,13 @@ export const Footer = () => {
             <span>주식회사 콜리</span>
             <span>
               서울특별시 강남구 논현로 709 (논현동) 로얄토토 논현동사옥 5층 콜리
-              I 사업자번호 : 371-81-01287 <a href="/">[사업자정보확인]</a> I
-              통신판매업신고 : 2016-서울마포-1355
+              I 사업자번호 : 371-81-01287{' '}
+              <a
+                href="/"
+                className={styles.businessInfo}>
+                [사업자정보확인]
+              </a>{' '}
+              I 통신판매업신고 : 2016-서울마포-1355
             </span>
             <span>
               대표자(성명) : 양승철 I CPO : 김남혁 I MAIL : pay@colley.kr
@@ -31,10 +36,18 @@ export const Footer = () => {
               Copyright © 콜리. All rights reserved. Hosting by cafe24
             </span>
             <ul>
-              <li>회사소개</li>
-              <li>이용약관</li>
-              <li>개인정보처리방침</li>
-              <li>이용안내</li>
+              <li>
+                <a href="">회사소개</a>
+              </li>
+              <li>
+                <a href="">이용약관</a>
+              </li>
+              <li>
+                <a href="">개인정보처리방침</a>
+              </li>
+              <li>
+                <a href="">이용안내</a>
+              </li>
             </ul>
           </div>
         </div>

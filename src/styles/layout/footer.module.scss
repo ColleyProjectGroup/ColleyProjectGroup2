@@ -41,6 +41,14 @@
           color: $color-black-5;
           line-height: 21px;
         }
+        .businessInfo {
+          text-decoration: none;
+          outline: none;
+          color: $color-black-0;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
       }
       .bottom {
         margin: 84px 0 0;
@@ -48,9 +56,21 @@
         .copyright {
           color: $color-black-6D;
           font-size: 13px;
+          text-decoration: none;
+          outline: none;
         }
         ul {
           display: flex;
+          a {
+            text-decoration: none;
+            outline: none;
+            &:visited {
+              color: $color-black-0;
+            }
+            &:hover {
+              text-decoration: underline;
+            }
+          }
           li:nth-child(3) {
             font-weight: 700;
           }
@@ -76,6 +96,9 @@
           outline: none;
           &:visited {
             color: $color-black-7;
+          }
+          &:hover {
+            color: $color-black-0;
           }
         }
         li {
