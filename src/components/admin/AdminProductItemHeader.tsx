@@ -1,6 +1,7 @@
+import React from 'react'
 import styled from 'styles/components/admin/productItemHeader.module.scss'
 
-export const AdminProductItemHeader = () => {
+export const AdminProductItemHeader = React.memo(() => {
   return (
     <div className={styled.wrapper}>
       <div className={styled.name}>상품명</div>
@@ -9,4 +10,4 @@ export const AdminProductItemHeader = () => {
       <div className={styled.discount}>할인율</div>
     </div>
   )
-}
+})
