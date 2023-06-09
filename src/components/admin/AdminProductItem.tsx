@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { ProductItemProps } from 'types/index'
 import { convertTagColor } from 'utils/index'
 import { AdminMoreButton } from 'components/index'
@@ -21,10 +22,13 @@ export const AdminProductItem = React.memo(
       }
     }, [hideMenu, showMenu, isMenuShow, product])
 
+    const navigate = useNavigate()
+
     const onClickProductEdit = React.useCallback(() => {
       if (isMenuShow) {
         hideMenu()
       }
+      navigate('/admin/product-add', { state: product })
     }, [isMenuShow, hideMenu])
 
     return (

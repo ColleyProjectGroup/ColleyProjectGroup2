@@ -2,13 +2,35 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import styled from 'styles/components/admin/productAddForm.module.scss'
 import { ProductAddFormProps } from 'types/index'
 
-export const ProductAddForm = ({ onSubmit }: ProductAddFormProps) => {
+export const ProductAddForm = ({ product, onSubmit }: ProductAddFormProps) => {
   const [title, setTitle] = useState<string>('')
   const [description, setDescription] = useState<string>('')
   const [tagStr, setTagStr] = useState<string>('')
   const [price, setPrice] = useState<string>('')
   const [discountRate, setDiscountRate] = useState<string>('')
   const [isValid, setIsValid] = useState<boolean>(false)
+
+  useEffect(() => {
+    if (product) {
+      const {
+        title,
+        description,
+        tags,
+        price,
+        discountRate,
+        thumbnail,
+        photo
+      } = product
+      console.log(thumbnail)
+      setTitle(title)
+      setDescription(description)
+      setTagStr(tags.join(', '))
+      setPrice(price.toString())
+      setDiscountRate(discountRate ? discountRate.toString() : '')
+      setThumbnailImage(thumbnail ? thumbnail : '')
+      setDetailImage(photo ? photo : '')
+    }
+  })
 
   // 유효성 검사
   useEffect(() => {

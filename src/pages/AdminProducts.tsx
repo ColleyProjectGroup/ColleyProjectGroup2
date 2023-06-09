@@ -7,15 +7,17 @@ import {
 import styled from 'styles/pages/adminProducts.module.scss'
 import { Link } from 'react-router-dom'
 import { adminFetchProducts, adminDeleteProduct } from 'api/index'
-import { Product, ModalProps } from 'types/index'
+import { ProductResponse, ProductAddBody, ModalProps } from 'types/index'
 import { useOutsideClick } from 'hooks/index'
 
 export const AdminProducts = () => {
   const [search, setSearch] = useState<string>('')
-  const [products, setProducts] = useState<Array<Product>>([])
+  const [products, setProducts] = useState<Array<ProductResponse>>([])
   const [shownMenuId, setShownMenuId] = useState<string | null>(null)
   const [isModalShow, setIsModalShow] = useState<boolean>(false)
-  const [deleteProduct, setDeleteProduct] = useState<Product | null>(null)
+  const [deleteProduct, setDeleteProduct] = useState<ProductResponse | null>(
+    null
+  )
   const [modalProps, setModalProps] = useState<ModalProps | null>(null)
   const [isError, setError] = useState<boolean>(false)
 
@@ -84,7 +86,7 @@ export const AdminProducts = () => {
     }
   }, [deleteProduct, isError])
 
-  const onClickDelete = useCallback((product: Product) => {
+  const onClickDelete = useCallback((product: ProductResponse) => {
     setDeleteProduct(product)
   }, [])
 
