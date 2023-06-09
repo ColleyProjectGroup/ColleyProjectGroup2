@@ -6,8 +6,12 @@ import {
 } from 'components/index'
 import styled from 'styles/pages/adminProducts.module.scss'
 import { Link } from 'react-router-dom'
-import { adminFetchProducts, adminDeleteProduct } from 'api/index'
-import { ProductResponse, ProductAddBody, ModalProps } from 'types/index'
+import {
+  adminFetchProducts,
+  adminDeleteProduct,
+  adminChangeProductSaleStatus
+} from 'api/index'
+import { ProductResponse, ModalProps } from 'types/index'
 import { useOutsideClick } from 'hooks/index'
 
 export const AdminProducts = () => {
@@ -21,10 +25,13 @@ export const AdminProducts = () => {
   const [modalProps, setModalProps] = useState<ModalProps | null>(null)
   const [isError, setError] = useState<boolean>(false)
 
-  const filteredProducts = useMemo(
-    () => products.filter(product => product.title.includes(search)),
-    [products, search]
-  )
+  const filteredProducts = useMemo(() => {
+    if (products.length === 0) {
+      return []
+    }
+
+    return products.filter(product => product.title.includes(search))
+  }, [products, search])
 
   const addButtonRef = useRef<HTMLButtonElement | null>(null)
   useEffect(() => {
@@ -117,6 +124,36 @@ export const AdminProducts = () => {
     setIsModalShow(false)
   }
 
+  // 상품 품절, 판매 처리
+  const changeStatusById = useCallback(
+    (id: string, isSoldOut: boolean) => {
+      const newProducts = products.map(product => {
+        if (product.id === id) {
+          product.isSoldOut = isSoldOut
+        }
+        return product
+      })
+      setProducts(newProducts)
+    },
+    [products]
+  )
+
+  const onChangeSaleStatus = useCallback(
+    (id: string, isChangedSoldout: boolean) => {
+      adminChangeProductSaleStatus(id, isChangedSoldout).then(
+        isSuccess => {
+          if (isSuccess) {
+            changeStatusById(id, isChangedSoldout)
+          }
+        },
+        error => {
+          console.log(error)
+        }
+      )
+    },
+    [changeStatusById]
+  )
+
   return (
     <section className={styled['admin-content-wrapper']}>
       <h1 className={styled['admin-title']}>상품 관리</h1>
@@ -145,6 +182,7 @@ export const AdminProducts = () => {
             showMenu={handleShow}
             hideMenu={handleHide}
             onClickDelete={onClickDelete}
+            onChangeSaleStatus={onChangeSaleStatus}
           />
         )
       })}

@@ -24,3 +24,14 @@ export const adminGetProductDetail = async (productId: string) => {
   const response = await baseInstance.get(`/products/${productId}`)
   return response.data
 }
+
+// 관리자 - 상품 판매 상태 변경
+export const adminChangeProductSaleStatus = async (
+  productId: string,
+  isSoldOut: boolean
+) => {
+  const response = await adminInstance.put(`/products/${productId}`, {
+    isSoldOut: isSoldOut
+  })
+  return response.data
+}

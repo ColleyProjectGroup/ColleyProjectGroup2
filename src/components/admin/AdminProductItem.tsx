@@ -12,7 +12,8 @@ export const AdminProductItem = React.memo(
     isMenuShow,
     showMenu,
     hideMenu,
-    onClickDelete
+    onClickDelete,
+    onChangeSaleStatus
   }: ProductItemProps) => {
     const handleToogleMenu = React.useCallback(() => {
       if (isMenuShow) {
@@ -30,6 +31,14 @@ export const AdminProductItem = React.memo(
       }
       navigate('/admin/product-add', { state: product })
     }, [isMenuShow, hideMenu])
+
+    const onClickChangeStatus = React.useCallback(() => {
+      if (product.isSoldOut) {
+        onChangeSaleStatus(product.id, false)
+      } else {
+        onChangeSaleStatus(product.id, true)
+      }
+    }, [])
 
     return (
       <div className={styled.wrapper}>
@@ -64,7 +73,9 @@ export const AdminProductItem = React.memo(
             isShow={isMenuShow}
             onToggleMenu={handleToogleMenu}
             onClickEdit={onClickProductEdit}
-            onClickDelete={onClickDelete.bind(null, product)}
+            onClickDelete={onClickDelete}
+            product={product}
+            onClickChangeStatus={onClickChangeStatus}
           />
         </div>
       </div>

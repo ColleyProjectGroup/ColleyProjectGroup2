@@ -6,4 +6,5 @@ export type ProductItemProps = {
   showMenu: (id: string) => void
   hideMenu: () => void
   onClickDelete: (product: ProductResponse) => void
+  onChangeSaleStatus: (id: string, isChangedSoldout: boolean) => void
 }
