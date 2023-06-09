@@ -1,0 +1,13 @@
+.address {
+  display: flex;
+  flex-direction: column;
+  label {
+    span {
+      width: 100px;
+    }
+    input {
+      display: block;
+      width: 100%;
+    }
+  }
+}
