@@ -52,6 +52,13 @@ export const AdminProductItem = React.memo(
             ? '-'
             : `${product.discountRate}%`}
         </div>
+        <div className={styled['sale-status']}>
+          {product.isSoldOut ? (
+            <span className={styled.soldout}>품절</span>
+          ) : (
+            <span className={styled.sale}>판매중</span>
+          )}
+        </div>
         <div className={styled.more}>
           <AdminMoreButton
             isShow={isMenuShow}
