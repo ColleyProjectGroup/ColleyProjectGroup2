@@ -1,4 +1,5 @@
 import styles from 'src/styles/layout/footer.module.scss'
+import icon from 'public/instagramIcon.svg'
 
 export const Footer = () => {
   return (
@@ -16,8 +17,8 @@ export const Footer = () => {
             <span>주식회사 콜리</span>
             <span>
               서울특별시 강남구 논현로 709 (논현동) 로얄토토 논현동사옥 5층 콜리
-              I 사업자번호 : 371-81-01287 [사업자정보확인] I 통신판매업신고 :
-              2016-서울마포-1355
+              I 사업자번호 : 371-81-01287 <a href="/">[사업자정보확인]</a> I
+              통신판매업신고 : 2016-서울마포-1355
             </span>
             <span>
               대표자(성명) : 양승철 I CPO : 김남혁 I MAIL : pay@colley.kr
@@ -37,7 +38,42 @@ export const Footer = () => {
             </ul>
           </div>
         </div>
-        <div className={styles.sideRight}>RIGHT</div>
+        <div className={styles.sideRight}>
+          <ul className={styles.community}>
+            <li>Community</li>
+            <li>
+              <a href="">Notice</a>
+            </li>
+
+            <li>
+              <a href="">Review</a>
+            </li>
+
+            <li>
+              <a href="">Q&A</a>
+            </li>
+          </ul>
+          <ul className={styles.shopping}>
+            <li>Shopping</li>
+            <li>
+              <a href="">My PAGE</a>
+            </li>
+
+            <li>
+              <a href="">ORDER</a>
+            </li>
+
+            <li>
+              <a href="">WISHLIST</a>
+            </li>
+          </ul>
+          <a href="https://www.instagram.com/colley.kr/">
+            <img
+              src={icon}
+              alt="Instagram"
+            />
+          </a>
+        </div>
       </div>
     </div>
   )
