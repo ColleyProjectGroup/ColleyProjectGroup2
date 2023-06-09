@@ -30,7 +30,17 @@ export const AdminProducts = () => {
       return []
     }
 
-    return products.filter(product => product.title.includes(search))
+    return products
+      .filter(product => product.title.includes(search))
+      .sort((a, b) => {
+        if (a.title < b.title) {
+          return 1
+        }
+        if (a.title > b.title) {
+          return -1
+        }
+        return 0
+      })
   }, [products, search])
 
   const addButtonRef = useRef<HTMLButtonElement | null>(null)
