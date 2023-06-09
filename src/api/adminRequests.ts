@@ -35,3 +35,9 @@ export const adminChangeProductSaleStatus = async (
   })
   return response.data
 }
+
+// 관리자 - 상품 수정
+export const adminEditProduct = async (product: ProductAddBody) => {
+  const response = await adminInstance.put(`/products/${product.id}`, product)
+  return response.data
+}

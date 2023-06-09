@@ -3,7 +3,11 @@ import { useLocation } from 'react-router-dom'
 import { ProductAddForm, AdminLoading } from 'components/index'
 import styled from 'styles/pages/adminProductAdd.module.scss'
 import { ProductAddBody, ProductResponse } from 'types/index'
-import { adminInsertProduct, adminGetProductDetail } from 'api/index'
+import {
+  adminInsertProduct,
+  adminGetProductDetail,
+  adminEditProduct
+} from 'api/index'
 
 export const AdminProductAdd = () => {
   const [isLoading, setLoading] = useState<boolean>(false)
@@ -36,12 +40,21 @@ export const AdminProductAdd = () => {
   }, [])
 
   const handleInsertProduct = (product: ProductAddBody) => {
-    adminInsertProduct(product).then(res => {
-      console.log(res)
+    if (isAddMode) {
+      adminInsertProduct(product).then(res => {
+        console.log(res)
 
-      setLoading(false)
-      history.back()
-    })
+        setLoading(false)
+        history.back()
+      })
+    } else {
+      adminEditProduct(product).then(res => {
+        console.log(res)
+
+        setLoading(false)
+        history.back()
+      })
+    }
   }
 
   return (

@@ -41,11 +41,6 @@ export const AdminMoreButton = ({
           <li onClick={onClickChangeStatus}>
             {product.isSoldOut ? '판매처리' : '품절처리'}
           </li>
-          {/* {product.isSoldOut ? (
-            <li onClick={onClickChangeStatus}>판매 처리</li>
-          ) : (
-            <li onClick={onClickChangeStatus}>품절 처리</li>
-          )} */}
         </ul>
       </div>
     </div>
