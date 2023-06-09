@@ -1,5 +1,6 @@
-import { Product } from 'types/index'
+import { ProductAddBody, ProductResponse } from 'types/index'
 
 export type ProductAddFormProps = {
-  onSubmit: (product: Product) => void
+  product: ProductResponse | null
+  onSubmit: (product: ProductAddBody) => void
 }

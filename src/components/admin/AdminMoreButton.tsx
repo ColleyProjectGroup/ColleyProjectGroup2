@@ -5,7 +5,9 @@ export const AdminMoreButton = ({
   isShow,
   onToggleMenu,
   onClickEdit,
-  onClickDelete
+  onClickDelete,
+  product,
+  onClickChangeStatus
 }: AdminMoreButtonProps) => {
   const handleClickMenu = (e: React.MouseEvent<HTMLElement>) => {
     e.stopPropagation()
@@ -19,7 +21,7 @@ export const AdminMoreButton = ({
 
   const handleClickDelete = (e: React.MouseEvent<HTMLElement>) => {
     e.stopPropagation()
-    onClickDelete()
+    onClickDelete(product)
   }
 
   return (
@@ -36,6 +38,9 @@ export const AdminMoreButton = ({
         <ul>
           <li onClick={handleClickEdit}>상품 수정</li>
           <li onClick={handleClickDelete}>상품 삭제</li>
+          <li onClick={onClickChangeStatus}>
+            {product.isSoldOut ? '판매처리' : '품절처리'}
+          </li>
         </ul>
       </div>
     </div>
