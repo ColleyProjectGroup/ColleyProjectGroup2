@@ -13,6 +13,8 @@ import {
 } from 'api/index'
 import { ProductResponse, ModalProps } from 'types/index'
 import { useOutsideClick } from 'hooks/index'
+import Pagination from 'react-js-pagination'
+import 'styles/common.scss'
 
 export const AdminProducts = () => {
   const [search, setSearch] = useState<string>('')
@@ -24,13 +26,13 @@ export const AdminProducts = () => {
   )
   const [modalProps, setModalProps] = useState<ModalProps | null>(null)
   const [isError, setError] = useState<boolean>(false)
+  const [page, setPage] = useState<number>(1)
 
   const filteredProducts = useMemo(() => {
     if (products.length === 0) {
       return []
     }
-
-    return products
+    const list = products
       .filter(product => product.title.includes(search))
       .sort((a, b) => {
         if (a.title < b.title) {
@@ -41,6 +43,14 @@ export const AdminProducts = () => {
         }
         return 0
       })
+
+    const indexOfLast = page * 10
+    const indexOfFirst = indexOfLast - 10
+    return list.slice(indexOfFirst, indexOfLast)
+  }, [products, search, page])
+
+  const totalProductsCount = useMemo(() => {
+    return products.filter(product => product.title.includes(search)).length
   }, [products, search])
 
   const addButtonRef = useRef<HTMLButtonElement | null>(null)
@@ -196,6 +206,19 @@ export const AdminProducts = () => {
           />
         )
       })}
+
+      {/* Pagination */}
+      <div className={'pagination-wrapper'}>
+        <Pagination
+          activePage={page}
+          itemsCountPerPage={10}
+          totalItemsCount={totalProductsCount}
+          pageRangeDisplayed={5}
+          prevPageText="‹"
+          nextPageText="›"
+          onChange={setPage}
+        />
+      </div>
 
       {isModalShow && modalProps ? (
         <Modal
