@@ -1,0 +1,94 @@
+@import '../abstracts/variables.scss';
+
+.header{
+  margin-top:30px;
+  font-family:'Montserrat',sans-serif;
+  .inner{
+    width:1240px;
+    margin:auto;
+    .headerTop{
+      display:flex;
+      justify-content: space-between;
+      > a{
+        justify-self: center;
+        .logo{
+          width:162px;
+          height:90px;
+        }
+      }
+      .loginTop{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        overflow: hidden;
+        .inputBox{
+          display:flex;
+          align-items: center;
+          margin-top:30px;
+          position: relative;
+          input{
+            margin-right:10px;
+            border:none;
+            outline:none;
+            padding:5px 5px 5px 10px;
+            background-color: #999;
+            border-radius: 4px;
+            color:#fff;
+            transition:all .6s;
+            &.show{
+              position:absolute;
+              right:0px;
+              border:none;
+              opacity:1;
+            }
+            &.hide{
+              position:absolute;
+              right:-300px;
+              opacity:0;
+            }
+          }
+          .icon{
+            font-size:30px;
+            font-weight:bold;
+            cursor: pointer;
+            &.show{
+              display:block;
+            }
+            &.hide{
+              //color:red;
+              display:none;
+            }
+          }
+        }
+        .loginLink{
+          display:flex;
+          justify-content:flex-end;
+          align-items: flex-start;
+          span{
+            font-size:14px;
+            font-weight:500;
+            padding:0 10px;
+            a{
+              text-decoration:none;
+              color:$color-black-0;
+            }
+          }
+        }
+      }
+    }
+    .navigation{
+      height:60px;
+      line-height:60px;
+      display:flex;
+      justify-content: space-evenly;
+      font-weight:800;
+      padding:20px 100px;
+      a{
+        text-decoration: none;
+        color:$color-black-0;
+      }
+    }
+  }
+}
+
+
