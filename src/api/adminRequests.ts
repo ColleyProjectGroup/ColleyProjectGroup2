@@ -1,5 +1,11 @@
 import { adminInstance, baseInstance } from 'api/index'
-import { ProductAddBody } from 'types/index'
+import {
+  ProductAddBody,
+  Customer,
+  TransactionDetail,
+  CustomerInfo
+} from 'types/index'
+import axios from 'axios'
 
 // 관리자 - 상품 추가
 export const adminInsertProduct = async (product: ProductAddBody) => {
@@ -40,4 +46,40 @@ export const adminChangeProductSaleStatus = async (
 export const adminEditProduct = async (product: ProductAddBody) => {
   const response = await adminInstance.put(`/products/${product.id}`, product)
   return response.data
+}
+
+// 관리자 - 사용자 목록 조회
+export const adminFetchCustomers = async () => {
+  const response = await axios
+    .all([
+      await adminInstance.get('auth/users'),
+      await adminInstance.get('products/transactions/all')
+    ])
+    .then(
+      axios.spread((res1, res2) => {
+        const customers = res1.data as Customer[]
+        const orders = res2.data as TransactionDetail[]
+
+        const customerInfos: CustomerInfo[] = customers.map(
+          (customer: Customer) => {
+            const customerTransactions = orders.filter(
+              (order: TransactionDetail) => order.user.email === customer.email
+            )
+            return {
+              user: customer,
+              totalTransaction: customerTransactions.length,
+              totalTransactionPrice: customerTransactions.reduce(
+                (acc, current) => {
+                  return (acc += current.product.price)
+                },
+                0
+              )
+            }
+          }
+        )
+
+        return customerInfos
+      })
+    )
+  return response
 }

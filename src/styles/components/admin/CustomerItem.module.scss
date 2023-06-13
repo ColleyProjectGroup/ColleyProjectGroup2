@@ -1,0 +1,41 @@
+@import 'src/styles/common.scss';
+
+.customer {
+  min-height: 40px;
+  padding: 5px 0;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid $color-admin-border;
+  background-color: $color-primary;
+  text-align: start;
+
+  .customer__email {
+    flex-grow: 1.5;
+    flex-shrink: 0;
+    flex-basis: 0;
+    padding-left: 40px;
+  }
+
+  .customer__name {
+    padding-left: 40px;
+    flex-grow: 1.2;
+    flex-shrink: 0;
+    flex-basis: 0;
+  }
+
+  .customer__grade {
+    padding-left: 40px;
+    flex-grow: 0.8;
+    flex-shrink: 0;
+    flex-basis: 0;
+  }
+
+  .customer__total-order,
+  .customer__total-price {
+    text-align: right;
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: 0;
+    padding-right: 40px;
+  }
+}

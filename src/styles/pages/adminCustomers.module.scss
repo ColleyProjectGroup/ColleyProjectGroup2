@@ -1,0 +1,50 @@
+@import 'src/styles/common.scss';
+
+// 검색 Input
+input.search {
+  margin-top: 80px;
+  width: 200px;
+  height: 40px;
+}
+
+.customers {
+  margin-top: 40px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid $color-admin-border;
+  background-color: $color-primary;
+  width: 100%;
+  text-align: start;
+  font-weight: 700;
+
+  .customers__email {
+    flex-grow: 1.5;
+    flex-shrink: 0;
+    flex-basis: 0;
+    padding-left: 40px;
+  }
+
+  .customers__name {
+    padding-left: 40px;
+    flex-grow: 1.2;
+    flex-shrink: 0;
+    flex-basis: 0;
+  }
+
+  .customers__grade {
+    padding-left: 40px;
+    flex-grow: 0.8;
+    flex-shrink: 0;
+    flex-basis: 0;
+  }
+
+  .customers__total-order,
+  .customers__total-price {
+    text-align: right;
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: 0;
+    padding-right: 40px;
+  }
+}
