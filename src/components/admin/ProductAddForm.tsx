@@ -1,14 +1,37 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState, useMemo } from 'react'
 import styled from 'styles/components/admin/productAddForm.module.scss'
-import { ProductAddFormProps } from 'types/index'
+import { ProductAddBody, ProductAddFormProps } from 'types/index'
 
-export const ProductAddForm = ({ onSubmit }: ProductAddFormProps) => {
+export const ProductAddForm = ({ product, onSubmit }: ProductAddFormProps) => {
   const [title, setTitle] = useState<string>('')
   const [description, setDescription] = useState<string>('')
   const [tagStr, setTagStr] = useState<string>('')
   const [price, setPrice] = useState<string>('')
   const [discountRate, setDiscountRate] = useState<string>('')
   const [isValid, setIsValid] = useState<boolean>(false)
+  const isAddMode = useMemo<boolean>(() => !product, [product])
+
+  useEffect(() => {
+    if (product) {
+      const {
+        title,
+        description,
+        tags,
+        price,
+        discountRate,
+        thumbnail,
+        photo
+      } = product
+      console.log(thumbnail)
+      setTitle(title)
+      setDescription(description)
+      setTagStr(tags.join(', '))
+      setPrice(price.toString())
+      setDiscountRate(discountRate ? discountRate.toString() : '')
+      setThumbnailImage(thumbnail ? thumbnail : '')
+      setDetailImage(photo ? photo : '')
+    }
+  }, [product])
 
   // 유효성 검사
   useEffect(() => {
@@ -83,16 +106,33 @@ export const ProductAddForm = ({ onSubmit }: ProductAddFormProps) => {
     e.preventDefault()
     if (!isValid) return
     const tags: string[] = tagStr.toUpperCase().split(', ')
-    const product = {
-      title,
-      description,
-      tags,
-      price: parseInt(price),
-      discountRate: parseInt(discountRate === '' ? '0' : discountRate),
-      thumbnailBase64: thumbnailImage,
-      photoBase64: detailImage
+    let newProduct: ProductAddBody
+    if (isAddMode) {
+      newProduct = {
+        title,
+        description,
+        tags,
+        price: parseInt(price),
+        discountRate: parseInt(discountRate === '' ? '0' : discountRate),
+        thumbnailBase64: thumbnailImage,
+        photoBase64: detailImage
+      }
+    } else {
+      newProduct = {
+        id: product?.id,
+        title,
+        description,
+        tags,
+        price: parseInt(price),
+        discountRate: parseInt(discountRate === '' ? '0' : discountRate),
+        ...(thumbnailImage !== product?.thumbnail
+          ? { thumbnailBase64: thumbnailImage }
+          : {}),
+        ...(detailImage !== product?.photo ? { photoBase64: detailImage } : {})
+      }
     }
-    onSubmit(product)
+
+    onSubmit(newProduct)
   }
 
   return (

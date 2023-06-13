@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { ProductItemProps } from 'types/index'
 import { convertTagColor } from 'utils/index'
 import { AdminMoreButton } from 'components/index'
@@ -11,7 +12,8 @@ export const AdminProductItem = React.memo(
     isMenuShow,
     showMenu,
     hideMenu,
-    onClickDelete
+    onClickDelete,
+    onChangeSaleStatus
   }: ProductItemProps) => {
     const handleToogleMenu = React.useCallback(() => {
       if (isMenuShow) {
@@ -21,11 +23,22 @@ export const AdminProductItem = React.memo(
       }
     }, [hideMenu, showMenu, isMenuShow, product])
 
+    const navigate = useNavigate()
+
     const onClickProductEdit = React.useCallback(() => {
       if (isMenuShow) {
         hideMenu()
       }
+      navigate('/admin/product-add', { state: product })
     }, [isMenuShow, hideMenu])
+
+    const onClickChangeStatus = React.useCallback(() => {
+      if (product.isSoldOut) {
+        onChangeSaleStatus(product.id, false)
+      } else {
+        onChangeSaleStatus(product.id, true)
+      }
+    }, [])
 
     return (
       <div className={styled.wrapper}>
@@ -48,12 +61,21 @@ export const AdminProductItem = React.memo(
             ? '-'
             : `${product.discountRate}%`}
         </div>
+        <div className={styled['sale-status']}>
+          {product.isSoldOut ? (
+            <span className={styled.soldout}>품절</span>
+          ) : (
+            <span className={styled.sale}>판매중</span>
+          )}
+        </div>
         <div className={styled.more}>
           <AdminMoreButton
             isShow={isMenuShow}
             onToggleMenu={handleToogleMenu}
             onClickEdit={onClickProductEdit}
-            onClickDelete={onClickDelete.bind(null, product)}
+            onClickDelete={onClickDelete}
+            product={product}
+            onClickChangeStatus={onClickChangeStatus}
           />
         </div>
       </div>

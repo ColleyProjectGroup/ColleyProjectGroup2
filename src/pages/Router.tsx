@@ -1,6 +1,12 @@
 import { createBrowserRouter } from 'react-router-dom'
 import { App, ErrorComponent, NotFound, Admin } from 'components/index'
-import { Home, About, AdminProducts, AdminProductAdd } from 'pages/index'
+import {
+  Home,
+  About,
+  AdminProducts,
+  AdminProductAdd,
+  ProductList
+} from 'pages/index'
 
 export const router = createBrowserRouter([
   {
@@ -22,6 +28,11 @@ export const router = createBrowserRouter([
       {
         path: 'pay',
         element: <About />,
+        errorElement: <ErrorComponent />
+      },
+      {
+        path: 'productlist',
+        element: <ProductList />,
         errorElement: <ErrorComponent />
       }
     ]

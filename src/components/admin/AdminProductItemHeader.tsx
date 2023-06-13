@@ -8,6 +8,7 @@ export const AdminProductItemHeader = React.memo(() => {
       <div className={styled.tag}>태그</div>
       <div className={styled.price}>가격</div>
       <div className={styled.discount}>할인율</div>
+      <div className={styled.saleStatus}>판매상태</div>
     </div>
   )
 })

@@ -6,23 +6,52 @@ import {
 } from 'components/index'
 import styled from 'styles/pages/adminProducts.module.scss'
 import { Link } from 'react-router-dom'
-import { adminFetchProducts, adminDeleteProduct } from 'api/index'
-import { Product, ModalProps } from 'types/index'
+import {
+  adminFetchProducts,
+  adminDeleteProduct,
+  adminChangeProductSaleStatus
+} from 'api/index'
+import { ProductResponse, ModalProps } from 'types/index'
 import { useOutsideClick } from 'hooks/index'
+import Pagination from 'react-js-pagination'
+import 'styles/common.scss'
 
 export const AdminProducts = () => {
   const [search, setSearch] = useState<string>('')
-  const [products, setProducts] = useState<Array<Product>>([])
+  const [products, setProducts] = useState<Array<ProductResponse>>([])
   const [shownMenuId, setShownMenuId] = useState<string | null>(null)
   const [isModalShow, setIsModalShow] = useState<boolean>(false)
-  const [deleteProduct, setDeleteProduct] = useState<Product | null>(null)
+  const [deleteProduct, setDeleteProduct] = useState<ProductResponse | null>(
+    null
+  )
   const [modalProps, setModalProps] = useState<ModalProps | null>(null)
   const [isError, setError] = useState<boolean>(false)
+  const [page, setPage] = useState<number>(1)
 
-  const filteredProducts = useMemo(
-    () => products.filter(product => product.title.includes(search)),
-    [products, search]
-  )
+  const filteredProducts = useMemo(() => {
+    if (products.length === 0) {
+      return []
+    }
+    const list = products
+      .filter(product => product.title.includes(search))
+      .sort((a, b) => {
+        if (a.title < b.title) {
+          return 1
+        }
+        if (a.title > b.title) {
+          return -1
+        }
+        return 0
+      })
+
+    const indexOfLast = page * 10
+    const indexOfFirst = indexOfLast - 10
+    return list.slice(indexOfFirst, indexOfLast)
+  }, [products, search, page])
+
+  const totalProductsCount = useMemo(() => {
+    return products.filter(product => product.title.includes(search)).length
+  }, [products, search])
 
   const addButtonRef = useRef<HTMLButtonElement | null>(null)
   useEffect(() => {
@@ -84,7 +113,7 @@ export const AdminProducts = () => {
     }
   }, [deleteProduct, isError])
 
-  const onClickDelete = useCallback((product: Product) => {
+  const onClickDelete = useCallback((product: ProductResponse) => {
     setDeleteProduct(product)
   }, [])
 
@@ -115,6 +144,36 @@ export const AdminProducts = () => {
     setIsModalShow(false)
   }
 
+  // 상품 품절, 판매 처리
+  const changeStatusById = useCallback(
+    (id: string, isSoldOut: boolean) => {
+      const newProducts = products.map(product => {
+        if (product.id === id) {
+          product.isSoldOut = isSoldOut
+        }
+        return product
+      })
+      setProducts(newProducts)
+    },
+    [products]
+  )
+
+  const onChangeSaleStatus = useCallback(
+    (id: string, isChangedSoldout: boolean) => {
+      adminChangeProductSaleStatus(id, isChangedSoldout).then(
+        isSuccess => {
+          if (isSuccess) {
+            changeStatusById(id, isChangedSoldout)
+          }
+        },
+        error => {
+          console.log(error)
+        }
+      )
+    },
+    [changeStatusById]
+  )
+
   return (
     <section className={styled['admin-content-wrapper']}>
       <h1 className={styled['admin-title']}>상품 관리</h1>
@@ -143,9 +202,23 @@ export const AdminProducts = () => {
             showMenu={handleShow}
             hideMenu={handleHide}
             onClickDelete={onClickDelete}
+            onChangeSaleStatus={onChangeSaleStatus}
           />
         )
       })}
+
+      {/* Pagination */}
+      <div className={'pagination-wrapper'}>
+        <Pagination
+          activePage={page}
+          itemsCountPerPage={10}
+          totalItemsCount={totalProductsCount}
+          pageRangeDisplayed={5}
+          prevPageText="‹"
+          nextPageText="›"
+          onChange={setPage}
+        />
+      </div>
 
       {isModalShow && modalProps ? (
         <Modal

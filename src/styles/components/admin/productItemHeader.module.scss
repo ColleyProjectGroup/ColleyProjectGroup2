@@ -39,6 +39,16 @@ div.wrapper {
   div.discount {
     flex-grow: 1;
     flex-shrink: 0;
+    // margin-right: 20px;
+    flex-basis: 0;
+    text-align: right;
+    max-width: 100px;
+    padding-right: 30px;
+  }
+
+  div.saleStatus {
+    flex-grow: 1;
+    flex-shrink: 0;
     margin-right: 55px;
     flex-basis: 0;
     text-align: right;

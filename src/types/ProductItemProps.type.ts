@@ -1,9 +1,10 @@
-import { Product } from 'types/index'
+import { ProductResponse } from 'types/index'
 
 export type ProductItemProps = {
-  product: Product
+  product: ProductResponse
   isMenuShow: boolean
   showMenu: (id: string) => void
   hideMenu: () => void
-  onClickDelete: (product: Product) => void
+  onClickDelete: (product: ProductResponse) => void
+  onChangeSaleStatus: (id: string, isChangedSoldout: boolean) => void
 }
