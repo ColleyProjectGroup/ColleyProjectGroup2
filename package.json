@@ -11,6 +11,7 @@
     "format": "prettier --write --cache ."
   },
   "dependencies": {
+    "@tosspayments/payment-widget-sdk": "^0.8.0",
     "axios": "^1.4.0",
     "path": "^0.12.7",
     "react": "^18.2.0",
