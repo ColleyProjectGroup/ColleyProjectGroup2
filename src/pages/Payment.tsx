@@ -14,7 +14,6 @@ export const Payment = () => {
       <UserAddress />
       <PriceInfo />
       <PaymentMethods />
-      <Confirmation />
     </div>
   )
 }

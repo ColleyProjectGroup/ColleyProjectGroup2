@@ -5,7 +5,7 @@
   flex-direction: column;
   justify-content: center;
   margin: 5px 0 0;
-  width: 900px;
+  // width: 900px;
   background-color: $color-primary;
 
   .agree {
@@ -22,9 +22,10 @@
   }
   .confirm {
     display: block;
-    width: 900px;
+    // width: 900px;
     border: none;
-    padding: 10px;
+    padding: 15px;
+    margin: 30px;
     font-size: 18px;
     background-color: $color-confirm;
     color: $color-primary;
