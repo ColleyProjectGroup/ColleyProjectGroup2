@@ -1,0 +1,44 @@
+.NewArrival {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .Inner{
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 1240px;
+    box-sizing: border-box;
+    h2 {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 26px;
+      font-weight: 700;
+      text-align: center;
+    }
+    h3 {
+      display: block;
+      margin-bottom: 50px;
+      font-size: 14px;
+      font-weight: 200;
+      text-align: center;
+    }
+    .Products {
+      display: flex;
+      gap: 20px;
+      flex-wrap: nowrap;
+      img{
+        width: 230px;
+        height: 230px;
+      }
+      .Title{
+        margin: 10px 0px 10px 0px;
+        font-size: 12px;
+      }
+      .Price{
+        margin: 10px 0px 10px 0px;
+        font-size: 14px;
+      }
+    }
+  }
+}

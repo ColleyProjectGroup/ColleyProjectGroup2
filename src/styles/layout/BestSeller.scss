@@ -1,0 +1,99 @@
+.BESTSELLER {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .Inner {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 10px;
+    width: 1240px;
+    box-sizing: border-box;
+
+    h2 {
+      display: block;
+      margin-top: 20px;
+      margin-bottom: 70px;
+      font-size: 26px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .Tabs {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .Tab {
+        width: 200px;
+        border: none;
+        background-color: transparent;
+        font-size: 15px;
+        font-weight: 700;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 10px;
+        box-sizing: border-box;
+        cursor: pointer;
+        transition: border-bottom-color 0.3s ease;
+
+        &:hover {
+          border-bottom-color: black;
+        }
+      }
+
+      .Active {
+        border-bottom: 2px solid black;
+      }
+    }
+
+    .TabContent {
+      .Products {
+        .Inner {
+          .Product {
+            cursor: pointer;
+            display: flex;
+            gap: 20px;
+            animation: fade-in 1s ease;
+
+            .Image {
+              img {
+                width: 230px;
+                height: 230px;
+              }
+            }
+
+            .Title {
+              margin: 10px 0px;
+              font-size: 12px;
+            }
+
+            .Price {
+              margin: 10px 0px;
+              font-size: 14px;
+
+              .OriginalPrice {
+                /* Original price styles here */
+              }
+
+              .DiscountedPrice {
+                /* Discounted price styles here */
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
