@@ -23,6 +23,7 @@ input.search {
     flex-shrink: 0;
     flex-basis: 0;
     padding-left: 40px;
+    min-width: 250px;
   }
 
   .customers__name {
@@ -30,6 +31,7 @@ input.search {
     flex-grow: 1.2;
     flex-shrink: 0;
     flex-basis: 0;
+    max-width: 160px;
   }
 
   .customers__grade {
