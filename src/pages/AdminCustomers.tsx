@@ -1,17 +1,40 @@
 import { useCallback, useEffect, useState, useMemo } from 'react'
 import { adminFetchCustomers } from 'api/index'
 import { CustomerInfo } from 'types/index'
+import { AdminCustomerItem } from 'components/index'
 import styled from 'styles/pages/adminCustomers.module.scss'
-import { AdminCustomerItem } from '@/components/admin/AdminCustomerItem'
+import Pagination from 'react-js-pagination'
 
 export const AdminCustomers = () => {
   const [customers, setCustomers] = useState<CustomerInfo[]>([])
   const [search, setSearch] = useState<string>('')
+  const [page, setPage] = useState<number>(1)
 
   const filteredCustomers = useMemo(() => {
+    if (customers.length === 0) {
+      return []
+    }
+
+    const list = customers
+      .filter(customer => customer.user.displayName.includes(search))
+      .sort((a, b) => {
+        if (a.user.displayName < b.user.displayName) {
+          return 1
+        }
+        if (a.user.displayName > b.user.displayName) {
+          return -1
+        }
+        return 0
+      })
+    const indexOfLast = page * 10
+    const indexOfFirst = indexOfLast - 10
+    return list.slice(indexOfFirst, indexOfLast)
+  }, [customers, search, page])
+
+  const totalCustomerCount = useMemo(() => {
     return customers.filter(customer =>
       customer.user.displayName.includes(search)
-    )
+    ).length
   }, [customers, search])
 
   useEffect(() => {
@@ -63,6 +86,18 @@ export const AdminCustomers = () => {
           />
         ))}
       </ul>
+
+      <div className={'pagination-wrapper'}>
+        <Pagination
+          activePage={page}
+          itemsCountPerPage={10}
+          totalItemsCount={totalCustomerCount}
+          pageRangeDisplayed={5}
+          prevPageText="‹"
+          nextPageText="›"
+          onChange={setPage}
+        />
+      </div>
     </section>
   )
 }

@@ -30,6 +30,13 @@
     flex-grow: 0.8;
     flex-shrink: 0;
     flex-basis: 0;
+
+    span {
+      padding: 4px;
+      border-radius: 20px;
+      font-size: 14px;
+      color: #000;
+    }
   }
 
   .customer__total-order,
@@ -40,4 +47,26 @@
     flex-basis: 0;
     padding-right: 40px;
   }
+}
+
+.grade--bronze {
+  background-color: #cd7f32;
+  color: #fff !important;
+}
+
+.grade--silver {
+  background-color: #c0c0c0;
+}
+
+.grade--gold {
+  background-color: #ffd700;
+}
+
+.grade--platinum {
+  background-color: #797979;
+  color: #fff !important;
+}
+
+.grade--diamond {
+  background-color: #b9f2ff;
 }
