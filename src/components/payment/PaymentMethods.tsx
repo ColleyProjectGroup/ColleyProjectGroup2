@@ -5,7 +5,12 @@ import {
 } from '@tosspayments/payment-widget-sdk'
 import { Confirmation } from 'components/payment'
 import styles from 'src/styles/components/payment/PaymentMethods.module.scss'
+import { useContext } from 'react'
+import { UsernameContext } from 'contexts/UsernameContext'
+
 export const PaymentMethods = () => {
+  const { name, setName } = useContext(UsernameContext)
+
   const clientKey = 'test_ck_P24xLea5zVAxXyyGMxb3QAMYNwW6'
   const customerKey = 'YbX2HuSlsC9uVJW6NMRMj'
 
@@ -19,7 +24,7 @@ export const PaymentMethods = () => {
       await paymentWidget?.requestPayment({
         orderId: '213asda21', //상품 주문번호 연동
         orderName: '토스 티셔츠 외 2건', //상품명 연동
-        customerName: '김토스', //사용자 입력 정보
+        customerName: name, //사용자 입력 정보
         customerEmail: 'customer123@gmail.com', //사용자 입력 정보
         successUrl: `${window.location.origin}/success`,
         failUrl: `${window.location.origin}/fail`
@@ -41,11 +46,6 @@ export const PaymentMethods = () => {
 
   return (
     <div className={styles.container}>
-      {/* <h3>결제수단</h3> */}
-      {/* <div className={styles.addAccout}>
-        <span>+</span>
-        <span>계좌추가</span>
-      </div> */}
       <div id="payment-widget" />
       <Confirmation confirm={pay} />
     </div>
