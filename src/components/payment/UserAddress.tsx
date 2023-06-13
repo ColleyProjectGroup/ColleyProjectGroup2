@@ -3,7 +3,7 @@ import { useContext } from 'react'
 import { UsernameContext } from 'contexts/UsernameContext'
 import { DaumPostCode } from 'components/payment/index'
 
-export const UserAddress = (props: any) => {
+export const UserAddress = () => {
   const { name, setName } = useContext(UsernameContext)
   return (
     <div className={styles.container}>

@@ -9,7 +9,7 @@ import { useContext } from 'react'
 import { UsernameContext } from 'contexts/UsernameContext'
 
 export const PaymentMethods = () => {
-  const { name, setName } = useContext(UsernameContext)
+  const { name } = useContext(UsernameContext)
 
   const clientKey = 'test_ck_P24xLea5zVAxXyyGMxb3QAMYNwW6'
   const customerKey = 'YbX2HuSlsC9uVJW6NMRMj'

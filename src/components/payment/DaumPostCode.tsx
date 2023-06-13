@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import styles from 'src/styles/components/payment/DaumPostCode.module.scss'
+// import styles from 'src/styles/components/payment/DaumPostCode.module.scss'
 import { useDaumPostcodePopup } from 'react-daum-postcode'
 
 export const DaumPostCode = () => {
