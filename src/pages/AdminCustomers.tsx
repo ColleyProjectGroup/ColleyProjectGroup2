@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useState, useMemo } from 'react'
 import { adminFetchCustomers } from 'api/index'
 import { CustomerInfo } from 'types/index'
-import { AdminCustomerItem } from 'components/index'
+import { AdminCustomerItem, AdminCustomerSkeleton } from 'components/index'
 import styled from 'styles/pages/adminCustomers.module.scss'
 import Pagination from 'react-js-pagination'
 
 export const AdminCustomers = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [customers, setCustomers] = useState<CustomerInfo[]>([])
   const [search, setSearch] = useState<string>('')
   const [page, setPage] = useState<number>(1)
@@ -37,27 +38,35 @@ export const AdminCustomers = () => {
     ).length
   }, [customers, search])
 
-  useEffect(() => {
-    fetchCustomers()
-  }, [])
-
-  const fetchCustomers = useCallback(() => {
-    adminFetchCustomers().then(
-      customers => {
-        setCustomers(customers)
-      },
-      error => {
-        console.error(error)
-      }
-    )
-  }, [])
-
   const onChangeSearch = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       setSearch(event.target.value.trim())
     },
     []
   )
+
+  const fetchCustomers = useCallback(() => {
+    adminFetchCustomers()
+      .then(
+        customers => {
+          setCustomers(customers)
+        },
+        error => {
+          console.error(error)
+        }
+      )
+      .finally(() => {
+        const hideSkeletons = setTimeout(() => {
+          setIsLoading(false)
+          clearTimeout(hideSkeletons)
+        }, 500)
+      })
+  }, [])
+
+  useEffect(() => {
+    setIsLoading(true)
+    fetchCustomers()
+  }, [fetchCustomers])
 
   return (
     <section className={styled['admin-content-wrapper']}>
@@ -77,15 +86,38 @@ export const AdminCustomers = () => {
         <div className={styled['customers__total-price']}>누적 주문금액</div>
       </div>
 
-      <ul>
-        {filteredCustomers.map(customer => (
-          <AdminCustomerItem
-            user={customer.user}
-            totalTransaction={customer.totalTransaction}
-            totalTransactionPrice={customer.totalTransactionPrice}
-          />
-        ))}
-      </ul>
+      {
+        // 고객 리스트
+        !isLoading && (
+          <ul>
+            {filteredCustomers.map(customer => (
+              <AdminCustomerItem
+                user={customer.user}
+                totalTransaction={customer.totalTransaction}
+                totalTransactionPrice={customer.totalTransactionPrice}
+              />
+            ))}
+          </ul>
+        )
+      }
+
+      {
+        // 스켈레톤 로딩
+        isLoading && (
+          <>
+            <AdminCustomerSkeleton />
+            <AdminCustomerSkeleton />
+            <AdminCustomerSkeleton />
+            <AdminCustomerSkeleton />
+            <AdminCustomerSkeleton />
+            <AdminCustomerSkeleton />
+            <AdminCustomerSkeleton />
+            <AdminCustomerSkeleton />
+            <AdminCustomerSkeleton />
+            <AdminCustomerSkeleton />
+          </>
+        )
+      }
 
       <div className={'pagination-wrapper'}>
         <Pagination

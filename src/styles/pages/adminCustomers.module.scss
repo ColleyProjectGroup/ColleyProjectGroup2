@@ -19,34 +19,31 @@ input.search {
   font-weight: 700;
 
   .customers__email {
-    flex-grow: 1.5;
-    flex-shrink: 0;
-    flex-basis: 0;
-    padding-left: 40px;
+    width: 30%;
+    flex-grow: 1;
+    margin-left: 40px;
     min-width: 250px;
   }
 
   .customers__name {
-    padding-left: 40px;
-    flex-grow: 1.2;
-    flex-shrink: 0;
-    flex-basis: 0;
-    max-width: 160px;
+    width: 20%;
+    flex-grow: 1;
   }
 
   .customers__grade {
-    padding-left: 40px;
-    flex-grow: 0.8;
-    flex-shrink: 0;
-    flex-basis: 0;
+    width: 15%;
+    flex-grow: 1;
+  }
+  .customers__total-order {
+    width: 15%;
+    flex-grow: 1;
+    text-align: right;
   }
 
-  .customers__total-order,
   .customers__total-price {
-    text-align: right;
+    width: 20%;
     flex-grow: 1;
-    flex-shrink: 0;
-    flex-basis: 0;
-    padding-right: 40px;
+    text-align: right;
+    margin-right: 40px;
   }
 }

@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 import { CustomerInfo } from 'types/index'
-import styled from 'styles/components/admin/CustomerItem.module.scss'
+import styled from 'styles/components/admin/customerItem.module.scss'
 
 export const AdminCustomerItem = React.memo(
   ({ user, totalTransaction, totalTransactionPrice }: CustomerInfo) => {
