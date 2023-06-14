@@ -70,6 +70,12 @@ export const adminFetchCustomers = async () => {
               totalTransaction: customerTransactions.length,
               totalTransactionPrice: customerTransactions.reduce(
                 (acc, current) => {
+                  if (current.product.discountRate) {
+                    return (acc +=
+                      current.product.price -
+                      (current.product.price * current.product.discountRate) /
+                        100)
+                  }
                   return (acc += current.product.price)
                 },
                 0
