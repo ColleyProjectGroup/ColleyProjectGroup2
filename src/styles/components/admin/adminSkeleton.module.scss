@@ -1,0 +1,45 @@
+@import 'src/styles/common.scss';
+
+.skeleton-wrapper {
+  min-height: 40px;
+  padding: 5px 0;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid $color-admin-border;
+  background-color: $color-primary;
+  text-align: start;
+  justify-content: space-between;
+
+  .skeleton {
+    @include skeleton;
+
+    &.skeleton__email {
+      width: 40%;
+      margin-right: 10%;
+      margin-left: 40px;
+    }
+
+    &.skeleton__name {
+      width: 20%;
+      margin-right: 10%;
+    }
+
+    &.skeleton__grade {
+      width: 15%;
+      margin-right: 7.5%;
+    }
+
+    &.skeleton__total-order {
+      width: 15%;
+      text-align: right;
+      margin-left: 7.5%;
+    }
+
+    &.skeleton__total-price {
+      width: 25%;
+      text-align: right;
+      margin-right: 40px;
+      margin-left: 7.5%;
+    }
+  }
+}

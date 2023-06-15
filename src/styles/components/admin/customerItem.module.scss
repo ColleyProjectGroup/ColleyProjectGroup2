@@ -1,0 +1,70 @@
+@import 'src/styles/common.scss';
+
+.customer {
+  min-height: 40px;
+  padding: 5px 0;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid $color-admin-border;
+  background-color: $color-primary;
+  text-align: start;
+
+  .customer__email {
+    width: 30%;
+    flex-grow: 1;
+    margin-left: 40px;
+    min-width: 250px;
+  }
+
+  .customer__name {
+    width: 20%;
+    flex-grow: 1;
+  }
+
+  .customer__grade {
+    width: 15%;
+    flex-grow: 1;
+
+    span {
+      padding: 4px;
+      border-radius: 20px;
+      font-size: 14px;
+      color: #000;
+    }
+  }
+
+  .customer__total-order {
+    width: 15%;
+    flex-grow: 1;
+    text-align: right;
+  }
+
+  .customer__total-price {
+    width: 20%;
+    flex-grow: 1;
+    text-align: right;
+    margin-right: 40px;
+  }
+}
+
+.grade--bronze {
+  background-color: #cd7f32;
+  color: #fff !important;
+}
+
+.grade--silver {
+  background-color: #c0c0c0;
+}
+
+.grade--gold {
+  background-color: #ffd700;
+}
+
+.grade--platinum {
+  background-color: #797979;
+  color: #fff !important;
+}
+
+.grade--diamond {
+  background-color: #b9f2ff;
+}
