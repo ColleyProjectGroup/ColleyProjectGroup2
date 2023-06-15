@@ -4,15 +4,36 @@ import {
   PaymentWidgetInstance
 } from '@tosspayments/payment-widget-sdk'
 import { Modal } from '@/components'
-import { Confirmation } from 'components/payment'
+import { Confirmation, BankSelection } from 'components/payment'
 import styles from 'src/styles/components/payment/PaymentMethods.module.scss'
 import { UsernameContext } from 'contexts/UsernameContext'
 import { UseremailContext } from 'contexts/UseremailContext'
+import { ModalProps } from '@/types'
 
 export const PaymentMethods = () => {
   const { name } = useContext(UsernameContext)
   const { email } = useContext(UseremailContext)
-  const [modalOpen, setModalOpen] = useState(false)
+  const [isModalShow, setIsModalShow] = useState<boolean>(false)
+  const [modalProps, setModalProps] = useState<ModalProps | null>(null)
+
+  const modalCancelHandler = () => {
+    setIsModalShow(false)
+  }
+
+  const modalOpenHandler = () => {
+    setIsModalShow(true)
+    setModalProps({
+      title: '계좌 추가',
+      content: ``,
+      isTwoButton: true,
+      okButtonText: '추가',
+      onClickOkButton: () => {
+        console.log('ACCOUNT FUNCTION NEEDS TO ATTACHED HERE')
+      },
+      cancelButtonText: '취소',
+      onClickCancelButton: modalCancelHandler
+    })
+  }
 
   const clientKey = 'test_ck_P24xLea5zVAxXyyGMxb3QAMYNwW6'
   const customerKey = 'YbX2HuSlsC9uVJW6NMRMj'
@@ -35,15 +56,25 @@ export const PaymentMethods = () => {
       <div id="payment-widget" />
       <div
         className={styles.addAccout}
-        onClick={() => {
-          setModalOpen(!modalOpen)
-          console.log(modalOpen)
-        }}>
+        onClick={modalOpenHandler}>
         <span>+</span>
         <span>계좌추가</span>
       </div>
+      <span className={styles.addAccoutText}>
+        계좌를 추가하지 않을 시 결제가 진행되지 않습니다.
+      </span>
       <Confirmation />
-      {/* <Modal className={`${modalOpen ? '' : 'hidden'}`} /> */}
+      {isModalShow && modalProps ? (
+        <Modal
+          isTwoButton={modalProps.isTwoButton}
+          title={modalProps.title}
+          okButtonText={modalProps.okButtonText}
+          onClickOkButton={modalProps.onClickOkButton}
+          cancelButtonText={modalProps.cancelButtonText}
+          onClickCancelButton={modalProps.onClickCancelButton}>
+          <BankSelection />
+        </Modal>
+      ) : null}
     </div>
   )
 }

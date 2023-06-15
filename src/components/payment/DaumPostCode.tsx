@@ -3,8 +3,8 @@ import { useState } from 'react'
 import { useDaumPostcodePopup } from 'react-daum-postcode'
 
 export const DaumPostCode = () => {
-  const [address, setAddress] = useState('')
-  const [zoneCode, setZoneCode] = useState('')
+  const [address, setAddress] = useState<string>('')
+  const [zoneCode, setZoneCode] = useState<string>('')
 
   const open = useDaumPostcodePopup() //미입력시 기본값 => 우편번호 스크립트 주소
 

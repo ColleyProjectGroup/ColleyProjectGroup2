@@ -1,5 +1,6 @@
 import { ModalProps } from 'types/index'
 import styles from 'src/styles/components/Modal.module.scss'
+import { Children } from 'react'
 
 export const Modal = (props: ModalProps) => {
   return (
@@ -9,7 +10,10 @@ export const Modal = (props: ModalProps) => {
           <div className={styles.title}>
             <span>{props.title}</span>
           </div>
-          <span className={styles.content}>{props.content}</span>
+          <span className={props.content ? styles.content : ''}>
+            {props.content}
+          </span>
+          {props.children}
           <div className={styles.buttons}>
             <button
               className={styles.button}
