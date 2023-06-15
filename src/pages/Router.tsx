@@ -5,7 +5,8 @@ import {
   About,
   AdminProducts,
   AdminProductAdd,
-  AdminCustomers
+  AdminCustomers,
+  AdminDashboard
 } from 'pages/index'
 
 export const router = createBrowserRouter([
@@ -37,6 +38,11 @@ export const router = createBrowserRouter([
     element: <Admin />,
     errorElement: <NotFound />,
     children: [
+      {
+        path: '',
+        element: <AdminDashboard />,
+        errorElement: <ErrorComponent />
+      },
       {
         path: 'customers',
         element: <AdminCustomers />,
