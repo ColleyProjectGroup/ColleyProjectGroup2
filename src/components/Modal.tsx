@@ -1,6 +1,5 @@
 import { ModalProps } from 'types/index'
 import styles from 'src/styles/components/Modal.module.scss'
-import { Children } from 'react'
 
 export const Modal = (props: ModalProps) => {
   return (
