@@ -41,7 +41,8 @@
       // "stylesPages/*": ["src/styles/pages/*"],
       "types/*": ["src/types/*"],
       "utils/*": ["src/utils/*"],
-      "api/*": ["src/api/*"]
+      "api/*": ["src/api/*"],
+      "constants/*": ["src/constants/*"]
     }
   },
   "include": [

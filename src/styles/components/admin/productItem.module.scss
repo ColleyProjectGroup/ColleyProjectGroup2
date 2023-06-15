@@ -1,0 +1,131 @@
+@import 'src/styles/common.scss';
+
+div.wrapper {
+  min-height: 40px;
+  padding: 5px 0;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid $color-admin-border;
+  background-color: $color-primary;
+
+  div {
+    color: $color-black-0;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  div.name {
+    flex-grow: 2;
+    margin-left: 60px;
+    flex-basis: 0;
+  }
+
+  div.tags {
+    flex-grow: 2;
+    flex-shrink: 0;
+    flex-basis: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  div.price {
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: 0;
+    text-align: right;
+    max-width: 150px;
+    margin-right: 40px;
+    padding-left: 30px;
+  }
+
+  div.discount {
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: 0;
+    text-align: right;
+    max-width: 100px;
+    padding-right: 30px;
+  }
+
+  div.sale-status {
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: 0;
+    text-align: right;
+    max-width: 80px;
+    padding-right: 30px;
+    margin-right: 20px;
+
+    span {
+      font-size: 12px;
+
+      &.soldout {
+        color: $color-admin-soldout;
+      }
+
+      &.sale {
+        color: $color-admin-sale;
+      }
+    }
+  }
+
+  div.more {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 15px;
+    cursor: pointer;
+  }
+}
+
+.tag {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 10px;
+  font-size: 14px;
+  border-radius: 20px;
+  color: $color-primary;
+  cursor: pointer;
+}
+
+.menu-wrapper {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  color: $color-black-8;
+  width: 200px;
+  padding: 10px;
+  margin: auto;
+  text-align: center;
+  border-radius: 4px;
+  background: $color-primary;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s;
+  z-index: 1;
+
+  li {
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $color-black-D9;
+    }
+  }
+}
+
+.dropdown-menu.show {
+  opacity: 1;
+  visibility: visible;
+}
