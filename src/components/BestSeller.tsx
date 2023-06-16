@@ -5,18 +5,12 @@ import '../styles/layout/BestSeller.scss'
 
 const BestSeller = () => {
   const [activeTab, setActiveTab] = useState<string>('Home')
-  const [isLoaded, setIsLoaded] = useState<boolean>(false)
 
   const handleTabClick = (tab: string) => {
     if (activeTab !== tab) {
-      setIsLoaded(false)
       setActiveTab(tab)
     }
   }
-
-  useEffect(() => {
-    setIsLoaded(true)
-  }, [activeTab])
 
   return (
     <div className="BESTSELLER">
@@ -45,29 +39,29 @@ const BestSeller = () => {
               <Products
                 key="Home"
                 limit={4}
-                getProductCount={() => {}} // 추가: 빈 함수를 전달
+                getProductCount={() => {}}
               />
             )}
           </div>
           <div
             className={`TabPane ${activeTab === 'Stationery' ? 'Active' : ''}`}>
-            {activeTab === 'Stationery' && isLoaded && (
+            {activeTab === 'Stationery' && (
               <Products
                 key="Stationery"
                 tagFilter={['KITCHEN', 'NEW']}
                 limit={4}
-                getProductCount={() => {}} // 추가: 빈 함수를 전달
+                getProductCount={() => {}}
               />
             )}
           </div>
           <div
             className={`TabPane ${activeTab === 'Baby/Kids' ? 'Active' : ''}`}>
-            {activeTab === 'Baby/Kids' && isLoaded && (
+            {activeTab === 'Baby/Kids' && (
               <Products
                 key="Baby/Kids"
                 tagFilter={['BABY/KIDS', 'NEW']}
                 limit={4}
-                getProductCount={() => {}} // 추가: 빈 함수를 전달
+                getProductCount={() => {}}
               />
             )}
           </div>

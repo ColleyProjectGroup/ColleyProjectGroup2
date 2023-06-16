@@ -6,22 +6,27 @@ import '../styles/layout/ProductList.scss'
 
 const ProductList = () => {
   const location = useLocation()
+  // 현재 URL 정보
   const queryParams = new URLSearchParams(location.search)
+  // 쿼리 파라미터
   const category = queryParams.get('category')
+  // 'category' 파라미터의 값
   const sortOption = queryParams.get('sortOption')
+  // 'sortOption' 파라미터의 값
 
   const [selectedSortOption, setSelectedSortOption] = useState<string | null>(
     sortOption || null
-  )
+  ) // 정렬 옵션
 
-  const [productCount, setProductCount] = useState<number>(0) // 추가: 상품 개수를 담는 상태
+  const [productCount, setProductCount] = useState<number>(0)
+  // 상품 수량
 
   useEffect(() => {
     setSelectedSortOption(sortOption)
   }, [sortOption])
 
   const handleGetProductCount = (count: number) => {
-    setProductCount(count) // 상품 개수를 설정하는 함수
+    setProductCount(count)
   }
 
   const handleTabClick = (option: string) => {
@@ -45,7 +50,7 @@ const ProductList = () => {
                   }&sortOption=name`}
                   onClick={() => handleTabClick('name')}>
                   상품명
-                </a>
+                </a>{' '}
               </li>
               <li>
                 <a
@@ -54,7 +59,7 @@ const ProductList = () => {
                   }&sortOption=priceLow`}
                   onClick={() => handleTabClick('priceLow')}>
                   낮은가격
-                </a>
+                </a>{' '}
               </li>
               <li>
                 <a
@@ -63,7 +68,7 @@ const ProductList = () => {
                   }&sortOption=priceHigh`}
                   onClick={() => handleTabClick('priceHigh')}>
                   높은가격
-                </a>
+                </a>{' '}
               </li>
             </ul>
           </div>
@@ -72,7 +77,7 @@ const ProductList = () => {
       <Products
         tagFilter={category ? [category] : []}
         sortOption={selectedSortOption}
-        getProductCount={handleGetProductCount} // 추가: getProductCount 함수를 전달
+        getProductCount={handleGetProductCount}
       />
       <Footer />
     </div>
