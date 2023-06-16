@@ -1,4 +1,5 @@
 @import '../abstracts/variables.scss';
+@import 'src/styles/common.scss';
 
 .header{
   margin-top:30px;
@@ -10,7 +11,7 @@
       display:flex;
       justify-content: space-between;
       > a{
-        justify-self: center;
+        margin-left:540px;
         .logo{
           width:162px;
           height:90px;
@@ -34,15 +35,17 @@
             background-color: #999;
             border-radius: 4px;
             color:#fff;
-            transition:all .6s;
+            transition:all 1s;
             &.show{
               position:absolute;
+              top:0px;
               right:0px;
               border:none;
               opacity:1;
             }
             &.hide{
               position:absolute;
+              top:0;
               right:-300px;
               opacity:0;
             }
@@ -51,6 +54,7 @@
             font-size:30px;
             font-weight:bold;
             cursor: pointer;
+            transition:all 1s;
             &.show{
               display:block;
             }

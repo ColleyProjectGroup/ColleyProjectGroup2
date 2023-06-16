@@ -1,9 +1,11 @@
-import { useState, FormEvent } from 'react'
+import { useState, FormEvent, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getId } from 'api/signApi'
+import { LoginContext } from '@/contexts/LoginContext'
 
 export const SignInPage = () => {
   const navigate = useNavigate()
+  const { isLogined, setIsLogined } = useContext(LoginContext)
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
 
@@ -14,11 +16,15 @@ export const SignInPage = () => {
       password
     }
     getId(idInfo).then(res => {
-      localStorage.setItem('token', res.accessToken)
+      event.preventDefault()
+      localStorage.setItem(
+        import.meta.env.VITE_STORAGE_KEY_ACCESSTOKEN,
+        res.accessToken
+      )
       const adminEmail = res.user.email
       if (adminEmail === 'team2master@gmail.com') {
         navigate('/admin')
-      } else if (localStorage.token) {
+      } else {
         navigate('/')
       }
     })
@@ -42,7 +48,13 @@ export const SignInPage = () => {
             onChange={e => setPassword(e.target.value)}
           />
         </div>
-        <button type="submit">로그인</button>
+        <button
+          type="submit"
+          onClick={() => {
+            setIsLogined(!isLogined)
+          }}>
+          로그인
+        </button>
       </form>
     </div>
   )

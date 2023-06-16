@@ -1,12 +1,14 @@
-import { useState, FormEvent } from 'react'
+import { useState, FormEvent, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { postInfo } from 'api/signApi'
+import { LoginContext } from '@/contexts/LoginContext'
 
 export const SignUpPage = () => {
   const navigate = useNavigate()
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [displayName, setDisplayName] = useState<string>('')
+  const { isLogined, setIsLogined } = useContext(LoginContext)
 
   const submitBodyInfo = (event: FormEvent) => {
     event.preventDefault()
@@ -16,7 +18,10 @@ export const SignUpPage = () => {
       displayName
     }
     postInfo(bodyInfo).then(res => {
-      localStorage.setItem('token', res.accessToken)
+      localStorage.setItem(
+        import.meta.env.VITE_STORAGE_KEY_ACCESSTOKEN,
+        res.accessToken
+      )
       if (localStorage.token) {
         navigate('/')
       }
@@ -48,16 +53,15 @@ export const SignUpPage = () => {
             onChange={e => setDisplayName(e.target.value)}
           />
         </div>
-        <button type="submit">회원가입</button>
+        <button
+          type="submit"
+          onClick={() => {
+            setIsLogined(!isLogined)
+            navigate('/')
+          }}>
+          회원가입
+        </button>
       </form>
     </div>
-    /*
-    const bodyInfo ={
-      email,
-      password,
-      displayName
-    }
-    이 값을 자식 컴포넌트에서 props.bodyInfo.email 이런식으로 사용하면 될듯? 일단 이따 해보자
-    */
   )
 }

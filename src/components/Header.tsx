@@ -1,12 +1,34 @@
 import styles from 'styles/layout/header.module.scss'
-import { useState } from 'react'
+import { useState, useRef, useEffect, useContext } from 'react'
+import { logOut } from 'api/signApi'
+import { LoginContext } from '@/contexts/LoginContext'
 
 export const Header = () => {
-  const [isClicked, setClicked] = useState<boolean>(false)
-  const [hideInput, setShowInput] = useState<boolean>(true)
-  const setClickedChange = () => {
-    setClicked(!isClicked)
-    setShowInput(!hideInput)
+  const { isLogined, setIsLogined } = useContext(LoginContext)
+  const [hideInput, setHideInput] = useState<boolean>(true)
+  const onClickSearch = () => {
+    setHideInput(false)
+  }
+
+  const searchRef = useRef<HTMLInputElement | null>(null)
+  useEffect(() => {
+    function handleOutside(e: Event) {
+      // current.contains(e.target) : 컴포넌트 특정 영역 외 클릭 감지를 위해 사용
+      if (searchRef.current && !searchRef.current.contains(e.target as Node)) {
+        if (!hideInput) {
+          setHideInput(true)
+        }
+      }
+    }
+    document.addEventListener('mousedown', handleOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleOutside)
+    }
+  }, [searchRef, hideInput])
+
+  const logOutId = (event: Event) => {
+    event.preventDefault()
+    logOut()
   }
 
   return (
@@ -21,12 +43,37 @@ export const Header = () => {
         </a>
         <div className={styles.loginTop}>
           <div className={styles.loginLink}>
-            <span>
-              <a href="/signup">JOIN</a>
-            </span>
-            <span>
-              <a href="/signin">LOGIN</a>
-            </span>
+            <div>
+              {isLogined ? (
+                <div>
+                  <span>
+                    <a href="/about">MYPAGE</a>
+                  </span>
+                  <span>
+                    <a
+                      href="/"
+                      onClick={() => {
+                        logOutId
+                        localStorage.removeItem(
+                          import.meta.env.VITE_STORAGE_KEY_ACCESSTOKEN
+                        )
+                        setIsLogined(!isLogined)
+                      }}>
+                      LOGOUT
+                    </a>
+                  </span>
+                </div>
+              ) : (
+                <div>
+                  <span>
+                    <a href="/signup">JOIN</a>
+                  </span>
+                  <span>
+                    <a href="/signin">LOGIN</a>
+                  </span>
+                </div>
+              )}
+            </div>
             <span>
               <a href="/">ORDER</a>
             </span>
@@ -38,13 +85,13 @@ export const Header = () => {
             <input
               type="text"
               className={styles[hideInput ? 'hide' : 'show']}
-              onBlur={setClickedChange}
+              ref={searchRef}
             />
             <div
               className={`material-icons ${styles['icon']} ${
-                styles[isClicked ? 'hide' : 'show']
+                styles[hideInput ? 'show' : 'hide']
               }`}
-              onClick={setClickedChange}>
+              onClick={onClickSearch}>
               search
             </div>
           </div>
@@ -61,7 +108,7 @@ export const Header = () => {
           <a href="/">BEST</a>
         </li>
         <li>
-          <a href="/">Livinig</a>
+          <a href="/">Living</a>
         </li>
         <li>
           <a href="/">Kitchen</a>
