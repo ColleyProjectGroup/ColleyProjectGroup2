@@ -1,13 +1,5 @@
-.address {
-  display: flex;
-  flex-direction: column;
-  label {
-    span {
-      width: 100px;
-    }
-    input {
-      display: block;
-      width: 100%;
-    }
-  }
+@import 'src/styles/abstracts/variables';
+
+.zonecode {
+  width: 20% !important;
 }

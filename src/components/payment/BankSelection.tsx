@@ -8,10 +8,13 @@ export const BankSelection = () => {
         <select
           name="banks"
           id="banks">
-          <option value="kb">kb</option>
-          <option value="sh">sh</option>
-          <option value="nh">nh</option>
-          <option value="wr">wr</option>
+          <option value="kb">KB국민은행</option>
+          <option value="sh">신한은행</option>
+          <option value="kebhana">하나은행</option>
+          <option value="kbank">케이뱅크</option>
+          <option value="kakao">카카오뱅크</option>
+          <option value="nh">NH농협은행</option>
+          <option value="woori">우리은행</option>
         </select>
       </label>
       <label>

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-// import styles from 'src/styles/components/payment/DaumPostCode.module.scss'
+import styles from 'src/styles/components/payment/DaumPostCode.module.scss'
 import { useDaumPostcodePopup } from 'react-daum-postcode'
 
 export const DaumPostCode = () => {
@@ -36,17 +36,24 @@ export const DaumPostCode = () => {
   return (
     <div>
       <label>
-        <span> 우편번호</span>
-        <input value={zoneCode} />
+        <span>우편번호</span>
+        <input
+          value={zoneCode}
+          placeholder="주소를 검색해주세요."
+          className={styles.zonecode}
+        />
         <button
           type="button"
           onClick={handleClick}>
-          우편번호
+          주소검색
         </button>
       </label>
       <label>
         <span>주소</span>
-        <input value={address} />
+        <input
+          value={address}
+          placeholder="도로명 주소가 입력됩니다."
+        />
       </label>
       <label>
         <span>상세주소</span>
