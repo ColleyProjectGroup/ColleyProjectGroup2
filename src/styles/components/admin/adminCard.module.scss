@@ -37,3 +37,9 @@
     color: $color-black-5;
   }
 }
+
+.skeleton {
+  width: 80px;
+  height: 18px;
+  @include skeleton;
+}

@@ -5,6 +5,7 @@ import { AdminDashboardCard } from 'components/index'
 import { useCallback, useEffect, useState, useMemo } from 'react'
 
 export const AdminDashboard = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [today] = useState<Date>(new Date())
   const [transactions, setTransactions] = useState<TransactionDetail[]>([])
 
@@ -39,11 +40,11 @@ export const AdminDashboard = () => {
       const date = new Date(transactions.timePaid)
       return date.getDate() === today.getDate()
     })
-  }, [transactionsByMonth])
+  }, [transactionsByMonth, today])
 
   // 일 매출
   const totalSalesByDate = useMemo(() => {
-    return transactionsByDate.reduce((total, transaction) => {
+    const totalPrice = transactionsByDate.reduce((total, transaction) => {
       if (transaction.product.discountRate) {
         total +=
           transaction.product.price -
@@ -53,9 +54,13 @@ export const AdminDashboard = () => {
       }
       return total
     }, 0)
+    // 로딩 해제
+    setIsLoading(false)
+    return totalPrice
   }, [transactionsByDate])
 
   useEffect(() => {
+    setIsLoading(true)
     fetchTransactions()
   }, [today])
 
@@ -76,11 +81,13 @@ export const AdminDashboard = () => {
           title="월 판매량"
           value={transactionsByMonth.length.toLocaleString()}
           unitStr="건"
+          isLoading={isLoading}
         />
         <AdminDashboardCard
           title="월 매출"
           value={totalSalesByMonth.toLocaleString()}
           unitStr="원"
+          isLoading={isLoading}
         />
       </div>
       <h2 className={styled['row-title']}>
@@ -91,11 +98,13 @@ export const AdminDashboard = () => {
           title="일 판매량"
           value={transactionsByDate.length.toLocaleString()}
           unitStr="건"
+          isLoading={isLoading}
         />
         <AdminDashboardCard
           title="일 매출"
           value={totalSalesByDate.toLocaleString()}
           unitStr="원"
+          isLoading={isLoading}
         />
       </div>
     </section>
