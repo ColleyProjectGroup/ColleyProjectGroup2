@@ -5,7 +5,8 @@ import {
   About,
   AdminProducts,
   AdminProductAdd,
-  ProductList
+  ProductList,
+  ProductDetail
 } from 'pages/index'
 
 export const router = createBrowserRouter([
@@ -14,7 +15,6 @@ export const router = createBrowserRouter([
     element: <App />,
     errorElement: <NotFound />,
     children: [
-      //하위 객체들처럼 페이지 추가시 생성해주세요
       {
         path: '',
         element: <Home />,
@@ -33,6 +33,11 @@ export const router = createBrowserRouter([
       {
         path: 'productlist',
         element: <ProductList />,
+        errorElement: <ErrorComponent />
+      },
+      {
+        path: 'products/:id',
+        element: <ProductDetail />,
         errorElement: <ErrorComponent />
       }
     ]

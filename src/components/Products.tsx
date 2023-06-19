@@ -1,25 +1,11 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import { adminInstance } from '../api/axios'
 import '../styles/layout/NewArrival.scss'
+import { ProductsProps, Product } from '../types/Products.interface'
+import { Link } from 'react-router-dom'
 
 const API_ENDPOINT = '/products'
 const PRODUCTS_CLASSNAME = 'Product'
-
-interface Product {
-  id: string
-  thumbnail: string
-  title: string
-  price: number
-  discountRate?: number
-  tags: string[]
-}
-
-interface ProductsProps {
-  tagFilter?: string[] // 상품 카테고리 태그
-  limit?: number // 상품 렌더링 제한 수
-  sortOption?: string | null // 상품 정렬 옵션
-  getProductCount: (count: number) => void // 상품 개수
-}
 
 const Products = ({
   tagFilter = [],
@@ -92,31 +78,33 @@ const Products = ({
         <div className={PRODUCTS_CLASSNAME}>
           {products.map(product => (
             <div key={product.id}>
-              <div className="Image">
-                <img
-                  src={product.thumbnail}
-                  alt={product.title}
-                />
-              </div>
-              <div className="Title">{product.title}</div>
-              <div className="Price">
-                {product.discountRate ? (
-                  <>
-                    <span className="OriginalPrice">
-                      <del>{product.price.toLocaleString()}원</del>
-                    </span>{' '}
-                    <span className="DiscountedPrice">
-                      {calculateDiscountedPrice(
-                        product.price,
-                        product.discountRate
-                      ).toLocaleString()}
-                      원
-                    </span>
-                  </>
-                ) : (
-                  <>{product.price.toLocaleString()}원</>
-                )}
-              </div>
+              <Link to={`/products/${product.id}`}>
+                <div className="Image">
+                  <img
+                    src={product.thumbnail}
+                    alt={product.title}
+                  />
+                </div>
+                <div className="Title">{product.title}</div>
+                <div className="Price">
+                  {product.discountRate ? (
+                    <>
+                      <span className="OriginalPrice">
+                        <del>{product.price.toLocaleString()}원</del>
+                      </span>{' '}
+                      <span className="DiscountedPrice">
+                        {calculateDiscountedPrice(
+                          product.price,
+                          product.discountRate
+                        ).toLocaleString()}
+                        원
+                      </span>
+                    </>
+                  ) : (
+                    <>{product.price.toLocaleString()}원</>
+                  )}
+                </div>
+              </Link>
             </div>
           ))}
         </div>
