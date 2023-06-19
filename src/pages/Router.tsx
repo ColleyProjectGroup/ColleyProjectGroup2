@@ -5,8 +5,10 @@ import {
   About,
   AdminProducts,
   AdminProductAdd,
-  ProductList,
-  AdminCustomers
+  AdminCustomers,
+  SignInPage,
+  SignUpPage,
+  ProductList
 } from 'pages/index'
 
 export const router = createBrowserRouter([
@@ -29,11 +31,6 @@ export const router = createBrowserRouter([
       {
         path: 'pay',
         element: <About />,
-        errorElement: <ErrorComponent />
-      },
-      {
-        path: 'productlist',
-        element: <ProductList />,
         errorElement: <ErrorComponent />
       }
     ]
