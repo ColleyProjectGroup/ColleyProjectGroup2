@@ -32,6 +32,16 @@ export const router = createBrowserRouter([
         path: 'pay',
         element: <About />,
         errorElement: <ErrorComponent />
+      },
+      {
+        path: 'signup',
+        element: <SignUpPage />,
+        errorElement: <ErrorComponent />
+      },
+      {
+        path: 'signin',
+        element: <SignInPage />,
+        errorElement: <ErrorComponent />
       }
     ]
   },
