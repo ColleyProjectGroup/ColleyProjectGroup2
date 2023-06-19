@@ -6,6 +6,7 @@ import {
   AdminProducts,
   AdminProductAdd,
   AdminCustomers,
+  AdminDashboard,
   SignInPage,
   SignUpPage
 } from 'pages/index'
@@ -49,6 +50,11 @@ export const router = createBrowserRouter([
     element: <Admin />,
     errorElement: <NotFound />,
     children: [
+      {
+        path: '',
+        element: <AdminDashboard />,
+        errorElement: <ErrorComponent />
+      },
       {
         path: 'customers',
         element: <AdminCustomers />,
