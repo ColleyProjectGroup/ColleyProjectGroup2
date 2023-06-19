@@ -22,7 +22,7 @@ export const SignInPage = () => {
         res.accessToken
       )
       const adminEmail = res.user.email
-      if (adminEmail === 'team2master@gmail.com') {
+      if (adminEmail === import.meta.env.VITE_ADMIN_EMAIL) {
         navigate('/admin')
       } else {
         navigate('/')
