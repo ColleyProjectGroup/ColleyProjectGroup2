@@ -1,0 +1,45 @@
+@import 'src/styles/common.scss';
+
+.card {
+  border-radius: 20px;
+  background-color: $color-primary;
+  min-width: 300px;
+  height: 150px;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05), 0 2px 4px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  color: $color-black-2;
+
+  &:hover {
+    box-shadow: 0 7px 14px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.1);
+  }
+  h4 {
+    font-size: 20px;
+  }
+}
+
+.card__content {
+  display: flex;
+  justify-content: end;
+  align-items: end;
+  gap: 4px;
+
+  span.value {
+    font-size: 18px;
+    font-weight: 500;
+    color: $color-admin-primary;
+  }
+  span.unit {
+    font-size: 16px;
+    color: $color-black-5;
+  }
+}
+
+.skeleton {
+  width: 80px;
+  height: 18px;
+  @include skeleton;
+}

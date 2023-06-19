@@ -5,6 +5,15 @@ button {
   display: block;
 }
 
+.inputBlur{
+  border:none;
+  background-color:#EDEFF2;
+}
+.inputFocus{
+  border:1px solid #D0d4d9;
+  outline:none;
+}
+
 .black {
   background-color: $color-black-0;
   color: $color-primary;
@@ -55,6 +64,8 @@ button {
   width: 100%;
   position: relative;
   padding: 40px 50px;
+  flex-grow: 1;
+  background-color: $color-admin-main;
 }
 
 .pagination-wrapper {

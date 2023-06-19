@@ -5,9 +5,13 @@ import {
   About,
   AdminProducts,
   AdminProductAdd,
-  ProductList
-  AdminCustomers
-  main
+  ProductList,
+  AdminCustomers,
+  main,
+  AdminCustomers,
+  AdminDashboard,
+  SignInPage,
+  SignUpPage
 } from 'pages/index'
 
 export const router = createBrowserRouter([
@@ -36,6 +40,15 @@ export const router = createBrowserRouter([
         path: 'productlist',
         element: <ProductList />,
         errorElement: <ErrorComponent />
+      },
+        path: 'signup',
+        element: <SignUpPage />,
+        errorElement: <ErrorComponent />
+      },
+      {
+        path: 'signin',
+        element: <SignInPage />,
+        errorElement: <ErrorComponent />
       }
     ]
   },
@@ -44,6 +57,11 @@ export const router = createBrowserRouter([
     element: <Admin />,
     errorElement: <NotFound />,
     children: [
+      {
+        path: '',
+        element: <AdminDashboard />,
+        errorElement: <ErrorComponent />
+      },
       {
         path: 'customers',
         element: <AdminCustomers />,
