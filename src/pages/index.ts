@@ -2,7 +2,6 @@
 export * from 'pages/Home'
 export * from 'pages/About'
 export * from 'pages/AdminDashboard'
-export * from 'pages/Admin'
 export * from 'pages/SignInPage'
 export * from 'pages/SignUpPage'
 export * from 'pages/AdminProducts'

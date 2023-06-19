@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import { Outlet, Navigate, useNavigate, useNavigation } from 'react-router-dom'
+import { useCallback, useEffect, useState } from 'react'
+import { Outlet, useNavigate } from 'react-router-dom'
 import { checkIsAdmin } from 'api/index'
 import { AdminNav } from 'components/index'
 import styled from 'styles/pages/admin.module.scss'
@@ -7,21 +7,26 @@ import styled from 'styles/pages/admin.module.scss'
 export const AdminPrivateRoute = () => {
   const [isAdmin, setIsAdmin] = useState<boolean>(false)
   const navigate = useNavigate()
+
+  const moveSignIn = useCallback(() => {
+    alert('관리자만 접근할 수 있습니다.')
+    navigate('/signin')
+  }, [navigate])
+
   useEffect(() => {
     checkIsAdmin()
       .then(isAdmin => {
         if (!isAdmin) {
-          alert('관리자만 접근할 수 있습니다.')
-          navigate('/sigiin')
+          moveSignIn()
         } else {
           setIsAdmin(isAdmin)
         }
       })
-      .catch(err => {
-        alert('관리자만 접근할 수 있습니다.')
-        navigate('/sigiin')
+      .catch(error => {
+        console.log(error)
+        moveSignIn()
       })
-  }, [])
+  }, [moveSignIn])
 
   return isAdmin ? (
     <div className={styled.admin}>

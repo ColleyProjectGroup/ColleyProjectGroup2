@@ -98,6 +98,6 @@ export const fetchAdminTransactions = async () => {
 
 // 사용자 확인
 export const checkIsAdmin = async () => {
-  const response = await authInstance.get('/auth/me')
+  const response = await authInstance.post('/auth/me')
   return response.data
 }
