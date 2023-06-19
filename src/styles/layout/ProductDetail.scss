@@ -1,0 +1,52 @@
+
+.ProductDetail{
+  a {
+    text-decoration: none;
+    color: black;
+  }
+  .Inner{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .Image{
+      img{
+        width: 580px;
+        height: 580px;
+      }
+    }
+    .Info{
+      width: 580px;
+      padding: 30px;
+      .Title{
+        display: block;
+        font-size: 24px;
+        font-weight: 600;
+        line-height: 2;
+      }
+      .Price{
+        font-size: 12px;
+      }
+      .Quantity{
+        label{}
+        input{}
+      }
+      .TotalPrice{}
+      .button{
+        .button{}
+      }
+    }
+  }
+  .Details {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: aqua;
+    .Inner {
+      width: 1240px;
+      img{
+        text-align: center;
+      }
+    }
+  }
+}

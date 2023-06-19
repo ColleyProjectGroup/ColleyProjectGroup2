@@ -1,5 +1,9 @@
 
 .ProductList{
+  a {
+    text-decoration: none;
+    color: black;
+  }
   .Category {
     display: flex;
     justify-content: center;

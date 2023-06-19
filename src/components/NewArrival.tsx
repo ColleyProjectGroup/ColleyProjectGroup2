@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { adminInstance } from '../api/axios'
 import '../styles/layout/NewArrival.scss'
+import { Link } from 'react-router-dom'
 
 interface Product {
   id: string
@@ -23,7 +24,7 @@ const NewArrival = () => {
         )
         setNewProducts(filteredProducts)
       } catch (error) {
-        console.error('상품 조회 오류 발생', error)
+        console.error('Error fetching products', error)
       }
     }
 
@@ -46,13 +47,15 @@ const NewArrival = () => {
         <div className="Products">
           {newProducts.map(product => (
             <div key={product.id}>
-              <div className="Image">
-                <img
-                  src={product.thumbnail}
-                  alt={product.title}
-                />
-              </div>
-              <div className="Title">{product.title}</div>
+              <Link to={`/products/${product.id}`}>
+                <div className="Image">
+                  <img
+                    src={product.thumbnail}
+                    alt={product.title}
+                  />
+                </div>
+                <div className="Title">{product.title}</div>
+              </Link>
               <div className="Price">
                 {product.discountRate ? (
                   <>

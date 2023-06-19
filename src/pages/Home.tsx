@@ -18,7 +18,6 @@ const promotionImages = [
 export const Home = () => {
   return (
     <div>
-      Home
       <ImageSlider sliderImages={sliderImages} />
       <ColleyNews />
       <NewArrival />
