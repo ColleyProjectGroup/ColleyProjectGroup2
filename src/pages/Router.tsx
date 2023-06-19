@@ -5,7 +5,9 @@ import {
   About,
   AdminProducts,
   AdminProductAdd,
-  AdminCustomers
+  AdminCustomers,
+  SignInPage,
+  SignUpPage
 } from 'pages/index'
 
 export const router = createBrowserRouter([
@@ -28,6 +30,16 @@ export const router = createBrowserRouter([
       {
         path: 'pay',
         element: <About />,
+        errorElement: <ErrorComponent />
+      },
+      {
+        path: 'signup',
+        element: <SignUpPage />,
+        errorElement: <ErrorComponent />
+      },
+      {
+        path: 'signin',
+        element: <SignInPage />,
         errorElement: <ErrorComponent />
       }
     ]
