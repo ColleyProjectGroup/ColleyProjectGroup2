@@ -13,20 +13,25 @@ export const AdminPrivateRoute = () => {
     navigate('/signin')
   }, [navigate])
 
+  const moveHome = useCallback(() => {
+    alert('관리자만 접근할 수 있습니다.')
+    navigate('/')
+  }, [navigate])
+
   useEffect(() => {
     checkIsAdmin()
-      .then(isAdmin => {
-        if (!isAdmin) {
-          moveSignIn()
+      .then(user => {
+        if (user.email !== import.meta.env.VITE_ADMIN_EMAIL) {
+          moveHome()
         } else {
-          setIsAdmin(isAdmin)
+          setIsAdmin(true)
         }
       })
       .catch(error => {
         console.log(error)
         moveSignIn()
       })
-  }, [moveSignIn])
+  }, [moveSignIn, moveHome])
 
   return isAdmin ? (
     <div className={styled.admin}>
