@@ -1,11 +1,21 @@
 import { createBrowserRouter } from 'react-router-dom'
-import { App, ErrorComponent, NotFound, Admin } from 'components/index'
+import {
+  App,
+  ErrorComponent,
+  NotFound,
+  AdminPrivateRoute
+} from 'components/index'
 import {
   Home,
   About,
   AdminProducts,
   AdminProductAdd,
+  ProductList,
+  ProductDetail,
   AdminCustomers,
+  AdminDashboard,
+  SignInPage,
+  SignUpPage,
   Payment
 } from 'pages/index'
 
@@ -15,7 +25,6 @@ export const router = createBrowserRouter([
     element: <App />,
     errorElement: <NotFound />,
     children: [
-      //하위 객체들처럼 페이지 추가시 생성해주세요
       {
         path: '',
         element: <Home />,
@@ -30,14 +39,39 @@ export const router = createBrowserRouter([
         path: 'payment',
         element: <Payment />,
         errorElement: <ErrorComponent />
+      },
+      {
+        path: 'productlist',
+        element: <ProductList />,
+        errorElement: <ErrorComponent />
+      },
+      {
+        path: 'products/:id',
+        element: <ProductDetail />,
+        errorElement: <ErrorComponent />
+      },
+      {
+        path: 'signup',
+        element: <SignUpPage />,
+        errorElement: <ErrorComponent />
+      },
+      {
+        path: 'signin',
+        element: <SignInPage />,
+        errorElement: <ErrorComponent />
       }
     ]
   },
   {
     path: '/admin',
-    element: <Admin />,
+    element: <AdminPrivateRoute />,
     errorElement: <NotFound />,
     children: [
+      {
+        path: '',
+        element: <AdminDashboard />,
+        errorElement: <ErrorComponent />
+      },
       {
         path: 'customers',
         element: <AdminCustomers />,

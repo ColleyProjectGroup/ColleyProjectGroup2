@@ -3,7 +3,7 @@ export const PriceInfo = () => {
   return (
     <div className={styles.container}>
       <h3>결제 정보</h3>
-      <div>PriceInfo/동해님 상품페이지 완성시 연동</div>
+      <div>PriceInfo/queryItems Sum</div>
     </div>
   )
 }

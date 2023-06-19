@@ -1,0 +1,55 @@
+.ColleyNews {
+  background-color: #f7f7f7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .Inner {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 1240px;
+    box-sizing: border-box;
+    h2 {
+      display: block;
+      margin-bottom: 50px;
+      font-size: 26px;
+      font-weight: 700;
+      text-align: center;
+    }
+    .NewsList {
+      display: flex;
+      gap: 40px;
+      .NewsItem {
+        cursor: pointer;
+        font-size: 20px;
+        img {
+          width: 380px;
+          height: 220px;
+        }
+        .NewsContent {
+          background-color: white;
+          padding: 10px 20px 20px 20px;
+          .Header {
+            span {
+              font-size: 12px;
+              font-weight: 700;
+              line-height: 2.5;
+            }
+          }
+          .Title {
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 2;
+          }
+          .Content {
+            font-size: 13px;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
