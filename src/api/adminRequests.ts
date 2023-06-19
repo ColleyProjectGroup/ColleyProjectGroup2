@@ -1,4 +1,4 @@
-import { adminInstance, baseInstance } from 'api/index'
+import { adminInstance, authInstance, baseInstance } from 'api/index'
 import {
   ProductAddBody,
   Customer,
@@ -93,5 +93,11 @@ export const adminFetchCustomers = async () => {
 // 관리자 - 대시보드 거래내역 조회
 export const fetchAdminTransactions = async () => {
   const response = await adminInstance.get('products/transactions/all')
+  return response.data
+}
+
+// 사용자 확인
+export const checkIsAdmin = async () => {
+  const response = await authInstance.post('/auth/me')
   return response.data
 }
