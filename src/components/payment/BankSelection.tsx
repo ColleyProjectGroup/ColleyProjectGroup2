@@ -4,8 +4,8 @@ export const BankSelection = () => {
   return (
     <div className={styles.container}>
       <label htmlFor="banks">
+        {/* BANK LISTS */}
         <span>은행</span>
-        {/* <div>DROPDOWN</div> */}
         <select
           name="banks"
           id="banks">
@@ -18,6 +18,7 @@ export const BankSelection = () => {
           <option value="woori">우리은행</option>
         </select>
       </label>
+      {/* ACCOUNT NUMBER */}
       <label>
         <span>계좌번호</span>
         <input type="text" />

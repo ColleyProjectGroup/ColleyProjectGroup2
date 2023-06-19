@@ -8,12 +8,15 @@ import { Confirmation, BankSelection } from 'components/payment'
 import styles from 'src/styles/components/payment/PaymentMethods.module.scss'
 import { UsernameContext } from 'contexts/UsernameContext'
 import { UseremailContext } from 'contexts/UseremailContext'
+import { PhoneNumberContext } from 'contexts/PhoneNumberContext'
 import { ModalProps } from '@/types'
-import { getBankLists, getAccounts } from '@/api/paymentRequests'
+import { getBankLists, getAccounts, createAccount } from '@/api/paymentRequests'
 
 export const PaymentMethods = () => {
   const { name } = useContext(UsernameContext)
   const { email } = useContext(UseremailContext)
+  const { phoneNumber } = useContext(PhoneNumberContext)
+
   const [isModalShow, setIsModalShow] = useState<boolean>(false)
   const [modalProps, setModalProps] = useState<ModalProps | null>(null)
 
@@ -22,16 +25,26 @@ export const PaymentMethods = () => {
   }
 
   const modalOpenHandler = () => {
-    setIsModalShow(true)
-    setModalProps({
-      title: '계좌 추가',
-      // content: ``,
-      isTwoButton: true,
-      okButtonText: '추가',
-      onClickOkButton: getAccounts,
-      cancelButtonText: '취소',
-      onClickCancelButton: modalCancelHandler
-    })
+    if (phoneNumber) {
+      setIsModalShow(true)
+      setModalProps({
+        title: '계좌 추가',
+        isTwoButton: true,
+        okButtonText: '추가',
+        onClickOkButton: () => {
+          createAccount({
+            bankCode: '088',
+            accountNumber: '123456789012',
+            phoneNumber: '01012345678',
+            signature: true
+          })
+        },
+        cancelButtonText: '취소',
+        onClickCancelButton: modalCancelHandler
+      })
+    } else {
+      alert('휴대전화번호를 입력해주세요.')
+    }
   }
 
   const clientKey = 'test_ck_P24xLea5zVAxXyyGMxb3QAMYNwW6'
