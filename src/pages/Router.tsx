@@ -1,5 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom'
-import { App, ErrorComponent, NotFound, Admin } from 'components/index'
+import {
+  App,
+  ErrorComponent,
+  NotFound,
+  AdminPrivateRoute
+} from 'components/index'
 import {
   Home,
   About,
@@ -35,7 +40,7 @@ export const router = createBrowserRouter([
   },
   {
     path: '/admin',
-    element: <Admin />,
+    element: <AdminPrivateRoute />,
     errorElement: <NotFound />,
     children: [
       {
