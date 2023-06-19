@@ -1,3 +1,5 @@
+export * from 'types/BodyInfo.interface'
+export * from 'types/IdInfo.interface'
 export * from 'types/Product.interface'
 export * from 'types/ProductAddFormProps.type'
 export * from 'types/ProductItemProps.type'
