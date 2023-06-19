@@ -110,7 +110,7 @@ export const Header = () => {
           <a href="/productlist?category=BEST">BEST</a>
         </li>
         <li>
-          <a href="/productlist?category=LIVING/">Living</a>
+          <a href="/productlist?category=LIVING">Living</a>
         </li>
         <li>
           <a href="/productlist?category=KITCHEN">Kitchen</a>
