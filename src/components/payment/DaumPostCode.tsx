@@ -38,7 +38,7 @@ export const DaumPostCode = () => {
       <label>
         <span>우편번호</span>
         <input
-          value={zoneCode}
+          defaultValue={zoneCode}
           placeholder="주소를 검색해주세요."
           className={styles.zonecode}
         />
@@ -51,7 +51,7 @@ export const DaumPostCode = () => {
       <label>
         <span>주소</span>
         <input
-          value={address}
+          defaultValue={address}
           placeholder="도로명 주소가 입력됩니다."
         />
       </label>

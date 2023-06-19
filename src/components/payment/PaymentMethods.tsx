@@ -9,6 +9,7 @@ import styles from 'src/styles/components/payment/PaymentMethods.module.scss'
 import { UsernameContext } from 'contexts/UsernameContext'
 import { UseremailContext } from 'contexts/UseremailContext'
 import { ModalProps } from '@/types'
+import { getBankLists, getAccounts } from '@/api/paymentRequests'
 
 export const PaymentMethods = () => {
   const { name } = useContext(UsernameContext)
@@ -24,12 +25,10 @@ export const PaymentMethods = () => {
     setIsModalShow(true)
     setModalProps({
       title: '계좌 추가',
-      content: ``,
+      // content: ``,
       isTwoButton: true,
       okButtonText: '추가',
-      onClickOkButton: () => {
-        console.log('ACCOUNT FUNCTION NEEDS TO ATTACHED HERE')
-      },
+      onClickOkButton: getAccounts,
       cancelButtonText: '취소',
       onClickCancelButton: modalCancelHandler
     })
@@ -42,6 +41,7 @@ export const PaymentMethods = () => {
   const price = 50_000 //결제정보 => 최종상품가격 연동
 
   useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-extra-semi
     ;(async () => {
       const paymentWidget = await loadPaymentWidget(clientKey, customerKey) //인스턴스 생성
 

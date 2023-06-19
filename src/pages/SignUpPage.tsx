@@ -22,9 +22,8 @@ export const SignUpPage = () => {
         import.meta.env.VITE_STORAGE_KEY_ACCESSTOKEN,
         res.accessToken
       )
-      if (localStorage.token) {
-        navigate('/')
-      }
+      console.log(res.accessToken)
+      navigate('/')
     })
   }
 
@@ -57,7 +56,6 @@ export const SignUpPage = () => {
           type="submit"
           onClick={() => {
             setIsLogined(!isLogined)
-            navigate('/')
           }}>
           회원가입
         </button>
