@@ -1,7 +1,9 @@
 import { useState, useCallback } from 'react'
+import { AdminSalesSkeleton } from 'components/index'
 import styled from 'styles/pages/adminSales.module.scss'
 
 export const AdminSales = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(true) // 테스트
   const [search, setSearch] = useState<string>('')
   const onChangeSearch = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,6 +28,21 @@ export const AdminSales = () => {
         <div className={styled['sales__product']}>주문 상품</div>
         <div className={styled['sales__status']}>주문 상태</div>
       </div>
+
+      {isLoading && (
+        <>
+          <AdminSalesSkeleton />
+          <AdminSalesSkeleton />
+          <AdminSalesSkeleton />
+          <AdminSalesSkeleton />
+          <AdminSalesSkeleton />
+          <AdminSalesSkeleton />
+          <AdminSalesSkeleton />
+          <AdminSalesSkeleton />
+          <AdminSalesSkeleton />
+          <AdminSalesSkeleton />
+        </>
+      )}
     </section>
   )
 }
