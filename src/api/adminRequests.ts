@@ -89,3 +89,9 @@ export const adminFetchCustomers = async () => {
     )
   return response
 }
+
+// 관리자 - 대시보드 거래내역 조회
+export const fetchAdminTransactions = async () => {
+  const response = await adminInstance.get('products/transactions/all')
+  return response.data
+}

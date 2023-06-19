@@ -64,6 +64,8 @@ button {
   width: 100%;
   position: relative;
   padding: 40px 50px;
+  flex-grow: 1;
+  background-color: $color-admin-main;
 }
 
 .pagination-wrapper {
