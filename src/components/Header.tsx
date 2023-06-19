@@ -74,12 +74,14 @@ export const Header = () => {
                 </div>
               )}
             </div>
-            <span>
-              <a href="/">ORDER</a>
-            </span>
-            <span>
-              <a href="/">CART</a>
-            </span>
+            <div>
+              <span>
+                <a href="/">ORDER</a>
+              </span>
+              <span>
+                <a href="/">CART</a>
+              </span>
+            </div>
           </div>
           <div className={styles.inputBox}>
             <input
