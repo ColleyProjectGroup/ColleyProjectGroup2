@@ -14,6 +14,16 @@ export const AdminSalesItem = React.memo(
       return date
     }, [detail])
 
+    const paidPrice = useMemo(() => {
+      if (detail.product.discountRate) {
+        return (
+          (detail.product.price * (100 - detail.product.discountRate)) / 100
+        )
+      } else {
+        return detail.product.price
+      }
+    }, [detail])
+
     const handleOrderCancelClick = () => {
       onChangeOrderIsCanceled(detail.detailId, true)
     }
@@ -32,7 +42,7 @@ export const AdminSalesItem = React.memo(
         <div className={styled['sale__email']}>{detail.user.email}</div>
         <div className={styled['sale__product']}>{detail.product.title}</div>
         <div className={styled['sale__price']}>
-          {detail.product.price.toLocaleString()}원
+          {paidPrice.toLocaleString()}원
         </div>
         <div className={styled['sale__status']}>
           {!detail.done && detail.isCanceled ? (

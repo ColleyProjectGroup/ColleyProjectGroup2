@@ -1,13 +1,18 @@
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useCallback, useEffect, useMemo } from 'react'
 import { AdminSalesSkeleton, AdminSalesItem } from 'components/index'
-import { fetchAdminTransactions } from 'api/index'
+import {
+  fetchAdminTransactions,
+  changeIsCanceled,
+  adminOrderConfirm
+} from 'api/index'
 import { TransactionDetail } from 'types/index'
 import styled from 'styles/pages/adminSales.module.scss'
+import Pagination from 'react-js-pagination'
 
 export const AdminSales = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true) // 테스트
   const [search, setSearch] = useState<string>('')
-
+  const [page, setPage] = useState<number>(1)
   const [sales, setSales] = useState<TransactionDetail[]>([])
   const onChangeSearch = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -16,26 +21,59 @@ export const AdminSales = () => {
     []
   )
 
+  const filteredSales = useMemo(() => {
+    if (sales.length === 0) {
+      return []
+    }
+
+    const list = sales
+      .filter(sale => sale.user.email.includes(search))
+      .sort((a, b) => {
+        if (a.timePaid < b.timePaid) {
+          return 1
+        }
+        if (a.timePaid > b.timePaid) {
+          return -1
+        }
+        return 0
+      })
+    const indexOfLast = page * 10
+    const indexOfFirst = indexOfLast - 10
+    return list.slice(indexOfFirst, indexOfLast)
+  }, [sales, search, page])
+
+  const totalSalesCount = useMemo(() => {
+    return sales.filter(sale => sale.user.email.includes(search)).length
+  }, [sales, search])
+
   useEffect(() => {
-    setIsLoading(true)
     fetchTransactions()
   }, [])
 
-  const fetchTransactions = useCallback(() => {
+  const fetchTransactions = () => {
+    setIsLoading(true)
     fetchAdminTransactions()
       .then(res => setSales(res))
       .finally(() => setIsLoading(false))
-  }, [])
+  }
 
   const onChangeOrderIsCanceled = useCallback(
     (id: string, isCanceled: boolean) => {
-      console.log(id, isCanceled)
+      changeIsCanceled(id, isCanceled).then(isSuccess => {
+        if (isSuccess) {
+          fetchTransactions()
+        }
+      })
     },
     []
   )
 
   const onChangeOrderConfirm = useCallback((id: string) => {
-    console.log(id)
+    adminOrderConfirm(id).then(isSuccess => {
+      if (isSuccess) {
+        fetchTransactions()
+      }
+    })
   }, [])
 
   return (
@@ -44,7 +82,7 @@ export const AdminSales = () => {
       <input
         className={styled.search}
         type="text"
-        placeholder="상품명 입력"
+        placeholder="고객 아이디 입력"
         value={search}
         onChange={onChangeSearch}
       />
@@ -73,14 +111,27 @@ export const AdminSales = () => {
       )}
 
       {!isLoading &&
-        sales.length > 0 &&
-        sales.map(sale => (
+        filteredSales.length > 0 &&
+        filteredSales.map(sale => (
           <AdminSalesItem
+            key={sale.detailId}
             detail={sale}
             onChangeOrderIsCanceled={onChangeOrderIsCanceled}
             onClickOrderConfirm={onChangeOrderConfirm}
           />
         ))}
+
+      <div className={'pagination-wrapper'}>
+        <Pagination
+          activePage={page}
+          itemsCountPerPage={10}
+          totalItemsCount={totalSalesCount}
+          pageRangeDisplayed={5}
+          prevPageText="‹"
+          nextPageText="›"
+          onChange={setPage}
+        />
+      </div>
     </section>
   )
 }
