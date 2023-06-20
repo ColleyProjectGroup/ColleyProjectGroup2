@@ -25,7 +25,7 @@ export const PaymentMethods = () => {
   }
 
   const modalOpenHandler = () => {
-    if (phoneNumber) {
+    if (phoneNumber.length === 11) {
       setIsModalShow(true)
       setModalProps({
         title: '계좌 추가',
@@ -43,7 +43,7 @@ export const PaymentMethods = () => {
         onClickCancelButton: modalCancelHandler
       })
     } else {
-      alert('휴대전화번호를 입력해주세요.')
+      alert('휴대전화번호를 정확히 입력해주세요.')
     }
   }
 
@@ -77,7 +77,7 @@ export const PaymentMethods = () => {
         계좌를 추가하지 않을 시 결제가 진행되지 않습니다.
       </span>
       <Confirmation />
-      {isModalShow && modalProps ? (
+      {phoneNumber.length === 11 && isModalShow && modalProps ? (
         <Modal
           isTwoButton={modalProps.isTwoButton}
           title={modalProps.title}

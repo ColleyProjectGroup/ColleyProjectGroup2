@@ -14,7 +14,7 @@ import styles from 'styles/components/payment/Payment.module.scss'
 export const Payment = () => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
-  const [phoneNumber, setPhoneNumber] = useState('')
+  const [phoneNumber, setPhoneNumber] = useState('010')
 
   return (
     <PhoneNumberContext.Provider value={{ phoneNumber, setPhoneNumber }}>

@@ -9,6 +9,14 @@ export const UserAddress = () => {
   const { name, setName } = useContext(UsernameContext)
   const { phoneNumber, setPhoneNumber } = useContext(PhoneNumberContext)
 
+  const numberCheckHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const phone = e.currentTarget.value.toString()
+    // /^010-\d{4}-\d{4}$/
+    // 010시작 추가?
+    if (phone === '' || /^[0-9\b]+$/.test(phone)) {
+      setPhoneNumber(phone)
+    }
+  }
   return (
     <div className={styles.container}>
       <h3>배송지</h3>
@@ -17,7 +25,6 @@ export const UserAddress = () => {
         <input
           onChange={e => {
             setName(e.target.value)
-            console.log(name)
           }}
         />
       </label>
@@ -25,10 +32,11 @@ export const UserAddress = () => {
       <label className={styles.mobile}>
         <span>휴대전화</span>
         <input
+          maxLength={11}
+          type="text"
           value={phoneNumber}
-          onChange={e => {
-            setPhoneNumber(e.target.value)
-          }}
+          onChange={numberCheckHandler}
+          placeholder="11자리 숫자를 입력해주세요."
         />
       </label>
       <label className={styles.email}>
