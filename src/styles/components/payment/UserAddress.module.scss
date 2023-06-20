@@ -31,6 +31,12 @@
         outline: none;
       }
     }
+    .valid {
+      border: 1px solid $color-error;
+    }
+    .invalid {
+      border: 1px solid $color-now;
+    }
     // .findAddress {
     //   all: unset;
     //   cursor: pointer;
