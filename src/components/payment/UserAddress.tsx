@@ -9,11 +9,20 @@ import { DaumPostCode } from 'components/payment/index'
 export const UserAddress = () => {
   const { name, setName } = useContext(UsernameContext)
   const { email, setEmail } = useContext(UseremailContext)
+  const { phoneNumber, setPhoneNumber } = useContext(PhoneNumberContext)
   const [isValidEmail, setIsValidEmail] = useState(false)
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(false)
+  const [isValidName, setIsValidName] = useState(false)
 
-  const { phoneNumber, setPhoneNumber } = useContext(PhoneNumberContext)
+  //USERNAME
+  const nameCheckHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value)
+    if (!(name.length < 2 || name.length > 5)) {
+      setIsValidName(true)
+    }
+  }
 
+  // PHONE NUMBER
   const numberCheckHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const phone = e.currentTarget.value.toString()
     // /^010-\d{4}-\d{4}$/
@@ -26,7 +35,7 @@ export const UserAddress = () => {
       setIsValidPhoneNumber(true)
     }
   }
-
+  // EMAIL
   const emailCheckHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const emailRegEx =
       /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/i
@@ -48,9 +57,9 @@ export const UserAddress = () => {
       <label className={styles.receiver}>
         <span>받는사람</span>
         <input
-          onChange={e => {
-            setName(e.target.value)
-          }}
+          maxLength={5}
+          className={isValidName ? styles.valid : styles.invalid}
+          onChange={nameCheckHandler}
           required
         />
       </label>
