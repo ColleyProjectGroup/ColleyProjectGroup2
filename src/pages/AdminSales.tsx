@@ -10,7 +10,7 @@ import styled from 'styles/pages/adminSales.module.scss'
 import Pagination from 'react-js-pagination'
 
 export const AdminSales = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(true) // 테스트
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [search, setSearch] = useState<string>('')
   const [page, setPage] = useState<number>(1)
   const [sales, setSales] = useState<TransactionDetail[]>([])
