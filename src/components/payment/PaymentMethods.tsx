@@ -10,6 +10,10 @@ import { UsernameContext } from 'contexts/UsernameContext'
 import { UseremailContext } from 'contexts/UseremailContext'
 import { PhoneNumberContext } from 'contexts/PhoneNumberContext'
 import { ModalProps } from '@/types'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import SwiperCore, { Navigation } from 'swiper'
+import 'swiper/scss'
+import 'swiper/scss/navigation'
 import { getBankLists, getAccounts, createAccount } from '@/api/paymentRequests'
 
 export const PaymentMethods = () => {
@@ -64,18 +68,53 @@ export const PaymentMethods = () => {
     })()
   }, [])
 
+  SwiperCore.use([Navigation])
+
   return (
     <div className={styles.container}>
       <div id="payment-widget" />
-      <div
-        className={styles.addAccout}
-        onClick={modalOpenHandler}>
-        <span>+</span>
-        <span>계좌추가</span>
-      </div>
-      <span className={styles.addAccoutText}>
-        계좌를 추가하지 않을 시 결제가 진행되지 않습니다.
-      </span>
+      <Swiper
+        modules={Navigation}
+        navigation={true}
+        spaceBetween={500}
+        centeredSlides={true}
+        slidesPerView={1}>
+        <SwiperSlide>
+          <div
+            className={styles.addAccout}
+            onClick={modalOpenHandler}>
+            <span>+</span>
+            <span>계좌추가</span>
+          </div>
+          <span className={styles.addAccoutText}>
+            계좌를 추가하지 않을 시 결제가 진행되지 않습니다.
+          </span>
+        </SwiperSlide>
+        <SwiperSlide>
+          <div className={styles.addAccout}>
+            <span>KB</span>
+            <span>123123123123123</span>
+            <span>3,000,000</span>
+          </div>
+        </SwiperSlide>
+        {/* <SwiperSlide>
+          {' '}
+          <div className={styles.addAccout}>
+            <span>KB</span>
+            <span>123123123123123</span>
+            <span>3,000,000</span>
+          </div>
+        </SwiperSlide>
+        <SwiperSlide>
+          {' '}
+          <div className={styles.addAccout}>
+            <span>KB</span>
+            <span>123123123123123</span>
+            <span>3,000,000</span>
+          </div>
+        </SwiperSlide> */}
+      </Swiper>
+
       <Confirmation />
       {phoneNumber.length === 11 && isModalShow && modalProps ? (
         <Modal
