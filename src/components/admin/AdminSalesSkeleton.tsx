@@ -10,6 +10,8 @@ export const AdminSalesSkeleton = () => {
       <div
         className={`${styled['skeleton']} ${styled['skeleton__sales-product']}`}></div>
       <div
+        className={`${styled['skeleton']} ${styled['skeleton__sales-price']}`}></div>
+      <div
         className={`${styled['skeleton']} ${styled['skeleton__sales-status']}`}></div>
     </div>
   )

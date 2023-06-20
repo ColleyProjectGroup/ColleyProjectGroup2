@@ -7,6 +7,7 @@ div.wrapper {
   border-bottom: 1px solid $color-admin-border;
   background-color: $color-primary;
   margin-top: 40px; // test
+  gap: 10px;
 
   div {
     color: $color-black-0;
@@ -53,6 +54,6 @@ div.wrapper {
     flex-basis: 0;
     text-align: right;
     max-width: 100px;
-    padding-right: 30px;
+    padding-right: 40px;
   }
 }

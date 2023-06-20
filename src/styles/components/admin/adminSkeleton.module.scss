@@ -9,6 +9,7 @@
   background-color: $color-primary;
   text-align: start;
   justify-content: space-between;
+  gap: 10px;
 
   .skeleton {
     @include skeleton;
@@ -43,25 +44,31 @@
     }
 
     &.skeleton__sales-date {
-      width: 30%;
-      margin-right: 5%;
+      width: 17%;
+      margin-right: 4.25%;
       margin-left: 40px;
     }
 
     &.skeleton__sales-email {
-      width: 35%;
-      margin-right: 7.5%;
+      width: 20%;
+      margin-right: 5%;
     }
 
     &.skeleton__sales-product {
-      width: 50%;
-      margin-right: 10%;
+      width: 30%;
+      margin-right: 7.5%;
+    }
+
+    &.skeleton__sales-price {
+      width: 15%;
+      margin-left: calc(3.75% - 20px);
+      margin-right: 20px;
     }
 
     &.skeleton__sales-status {
-      width: 30%;
-      margin-right: 5%;
-      padding-right: 40px;
+      width: 15%;
+      margin-left: 1.875%;
+      margin-right: 1.875%;
     }
   }
 }
