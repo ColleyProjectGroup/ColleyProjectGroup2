@@ -1,0 +1,93 @@
+@import 'src/styles/common.scss';
+
+.sale-item {
+  min-height: 40px;
+  padding: 5px 0;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid $color-admin-border;
+  background-color: $color-primary;
+  text-align: start;
+  gap: 10px;
+  .sale__date {
+    width: 17%;
+    flex-grow: 1;
+    margin-left: 40px;
+  }
+
+  .sale__email {
+    width: 20%;
+    flex-grow: 1;
+  }
+
+  .sale__product {
+    width: 30%;
+    flex-grow: 1;
+  }
+
+  .sale__price {
+    width: calc(15% - 40px);
+    flex-grow: 1;
+    text-align: right;
+    padding: 0 20px;
+  }
+
+  .sale__status {
+    width: 18%;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    button {
+      height: 30px;
+      outline: none;
+      border: none;
+      padding: 0 8px;
+      cursor: pointer;
+      border: 2px solid;
+      background-color: $color-primary;
+      font-weight: 500;
+
+      &.back {
+        border-color: $color-admin-back;
+        color: $color-admin-back;
+
+        &:hover {
+          background-color: $color-admin-back;
+          color: $color-primary;
+        }
+      }
+
+      &.cancel {
+        border-color: $color-error;
+        color: $color-error;
+
+        &:hover {
+          background-color: $color-error;
+          color: $color-primary;
+        }
+      }
+
+      &.confirm {
+        border-color: $color-admin-sale;
+        color: $color-admin-sale;
+        font-weight: 500;
+
+        &:hover {
+          background-color: $color-admin-sale;
+          color: $color-primary;
+        }
+      }
+
+      &.hide {
+        display: none;
+      }
+    }
+
+    span {
+      color: $color-admin-sale;
+    }
+  }
+}
