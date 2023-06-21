@@ -128,4 +128,54 @@
       }
     }
   }
+  .etcProducts{
+    margin-top: 100px;
+    margin-bottom: 50px;
+    text-align: center;
+    line-height: 1.5;
+    h2{
+      font-size: 40px;
+      font-weight: 300;
+    }
+    h3{
+      font-size: 18px;
+      font-weight: 300;
+      color: gray;
+    }
+  }
+  .Products {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+    .Inner {
+      padding-top: 50px;
+      padding-bottom: 50px;
+      padding-right: 10px;
+      box-sizing: border-box;
+      .Product {
+        width: 1240px;
+        display: flex;
+        cursor: pointer;
+        flex-wrap: wrap;
+        gap: 20px;
+        animation: fade-in 1s ease; 
+        .Image {
+          img {
+            width: 295px;
+            height: 295px;
+          }
+        }
+        .Title {
+          margin: 10px 0px;
+          font-size: 12px;
+        }
+        .Price {
+          margin: 10px 0px;
+          font-size: 14px;
+        }
+      }
+    }
+  }
 }
+
