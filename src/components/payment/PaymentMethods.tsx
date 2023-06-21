@@ -11,6 +11,7 @@ import { UsernameContext } from 'contexts/UsernameContext'
 import { UseremailContext } from 'contexts/UseremailContext'
 import { PhoneNumberContext } from 'contexts/PhoneNumberContext'
 import { BankContext } from 'contexts/BankContext'
+import { AccountNumberContext } from 'contexts/AccountNumberContext'
 
 import { ModalProps } from '@/types'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -26,6 +27,7 @@ export const PaymentMethods = () => {
   // ###결제완료 요청시 함께 전송 데이터
   const { phoneNumber } = useContext(PhoneNumberContext)
   const { bank } = useContext(BankContext)
+  const { accountNumber } = useContext(AccountNumberContext)
 
   const [isModalShow, setIsModalShow] = useState<boolean>(false)
   const [modalProps, setModalProps] = useState<ModalProps | null>(null)
@@ -47,7 +49,7 @@ export const PaymentMethods = () => {
         onClickOkButton: () => {
           createAccount({
             bankCode: bank, //BankSelection => options (useContext)
-            accountNumber: '123456789012', //BankSelection => input (useContext)
+            accountNumber: accountNumber, //BankSelection => input (useContext)
             phoneNumber: phoneNumber,
             signature: true
           })

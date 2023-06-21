@@ -1,13 +1,18 @@
 import { BankContext } from 'contexts/BankContext'
+import { AccountNumberContext } from 'contexts/AccountNumberContext'
 import { useContext } from 'react'
 import styles from 'styles/components/payment/BankSelection.module.scss'
 
 export const BankSelection = () => {
   const { bank, setBank } = useContext(BankContext)
+  const { accountNumber, setAccountNumber } = useContext(AccountNumberContext)
   const bankSelectionHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setBank(e.currentTarget.value)
-    console.log(bank)
   }
+  const accountNumberHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setAccountNumber(e.currentTarget.value)
+  }
+
   return (
     <div className={styles.container}>
       <label htmlFor="banks">
@@ -30,7 +35,10 @@ export const BankSelection = () => {
       {/* ACCOUNT NUMBER */}
       <label>
         <span>계좌번호</span>
-        <input type="text" />
+        <input
+          type="text"
+          onChange={accountNumberHandler}
+        />
       </label>
     </div>
   )
