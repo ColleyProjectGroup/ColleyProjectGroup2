@@ -35,14 +35,16 @@ export const PaymentMethods = () => {
         title: '계좌 추가',
         isTwoButton: true,
         okButtonText: '추가',
-        onClickOkButton: () => {
-          createAccount({
-            bankCode: '088',
-            accountNumber: '123456789012',
-            phoneNumber: '01012345678',
-            signature: true
-          })
-        },
+        onClickOkButton:
+          // () => {
+          // createAccount({
+          //   bankCode: '088',
+          //   accountNumber: '123456789012',
+          //   phoneNumber: '01012345678',
+          //   signature: true
+          // })
+          getAccounts,
+        // }
         cancelButtonText: '취소',
         onClickCancelButton: modalCancelHandler
       })
@@ -97,22 +99,6 @@ export const PaymentMethods = () => {
             <span>3,000,000</span>
           </div>
         </SwiperSlide>
-        {/* <SwiperSlide>
-          {' '}
-          <div className={styles.addAccout}>
-            <span>KB</span>
-            <span>123123123123123</span>
-            <span>3,000,000</span>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          {' '}
-          <div className={styles.addAccout}>
-            <span>KB</span>
-            <span>123123123123123</span>
-            <span>3,000,000</span>
-          </div>
-        </SwiperSlide> */}
       </Swiper>
 
       <Confirmation />
