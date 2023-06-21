@@ -19,7 +19,8 @@
     "react-dom": "^18.2.0",
     "react-js-pagination": "^3.0.3",
     "react-router-dom": "^6.12.1",
-    "sass": "^1.62.1"
+    "sass": "^1.62.1",
+    "swiper": "^6.8.4"
   },
   "devDependencies": {
     "@types/node": "^20.2.5",

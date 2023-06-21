@@ -1,8 +1,9 @@
-import React, { useEffect, useState, useCallback } from 'react'
+import React, { useEffect, useState, useCallback, useContext } from 'react'
 import { adminInstance } from '../api/axios'
 import '../styles/layout/NewArrival.scss'
-import { ProductsProps, Product } from '../types/Products.interface'
+import { ProductsProps, Product } from 'types/index'
 import { Link } from 'react-router-dom'
+import { RecentlyContext } from 'contexts/index'
 
 const API_ENDPOINT = '/products'
 const PRODUCTS_CLASSNAME = 'Product'
@@ -72,13 +73,31 @@ const Products = ({
     return price
   }
 
+  // 최근 본 상품 세션 저장 처리
+  const { recentlyViewedList, setRecentlyViewedList } =
+    useContext(RecentlyContext)
+
+  const onSaveProductRecently = (product: Product) => {
+    const isExist = recentlyViewedList.find(p => p.id === product.id)
+    if (!isExist) {
+      setRecentlyViewedList([...recentlyViewedList, product])
+    } else {
+      const removeList = recentlyViewedList.filter(p => p.id !== product.id)
+      setRecentlyViewedList([...removeList, product])
+    }
+  }
+
   return (
     <div className="Products">
       <div className="Inner">
         <div className={PRODUCTS_CLASSNAME}>
           {products.map(product => (
             <div key={product.id}>
-              <Link to={`/products/${product.id}`}>
+              <Link
+                to={`/products/${product.id}`}
+                onClick={() => {
+                  onSaveProductRecently(product)
+                }}>
                 <div className="Image">
                   <img
                     src={product.thumbnail}
