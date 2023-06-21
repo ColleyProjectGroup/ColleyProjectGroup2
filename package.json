@@ -13,6 +13,7 @@
   "dependencies": {
     "@tosspayments/payment-widget-sdk": "^0.8.0",
     "@types/react-js-pagination": "^3.0.4",
+    "@types/swiper": "^6.0.0",
     "axios": "^1.4.0",
     "moment": "^2.29.4",
     "path": "^0.12.7",

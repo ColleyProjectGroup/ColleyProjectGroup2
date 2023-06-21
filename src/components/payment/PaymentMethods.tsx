@@ -6,14 +6,18 @@ import {
 import { Modal } from '@/components'
 import { Confirmation, BankSelection } from 'components/payment'
 import styles from 'src/styles/components/payment/PaymentMethods.module.scss'
+// CONTEXT INDEX.TS CREATE **
 import { UsernameContext } from 'contexts/UsernameContext'
 import { UseremailContext } from 'contexts/UseremailContext'
 import { PhoneNumberContext } from 'contexts/PhoneNumberContext'
+import { BankContext } from 'contexts/BankContext'
+
 import { ModalProps } from '@/types'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import SwiperCore, { Navigation } from 'swiper'
 import 'swiper/scss'
 import 'swiper/scss/navigation'
+import { Bank } from '@/types/BankAccounts.interface'
 import { getBankLists, getAccounts, createAccount } from '@/api/paymentRequests'
 
 export const PaymentMethods = () => {
@@ -21,10 +25,11 @@ export const PaymentMethods = () => {
   const { email } = useContext(UseremailContext)
   // ###결제완료 요청시 함께 전송 데이터
   const { phoneNumber } = useContext(PhoneNumberContext)
+  const { bank } = useContext(BankContext)
 
   const [isModalShow, setIsModalShow] = useState<boolean>(false)
   const [modalProps, setModalProps] = useState<ModalProps | null>(null)
-  const [accountData, setAccountData] = useState([])
+  const [accountData, setAccountData] = useState<Bank[]>([])
 
   SwiperCore.use([Navigation])
 
@@ -39,16 +44,14 @@ export const PaymentMethods = () => {
         title: '계좌 추가',
         isTwoButton: true,
         okButtonText: '추가',
-        onClickOkButton:
-          // () => {
-          // createAccount({
-          //   bankCode: '088',
-          //   accountNumber: '123456789012',
-          //   phoneNumber: '01012345678',
-          //   signature: true
-          // })
-          getAccounts,
-        // }
+        onClickOkButton: () => {
+          createAccount({
+            bankCode: bank, //BankSelection => options (useContext)
+            accountNumber: '123456789012', //BankSelection => input (useContext)
+            phoneNumber: phoneNumber,
+            signature: true
+          })
+        },
         cancelButtonText: '취소',
         onClickCancelButton: modalCancelHandler
       })
@@ -56,9 +59,6 @@ export const PaymentMethods = () => {
       alert('휴대전화번호를 정확히 입력해주세요.')
     }
   }
-  // const res = async () => {
-  //   return await getAccounts()
-  // }
 
   // ######TOSS PAYMENTS WIDGET
   const clientKey = 'test_ck_P24xLea5zVAxXyyGMxb3QAMYNwW6'
@@ -107,19 +107,15 @@ export const PaymentMethods = () => {
         {accountData.map(item => (
           <SwiperSlide key={item.id}>
             <div className={styles.addAccout}>
-              <span>{item.bankName}</span>
-              <span>{item.accountNumber}</span>
+              <span>
+                {item.bankName}
+                {item.accountNumber}
+              </span>
               <span>{item.balance}</span>
             </div>
           </SwiperSlide>
         ))}
-        {/* <SwiperSlide key={item.id}>
-          <div className={styles.addAccout}>
-            <span>KB</span>
-            <span>123123123123123</span>
-            <span>3,000,000</span>
-          </div>
-        </SwiperSlide> */}
+        {/* 선택계좌 FOCUS COLOR? */}
       </Swiper>
 
       <Confirmation />

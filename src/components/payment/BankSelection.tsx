@@ -1,6 +1,13 @@
+import { BankContext } from 'contexts/BankContext'
+import { useContext } from 'react'
 import styles from 'styles/components/payment/BankSelection.module.scss'
 
 export const BankSelection = () => {
+  const { bank, setBank } = useContext(BankContext)
+  const bankSelectionHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setBank(e.currentTarget.value)
+    console.log(bank)
+  }
   return (
     <div className={styles.container}>
       <label htmlFor="banks">
@@ -8,7 +15,9 @@ export const BankSelection = () => {
         <span>은행</span>
         <select
           name="banks"
-          id="banks">
+          id="banks"
+          onChange={bankSelectionHandler}
+          value={bank}>
           <option value="004">KB국민은행</option>
           <option value="088">신한은행</option>
           <option value="081">하나은행</option>
