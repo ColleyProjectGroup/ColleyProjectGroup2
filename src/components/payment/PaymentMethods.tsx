@@ -47,6 +47,7 @@ export const PaymentMethods = () => {
         isTwoButton: true,
         okButtonText: '추가',
         onClickOkButton: () => {
+          // *********ACCOUNT NUMBER VALIDATION REQUIRED*********
           createAccount({
             bankCode: bank, //BankSelection => options (useContext)
             accountNumber: accountNumber, //BankSelection => input (useContext)
