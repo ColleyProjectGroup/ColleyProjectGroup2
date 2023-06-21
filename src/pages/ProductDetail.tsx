@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { adminInstance } from '../api/axios'
 import { Footer } from '@/components'
+import { Products } from '../components/Products'
 import '../styles/layout/ProductDetail.scss'
 import { Product, RouteParams } from '../types/Products.interface'
 
@@ -17,7 +18,7 @@ const ProductDetail: React.FC = () => {
         setProduct(response.data)
         console.log(response.data)
       } catch (error) {
-        console.error('Error fetching product', error)
+        console.error('상품을 불러오는 중에 오류가 발생했습니다.', error)
       }
     }
 
@@ -96,7 +97,7 @@ const ProductDetail: React.FC = () => {
             </div>
             <div className="infoInner">
               <div className="infoleft">
-                <span>배송방법 :</span>
+                <span>배송방법:</span>
               </div>
               <div className="infoleft">
                 <span>국내 배송</span>
@@ -104,7 +105,7 @@ const ProductDetail: React.FC = () => {
             </div>
             <div className="infoInner">
               <div className="infoleft">
-                <span>배송비 :</span>
+                <span>배송비:</span>
               </div>
               <div>
                 <span>3,000원</span>
@@ -129,7 +130,7 @@ const ProductDetail: React.FC = () => {
             </div>
           </div>
           <div className="TotalPrice">
-            <div>TOTAL : </div>
+            <div>TOTAL:</div>
             <div>{calculateTotalPrice().toLocaleString()}원</div>
           </div>
           <div className="Buttons1">
@@ -148,6 +149,16 @@ const ProductDetail: React.FC = () => {
             alt={product.title}
           />
         </div>
+      </div>
+      <div>
+        <div className="etcProducts">
+          <h2>YOU MAY ALSO LIKE</h2>
+          <h3>함께 구매하면 좋을 관련 상품</h3>
+        </div>
+        <Products
+          tagFilter={product.tags}
+          limit={4}
+        />
       </div>
       <Footer />
     </div>
