@@ -1,19 +1,20 @@
-import styles from 'styles/layout/header.module.scss'
-import { useState, useRef, useEffect, useContext } from 'react'
+import React, { useState, useRef, useEffect, useContext } from 'react'
 import { logOut } from 'api/signApi'
 import { LoginContext } from '@/contexts/LoginContext'
+import styles from 'styles/layout/header.module.scss'
 
-export const Header = () => {
+export const Header: React.FC = () => {
   const { isLogined, setIsLogined } = useContext(LoginContext)
   const [hideInput, setHideInput] = useState<boolean>(true)
+  const [searchKeyword, setSearchKeyword] = useState<string>('')
+  const searchRef = useRef<HTMLInputElement | null>(null)
+
   const onClickSearch = () => {
     setHideInput(false)
   }
 
-  const searchRef = useRef<HTMLInputElement | null>(null)
   useEffect(() => {
     function handleOutside(e: Event) {
-      // current.contains(e.target) : 컴포넌트 특정 영역 외 클릭 감지를 위해 사용
       if (searchRef.current && !searchRef.current.contains(e.target as Node)) {
         if (!hideInput) {
           setHideInput(true)
@@ -26,9 +27,21 @@ export const Header = () => {
     }
   }, [searchRef, hideInput])
 
-  const logOutId = (event: Event) => {
+  const logOutId = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     event.preventDefault()
     logOut()
+  }
+
+  const onSearchEnter = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      event.preventDefault()
+      if (searchKeyword.trim() !== '') {
+        // 검색어를 `ProductList` 컴포넌트로 전달합니다.
+        window.location.href = `/productlist?category=SEARCH&keyword=${encodeURIComponent(
+          searchKeyword
+        )}`
+      }
+    }
   }
 
   return (
@@ -52,13 +65,7 @@ export const Header = () => {
                   <span>
                     <a
                       href="/"
-                      onClick={() => {
-                        logOutId
-                        localStorage.removeItem(
-                          import.meta.env.VITE_STORAGE_KEY_ACCESSTOKEN
-                        )
-                        setIsLogined(!isLogined)
-                      }}>
+                      onClick={logOutId}>
                       LOGOUT
                     </a>
                   </span>
@@ -85,9 +92,13 @@ export const Header = () => {
           </div>
           <div className={styles.inputBox}>
             <input
+              id="SearchInput"
               type="text"
               className={styles[hideInput ? 'hide' : 'show']}
               ref={searchRef}
+              value={searchKeyword}
+              onChange={e => setSearchKeyword(e.target.value)}
+              onKeyPress={onSearchEnter}
             />
             <div
               className={`material-icons ${styles['icon']} ${
