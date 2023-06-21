@@ -19,7 +19,11 @@ import SwiperCore, { Navigation } from 'swiper'
 import 'swiper/scss'
 import 'swiper/scss/navigation'
 import { Bank } from '@/types/BankAccounts.interface'
-import { getBankLists, getAccounts, createAccount } from '@/api/paymentRequests'
+import {
+  removeAccount,
+  getAccounts,
+  createAccount
+} from '@/api/paymentRequests'
 
 export const PaymentMethods = () => {
   const { name } = useContext(UsernameContext)
@@ -61,6 +65,13 @@ export const PaymentMethods = () => {
     } else {
       alert('휴대전화번호를 정확히 입력해주세요.')
     }
+  }
+
+  const removeAccountHandler = async (value: string): Promise<any> => {
+    await removeAccount({
+      accountId: value,
+      signature: true
+    })
   }
 
   // ######TOSS PAYMENTS WIDGET
@@ -113,6 +124,13 @@ export const PaymentMethods = () => {
               <span>
                 {item.bankName}
                 {item.accountNumber}
+                <a
+                  onClick={() => {
+                    console.log(item.id)
+                    removeAccountHandler(item.id)
+                  }}>
+                  ✖
+                </a>
               </span>
               <span>{item.balance}</span>
             </div>

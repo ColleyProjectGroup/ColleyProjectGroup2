@@ -33,7 +33,7 @@ export const createAccount = async (request: CreateRequest) => {
 //계좌 해지
 export const removeAccount = async (request: RemoveRequest) => {
   console.log('REMOVE ACCOUNT')
-  const res = await authInstance.post('/account', request)
+  const res = await authInstance.delete('/account', request)
   console.log(res.data)
   return res.data
 }

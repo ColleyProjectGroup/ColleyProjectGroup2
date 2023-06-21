@@ -25,6 +25,14 @@
       font-weight: 700;
       display: flex;
       justify-content: center;
+      position: relative;
+      a {
+        text-decoration: none;
+        cursor: crosshair;
+        top: -20px;
+        right: 15px;
+        position: absolute;
+      }
     }
   }
   .addAccoutText {

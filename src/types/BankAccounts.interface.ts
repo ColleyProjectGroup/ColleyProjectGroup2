@@ -1,9 +1,6 @@
 export interface RemoveRequest {
-  id: string // 계좌 ID
-  bankName: string // 은행 이름
-  bankCode: string // 은행 코드
-  accountNumber: string // 계좌 번호
-  balance: number // 계좌 잔액
+  accountId: string // 계좌 ID (필수!)
+  signature: boolean // 사용자 서명 (필수!)
 }
 
 export interface CreateRequest {
