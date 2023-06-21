@@ -5,13 +5,13 @@ button {
   display: block;
 }
 
-.inputBlur{
-  border:none;
-  background-color:#EDEFF2;
+.inputBlur {
+  border: none;
+  background-color: #edeff2;
 }
-.inputFocus{
-  border:1px solid #D0d4d9;
-  outline:none;
+.inputFocus {
+  border: 1px solid #d0d4d9;
+  outline: none;
 }
 
 .black {
@@ -66,6 +66,10 @@ button {
   padding: 40px 50px;
   flex-grow: 1;
   background-color: $color-admin-main;
+
+  input {
+    @include inputBox;
+  }
 }
 
 .pagination-wrapper {

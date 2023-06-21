@@ -101,3 +101,28 @@ export const checkIsAdmin = async () => {
   const response = await authInstance.post('/auth/me')
   return response.data
 }
+
+// 주문 취소/취소 철회
+export const changeIsCanceled = async (
+  detailId: string,
+  isCanceled: boolean
+) => {
+  const response = await adminInstance.put(
+    `/products/transactions/${detailId}`,
+    {
+      isCanceled: isCanceled
+    }
+  )
+  return response.data
+}
+
+// 구매 확정 처리
+export const adminOrderConfirm = async (detailId: string) => {
+  const response = await adminInstance.put(
+    `/products/transactions/${detailId}`,
+    {
+      done: true
+    }
+  )
+  return response.data
+}

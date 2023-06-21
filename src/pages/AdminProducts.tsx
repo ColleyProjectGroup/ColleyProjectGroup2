@@ -2,7 +2,8 @@ import { useEffect, useState, useRef, useCallback, useMemo } from 'react'
 import {
   AdminProductItem,
   AdminProductItemHeader,
-  Modal
+  Modal,
+  AdminProductsSkeleton
 } from 'components/index'
 import styled from 'styles/pages/adminProducts.module.scss'
 import { Link } from 'react-router-dom'
@@ -17,6 +18,7 @@ import Pagination from 'react-js-pagination'
 import 'styles/common.scss'
 
 export const AdminProducts = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [search, setSearch] = useState<string>('')
   const [products, setProducts] = useState<Array<ProductResponse>>([])
   const [shownMenuId, setShownMenuId] = useState<string | null>(null)
@@ -55,13 +57,18 @@ export const AdminProducts = () => {
 
   const addButtonRef = useRef<HTMLButtonElement | null>(null)
   useEffect(() => {
+    setIsLoading(true)
     fetchProducts()
   }, [])
 
   const fetchProducts = useCallback(() => {
-    adminFetchProducts().then(res => {
-      setProducts(res)
-    })
+    adminFetchProducts()
+      .then(res => {
+        setProducts(res)
+      })
+      .finally(() => {
+        setIsLoading(false)
+      })
   }, [])
 
   // 바깥쪽 클릭 시 메뉴 hidden 처리
@@ -192,6 +199,25 @@ export const AdminProducts = () => {
         onChange={onChangeSearch}
       />
       <AdminProductItemHeader />
+
+      {
+        // 스켈레톤 로딩
+        isLoading && (
+          <>
+            <AdminProductsSkeleton />
+            <AdminProductsSkeleton />
+            <AdminProductsSkeleton />
+            <AdminProductsSkeleton />
+            <AdminProductsSkeleton />
+            <AdminProductsSkeleton />
+            <AdminProductsSkeleton />
+            <AdminProductsSkeleton />
+            <AdminProductsSkeleton />
+            <AdminProductsSkeleton />
+          </>
+        )
+      }
+
       {filteredProducts.map(product => {
         const isMenuShow = shownMenuId === product.id
         return (
