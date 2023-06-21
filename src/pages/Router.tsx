@@ -16,7 +16,8 @@ import {
   AdminDashboard,
   SignInPage,
   SignUpPage,
-  Payment
+  Payment,
+  AdminSales
 } from 'pages/index'
 
 export const router = createBrowserRouter([
@@ -85,6 +86,11 @@ export const router = createBrowserRouter([
       {
         path: 'product-add',
         element: <AdminProductAdd />,
+        errorElement: <ErrorComponent />
+      },
+      {
+        path: 'sales',
+        element: <AdminSales />,
         errorElement: <ErrorComponent />
       }
     ]

@@ -4,10 +4,9 @@
 input.search {
   margin-top: 80px;
   width: 200px;
-  height: 40px;
 }
 
-.customers {
+.sales {
   margin-top: 40px;
   height: 60px;
   display: flex;
@@ -19,32 +18,31 @@ input.search {
   font-weight: 700;
   gap: 10px;
 
-  .customers__email {
-    width: 30%;
+  .sales__date {
+    width: 17%;
     flex-grow: 1;
     margin-left: 40px;
-    min-width: 250px;
   }
 
-  .customers__name {
+  .sales__email {
     width: 20%;
     flex-grow: 1;
   }
 
-  .customers__grade {
-    width: 15%;
+  .sales__product {
+    width: 30%;
     flex-grow: 1;
-  }
-  .customers__total-order {
-    width: 15%;
-    flex-grow: 1;
-    text-align: right;
   }
 
-  .customers__total-price {
-    width: 20%;
+  .sales__price {
+    width: 15%;
     flex-grow: 1;
-    text-align: right;
-    margin-right: 40px;
+    text-align: center;
+  }
+
+  .sales__status {
+    width: 18%;
+    flex-grow: 1;
+    text-align: center;
   }
 }
