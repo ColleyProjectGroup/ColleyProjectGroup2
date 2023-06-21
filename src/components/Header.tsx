@@ -101,25 +101,25 @@ export const Header = () => {
       </div>
       <ul className={styles.navigation}>
         <li>
-          <a href="/">ALL</a>
+          <a href="/productlist">ALL</a>
         </li>
         <li>
-          <a href="/">NEW</a>
+          <a href="/productlist?category=NEW">NEW</a>
         </li>
         <li>
-          <a href="/">BEST</a>
+          <a href="/productlist?category=BEST">BEST</a>
         </li>
         <li>
-          <a href="/">Living</a>
+          <a href="/productlist?category=LIVING">Living</a>
         </li>
         <li>
-          <a href="/">Kitchen</a>
+          <a href="/productlist?category=KITCHEN">Kitchen</a>
         </li>
         <li>
-          <a href="/">Stationery</a>
+          <a href="/productlist?category=STATIONERY">Stationery</a>
         </li>
         <li>
-          <a href="/">Baby/Kids</a>
+          <a href="/productlist?category=BABY/KIDS">Baby/Kids</a>
         </li>
       </ul>
     </div>
