@@ -1,5 +1,10 @@
 import { authInstance } from '@/api'
-import { CreateRequest, RemoveRequest } from '@/types/BankAccounts.interface'
+import {
+  CreateRequest,
+  RemoveRequest,
+  AccountsRequest,
+  Bank
+} from '@/types/BankAccounts.interface'
 
 //선택 가능한 은행 목록 조회
 export const getBankLists = async () => {
@@ -13,8 +18,8 @@ export const getBankLists = async () => {
 export const getAccounts = async () => {
   console.log('GET ACCOUNTS')
   const res = await authInstance.get('/account')
-  console.log(res.data)
-  return res.data
+  console.log(res.data.accounts)
+  return res.data.accounts
 }
 
 //계좌 연결 - Exception Handling***

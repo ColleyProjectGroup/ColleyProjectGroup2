@@ -19,10 +19,14 @@ import { getBankLists, getAccounts, createAccount } from '@/api/paymentRequests'
 export const PaymentMethods = () => {
   const { name } = useContext(UsernameContext)
   const { email } = useContext(UseremailContext)
+  // ###결제완료 요청시 함께 전송 데이터
   const { phoneNumber } = useContext(PhoneNumberContext)
 
   const [isModalShow, setIsModalShow] = useState<boolean>(false)
   const [modalProps, setModalProps] = useState<ModalProps | null>(null)
+  const [accountData, setAccountData] = useState([])
+
+  SwiperCore.use([Navigation])
 
   const modalCancelHandler = () => {
     setIsModalShow(false)
@@ -52,7 +56,11 @@ export const PaymentMethods = () => {
       alert('휴대전화번호를 정확히 입력해주세요.')
     }
   }
+  // const res = async () => {
+  //   return await getAccounts()
+  // }
 
+  // ######TOSS PAYMENTS WIDGET
   const clientKey = 'test_ck_P24xLea5zVAxXyyGMxb3QAMYNwW6'
   const customerKey = 'YbX2HuSlsC9uVJW6NMRMj'
 
@@ -70,7 +78,11 @@ export const PaymentMethods = () => {
     })()
   }, [])
 
-  SwiperCore.use([Navigation])
+  useEffect(() => {
+    getAccounts().then(response => {
+      setAccountData(response)
+    })
+  }, [])
 
   return (
     <div className={styles.container}>
@@ -92,13 +104,22 @@ export const PaymentMethods = () => {
             계좌를 추가하지 않을 시 결제가 진행되지 않습니다.
           </span>
         </SwiperSlide>
-        <SwiperSlide>
+        {accountData.map(item => (
+          <SwiperSlide key={item.id}>
+            <div className={styles.addAccout}>
+              <span>{item.bankName}</span>
+              <span>{item.accountNumber}</span>
+              <span>{item.balance}</span>
+            </div>
+          </SwiperSlide>
+        ))}
+        {/* <SwiperSlide key={item.id}>
           <div className={styles.addAccout}>
             <span>KB</span>
             <span>123123123123123</span>
             <span>3,000,000</span>
           </div>
-        </SwiperSlide>
+        </SwiperSlide> */}
       </Swiper>
 
       <Confirmation />
