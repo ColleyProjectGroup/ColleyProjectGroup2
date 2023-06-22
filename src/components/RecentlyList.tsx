@@ -3,6 +3,8 @@ import { Product } from 'types/index'
 import SwiperCore, { Navigation } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import styled from 'styles/components/recentlyList.module.scss'
+import 'swiper/scss'
+import 'swiper/scss/navigation'
 
 export const RecentlyList = React.memo(
   ({ products }: { products: Product[] }) => {
