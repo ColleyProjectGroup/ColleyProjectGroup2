@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { MyOrderSummary, MyOrderStatus } from 'components/index'
+import { MyOrderSummary, MyOrderStatus, MyOrderList } from 'components/index'
 import styled from 'styles/pages/myOrders.module.scss'
 
 export const MyOrders = () => {
@@ -12,6 +12,7 @@ export const MyOrders = () => {
       </div>
       <MyOrderSummary />
       <MyOrderStatus />
+      <MyOrderList />
     </div>
   )
 }

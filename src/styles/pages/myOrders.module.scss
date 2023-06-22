@@ -1,6 +1,7 @@
 @import 'src/styles/common.scss';
 
 .container {
+  min-width: 1040px;
   max-width: 1240px;
   min-height: 700px;
   padding: 0 50px 200px;

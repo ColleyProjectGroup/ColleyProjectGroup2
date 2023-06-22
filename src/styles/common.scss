@@ -115,3 +115,50 @@ button {
     color: $color-item-blue;
   }
 }
+
+.mypage-pagination {
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  ul.pagination li {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    line-height: 40px;
+
+    &:first-child,
+    &:nth-child(2),
+    &:nth-last-child(2),
+    &:last-child {
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 40px;
+    }
+  }
+  ul.pagination li a {
+    text-decoration: none;
+    color: $color-black-0;
+  }
+  ul.pagination li.active a {
+    color: $color-black-0;
+  }
+  ul.pagination li.active {
+    border: 1px solid $color-black-0;
+  }
+  ul.pagination li a:hover,
+  ul.pagination li a.active {
+    color: $color-black-0;
+    font-weight: 500;
+  }
+}
