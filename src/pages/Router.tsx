@@ -16,7 +16,8 @@ import {
   AdminDashboard,
   SignInPage,
   SignUpPage,
-  AdminSales
+  AdminSales,
+  MyOrders
 } from 'pages/index'
 
 export const router = createBrowserRouter([
@@ -32,7 +33,7 @@ export const router = createBrowserRouter([
       },
       {
         path: 'about',
-        element: <About />,
+        element: <MyOrders />,
         errorElement: <ErrorComponent />
       },
       {
