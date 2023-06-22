@@ -2,22 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { adminInstance } from '../api/axios'
 import { Footer } from '@/components'
+import { Products } from '../components/Products'
 import '../styles/layout/ProductDetail.scss'
-
-interface Product {
-  id: number
-  thumbnail: string
-  title: string
-  price: number
-  discountRate?: number // 할인율을 나타내는 필드
-  photo: string
-  // Add other fields for product information
-}
-
-interface RouteParams {
-  id: string
-  [key: string]: string | undefined
-}
+import { Product, RouteParams } from '../types/Products.interface'
 
 const ProductDetail: React.FC = () => {
   const { id } = useParams<RouteParams>()
@@ -31,7 +18,7 @@ const ProductDetail: React.FC = () => {
         setProduct(response.data)
         console.log(response.data)
       } catch (error) {
-        console.error('Error fetching product', error)
+        console.error('상품을 불러오는 중에 오류가 발생했습니다.', error)
       }
     }
 
@@ -39,7 +26,7 @@ const ProductDetail: React.FC = () => {
   }, [id])
 
   if (!product) {
-    return <div>Loading...</div>
+    return <div>로딩 중...</div>
   }
 
   const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,12 +35,22 @@ const ProductDetail: React.FC = () => {
     setQuantity(nonNegativeValue)
   }
 
+  const handleIncreaseQuantity = () => {
+    setQuantity(prevQuantity => prevQuantity + 1)
+  }
+
+  const handleDecreaseQuantity = () => {
+    if (quantity > 1) {
+      setQuantity(prevQuantity => prevQuantity - 1)
+    }
+  }
+
   const calculateDiscountPrice = () => {
     if (product.discountRate) {
       const discountRate = product.discountRate / 100
       return product.price * (1 - discountRate)
     }
-    return null
+    return product.price
   }
 
   const calculateTotalPrice = () => {
@@ -85,40 +82,61 @@ const ProductDetail: React.FC = () => {
         </div>
         <div className="Info">
           <div className="Title">{product.title}</div>
-          {product.discountRate && (
-            <div className="Price">
-              <span className="OriginalPrice">
-                소비자가: <s>{product.price.toLocaleString()}원</s>
-              </span>
-              <br />
-              <span className="DiscountedPrice">
-                할인가: {calculateDiscountPrice()?.toLocaleString()}원
-              </span>
-              <br />
-              <span>국내·해외배송 : 국내 배송</span> <br />
-              <span>배송방법 : 택배</span> <br />
-              <span>배송비 : 3,000원</span>
+          <div className="Price">
+            <div className="infoInner">
+              <div className="infoleft">
+                <span className="OriginalPrice">소비자가:</span>
+              </div>
+              <div>{product.price.toLocaleString()}원</div>
             </div>
-          )}
-          {!product.discountRate && (
-            <div className="Price">
-              소비자가: {product.price.toLocaleString()}원
+            <div className="infoInner DiscountedPrice">
+              <div className="infoleft">
+                <span>판매가:</span>
+              </div>
+              <div>{calculateDiscountPrice().toLocaleString()}원</div>
             </div>
-          )}
+            <div className="infoInner">
+              <div className="infoleft">
+                <span>배송방법:</span>
+              </div>
+              <div className="infoleft">
+                <span>국내 배송</span>
+              </div>
+            </div>
+            <div className="infoInner">
+              <div className="infoleft">
+                <span>배송비:</span>
+              </div>
+              <div>
+                <span>3,000원</span>
+              </div>
+            </div>
+            <div>
+              <span>(최소주문수량 1개 이상)</span>
+            </div>
+          </div>
           <div className="Quantity">
-            <label htmlFor="quantity">주문수량:</label>
-            <input
-              type="number"
-              id="quantity"
-              value={quantity}
-              onChange={handleQuantityChange}
-            />
+            <div className="QantityTitle">
+              <label htmlFor="quantity">{product.title}</label>
+            </div>
+            <div className="QuantityControl">
+              <button onClick={handleDecreaseQuantity}>-</button>
+              <input
+                id="quantity"
+                value={quantity}
+                onChange={handleQuantityChange}
+              />
+              <button onClick={handleIncreaseQuantity}>+</button>
+            </div>
           </div>
           <div className="TotalPrice">
-            TOTAL (QUANTITY): {calculateTotalPrice().toLocaleString()}원
+            <div>TOTAL:</div>
+            <div>{calculateTotalPrice().toLocaleString()}원</div>
           </div>
-          <div className="Buttons">
+          <div className="Buttons1">
             <button onClick={handleBuyNow}>바로 구매</button>
+          </div>
+          <div className="Buttons2">
             <button onClick={handleAddToCart}>장바구니</button>
             <button onClick={handleAddToWishlist}>위시 리스트</button>
           </div>
@@ -131,6 +149,16 @@ const ProductDetail: React.FC = () => {
             alt={product.title}
           />
         </div>
+      </div>
+      <div>
+        <div className="etcProducts">
+          <h2>YOU MAY ALSO LIKE</h2>
+          <h3>함께 구매하면 좋을 관련 상품</h3>
+        </div>
+        <Products
+          tagFilter={product.tags}
+          limit={4}
+        />
       </div>
       <Footer />
     </div>

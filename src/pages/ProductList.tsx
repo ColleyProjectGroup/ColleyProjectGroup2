@@ -4,22 +4,21 @@ import { Products } from '../components/Products'
 import { Footer } from '../components'
 import '../styles/layout/ProductList.scss'
 
+interface ProductListProps {
+  keyword?: string
+}
+
 const ProductList = () => {
   const location = useLocation()
-  // 현재 URL 정보
   const queryParams = new URLSearchParams(location.search)
-  // 쿼리 파라미터
   const category = queryParams.get('category')
-  // 'category' 파라미터의 값
   const sortOption = queryParams.get('sortOption')
-  // 'sortOption' 파라미터의 값
+  const keyword = queryParams.get('keyword')
 
   const [selectedSortOption, setSelectedSortOption] = useState<string | null>(
     sortOption || null
-  ) // 정렬 옵션
-
+  )
   const [productCount, setProductCount] = useState<number>(0)
-  // 상품 수량
 
   useEffect(() => {
     setSelectedSortOption(sortOption)
@@ -31,6 +30,16 @@ const ProductList = () => {
 
   const handleTabClick = (option: string) => {
     setSelectedSortOption(option)
+
+    const searchParams = new URLSearchParams(location.search)
+    searchParams.set('sortOption', option)
+
+    if (keyword) {
+      searchParams.set('keyword', keyword)
+    }
+
+    const newPath = `${location.pathname}?${searchParams.toString()}`
+    window.history.pushState(null, '', newPath)
   }
 
   return (
@@ -40,14 +49,16 @@ const ProductList = () => {
       </div>
       <div className="Inner">
         <div className="ProductInfo">
-          <div className="ProductCount">등록 제품 : {productCount}개</div>
+          <div className="ProductCount">등록 제품: {productCount}개</div>
           <div className="ProductSort">
             <ul>
               <li>
                 <a
                   href={`/productlist?category=${
                     category || ''
-                  }&sortOption=name`}
+                  }&sortOption=name${
+                    keyword ? `&keyword=${encodeURIComponent(keyword)}` : ''
+                  }`}
                   onClick={() => handleTabClick('name')}>
                   상품명
                 </a>{' '}
@@ -56,7 +67,9 @@ const ProductList = () => {
                 <a
                   href={`/productlist?category=${
                     category || ''
-                  }&sortOption=priceLow`}
+                  }&sortOption=priceLow${
+                    keyword ? `&keyword=${encodeURIComponent(keyword)}` : ''
+                  }`}
                   onClick={() => handleTabClick('priceLow')}>
                   낮은가격
                 </a>{' '}
@@ -65,7 +78,9 @@ const ProductList = () => {
                 <a
                   href={`/productlist?category=${
                     category || ''
-                  }&sortOption=priceHigh`}
+                  }&sortOption=priceHigh${
+                    keyword ? `&keyword=${encodeURIComponent(keyword)}` : ''
+                  }`}
                   onClick={() => handleTabClick('priceHigh')}>
                   높은가격
                 </a>{' '}
@@ -77,8 +92,10 @@ const ProductList = () => {
       <Products
         tagFilter={category ? [category] : []}
         sortOption={selectedSortOption}
+        keyword={keyword || undefined}
         getProductCount={handleGetProductCount}
       />
+
       <Footer />
     </div>
   )

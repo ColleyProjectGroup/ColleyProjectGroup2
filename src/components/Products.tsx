@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useCallback, useContext } from 'react'
+import { useLocation } from 'react-router-dom'
 import { adminInstance } from '../api/axios'
 import '../styles/layout/NewArrival.scss'
 import { ProductsProps, Product } from 'types/index'
@@ -12,63 +13,75 @@ const Products = ({
   tagFilter = [],
   limit,
   sortOption,
-  getProductCount
+  getProductCount,
+  keyword
 }: ProductsProps) => {
   const [products, setProducts] = useState<Product[]>([])
-
-  const fetchProducts = useCallback(async () => {
-    try {
-      const query = API_ENDPOINT
-
-      const response = await adminInstance.get(query)
-      let filteredProducts = response.data
-
-      if (tagFilter.length > 0) {
-        // 해당 태그를 포함하는 상품 필터링
-        filteredProducts = filteredProducts.filter((product: Product) =>
-          tagFilter.every(tag => product.tags.includes(tag))
-        )
-      }
-
-      if (sortOption) {
-        // 정렬 옵션이 존재할 경우
-        filteredProducts.sort((a: Product, b: Product) => {
-          if (sortOption === 'priceLow') {
-            return a.price - b.price // 낮은 가격 순
-          } else if (sortOption === 'priceHigh') {
-            return b.price - a.price // 높은 가격 순
-          } else if (sortOption === 'name') {
-            return a.title.localeCompare(b.title, 'ko', {
-              sensitivity: 'base'
-            }) // 상품명을 기준으로 가나다 순으로 정렬
-          } else {
-            return 0
-          }
-        })
-      }
-
-      if (limit) {
-        // 상품 제한 수량
-        filteredProducts = filteredProducts.slice(0, limit)
-      }
-
-      setProducts(filteredProducts)
-      getProductCount(filteredProducts.length)
-      // 렌더링 상품 수 함수 호출
-    } catch (error) {
-      console.error('상품 조회 오류 발생', error)
-    }
-  }, [tagFilter, limit, sortOption, getProductCount])
+  const location = useLocation()
 
   useEffect(() => {
-    fetchProducts()
-  }, [])
+    const fetchProducts = async () => {
+      try {
+        const query = API_ENDPOINT + location.search
+        const response = await adminInstance.get(query)
+        let filteredProducts: Product[] = response.data
 
-  const calculateDiscountedPrice = (price: number, discountRate?: number) => {
+        if (tagFilter.length > 0) {
+          filteredProducts = filteredProducts.filter((product: Product) =>
+            tagFilter.every(tag => product.tags.includes(tag))
+          )
+        }
+
+        filteredProducts = filteredProducts.filter(
+          (product: Product) => !product.isSoldOut
+        )
+
+        if (sortOption) {
+          filteredProducts.sort((a: Product, b: Product) => {
+            if (sortOption === 'priceLow') {
+              return a.price - b.price
+            } else if (sortOption === 'priceHigh') {
+              return b.price - a.price
+            } else if (sortOption === 'name') {
+              return a.title.localeCompare(b.title, 'ko', {
+                sensitivity: 'base'
+              })
+            } else {
+              return 0
+            }
+          })
+        }
+
+        let searchedProducts: Product[] = filteredProducts
+
+        if (keyword) {
+          const keywordLowerCase = keyword.toLowerCase() // 키워드를 소문자로 변환
+          searchedProducts = response.data.filter((product: Product) =>
+            product.title.toLowerCase().includes(keywordLowerCase)
+          )
+        }
+
+        if (limit) {
+          searchedProducts = searchedProducts.slice(0, limit)
+        }
+
+        setProducts(searchedProducts)
+        getProductCount(searchedProducts.length)
+      } catch (error) {
+        console.error('상품을 가져오는 중 오류 발생', error)
+      }
+    }
+
+    fetchProducts()
+  }, [tagFilter, limit, sortOption, getProductCount, location.search, keyword])
+
+  const calculateDiscountedPrice = (
+    price: number,
+    discountRate?: number
+  ): number => {
     if (discountRate) {
       const discountAmount = price * (discountRate / 100)
       return price - discountAmount
-      // 할인가 계산
     }
     return price
   }
@@ -91,41 +104,44 @@ const Products = ({
     <div className="Products">
       <div className="Inner">
         <div className={PRODUCTS_CLASSNAME}>
-          {products.map(product => (
-            <div key={product.id}>
-              <Link
-                to={`/products/${product.id}`}
-                onClick={() => {
+          {products.length > 0 ? (
+            products.map(product => (
+              <div key={product.id}>
+                <Link to={`/products/${product.id}`}
+                  onClick={() => {
                   onSaveProductRecently(product)
                 }}>
-                <div className="Image">
-                  <img
-                    src={product.thumbnail}
-                    alt={product.title}
-                  />
-                </div>
-                <div className="Title">{product.title}</div>
-                <div className="Price">
-                  {product.discountRate ? (
-                    <>
-                      <span className="OriginalPrice">
-                        <del>{product.price.toLocaleString()}원</del>
-                      </span>{' '}
-                      <span className="DiscountedPrice">
-                        {calculateDiscountedPrice(
-                          product.price,
-                          product.discountRate
-                        ).toLocaleString()}
-                        원
-                      </span>
-                    </>
-                  ) : (
-                    <>{product.price.toLocaleString()}원</>
-                  )}
-                </div>
-              </Link>
-            </div>
-          ))}
+                  <div className="Image">
+                    <img
+                      src={product.thumbnail}
+                      alt={product.title}
+                    />
+                  </div>
+                  <div className="Title">{product.title}</div>
+                  <div className="Price">
+                    {product.discountRate ? (
+                      <>
+                        <span className="OriginalPrice">
+                          <del>{product.price.toLocaleString()}원</del>
+                        </span>{' '}
+                        <span className="DiscountedPrice">
+                          {calculateDiscountedPrice(
+                            product.price,
+                            product.discountRate
+                          ).toLocaleString()}
+                          원
+                        </span>
+                      </>
+                    ) : (
+                      <>{product.price.toLocaleString()}원</>
+                    )}
+                  </div>
+                </Link>
+              </div>
+            ))
+          ) : (
+            <div className="NoProducts">상품이 없습니다.</div>
+          )}
         </div>
       </div>
     </div>
@@ -133,3 +149,4 @@ const Products = ({
 }
 
 export { Products }
+export type { ProductsProps }

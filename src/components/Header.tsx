@@ -1,23 +1,24 @@
-import styles from 'styles/layout/header.module.scss'
-import { useState, useRef, useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { logOut } from 'api/signApi'
 import { checkIsAdmin } from 'utils/index'
 import { LoginedUserContext, LoginContext } from 'contexts/index'
+import React, { useState, useRef, useEffect, useContext } from 'react'
+import { logOut } from 'api/signApi'
+import styles from 'styles/layout/header.module.scss'
 
-export const Header = () => {
+export const Header: React.FC = () => {
   const { isLogined, setIsLogined } = useContext(LoginContext)
   const { userEmail, setUserEmail } = useContext(LoginedUserContext)
   const [hideInput, setHideInput] = useState<boolean>(true)
   const navigate = useNavigate()
+  const [searchKeyword, setSearchKeyword] = useState<string>('')
+  const searchRef = useRef<HTMLInputElement | null>(null)
+
   const onClickSearch = () => {
     setHideInput(false)
   }
 
-  const searchRef = useRef<HTMLInputElement | null>(null)
   useEffect(() => {
     function handleOutside(e: Event) {
-      // current.contains(e.target) : 컴포넌트 특정 영역 외 클릭 감지를 위해 사용
       if (searchRef.current && !searchRef.current.contains(e.target as Node)) {
         if (!hideInput) {
           setHideInput(true)
@@ -44,6 +45,18 @@ export const Header = () => {
     })
   }
 
+  const onSearchEnter = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      event.preventDefault()
+      if (searchKeyword.trim() !== '') {
+        // 검색어를 `ProductList` 컴포넌트로 전달합니다.
+        window.location.href = `/productlist?category=SEARCH&keyword=${encodeURIComponent(
+          searchKeyword
+        )}`
+      }
+    }
+  }
+
   return (
     <div className={styles.inner}>
       <div className={styles.headerTop}>
@@ -59,6 +72,7 @@ export const Header = () => {
             <div>
               {isLogined ? (
                 <div>
+
                   {checkIsAdmin(userEmail) ? (
                     <span>
                       <a href="/admin">ADMIN</a>
@@ -92,9 +106,13 @@ export const Header = () => {
           </div>
           <div className={styles.inputBox}>
             <input
+              id="SearchInput"
               type="text"
               className={styles[hideInput ? 'hide' : 'show']}
               ref={searchRef}
+              value={searchKeyword}
+              onChange={e => setSearchKeyword(e.target.value)}
+              onKeyPress={onSearchEnter}
             />
             <div
               className={`material-icons ${styles['icon']} ${
@@ -108,25 +126,25 @@ export const Header = () => {
       </div>
       <ul className={styles.navigation}>
         <li>
-          <a href="/">ALL</a>
+          <a href="/productlist">ALL</a>
         </li>
         <li>
-          <a href="/">NEW</a>
+          <a href="/productlist?category=NEW">NEW</a>
         </li>
         <li>
-          <a href="/">BEST</a>
+          <a href="/productlist?category=BEST">BEST</a>
         </li>
         <li>
-          <a href="/">Living</a>
+          <a href="/productlist?category=LIVING">Living</a>
         </li>
         <li>
-          <a href="/">Kitchen</a>
+          <a href="/productlist?category=KITCHEN">Kitchen</a>
         </li>
         <li>
-          <a href="/">Stationery</a>
+          <a href="/productlist?category=STATIONERY">Stationery</a>
         </li>
         <li>
-          <a href="/">Baby/Kids</a>
+          <a href="/productlist?category=BABY/KIDS">Baby/Kids</a>
         </li>
       </ul>
     </div>
