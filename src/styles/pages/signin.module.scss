@@ -1,0 +1,51 @@
+@import 'src/styles/common.scss';
+
+.loginForm{
+  width:600px;
+  height:400px;
+  margin:70px auto;
+  text-align: center;
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+  .title{
+    margin-top:50px;
+    font-weight:bold;
+  }
+  form{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width:360px;
+    height:200px;
+    margin:auto;
+    .inputBlur{
+      width:338px;
+      height:50px;
+      outline:none;
+      padding-left:10px;
+      border:none;
+      background-color:#EDEFF2;
+      font-size:16px;
+    }
+    .inputFocus{
+      width:350px;
+      height:50px;
+      outline:none;
+      padding-left:10px;
+      border:1px solid #D0d4d9;
+      box-sizing:border-box;
+      font-size:16px;
+    }
+    button{
+      width:180px;
+      height:45px;
+      font-size:16px;
+    }
+  }
+  .title{
+    font-size:30px;
+  }
+
+}
