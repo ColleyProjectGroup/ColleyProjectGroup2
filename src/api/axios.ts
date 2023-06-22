@@ -1,4 +1,4 @@
-import axios, { AxiosError, AxiosInstance } from 'axios'
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from 'axios'
 
 const authInterceptors = (instance: AxiosInstance): AxiosInstance => {
   instance.interceptors.request.use(
@@ -30,6 +30,8 @@ export const baseInstance: AxiosInstance = axios.create({
     username: import.meta.env.VITE_USERNAME
   }
 })
+// Authorization 설정이 추가된 로그인한 사용자 API용 Instance
+export const authInstance: AxiosInstance = authInterceptors(baseInstance)
 
 // 관리자 API용 Instance
 export const adminInstance: AxiosInstance = axios.create({
@@ -40,9 +42,9 @@ export const adminInstance: AxiosInstance = axios.create({
     masterKey: true
   }
 })
-
-// Authorization 설정이 추가된 로그인한 사용자 API용 Instance
-export const authInstance: AxiosInstance = authInterceptors(baseInstance)
+const config: AxiosRequestConfig<any> = {
+  // Your configuration options
+}
 
 ////////////////////////////////
 // * Axios Instance 기본 사용법

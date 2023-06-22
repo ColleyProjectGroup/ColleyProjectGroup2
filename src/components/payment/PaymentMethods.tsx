@@ -7,11 +7,13 @@ import { Modal } from '@/components'
 import { Confirmation, BankSelection } from 'components/payment'
 import styles from 'src/styles/components/payment/PaymentMethods.module.scss'
 // CONTEXT INDEX.TS CREATE **
-import { UsernameContext } from 'contexts/UsernameContext'
-import { UseremailContext } from 'contexts/UseremailContext'
-import { PhoneNumberContext } from 'contexts/PhoneNumberContext'
-import { BankContext } from 'contexts/BankContext'
-import { AccountNumberContext } from 'contexts/AccountNumberContext'
+import {
+  UsernameContext,
+  UseremailContext,
+  PhoneNumberContext,
+  BankContext,
+  AccountNumberContext
+} from 'contexts/index'
 
 import { ModalProps } from '@/types'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -50,14 +52,15 @@ export const PaymentMethods = () => {
         title: '계좌 추가',
         isTwoButton: true,
         okButtonText: '추가',
-        onClickOkButton: () => {
+        onClickOkButton: async () => {
           // *********ACCOUNT NUMBER VALIDATION REQUIRED*********
-          createAccount({
+          await createAccount({
             bankCode: bank, //BankSelection => options (useContext)
             accountNumber: accountNumber, //BankSelection => input (useContext)
             phoneNumber: phoneNumber,
             signature: true
           })
+          await getAccounts
         },
         cancelButtonText: '취소',
         onClickCancelButton: modalCancelHandler
@@ -65,13 +68,6 @@ export const PaymentMethods = () => {
     } else {
       alert('휴대전화번호를 정확히 입력해주세요.')
     }
-  }
-
-  const removeAccountHandler = async (value: string): Promise<any> => {
-    await removeAccount({
-      accountId: value,
-      signature: true
-    })
   }
 
   // ######TOSS PAYMENTS WIDGET
@@ -125,9 +121,12 @@ export const PaymentMethods = () => {
                 {item.bankName}
                 {item.accountNumber}
                 <a
-                  onClick={() => {
-                    console.log(item.id)
-                    removeAccountHandler(item.id)
+                  onClick={async () => {
+                    await removeAccount({
+                      accountId: item.id,
+                      signature: true
+                    })
+                    await getAccounts
                   }}>
                   ✖
                 </a>

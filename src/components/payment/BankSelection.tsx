@@ -1,16 +1,19 @@
-import { BankContext } from 'contexts/BankContext'
-import { AccountNumberContext } from 'contexts/AccountNumberContext'
+import { AccountNumberContext, BankContext } from 'contexts/index'
 import { useContext } from 'react'
 import styles from 'styles/components/payment/BankSelection.module.scss'
 
 export const BankSelection = () => {
   const { bank, setBank } = useContext(BankContext)
   const { accountNumber, setAccountNumber } = useContext(AccountNumberContext)
-  const bankSelectionHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const bankSelectionHandler = async (
+    e: React.ChangeEvent<HTMLSelectElement>
+  ) => {
     setBank(e.currentTarget.value)
+    console.log(bank)
   }
   const accountNumberHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAccountNumber(e.currentTarget.value)
+    console.log(accountNumber)
   }
 
   return (
@@ -21,8 +24,7 @@ export const BankSelection = () => {
         <select
           name="banks"
           id="banks"
-          onChange={bankSelectionHandler}
-          value={bank}>
+          onChange={bankSelectionHandler}>
           <option value="004">KB국민은행</option>
           <option value="088">신한은행</option>
           <option value="081">하나은행</option>

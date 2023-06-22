@@ -1,10 +1,5 @@
 import { authInstance } from '@/api'
-import {
-  CreateRequest,
-  RemoveRequest,
-  AccountsRequest,
-  Bank
-} from '@/types/BankAccounts.interface'
+import { CreateRequest, RemoveRequest } from '@/types/BankAccounts.interface'
 
 //선택 가능한 은행 목록 조회
 export const getBankLists = async () => {
@@ -31,9 +26,9 @@ export const createAccount = async (request: CreateRequest) => {
 }
 
 //계좌 해지
-export const removeAccount = async (request: RemoveRequest) => {
+export const removeAccount = async (req: RemoveRequest) => {
   console.log('REMOVE ACCOUNT')
-  const res = await authInstance.delete('/account', request)
+  const res = await authInstance.delete('/account', { data: req })
   console.log(res.data)
   return res.data
 }

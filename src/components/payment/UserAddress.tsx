@@ -40,7 +40,7 @@ export const UserAddress = () => {
     const emailRegEx =
       /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/i
 
-    const emailCheck = (username: any) => {
+    const emailCheck = (username: string) => {
       return emailRegEx.test(username) //형식에 맞을 경우, true 리턴
     }
     if (emailCheck(e.target.value)) {
@@ -51,6 +51,7 @@ export const UserAddress = () => {
       console.log('state => input border color 변경 ')
     }
   }
+
   return (
     <div className={styles.container}>
       <h3>배송지</h3>

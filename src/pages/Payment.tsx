@@ -4,11 +4,13 @@ import {
   PriceInfo,
   PaymentMethods
 } from 'components/payment/index'
-import { UsernameContext } from 'contexts/UsernameContext'
-import { UseremailContext } from 'contexts/UseremailContext'
-import { PhoneNumberContext } from 'contexts/PhoneNumberContext'
-import { BankContext } from 'contexts/BankContext'
-import { AccountNumberContext } from 'contexts/AccountNumberContext'
+import {
+  UsernameContext,
+  PhoneNumberContext,
+  UseremailContext,
+  BankContext,
+  AccountNumberContext
+} from 'contexts/index'
 
 import { useState } from 'react'
 import styles from 'styles/components/payment/Payment.module.scss'
@@ -17,7 +19,7 @@ export const Payment = () => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [phoneNumber, setPhoneNumber] = useState('010')
-  const [bank, setBank] = useState('')
+  const [bank, setBank] = useState('004')
   const [accountNumber, setAccountNumber] = useState('')
 
   return (
