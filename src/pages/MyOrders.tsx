@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { MyOrderSummary } from 'components/index'
+import { MyOrderSummary, MyOrderStatus } from 'components/index'
 import styled from 'styles/pages/myOrders.module.scss'
 
 export const MyOrders = () => {
@@ -11,6 +11,7 @@ export const MyOrders = () => {
         <span> / MY PAGE</span>
       </div>
       <MyOrderSummary />
+      <MyOrderStatus />
     </div>
   )
 }
