@@ -1,11 +1,15 @@
 import styles from 'styles/layout/header.module.scss'
 import { useState, useRef, useEffect, useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { logOut } from 'api/signApi'
-import { LoginContext } from '@/contexts/LoginContext'
+import { checkIsAdmin } from 'utils/index'
+import { LoginedUserContext, LoginContext } from 'contexts/index'
 
 export const Header = () => {
   const { isLogined, setIsLogined } = useContext(LoginContext)
+  const { userEmail, setUserEmail } = useContext(LoginedUserContext)
   const [hideInput, setHideInput] = useState<boolean>(true)
+  const navigate = useNavigate()
   const onClickSearch = () => {
     setHideInput(false)
   }
@@ -26,9 +30,18 @@ export const Header = () => {
     }
   }, [searchRef, hideInput])
 
-  const logOutId = (event: Event) => {
-    event.preventDefault()
-    logOut()
+  const logOutId = () => {
+    // event.preventDefault() // 통합 테스트 때 확인 필요
+    logOut().then(isSuccess => {
+      if (isSuccess) {
+        setUserEmail('')
+        localStorage.removeItem(import.meta.env.VITE_STORAGE_KEY_ACCESSTOKEN)
+        setIsLogined(!isLogined)
+        navigate('/')
+      } else {
+        // 예외처리
+      }
+    })
   }
 
   return (
@@ -46,22 +59,16 @@ export const Header = () => {
             <div>
               {isLogined ? (
                 <div>
-                  <span>
-                    <a href="/about">MYPAGE</a>
-                  </span>
-                  <span>
-                    <a
-                      href="/"
-                      onClick={() => {
-                        logOutId
-                        localStorage.removeItem(
-                          import.meta.env.VITE_STORAGE_KEY_ACCESSTOKEN
-                        )
-                        setIsLogined(!isLogined)
-                      }}>
-                      LOGOUT
-                    </a>
-                  </span>
+                  {checkIsAdmin(userEmail) ? (
+                    <span>
+                      <a href="/admin">ADMIN</a>
+                    </span>
+                  ) : (
+                    <span>
+                      <a href="/about">MYPAGE</a>
+                    </span>
+                  )}
+                  <span onClick={logOutId}>LOGOUT</span>
                 </div>
               ) : (
                 <div>

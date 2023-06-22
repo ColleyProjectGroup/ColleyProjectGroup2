@@ -10,7 +10,6 @@ import 'swiper/scss/navigation'
 export const RecentlyList = React.memo(
   ({ products }: { products: Product[] }) => {
     const [isObserver, setIsObserver] = useState<boolean>(false)
-    const [swiperIndex, setSwiperIndex] = useState(0)
     const navigationPrevRef = React.useRef(null)
     const navigationNextRef = React.useRef(null)
     useEffect(() => {
