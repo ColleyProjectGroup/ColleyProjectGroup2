@@ -1,4 +1,3 @@
-export * from 'components/admin/Admin'
 export * from 'components/admin/AdminNav'
 export * from 'components/admin/AdminProductItemHeader'
 export * from 'components/admin/ProductAddForm'
