@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useContext } from 'react'
+import { useEffect, useRef, useState, useContext, useCallback } from 'react'
 import {
   loadPaymentWidget,
   PaymentWidgetInstance
@@ -6,7 +6,6 @@ import {
 import { Modal } from '@/components'
 import { Confirmation, BankSelection } from 'components/payment'
 import styles from 'src/styles/components/payment/PaymentMethods.module.scss'
-// CONTEXT INDEX.TS CREATE **
 import {
   UsernameContext,
   UseremailContext,
@@ -41,40 +40,30 @@ export const PaymentMethods = () => {
 
   SwiperCore.use([Navigation])
 
+  //MODAL HANDLERS
   const modalCancelHandler = () => {
     setIsModalShow(false)
   }
-  const createAndRender = async (value1: string, value2: string) => {
+  const modalOpenHandler = useCallback(() => {
+    if (phoneNumber.length === 11) {
+      setIsModalShow(true)
+    } else {
+      alert('휴대전화번호를 정확히 입력해주세요.')
+    }
+  }, [phoneNumber])
+
+  // ACCOUNTS FUNCTIONS
+  const createAndRender = useCallback(async () => {
     await createAccount({
-      bankCode: value1, //BankSelection => options (useContext)
-      accountNumber: value2, //BankSelection => input (useContext)
+      bankCode: bank, //BankSelection => options (useContext)
+      accountNumber: accountNumber, //BankSelection => input (useContext)
       phoneNumber: phoneNumber,
       signature: true
     })
     await getAccounts().then(response => {
       setAccountData(response)
     })
-  }
-
-  const modalOpenHandler = () => {
-    if (phoneNumber.length === 11) {
-      setIsModalShow(true)
-      setModalProps({
-        title: '계좌 추가',
-        isTwoButton: true,
-        okButtonText: '추가',
-        onClickOkButton: () => {
-          // *********ACCOUNT NUMBER VALIDATION REQUIRED*********
-          console.log(bank, accountNumber)
-          createAndRender(bank, accountNumber)
-        },
-        cancelButtonText: '취소',
-        onClickCancelButton: modalCancelHandler
-      })
-    } else {
-      alert('휴대전화번호를 정확히 입력해주세요.')
-    }
-  }
+  }, [bank, accountNumber, phoneNumber])
 
   const removeAndRender = async (val: string) => {
     await removeAccount({
@@ -103,12 +92,28 @@ export const PaymentMethods = () => {
       paymentWidgetRef.current = paymentWidget
     })()
   }, [])
-
+  // INITIAL ACCOUNTS RENDER
   useEffect(() => {
     getAccounts().then(response => {
       setAccountData(response)
     })
   }, [])
+
+  useEffect(() => {
+    if (phoneNumber.length === 11) {
+      setModalProps({
+        title: '계좌 추가',
+        isTwoButton: true,
+        okButtonText: '추가',
+        onClickOkButton: () => {
+          // *********ACCOUNT NUMBER VALIDATION REQUIRED*********
+          createAndRender()
+        },
+        cancelButtonText: '취소',
+        onClickCancelButton: modalCancelHandler
+      })
+    }
+  }, [bank, accountNumber, phoneNumber])
 
   return (
     <div className={styles.container}>
