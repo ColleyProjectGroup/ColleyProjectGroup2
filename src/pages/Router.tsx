@@ -7,7 +7,6 @@ import {
 } from 'components/index'
 import {
   Home,
-  About,
   AdminProducts,
   AdminProductAdd,
   ProductList,
@@ -17,7 +16,8 @@ import {
   SignInPage,
   SignUpPage,
   Payment,
-  AdminSales
+  AdminSales,
+  MyOrders
 } from 'pages/index'
 
 export const router = createBrowserRouter([
@@ -33,7 +33,7 @@ export const router = createBrowserRouter([
       },
       {
         path: 'about',
-        element: <About />,
+        element: <MyOrders />,
         errorElement: <ErrorComponent />
       },
       {
