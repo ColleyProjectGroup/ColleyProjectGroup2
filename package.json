@@ -21,7 +21,7 @@
     "react-daum-postcode": "^3.1.1",
     "react-dom": "^18.2.0",
     "react-js-pagination": "^3.0.3",
-    "swiper": "^9.4.1"
+    "swiper": "^9.4.1",
     "react-router-dom": "^6.13.0",
     "sass": "^1.62.1"
   },

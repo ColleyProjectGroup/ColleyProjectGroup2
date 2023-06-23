@@ -3,8 +3,8 @@ import {
   loadPaymentWidget,
   PaymentWidgetInstance
 } from '@tosspayments/payment-widget-sdk'
-import { Modal } from '@/components'
-import { Confirmation, BankSelection } from 'components/payment'
+import { Modal } from 'components/index'
+import { Confirmation, BankSelection } from 'components/payment/index'
 import styles from 'src/styles/components/payment/PaymentMethods.module.scss'
 import {
   UsernameContext,

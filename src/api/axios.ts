@@ -42,9 +42,7 @@ export const adminInstance: AxiosInstance = axios.create({
     masterKey: true
   }
 })
-const config: AxiosRequestConfig<any> = {
-  // Your configuration options
-}
+
 
 ////////////////////////////////
 // * Axios Instance 기본 사용법

@@ -4,3 +4,7 @@ export * from 'contexts/PhoneNumberContext'
 export * from 'contexts/BankContext'
 export * from 'contexts/UseremailContext'
 export * from 'contexts/UsernameContext'
+export * from 'contexts/RecentlyContext'
+export * from 'contexts/LoginContext'
+export * from 'contexts/LoginedUserContext'
+
