@@ -72,7 +72,7 @@ const Products = ({
       }
     }
 
-    fetchProducts()
+    // fetchProducts()
   }, [tagFilter, limit, sortOption, getProductCount, location.search, keyword])
 
   const calculateDiscountedPrice = (
@@ -107,10 +107,11 @@ const Products = ({
           {products.length > 0 ? (
             products.map(product => (
               <div key={product.id}>
-                <Link to={`/products/${product.id}`}
+                <Link
+                  to={`/products/${product.id}`}
                   onClick={() => {
-                  onSaveProductRecently(product)
-                }}>
+                    onSaveProductRecently(product)
+                  }}>
                   <div className="Image">
                     <img
                       src={product.thumbnail}
