@@ -14,4 +14,33 @@
     font-size: 19px;
     letter-spacing: -1px;
   }
+  .wrapper {
+    display: flex;
+    img {
+      width: 90px;
+      aspect-ratio: 1 / 1;
+    }
+
+    .info {
+      display: flex;
+      flex-direction: column;
+      margin-left: 20px;
+      .title {
+        padding-top: 5px;
+        height: 25px;
+        font-size: 14px;
+      }
+      .quantity {
+        padding-top: 5px;
+        height: 25px;
+        font-size: 14px;
+        color: $color-black-6;
+      }
+      .price {
+        padding-top: 5px;
+        height: 25px;
+        font-size: 15px;
+      }
+    }
+  }
 }
