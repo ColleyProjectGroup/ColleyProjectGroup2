@@ -1,6 +1,5 @@
 import { Outlet } from 'react-router-dom'
 import { Header, Badge } from 'components/index'
-import styles from 'styles/layout/header.module.scss'
 import { Product } from 'types/index'
 import {
   LoginContext,
@@ -18,7 +17,7 @@ export const App = () => {
   >('RecentlyViewed', [])
 
   return (
-    <div className={styles.header}>
+    <>
       <LoginContext.Provider value={{ isLogined, setIsLogined }}>
         <LoginedUserContext.Provider value={{ userEmail, setUserEmail }}>
           <RecentlyContext.Provider
@@ -30,6 +29,6 @@ export const App = () => {
         </LoginedUserContext.Provider>
       </LoginContext.Provider>
       {/* 결제 페이지/회원가입 페이지 등은 footer미적용일 것 같아서 header만 기본으로 outlet과 함께 배치시켰습니다 */}
-    </div>
+    </>
   )
 }

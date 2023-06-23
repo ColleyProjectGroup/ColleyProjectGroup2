@@ -4,22 +4,32 @@ import styles from 'styles/components/mypage/mypageNav.module.scss'
 export const MyPageNav = () => {
   return (
     <nav>
-      <h1>My Page</h1>
+      <span className={styles.title}>My Page</span>
       <ul>
         <li>
           쇼핑 정보
-          <span>주문내역 조회</span>
+          <div>
+            <Link to="/">주문내역 조회</Link>
+          </div>
         </li>
         <li>
           활동 정보
-          <span>나의 위시리스트</span>
+          <div>
+            <Link to="/">나의 위시리스트</Link>
+          </div>
         </li>
         <li>
           나의 정보
           <ul>
-            <li>회원정보 수정</li>
-            <li>비밀번호 변경</li>
-            <li>로그아웃</li>
+            <li>
+              <Link to="/">회원정보 수정</Link>
+            </li>
+            <li>
+              <Link to="/">비밀번호 변경</Link>
+            </li>
+            <li>
+              <Link to="/">로그아웃</Link>
+            </li>
           </ul>
         </li>
       </ul>
