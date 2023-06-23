@@ -4,22 +4,30 @@ import { calculateDiscountedPrice } from 'utils/index'
 import styled from 'styles/components/mypage/myOrderSummary.module.scss'
 
 export const MyOrderSummary = React.memo(
-  ({ orders }: { orders: TransactionDetail[] }) => {
+  ({
+    orders,
+    isLoading
+  }: {
+    orders: TransactionDetail[]
+    isLoading: boolean
+  }) => {
     // 총 주문 금액
     const totalOrderPrice = useMemo(() => {
-      const totalPrice = orders.reduce((total, order) => {
-        total += calculateDiscountedPrice(
-          order.product.price,
-          order.product.discountRate
-        )
-        return total
-      }, 0)
+      const totalPrice = orders
+        .filter(order => !order.isCanceled)
+        .reduce((total, order) => {
+          total += calculateDiscountedPrice(
+            order.product.price,
+            order.product.discountRate
+          )
+          return total
+        }, 0)
       return totalPrice
     }, [orders])
 
     // 적립금 (주문금액의 1%)
     const point = useMemo(() => {
-      return totalOrderPrice * 0.01
+      return Math.floor(totalOrderPrice * 0.01)
     }, [totalOrderPrice])
 
     return (
@@ -30,9 +38,13 @@ export const MyOrderSummary = React.memo(
             src="/public/images/ico_won.png"
             alt="적립금"
           />
-          <span className={styled['summary__content']}>
-            {point.toLocaleString()}원
-          </span>
+          {isLoading ? (
+            <div className={styled['skeleton']}></div>
+          ) : (
+            <span className={styled['summary__content']}>
+              {point.toLocaleString()}원
+            </span>
+          )}
           <span className={styled['summary__title']}>총적립금</span>
         </div>
         <div className={styled['summary__item']}>
@@ -41,7 +53,11 @@ export const MyOrderSummary = React.memo(
             src="/public/images/ico_coupon.png"
             alt="쿠폰"
           />
-          <span className={styled['summary__content']}>0개</span>
+          {isLoading ? (
+            <div className={styled['skeleton']}></div>
+          ) : (
+            <span className={styled['summary__content']}>0개</span>
+          )}
           <span className={styled['summary__title']}>쿠폰</span>
         </div>
         <div className={styled['summary__item']}>
@@ -50,9 +66,14 @@ export const MyOrderSummary = React.memo(
             src="/public/images/ico_orders.png"
             alt="주문"
           />
-          <span className={styled['summary__content']}>
-            {totalOrderPrice.toLocaleString()}원 ({orders.length}회)
-          </span>
+          {isLoading ? (
+            <div className={styled['skeleton']}></div>
+          ) : (
+            <span className={styled['summary__content']}>
+              {totalOrderPrice.toLocaleString()}원 (
+              {orders.filter(order => !order.isCanceled).length}회)
+            </span>
+          )}
           <span className={styled['summary__title']}>총주문</span>
         </div>
       </div>

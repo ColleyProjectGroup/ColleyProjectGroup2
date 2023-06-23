@@ -6,12 +6,18 @@ import { MyOrderSummary, MyOrderStatus, MyOrderList } from 'components/index'
 import styled from 'styles/pages/myOrders.module.scss'
 
 export const MyOrders = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [orders, setOrders] = useState<TransactionDetail[]>([])
 
   const fetchOrders = () => {
-    featchUserOrders().then(res => {
-      setOrders(res)
-    })
+    setIsLoading(true)
+    featchUserOrders()
+      .then(res => {
+        setOrders(res)
+      })
+      .finally(() => {
+        setIsLoading(false)
+      })
   }
 
   useEffect(() => {
@@ -24,9 +30,19 @@ export const MyOrders = () => {
         <Link to="/">홈</Link>
         <span> / MY PAGE</span>
       </div>
-      <MyOrderSummary orders={orders} />
-      <MyOrderStatus orders={orders} />
-      <MyOrderList orders={orders} />
+      <MyOrderSummary
+        orders={orders}
+        isLoading={isLoading}
+      />
+      <MyOrderStatus
+        orders={orders}
+        isLoading={isLoading}
+      />
+      <MyOrderList
+        orders={orders}
+        onFetch={fetchOrders}
+        isLoading={isLoading}
+      />
     </div>
   )
 }
