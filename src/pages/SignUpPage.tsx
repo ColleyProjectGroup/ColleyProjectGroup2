@@ -14,9 +14,6 @@ export const SignUpPage = () => {
   const [isValid, setIsValid] = useState<boolean>(false)
   const [isModalShow, setIsModalShow] = useState<boolean>(false)
   const [modalProps, setModalProps] = useState<ModalProps | null>(null)
-  const [onFocusEmail, setOnFocusEmail] = useState<boolean>(false)
-  const [onFocusPassword, setOnFocusPassword] = useState<boolean>(false)
-  const [onFocusDisplayName, setOnFocusDisplayName] = useState<boolean>(false)
   const { isLogined, setIsLogined } = useContext(LoginContext)
 
   //유효성 검사
@@ -28,27 +25,19 @@ export const SignUpPage = () => {
     }
   }, [email, password, displayName])
 
-  const searchRef = useRef<HTMLInputElement | null>(null)
+  const inputRef = useRef<HTMLInputElement | null>(null)
   useEffect(() => {
     function handleOutside(e: Event) {
       // current.contains(e.target) : 컴포넌트 특정 영역 외 클릭 감지를 위해 사용
-      if (searchRef.current && !searchRef.current.contains(e.target as Node)) {
-        if (onFocusEmail) {
-          setOnFocusEmail(false)
-        }
-        if (onFocusPassword) {
-          setOnFocusPassword(false)
-        }
-        if (onFocusDisplayName) {
-          setOnFocusDisplayName(false)
-        }
+      if (inputRef.current && !inputRef.current.contains(e.target as Node)) {
+        inputRef.current.blur()
       }
     }
     document.addEventListener('mousedown', handleOutside)
     return () => {
       document.removeEventListener('mousedown', handleOutside)
     }
-  }, [searchRef, onFocusEmail, onFocusPassword, onFocusDisplayName])
+  }, [inputRef])
 
   const submitBodyInfo = (event: FormEvent) => {
     event.preventDefault()
@@ -72,7 +61,7 @@ export const SignUpPage = () => {
           onClickOkButton: () => {
             setIsModalShow(false)
             setIsLogined(!isLogined)
-            navigate('/')
+            navigate('/', { replace: true })
           }
         })
       },
@@ -107,40 +96,26 @@ export const SignUpPage = () => {
         <div className={styles.inputbox}>
           <div className={styles.text}>이메일</div>
           <input
-            className={onFocusEmail ? styles.inputFocus : styles.inputBlur}
             value={email}
             onChange={e => setEmail(e.target.value)}
-            onClick={() => {
-              setOnFocusEmail(true)
-            }}
-            ref={searchRef}
+            ref={inputRef}
           />
         </div>
         <div className={styles.inputbox}>
           <div className={styles.text}>비밀번호</div>
           <input
-            className={onFocusPassword ? styles.inputFocus : styles.inputBlur}
             type="password"
             value={password}
             onChange={e => setPassword(e.target.value)}
-            onClick={() => {
-              setOnFocusPassword(true)
-            }}
-            ref={searchRef}
+            ref={inputRef}
           />
         </div>
         <div className={styles.inputbox}>
           <div className={styles.text}>이름</div>
           <input
-            className={
-              onFocusDisplayName ? styles.inputFocus : styles.inputBlur
-            }
             value={displayName}
             onChange={e => setDisplayName(e.target.value)}
-            onClick={() => {
-              setOnFocusDisplayName(true)
-            }}
-            ref={searchRef}
+            ref={inputRef}
           />
         </div>
         <button

@@ -33,21 +33,20 @@
       padding-right:45px;
       font-weight:bold;
     }
-    .inputBlur{
+    input{
       width:188px;
       height:30px;
       outline:none;
       padding-left:10px;
       border:none;
       background-color:#EDEFF2;
-    }
-    .inputFocus{
-      width:200px;
-      height:30px;
-      outline:none;
-      padding-left:10px;
-      border:1px solid #D0d4d9;
-      box-sizing:border-box;
+      &:focus{
+        width:200px;
+        height:30px;
+        background-color: $color-primary;
+        border:1px solid #D0d4d9;
+        box-sizing:border-box;
+      }
     }
   }
   button{

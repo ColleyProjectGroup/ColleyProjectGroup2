@@ -15,8 +15,6 @@ export const SignInPage = () => {
   const [isValid, setIsValid] = useState<boolean>(false)
   const [isModalShow, setIsModalShow] = useState<boolean>(false)
   const [modalProps, setModalProps] = useState<ModalProps | null>(null)
-  const [onFocusEmail, setOnFocusEmail] = useState<boolean>(false)
-  const [onFocusPassword, setOnFocusPassword] = useState<boolean>(false)
 
   //유효성 검사
   useEffect(() => {
@@ -27,24 +25,19 @@ export const SignInPage = () => {
     }
   }, [email, password])
 
-  const searchRef = useRef<HTMLInputElement | null>(null)
+  const inputRef = useRef<HTMLInputElement | null>(null)
   useEffect(() => {
     function handleOutside(e: Event) {
       // current.contains(e.target) : 컴포넌트 특정 영역 외 클릭 감지를 위해 사용
-      if (searchRef.current && !searchRef.current.contains(e.target as Node)) {
-        if (onFocusEmail) {
-          setOnFocusEmail(false)
-        }
-        if (onFocusPassword) {
-          setOnFocusPassword(false)
-        }
+      if (inputRef.current && !inputRef.current.contains(e.target as Node)) {
+        inputRef.current.blur()
       }
     }
     document.addEventListener('mousedown', handleOutside)
     return () => {
       document.removeEventListener('mousedown', handleOutside)
     }
-  }, [searchRef, onFocusEmail, onFocusPassword])
+  }, [inputRef])
 
   const submitId = (event: FormEvent) => {
     event.preventDefault()
@@ -64,7 +57,8 @@ export const SignInPage = () => {
           navigate('/admin')
           setIsLogined(!isLogined)
         } else {
-          navigate('/')
+          //navigate('/', { replace: true })
+          location.replace(document.referrer)
           setIsLogined(!isLogined)
         }
       },
@@ -93,25 +87,17 @@ export const SignInPage = () => {
         <div className={styles.title}>LOGIN</div>
         <form onSubmit={submitId}>
           <input
-            className={onFocusEmail ? styles.inputFocus : styles.inputBlur}
             value={email}
             onChange={e => setEmail(e.target.value)}
-            onClick={() => {
-              setOnFocusEmail(!onFocusEmail)
-            }}
             placeholder="이메일"
-            ref={searchRef}
+            ref={inputRef}
           />
           <input
-            className={onFocusPassword ? styles.inputFocus : styles.inputBlur}
             type="password"
             value={password}
             onChange={e => setPassword(e.target.value)}
-            onClick={() => {
-              setOnFocusPassword(!onFocusPassword)
-            }}
             placeholder="비밀번호"
-            ref={searchRef}
+            ref={inputRef}
           />
           <button
             type="submit"

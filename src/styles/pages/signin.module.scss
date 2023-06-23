@@ -20,7 +20,7 @@
     width:360px;
     height:200px;
     margin:auto;
-    .inputBlur{
+    input{
       width:338px;
       height:50px;
       outline:none;
@@ -28,15 +28,12 @@
       border:none;
       background-color:#EDEFF2;
       font-size:16px;
-    }
-    .inputFocus{
-      width:350px;
-      height:50px;
-      outline:none;
-      padding-left:10px;
-      border:1px solid #D0d4d9;
-      box-sizing:border-box;
-      font-size:16px;
+      &:focus{
+        width:350px;
+        background-color: $color-primary;
+        border:1px solid #D0d4d9;
+        box-sizing:border-box;
+      }
     }
     button{
       width:180px;

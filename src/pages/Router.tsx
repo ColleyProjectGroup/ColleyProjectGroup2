@@ -1,5 +1,11 @@
 import { createBrowserRouter } from 'react-router-dom'
-import { App, ErrorComponent, NotFound, Admin } from 'components/index'
+import {
+  App,
+  ErrorComponent,
+  NotFound,
+  Admin,
+  MyPageRoute
+} from 'components/index'
 import {
   Home,
   About,
@@ -43,6 +49,12 @@ export const router = createBrowserRouter([
         errorElement: <ErrorComponent />
       }
     ]
+  },
+  {
+    path: '/mypage',
+    element: <MyPageRoute />,
+    errorElement: <NotFound />,
+    children: []
   },
   {
     path: '/admin',

@@ -99,29 +99,31 @@ export const Header = () => {
           </div>
         </div>
       </div>
-      <ul className={styles.navigation}>
-        <li>
-          <a href="/">ALL</a>
-        </li>
-        <li>
-          <a href="/">NEW</a>
-        </li>
-        <li>
-          <a href="/">BEST</a>
-        </li>
-        <li>
-          <a href="/">Living</a>
-        </li>
-        <li>
-          <a href="/">Kitchen</a>
-        </li>
-        <li>
-          <a href="/">Stationery</a>
-        </li>
-        <li>
-          <a href="/">Baby/Kids</a>
-        </li>
-      </ul>
+      <div className={styles.navigation}>
+        <ul className={styles.navInner}>
+          <li>
+            <a href="/">ALL</a>
+          </li>
+          <li>
+            <a href="/">NEW</a>
+          </li>
+          <li>
+            <a href="/">BEST</a>
+          </li>
+          <li>
+            <a href="/">Living</a>
+          </li>
+          <li>
+            <a href="/">Kitchen</a>
+          </li>
+          <li>
+            <a href="/">Stationery</a>
+          </li>
+          <li>
+            <a href="/">Baby/Kids</a>
+          </li>
+        </ul>
+      </div>
     </div>
   )
 }
