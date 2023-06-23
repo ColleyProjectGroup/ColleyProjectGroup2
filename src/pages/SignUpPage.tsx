@@ -1,7 +1,7 @@
 import { useState, FormEvent, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { postInfo } from 'api/signApi'
-import { LoginContext } from '@/contexts/LoginContext'
+import { LoginContext, LoginedUserContext } from 'contexts/index'
 
 export const SignUpPage = () => {
   const navigate = useNavigate()
@@ -9,6 +9,7 @@ export const SignUpPage = () => {
   const [password, setPassword] = useState<string>('')
   const [displayName, setDisplayName] = useState<string>('')
   const { isLogined, setIsLogined } = useContext(LoginContext)
+  const { setUserEmail } = useContext(LoginedUserContext)
 
   const submitBodyInfo = (event: FormEvent) => {
     event.preventDefault()
@@ -18,6 +19,7 @@ export const SignUpPage = () => {
       displayName
     }
     postInfo(bodyInfo).then(res => {
+      setUserEmail(res.user.email)
       localStorage.setItem(
         import.meta.env.VITE_STORAGE_KEY_ACCESSTOKEN,
         res.accessToken

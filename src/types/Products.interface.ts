@@ -1,4 +1,5 @@
 export interface Product {
+  isSoldOut: any
   id: string
   thumbnail: string
   title: string
@@ -12,7 +13,9 @@ export interface ProductsProps {
   tagFilter?: string[]
   limit?: number
   sortOption?: string | null
-  getProductCount: (count: number) => void
+  keyword?: string
+  getProductCount?: ((count: number) => void) | undefined
+  excludeProductIds?: string[]
 }
 
 export interface RouteParams {

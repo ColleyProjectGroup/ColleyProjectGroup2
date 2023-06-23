@@ -1,15 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { adminInstance } from '../api/axios'
 import '../styles/layout/NewArrival.scss'
 import { Link } from 'react-router-dom'
-
-interface Product {
-  id: string
-  thumbnail: string
-  title: string
-  price: number
-  discountRate?: number
-}
+import { RecentlyContext } from 'contexts/index'
+import { Product } from 'types/index'
 
 const NewArrival = () => {
   const [newProducts, setNewProducts] = useState<Product[]>([])
@@ -39,6 +33,20 @@ const NewArrival = () => {
     return price
   }
 
+  // 최근 본 상품 세션 저장 처리
+  const { recentlyViewedList, setRecentlyViewedList } =
+    useContext(RecentlyContext)
+
+  const onSaveProductRecently = (product: Product) => {
+    const isExist = recentlyViewedList.find(p => p.id === product.id)
+    if (!isExist) {
+      setRecentlyViewedList([...recentlyViewedList, product])
+    } else {
+      const removeList = recentlyViewedList.filter(p => p.id !== product.id)
+      setRecentlyViewedList([...removeList, product])
+    }
+  }
+
   return (
     <div className="NewArrival">
       <div className="Inner">
@@ -47,7 +55,9 @@ const NewArrival = () => {
         <div className="Products">
           {newProducts.map(product => (
             <div key={product.id}>
-              <Link to={`/products/${product.id}`}>
+              <Link
+                to={`/products/${product.id}`}
+                onClick={() => onSaveProductRecently(product)}>
                 <div className="Image">
                   <img
                     src={product.thumbnail}
