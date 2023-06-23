@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom'
 
 export const ProductInfo = () => {
   const chosenProduct = useLocation().state
-  console.log(chosenProduct.thumbnail)
+  console.log(chosenProduct)
   return (
     <div className={styles.container}>
       <h3>상품정보</h3>

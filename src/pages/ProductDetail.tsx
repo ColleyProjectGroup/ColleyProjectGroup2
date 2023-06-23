@@ -140,10 +140,13 @@ const ProductDetail: React.FC = () => {
                 navigate('/payment', {
                   state: {
                     //상품정보 데이터
-                    photo: product.thumbnail,
+                    thumbnail: product.thumbnail,
                     title: product.title,
                     quantity: quantity,
-                    price: product.price.toLocaleString()
+                    price: calculateDiscountPrice().toLocaleString(),
+                    prevPrice: product.price,
+                    discount: product.discountRate
+                    // product: product
                   }
                 })
               }}>

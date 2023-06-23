@@ -26,6 +26,9 @@
       .discount {
         font-weight: 700;
         color: $color-now;
+        > span {
+          color: $color-black-0;
+        }
       }
     }
   }
