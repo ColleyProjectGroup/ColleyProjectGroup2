@@ -44,6 +44,17 @@ export const PaymentMethods = () => {
   const modalCancelHandler = () => {
     setIsModalShow(false)
   }
+  const createAndRender = async (value1: string, value2: string) => {
+    await createAccount({
+      bankCode: value1, //BankSelection => options (useContext)
+      accountNumber: value2, //BankSelection => input (useContext)
+      phoneNumber: phoneNumber,
+      signature: true
+    })
+    await getAccounts().then(response => {
+      setAccountData(response)
+    })
+  }
 
   const modalOpenHandler = () => {
     if (phoneNumber.length === 11) {
@@ -52,15 +63,10 @@ export const PaymentMethods = () => {
         title: '계좌 추가',
         isTwoButton: true,
         okButtonText: '추가',
-        onClickOkButton: async () => {
+        onClickOkButton: () => {
           // *********ACCOUNT NUMBER VALIDATION REQUIRED*********
-          await createAccount({
-            bankCode: bank, //BankSelection => options (useContext)
-            accountNumber: accountNumber, //BankSelection => input (useContext)
-            phoneNumber: phoneNumber,
-            signature: true
-          })
-          await getAccounts
+          console.log(bank, accountNumber)
+          createAndRender(bank, accountNumber)
         },
         cancelButtonText: '취소',
         onClickCancelButton: modalCancelHandler
@@ -68,6 +74,16 @@ export const PaymentMethods = () => {
     } else {
       alert('휴대전화번호를 정확히 입력해주세요.')
     }
+  }
+
+  const removeAndRender = async (val: string) => {
+    await removeAccount({
+      accountId: val,
+      signature: true
+    })
+    await getAccounts().then(response => {
+      setAccountData(response)
+    })
   }
 
   // ######TOSS PAYMENTS WIDGET
@@ -114,6 +130,7 @@ export const PaymentMethods = () => {
             계좌를 추가하지 않을 시 결제가 진행되지 않습니다.
           </span>
         </SwiperSlide>
+        {/* 생성된 계좌 */}
         {accountData.map(item => (
           <SwiperSlide key={item.id}>
             <div className={styles.addAccout}>
@@ -121,12 +138,8 @@ export const PaymentMethods = () => {
                 {item.bankName}
                 {item.accountNumber}
                 <a
-                  onClick={async () => {
-                    await removeAccount({
-                      accountId: item.id,
-                      signature: true
-                    })
-                    await getAccounts
+                  onClick={() => {
+                    removeAndRender(item.id)
                   }}>
                   ✖
                 </a>

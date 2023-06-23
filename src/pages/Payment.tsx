@@ -23,9 +23,10 @@ export const Payment = () => {
   const [accountNumber, setAccountNumber] = useState('')
 
   return (
-    <AccountNumberContext.Provider value={{ accountNumber, setAccountNumber }}>
-      <BankContext.Provider value={{ bank, setBank }}>
-        <PhoneNumberContext.Provider value={{ phoneNumber, setPhoneNumber }}>
+    <BankContext.Provider value={{ bank, setBank }}>
+      <PhoneNumberContext.Provider value={{ phoneNumber, setPhoneNumber }}>
+        <AccountNumberContext.Provider
+          value={{ accountNumber, setAccountNumber }}>
           <UseremailContext.Provider value={{ email, setEmail }}>
             <UsernameContext.Provider value={{ name, setName }}>
               <div className={styles.container}>
@@ -36,8 +37,8 @@ export const Payment = () => {
               </div>
             </UsernameContext.Provider>
           </UseremailContext.Provider>
-        </PhoneNumberContext.Provider>
-      </BankContext.Provider>
-    </AccountNumberContext.Provider>
+        </AccountNumberContext.Provider>
+      </PhoneNumberContext.Provider>
+    </BankContext.Provider>
   )
 }

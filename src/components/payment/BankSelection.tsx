@@ -24,7 +24,9 @@ export const BankSelection = () => {
         <select
           name="banks"
           id="banks"
-          onChange={bankSelectionHandler}>
+          value={bank}
+          onChange={bankSelectionHandler}
+          required>
           <option value="004">KB국민은행</option>
           <option value="088">신한은행</option>
           <option value="081">하나은행</option>
@@ -39,7 +41,9 @@ export const BankSelection = () => {
         <span>계좌번호</span>
         <input
           type="text"
+          value={accountNumber}
           onChange={accountNumberHandler}
+          required
         />
       </label>
     </div>
