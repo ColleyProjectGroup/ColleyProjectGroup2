@@ -1,4 +1,4 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from 'axios'
+import axios, { AxiosError, AxiosInstance } from 'axios'
 
 const authInterceptors = (instance: AxiosInstance): AxiosInstance => {
   instance.interceptors.request.use(
@@ -42,7 +42,6 @@ export const adminInstance: AxiosInstance = axios.create({
     masterKey: true
   }
 })
-
 
 ////////////////////////////////
 // * Axios Instance 기본 사용법
