@@ -1,0 +1,14 @@
+@import 'src/styles/abstracts/variables.scss';
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  right: 0;
+  left: 0;
+  border-left: 1px solid $color-gray-D7;
+  border-right: 1px solid $color-gray-D7;
+  border-top: 1px solid $color-gray-D7;
+  margin: 0 auto;
+  max-width: 900px;
+  background-color: $color-gray-D7;
+}

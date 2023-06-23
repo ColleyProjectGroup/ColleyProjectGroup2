@@ -1,0 +1,34 @@
+@import 'src/styles/abstracts/variables';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 5px 0 0;
+  // width: 900px;
+  background-color: $color-primary;
+
+  .agree {
+    border: 1px solid $color-gray-EA;
+    background-color: $color-gray-FA;
+    margin: 30px;
+    padding: 20px;
+  }
+  .check {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    font-weight: 700;
+  }
+  .confirm {
+    display: block;
+    // width: 900px;
+    border: none;
+    padding: 15px;
+    margin: 30px;
+    font-size: 18px;
+    background-color: $color-confirm;
+    color: $color-primary;
+    cursor: pointer;
+  }
+}
