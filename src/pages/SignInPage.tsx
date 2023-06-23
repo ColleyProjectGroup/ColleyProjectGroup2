@@ -1,11 +1,12 @@
 import { useState, FormEvent, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getId } from 'api/signApi'
-import { LoginContext } from '@/contexts/LoginContext'
+import { LoginContext, LoginedUserContext } from 'contexts/index'
 
 export const SignInPage = () => {
   const navigate = useNavigate()
   const { isLogined, setIsLogined } = useContext(LoginContext)
+  const { setUserEmail } = useContext(LoginedUserContext)
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
 
@@ -17,6 +18,7 @@ export const SignInPage = () => {
     }
     getId(idInfo).then(res => {
       event.preventDefault()
+      setUserEmail(res.user.email)
       localStorage.setItem(
         import.meta.env.VITE_STORAGE_KEY_ACCESSTOKEN,
         res.accessToken
