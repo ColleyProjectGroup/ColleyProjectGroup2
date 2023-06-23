@@ -1,7 +1,7 @@
 import { useState, FormEvent, useContext, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { postInfo } from 'api/signApi'
-import { LoginContext } from '@/contexts/LoginContext'
+import { LoginContext, LoginedUserContext } from 'contexts/index'
 import { Modal } from 'components/Modal'
 import { ModalProps } from 'types/ModalProps.type'
 import styles from 'styles/pages/signup.module.scss'
@@ -15,6 +15,7 @@ export const SignUpPage = () => {
   const [isModalShow, setIsModalShow] = useState<boolean>(false)
   const [modalProps, setModalProps] = useState<ModalProps | null>(null)
   const { isLogined, setIsLogined } = useContext(LoginContext)
+  const { setUserEmail } = useContext(LoginedUserContext)
 
   //유효성 검사
   useEffect(() => {
@@ -87,6 +88,16 @@ export const SignUpPage = () => {
         console.log(errorMessage)
       }
     )
+
+    postInfo(bodyInfo).then(res => {
+      setUserEmail(res.user.email)
+      localStorage.setItem(
+        import.meta.env.VITE_STORAGE_KEY_ACCESSTOKEN,
+        res.accessToken
+      )
+      console.log(res.accessToken)
+      navigate('/')
+    })
   }
 
   return (
@@ -120,7 +131,10 @@ export const SignUpPage = () => {
         </div>
         <button
           type="submit"
-          disabled={!isValid}>
+          onClick={() => {
+            setIsLogined(!isLogined)
+            navigate('/')
+          }}>
           회원가입
         </button>
       </form>

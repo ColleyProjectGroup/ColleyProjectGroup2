@@ -1,0 +1,17 @@
+@import 'src/styles/abstracts/variables';
+
+.container {
+  margin: 0 0 5px;
+  padding: 32px;
+  background-color: $color-primary;
+  width: 900px;
+  box-sizing: border-box;
+
+  h3 {
+    font-weight: 600;
+    padding-bottom: 20px;
+    color: $color-payment-titles;
+    font-size: 19px;
+    letter-spacing: -1px;
+  }
+}

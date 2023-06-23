@@ -3,17 +3,22 @@ import {
   App,
   ErrorComponent,
   NotFound,
-  Admin,
-  MyPageRoute
+  MyPageRoute,
+  AdminPrivateRoute
 } from 'components/index'
 import {
   Home,
-  About,
   AdminProducts,
   AdminProductAdd,
+  ProductList,
+  ProductDetail,
   AdminCustomers,
+  AdminDashboard,
   SignInPage,
-  SignUpPage
+  SignUpPage,
+  Payment,
+  AdminSales,
+  MyOrders
 } from 'pages/index'
 
 export const router = createBrowserRouter([
@@ -22,7 +27,6 @@ export const router = createBrowserRouter([
     element: <App />,
     errorElement: <NotFound />,
     children: [
-      //하위 객체들처럼 페이지 추가시 생성해주세요
       {
         path: '',
         element: <Home />,
@@ -30,12 +34,22 @@ export const router = createBrowserRouter([
       },
       {
         path: 'about',
-        element: <About />,
+        element: <MyOrders />,
         errorElement: <ErrorComponent />
       },
       {
-        path: 'pay',
-        element: <About />,
+        path: 'payment',
+        element: <Payment />,
+        errorElement: <ErrorComponent />
+      },
+      {
+        path: 'productlist',
+        element: <ProductList />,
+        errorElement: <ErrorComponent />
+      },
+      {
+        path: 'products/:id',
+        element: <ProductDetail />,
         errorElement: <ErrorComponent />
       },
       {
@@ -58,9 +72,14 @@ export const router = createBrowserRouter([
   },
   {
     path: '/admin',
-    element: <Admin />,
+    element: <AdminPrivateRoute />,
     errorElement: <NotFound />,
     children: [
+      {
+        path: '',
+        element: <AdminDashboard />,
+        errorElement: <ErrorComponent />
+      },
       {
         path: 'customers',
         element: <AdminCustomers />,
@@ -74,6 +93,11 @@ export const router = createBrowserRouter([
       {
         path: 'product-add',
         element: <AdminProductAdd />,
+        errorElement: <ErrorComponent />
+      },
+      {
+        path: 'sales',
+        element: <AdminSales />,
         errorElement: <ErrorComponent />
       }
     ]

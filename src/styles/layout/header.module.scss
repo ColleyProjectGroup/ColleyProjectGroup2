@@ -1,20 +1,20 @@
 @import '../abstracts/variables.scss';
 @import 'src/styles/common.scss';
 
-.header{
-  margin-top:30px;
-  font-family:'Montserrat',sans-serif;
-  .inner{
-    width:1240px;
-    margin:auto;
-    .headerTop{
-      display:flex;
+.header {
+  margin-top: 30px;
+  font-family: 'Montserrat', sans-serif;
+  .inner {
+    width: 1240px;
+    margin: auto;
+    .headerTop {
+      display: flex;
       justify-content: space-between;
-      > a{
-        margin-left:540px;
-        .logo{
-          width:162px;
-          height:90px;
+      > a {
+        margin-left: 540px;
+        .logo {
+          width: 162px;
+          height: 90px;
         }
       }
       .loginTop{
@@ -23,10 +23,10 @@
         flex-direction: column;
         align-items: flex-end;
         overflow: hidden;
-        .inputBox{
-          display:flex;
+        .inputBox {
+          display: flex;
           align-items: center;
-          margin-top:20px;
+          margin-top: 20px;
           position: relative;
           input{
             margin-right:10px;
@@ -43,38 +43,42 @@
               background-color:$color-primary;
               opacity:1;
             }
-            &.hide{
-              position:absolute;
-              top:0;
-              right:-300px;
-              opacity:0;
+            &.hide {
+              position: absolute;
+              top: 0;
+              right: -300px;
+              opacity: 0;
             }
           }
-          .icon{
-            font-size:30px;
-            font-weight:bold;
+          .icon {
+            font-size: 30px;
+            font-weight: bold;
             cursor: pointer;
-            transition:all 1s;
-            &.show{
-              display:block;
+            transition: all 1s;
+            &.show {
+              display: block;
             }
-            &.hide{
+            &.hide {
               //color:red;
-              display:none;
+              display: none;
             }
           }
         }
-        .loginLink{
-          display:flex;
-          justify-content:flex-end;
+        .loginLink {
+          display: flex;
+          justify-content: flex-end;
           align-items: flex-start;
-          span{
-            font-size:14px;
-            font-weight:500;
-            padding:0 10px;
-            a{
-              text-decoration:none;
-              color:$color-black-0;
+
+          span {
+            font-size: 14px;
+            font-weight: 500;
+            padding: 0 10px;
+            color: $color-black-0;
+            cursor: pointer;
+
+            a {
+              text-decoration: none;
+              color: $color-black-0;
             }
           }
         }
@@ -92,10 +96,8 @@
       }
       a{
         text-decoration: none;
-        color:$color-black-0;
+        color: $color-black-0;
       }
     }
   }
 }
-
-

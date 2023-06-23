@@ -1,0 +1,48 @@
+@import 'src/styles/common.scss';
+
+// 검색 Input
+input.search {
+  margin-top: 80px;
+  width: 200px;
+}
+
+.sales {
+  margin-top: 40px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid $color-admin-border;
+  background-color: $color-primary;
+  width: 100%;
+  text-align: start;
+  font-weight: 700;
+  gap: 10px;
+
+  .sales__date {
+    width: 17%;
+    flex-grow: 1;
+    margin-left: 40px;
+  }
+
+  .sales__email {
+    width: 20%;
+    flex-grow: 1;
+  }
+
+  .sales__product {
+    width: 30%;
+    flex-grow: 1;
+  }
+
+  .sales__price {
+    width: 15%;
+    flex-grow: 1;
+    text-align: center;
+  }
+
+  .sales__status {
+    width: 18%;
+    flex-grow: 1;
+    text-align: center;
+  }
+}

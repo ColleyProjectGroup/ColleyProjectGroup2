@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  margin-top: 20px;
+  margin-left: 40px;
+  span {
+    display: block;
+    font-weight: 700;
+    padding: 10px 0;
+  }
+}

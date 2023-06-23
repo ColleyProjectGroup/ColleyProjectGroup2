@@ -1,0 +1,16 @@
+@import 'src/styles/common.scss';
+
+.row-title {
+  margin-top: 50px;
+  font-size: 20px;
+  font-weight: 500;
+  color: $color-loginlink;
+}
+
+.row {
+  margin-top: 10px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 40px;
+}
