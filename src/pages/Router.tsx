@@ -16,6 +16,7 @@ import {
   AdminDashboard,
   SignInPage,
   SignUpPage,
+  Payment,
   AdminSales
 } from 'pages/index'
 
@@ -36,8 +37,8 @@ export const router = createBrowserRouter([
         errorElement: <ErrorComponent />
       },
       {
-        path: 'pay',
-        element: <About />,
+        path: 'payment',
+        element: <Payment />,
         errorElement: <ErrorComponent />
       },
       {

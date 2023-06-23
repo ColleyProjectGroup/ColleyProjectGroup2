@@ -9,6 +9,8 @@ module.exports = {
   parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
   plugins: ['react-refresh', 'prettier'], //추가사항 - prettier
   rules: {
-    'react-refresh/only-export-components': 'warn'
+    'react-refresh/only-export-components': 'warn',
+    'no-extra-semi': 'off',
+    '@typescript-eslint/no-extra-semi': 'error'
   }
 }
