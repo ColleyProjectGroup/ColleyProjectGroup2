@@ -21,6 +21,7 @@ export const PriceInfo = () => {
           <div className={styles.block}>
             <span>할인/부가결제</span>
             <span className={styles.discount}>
+              -
               {(
                 receipt.prevPrice -
                 receipt.prevPrice * (1 - receipt.discount / 100)
