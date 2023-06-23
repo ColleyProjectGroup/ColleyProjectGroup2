@@ -78,7 +78,7 @@ export const Header: React.FC = () => {
                     </span>
                   ) : (
                     <span>
-                      <a href="/about">MYPAGE</a>
+                      <a href="/mypage">MYPAGE</a>
                     </span>
                   )}
                   <span onClick={logOutId}>LOGOUT</span>

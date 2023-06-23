@@ -1,6 +1,5 @@
 import { Outlet } from 'react-router-dom'
-import { Header } from 'components/Header'
-import { Badge } from 'components/index'
+import { Header, Badge } from 'components/index'
 import styles from 'styles/layout/header.module.scss'
 import { Product } from 'types/index'
 import {
