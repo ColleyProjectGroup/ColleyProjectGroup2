@@ -72,7 +72,6 @@ export const Header: React.FC = () => {
             <div>
               {isLogined ? (
                 <div>
-
                   {checkIsAdmin(userEmail) ? (
                     <span>
                       <a href="/admin">ADMIN</a>
@@ -97,7 +96,7 @@ export const Header: React.FC = () => {
             </div>
             <div>
               <span>
-                <a href="/">ORDER</a>
+                <a href="/mypage/order">ORDER</a>
               </span>
               <span>
                 <a href="/">CART</a>

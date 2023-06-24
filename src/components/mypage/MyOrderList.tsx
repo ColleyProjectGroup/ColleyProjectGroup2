@@ -7,10 +7,12 @@ import styled from 'styles/components/mypage/myOrderList.module.scss'
 
 export const MyOrderList = React.memo(
   ({
+    title,
     orders,
     onFetch,
     isLoading
   }: {
+    title: string
     orders: TransactionDetail[]
     onFetch: () => void
     isLoading: boolean
@@ -91,7 +93,7 @@ export const MyOrderList = React.memo(
 
     return (
       <div className={styled['orders']}>
-        <h4>주문내역 조회</h4>
+        <h4>{title}</h4>
         <ul className={styled['list']}>
           {isLoading ? (
             <>

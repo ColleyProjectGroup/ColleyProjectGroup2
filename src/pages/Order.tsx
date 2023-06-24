@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import { TransactionDetail } from 'types/index'
 import { featchUserOrders } from 'api/index'
-import { MyOrderSummary, MyOrderStatus, MyOrderList } from 'components/index'
+import { MyOrderList } from 'components/index'
+import { Link } from 'react-router-dom'
 import styled from 'styles/pages/myOrders.module.scss'
 
-export const MyOrders = () => {
+export const Order = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [orders, setOrders] = useState<TransactionDetail[]>([])
 
@@ -28,18 +28,19 @@ export const MyOrders = () => {
     <div className={styled.container}>
       <div className={styled.path}>
         <Link to="/">홈</Link>
-        <span>/ MY PAGE</span>
+        <span>/</span>
+        <Link to="/mypage">마이쇼핑</Link>
+        <span>/ 주문조회</span>
       </div>
-      <MyOrderSummary
-        orders={orders}
-        isLoading={isLoading}
-      />
-      <MyOrderStatus
-        orders={orders}
-        isLoading={isLoading}
-      />
+      <h4>주문 조회</h4>
+      <div className={styled.tabs}>
+        <div className={`${styled.tab} ${styled.active}`}>
+          주문내역조회 ({orders.length.toLocaleString()})
+        </div>
+        <div className={`${styled.tab} ${styled.inactive}`}></div>
+      </div>
       <MyOrderList
-        title="주문 내역 조회"
+        title={''}
         orders={orders}
         onFetch={fetchOrders}
         isLoading={isLoading}
