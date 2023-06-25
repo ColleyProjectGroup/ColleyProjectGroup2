@@ -1,0 +1,32 @@
+@import 'src/styles/common.scss';
+.container {
+  margin-left: 47px;
+  position: relative;
+  .total {
+    width: 300px;
+    position: sticky;
+    .totalSummary {
+      border: 1px solid $color-black-0;
+      padding: 20px;
+      h3 {
+        font-size: 14px;
+        font-weight: bold;
+        margin: 0 0 20px;
+        padding: 0 0 19px;
+        border-bottom: 1px solid $color-tab;
+      }
+      .contents {
+        border-bottom: 1px solid $color-tab;
+        margin: 0 0 20px;
+        padding: 0 0 19px;
+
+        .content {
+          display: flex;
+          justify-content: space-between;
+        }
+      }
+    }
+    .totalPrice {
+    }
+  }
+}

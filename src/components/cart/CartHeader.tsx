@@ -15,7 +15,7 @@ export const CartHeader = () => {
       </ol>
       <div className={styles.tabs}>
         {/* 국내배송상품 주문숫자 연동 */}
-        <div className={`${styles.tab} ${styles.active}`}>국내배송상품()</div>
+        <div className={`${styles.tab} ${styles.active}`}>국내배송상품 (0)</div>
         <div className={`${styles.tab} ${styles.inactive}`}></div>
         <div className={`${styles.tab} ${styles.inactive}`}></div>
         <div className={`${styles.tab} ${styles.inactive}`}></div>

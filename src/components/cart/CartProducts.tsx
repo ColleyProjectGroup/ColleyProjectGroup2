@@ -4,7 +4,11 @@ export const CartProducts = () => {
   return (
     <>
       <div className={styles.container}>
-        <CartItem />
+        <div className={styles.wrapper}>
+          {/* MAP */}
+          <CartItem />
+          <div className={styles.summary}></div>
+        </div>
         <CartSummary />
       </div>
     </>

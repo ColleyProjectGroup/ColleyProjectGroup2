@@ -1,3 +1,9 @@
+@import 'src/styles/common.scss';
 .container {
   display: flex;
+  .wrapper {
+    flex-grow: 1;
+  }
+  .summary {
+  }
 }
