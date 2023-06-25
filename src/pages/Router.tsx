@@ -18,7 +18,8 @@ import {
   SignUpPage,
   Payment,
   AdminSales,
-  MyOrders
+  MyOrders,
+  Order
 } from 'pages/index'
 
 export const router = createBrowserRouter([
@@ -35,6 +36,11 @@ export const router = createBrowserRouter([
       {
         path: 'about',
         element: <MyOrders />,
+        errorElement: <ErrorComponent />
+      },
+      {
+        path: '/mypage/order',
+        element: <Order />,
         errorElement: <ErrorComponent />
       },
       {
