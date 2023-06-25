@@ -3,6 +3,7 @@ import {
   App,
   ErrorComponent,
   NotFound,
+  MyPageRoute,
   AdminPrivateRoute
 } from 'components/index'
 import {
@@ -68,6 +69,12 @@ export const router = createBrowserRouter([
         errorElement: <ErrorComponent />
       }
     ]
+  },
+  {
+    path: '/mypage',
+    element: <MyPageRoute />,
+    errorElement: <NotFound />,
+    children: []
   },
   {
     path: '/admin',
