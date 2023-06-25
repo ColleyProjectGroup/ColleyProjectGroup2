@@ -19,7 +19,8 @@ import {
   Payment,
   AdminSales,
   MyOrders,
-  Order
+  Order,
+  Cart
 } from 'pages/index'
 
 export const router = createBrowserRouter([
@@ -34,12 +35,12 @@ export const router = createBrowserRouter([
         errorElement: <ErrorComponent />
       },
       {
-        path: 'about',
+        path: 'mypage',
         element: <MyOrders />,
         errorElement: <ErrorComponent />
       },
       {
-        path: '/mypage/order',
+        path: 'mypage/order',
         element: <Order />,
         errorElement: <ErrorComponent />
       },
@@ -67,15 +68,20 @@ export const router = createBrowserRouter([
         path: 'signin',
         element: <SignInPage />,
         errorElement: <ErrorComponent />
+      },
+      {
+        path: 'cart',
+        element: <Cart />,
+        errorElement: <ErrorComponent />
       }
     ]
   },
-  {
-    path: '/mypage',
-    element: <MyPageRoute />,
-    errorElement: <NotFound />,
-    children: []
-  },
+  // {
+  //   path: '/mypage',
+  //   element: <MyPageRoute />,
+  //   errorElement: <NotFound />,
+  //   children: []
+  // },
   {
     path: '/admin',
     element: <AdminPrivateRoute />,

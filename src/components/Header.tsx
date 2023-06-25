@@ -78,7 +78,7 @@ export const Header: React.FC = () => {
                     </span>
                   ) : (
                     <span>
-                      <a href="/about">MYPAGE</a>
+                      <a href="/mypage">MYPAGE</a>
                     </span>
                   )}
                   <span onClick={logOutId}>LOGOUT</span>
@@ -99,7 +99,7 @@ export const Header: React.FC = () => {
                 <a href="/mypage/order">ORDER</a>
               </span>
               <span>
-                <a href="/">CART</a>
+                <a href="/cart">CART</a>
               </span>
             </div>
           </div>
