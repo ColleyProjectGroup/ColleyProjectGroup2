@@ -99,7 +99,11 @@ export const Header: React.FC = () => {
                 <a href="/mypage/order">ORDER</a>
               </span>
               <span>
-                <a href="/cart">CART</a>
+                {isLogined ? (
+                  <a href="/cart">CART</a>
+                ) : (
+                  <a href="/signin">CART</a>
+                )}
               </span>
             </div>
           </div>
