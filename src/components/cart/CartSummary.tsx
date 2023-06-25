@@ -8,12 +8,12 @@ export const CartSummary = () => {
           <h3>주문상품</h3>
           <div className={styles.contents}>
             <div className={styles.content}>
-              <h4>TOTAL</h4>
+              <h4>총 상품금액</h4>
               {/* PRICE.toLocaleString()원 */}
               <span>PRICE1</span>
             </div>
             <div className={styles.content}>
-              <h4>DELIVERY</h4>
+              <h4>총 배송비 </h4>
               <span>PRICE2</span>
             </div>
           </div>
