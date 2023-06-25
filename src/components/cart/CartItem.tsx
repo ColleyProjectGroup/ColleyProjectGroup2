@@ -19,22 +19,25 @@ export const CartItem = () => {
   return (
     <div className={styles.itemBox}>
       <input type="checkbox" />
-      <div className={styles.thumbnail}>썸네일</div>
+      <img
+        src=""
+        className={styles.thumbnail}
+      />
       <div className={styles.productInfo}>
         <div className={styles.name}>제품명</div>
         <div className={styles.price}>가격</div>
         <div className={styles.amount}>
-          <button
+          <div
             className={styles.down}
             onClick={minus}>
             -
-          </button>
+          </div>
           <div className={styles.number}>{number}</div>
-          <button
+          <div
             className={styles.up}
             onClick={plus}>
             +
-          </button>
+          </div>
         </div>
       </div>
       <div className={styles.sumPrice}>총 가격</div>
