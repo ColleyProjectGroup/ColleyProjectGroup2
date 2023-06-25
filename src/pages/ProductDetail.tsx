@@ -1,17 +1,22 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { adminInstance } from '../api/axios'
-import { Footer } from '@/components'
-import { Products } from '../components/Products'
+import { adminInstance } from 'api/index'
+import { Footer, Products, Modal } from 'components/index'
 import { useNavigate } from 'react-router-dom'
 import '../styles/layout/ProductDetail.scss'
-import { Product, RouteParams } from '../types/Products.interface'
+import { Product, RouteParams, ModalProps } from 'types/index'
+import { LoginContext, WishListContext } from 'contexts/index'
 
-const ProductDetail: React.FC = () => {
+export const ProductDetail = () => {
   const { id } = useParams<RouteParams>()
   const [product, setProduct] = useState<Product | null>(null)
   const [quantity, setQuantity] = useState(1)
   const navigate = useNavigate()
+  const { wishList, setWishList } = useContext(WishListContext)
+  const { isLogined } = useContext(LoginContext)
+  const [isModalShow, setIsModalShow] = useState<boolean>(false)
+  const [modalProps, setModalProps] = useState<ModalProps | null>(null)
+
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -68,8 +73,39 @@ const ProductDetail: React.FC = () => {
     // 장바구니 기능
   }
 
+  // 위시 리스트 저장 처리
+  const onSaveWishList = (product: Product) => {
+    const isExist = wishList.find(p => p.id === product.id)
+    if (!isExist) {
+      setWishList([...wishList, product])
+    } else {
+      setIsModalShow(true)
+      setModalProps({
+        title: '오류',
+        content: '이미 위시리스트에 추가된 상품입니다.',
+        isTwoButton: false,
+        okButtonText: '확인',
+        onClickOkButton: () => setIsModalShow(false)
+      })
+    }
+  }
+
   const handleAddToWishlist = () => {
-    // 위시 리스트 기능
+    if (isLogined) {
+      onSaveWishList(product)
+    } else {
+      // 로그인 안내
+      setIsModalShow(true)
+      setModalProps({
+        title: '위시리스트 추가',
+        content: '로그인이 필요한 서비스입니다.',
+        isTwoButton: false,
+        okButtonText: '확인',
+        onClickOkButton: () => {
+          setIsModalShow(false)
+        }
+      })
+    }
   }
 
   return (
@@ -178,8 +214,18 @@ const ProductDetail: React.FC = () => {
         />
       </div>
       <Footer />
+
+      {isModalShow && modalProps ? (
+        <Modal
+          isTwoButton={modalProps.isTwoButton}
+          title={modalProps.title}
+          content={modalProps.content}
+          okButtonText={modalProps.okButtonText}
+          onClickOkButton={modalProps.onClickOkButton}
+          cancelButtonText={modalProps.cancelButtonText}
+          onClickCancelButton={modalProps.onClickCancelButton}
+        />
+      ) : null}
     </div>
   )
 }
-
-export { ProductDetail }

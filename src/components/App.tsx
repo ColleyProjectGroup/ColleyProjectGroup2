@@ -4,7 +4,8 @@ import { Product } from 'types/index'
 import {
   LoginContext,
   RecentlyContext,
-  LoginedUserContext
+  LoginedUserContext,
+  WishListContext
 } from 'contexts/index'
 import { useLocalStorage, useSessionStorage } from 'hooks/index'
 
@@ -15,6 +16,11 @@ export const App = () => {
   const [recentlyViewedList, setRecentlyViewedList] = useSessionStorage<
     Product[]
   >('RecentlyViewed', [])
+  const [wishList, setWishList] = useLocalStorage<Product[]>(
+    `wish-${userEmail}`,
+    [],
+    isLogined
+  )
 
   return (
     <>
@@ -22,9 +28,11 @@ export const App = () => {
         <LoginedUserContext.Provider value={{ userEmail, setUserEmail }}>
           <RecentlyContext.Provider
             value={{ recentlyViewedList, setRecentlyViewedList }}>
-            <Header />
-            <Badge />
-            <Outlet />
+            <WishListContext.Provider value={{ wishList, setWishList }}>
+              <Header />
+              <Badge />
+              <Outlet />
+            </WishListContext.Provider>
           </RecentlyContext.Provider>
         </LoginedUserContext.Provider>
       </LoginContext.Provider>
