@@ -1,3 +1,98 @@
+@import 'src/styles/common.scss';
+
 .order {
   width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  gap: 20px;
+  justify-content: space-between;
+  box-sizing: border-box;
+  border-bottom: 1px solid $color-border;
+
+  &.last {
+    border: none;
+  }
+
+  .timestamp {
+    font-size: 14px;
+
+    &.skeleton {
+      @include size(110px, 14px);
+    }
+  }
+
+  .thumb.skeleton {
+    @include size(80px, 80px);
+  }
+
+  a {
+    flex-grow: 1;
+    text-decoration: none;
+    color: $color-black-0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  img {
+    width: 80px;
+    height: 80px;
+    border-radius: 4px;
+    overflow: hidden;
+    background-color: $color-black-D9;
+  }
+
+  p {
+    font-size: 16px;
+    flex-grow: 1;
+
+    &.skeleton {
+      @include size(250px, 16px);
+    }
+  }
+
+  .price {
+    font-size: 16px;
+
+    &.skeleton {
+      @include size(120px, 16px);
+    }
+  }
+
+  .status {
+    min-width: 150px;
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+
+    button {
+      padding: 8px 10px;
+    }
+
+    .cancel {
+      color: $color-now;
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .confirm {
+      color: $color-confirm;
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    &.skeleton {
+      @include size(80px, 20px);
+    }
+  }
+}
+
+.skeleton {
+  @include skeleton;
 }

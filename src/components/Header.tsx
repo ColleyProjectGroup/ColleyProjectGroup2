@@ -100,7 +100,7 @@ export const Header: React.FC = () => {
                   <a href="/">ORDER</a>
                 </span>
                 <span>
-                  <a href="/">CART</a>
+                  <a href="/cart">CART</a>
                 </span>
               </div>
             </div>

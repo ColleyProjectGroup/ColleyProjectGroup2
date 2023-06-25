@@ -18,7 +18,9 @@ export const Badge = React.memo(() => {
         <span>CART</span>
         <div className={styled['cart__count']}>0</div>
       </div>
-      <RecentlyList products={recentlyViewedList} />
+      {recentlyViewedList.length !== 0 ? (
+        <RecentlyList products={recentlyViewedList} />
+      ) : null}
       <div
         className={styled.top}
         onClick={scrollTop}>

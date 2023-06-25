@@ -3,7 +3,6 @@ import {
   App,
   ErrorComponent,
   NotFound,
-  MyPageRoute,
   AdminPrivateRoute
 } from 'components/index'
 import {
@@ -19,7 +18,8 @@ import {
   Payment,
   AdminSales,
   MyOrders,
-  About
+  Order,
+  Cart
 } from 'pages/index'
 
 export const router = createBrowserRouter([
@@ -34,8 +34,13 @@ export const router = createBrowserRouter([
         errorElement: <ErrorComponent />
       },
       {
-        path: 'about',
-        element: <About />,
+        path: 'mypage',
+        element: <MyOrders />,
+        errorElement: <ErrorComponent />
+      },
+      {
+        path: 'mypage/order',
+        element: <Order />,
         errorElement: <ErrorComponent />
       },
       {
@@ -62,17 +67,10 @@ export const router = createBrowserRouter([
         path: 'signin',
         element: <SignInPage />,
         errorElement: <ErrorComponent />
-      }
-    ]
-  },
-  {
-    path: '/mypage',
-    element: <MyPageRoute />,
-    errorElement: <NotFound />,
-    children: [
+      },
       {
-        path: '',
-        element: <MyOrders />,
+        path: 'cart',
+        element: <Cart />,
         errorElement: <ErrorComponent />
       }
     ]

@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { adminInstance } from '../api/axios'
 import { Footer } from '@/components'
 import { Products } from '../components/Products'
+import { useNavigate } from 'react-router-dom'
 import '../styles/layout/ProductDetail.scss'
 import { Product, RouteParams } from '../types/Products.interface'
 
@@ -10,7 +11,7 @@ const ProductDetail: React.FC = () => {
   const { id } = useParams<RouteParams>()
   const [product, setProduct] = useState<Product | null>(null)
   const [quantity, setQuantity] = useState(1)
-
+  const navigate = useNavigate()
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -28,7 +29,7 @@ const ProductDetail: React.FC = () => {
   if (!product) {
     return <div>로딩 중...</div>
   }
-
+  console.log(product.thumbnail)
   const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(event.target.value)
     const nonNegativeValue = value < 1 ? 1 : value
@@ -134,7 +135,23 @@ const ProductDetail: React.FC = () => {
             <div>{calculateTotalPrice().toLocaleString()}원</div>
           </div>
           <div className="Buttons1">
-            <button onClick={handleBuyNow}>바로 구매</button>
+            <button
+              onClick={() => {
+                navigate('/payment', {
+                  state: {
+                    //상품정보 데이터
+                    thumbnail: product.thumbnail,
+                    title: product.title,
+                    quantity: quantity,
+                    price: calculateDiscountPrice().toLocaleString(),
+                    prevPrice: product.price,
+                    discount: product.discountRate
+                    // product: product
+                  }
+                })
+              }}>
+              바로 구매
+            </button>
           </div>
           <div className="Buttons2">
             <button onClick={handleAddToCart}>장바구니</button>
