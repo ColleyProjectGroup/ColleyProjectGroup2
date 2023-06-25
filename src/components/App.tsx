@@ -13,7 +13,7 @@ import { useLocalStorage, useSessionStorage } from 'hooks/index'
 export const App = () => {
   const [isLogined, setIsLogined] = useLocalStorage<boolean>('isLogined', false)
   const [userEmail, setUserEmail] = useLocalStorage<string>('ColleyUser', '')
-  const [userCart, setUserCart] = useLocalStorage<Product[]>(`cart-guest`, [])
+  const [userCart, setUserCart] = useLocalStorage<Product[]>('cart-guest', [])
   const [recentlyViewedList, setRecentlyViewedList] = useSessionStorage<
     Product[]
   >('RecentlyViewed', [])

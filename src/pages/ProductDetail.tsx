@@ -12,7 +12,7 @@ const ProductDetail: React.FC = () => {
   const { id } = useParams<RouteParams>()
   const [product, setProduct] = useState<Product | null>(null)
   const [quantity, setQuantity] = useState(1)
-  // const { userCart, setUserCart } = useContext(CartContext)
+  const { userCart, setUserCart } = useContext(CartContext)
   const navigate = useNavigate()
   useEffect(() => {
     const fetchProduct = async () => {
@@ -20,7 +20,6 @@ const ProductDetail: React.FC = () => {
         const response = await adminInstance.get(`/products/${id}`)
         setProduct(response.data)
         console.log(response.data)
-        // setUserCart(response.data)
       } catch (error) {
         console.error('상품을 불러오는 중에 오류가 발생했습니다.', error)
       }
@@ -64,11 +63,16 @@ const ProductDetail: React.FC = () => {
   }
 
   const handleBuyNow = () => {
-    //장바구니 추가 기능
+    //바로구매 기능
   }
 
   const handleAddToCart = () => {
     // 장바구니 기능
+    if (userCart.length === 0) {
+      setUserCart([product])
+    } else {
+      setUserCart([...userCart, product])
+    }
   }
 
   const handleAddToWishlist = () => {

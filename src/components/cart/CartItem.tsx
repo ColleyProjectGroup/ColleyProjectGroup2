@@ -1,8 +1,13 @@
 import styles from 'styles/components/cart/cartItem.module.scss'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import { CartContext } from 'contexts/index'
+import { Product } from 'types/index'
 
-export const CartItem = () => {
+export const CartItem = ({ product }: { product: Product }) => {
   const [number, setNumber] = useState(1)
+  const { userCart } = useContext(CartContext)
+
+  console.log(userCart)
 
   const plus = () => {
     setNumber(number + 1)
@@ -20,12 +25,12 @@ export const CartItem = () => {
     <div className={styles.itemBox}>
       <input type="checkbox" />
       <img
-        src=""
+        src={product.thumbnail}
         className={styles.thumbnail}
       />
       <div className={styles.productInfo}>
-        <div className={styles.name}>제품명</div>
-        <div className={styles.price}>가격</div>
+        <div className={styles.name}>{product.title}</div>
+        <div className={styles.price}>{product.price}</div>
         <div className={styles.amount}>
           <div
             className={styles.down}
