@@ -1,4 +1,6 @@
-import { Link, useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { useContext } from 'react'
+import { LoginedUserContext, LoginContext } from 'contexts/index'
 import styles from 'styles/components/mypage/mypageNav.module.scss'
 
 export const MyPageNav = () => {
@@ -22,7 +24,7 @@ export const MyPageNav = () => {
           나의 정보
           <ul>
             <li>
-              <Link to="/">회원정보 수정</Link>
+              <Link to="/mypage/modify">회원정보 수정</Link>
             </li>
             <li>
               <Link to="/">비밀번호 변경</Link>
