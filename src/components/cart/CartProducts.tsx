@@ -3,9 +3,15 @@ import styles from 'styles/components/cart/cartProducts.module.scss'
 import { CartContext } from 'contexts/index'
 import { useContext } from 'react'
 import { Cart } from '@/pages'
+import { Product } from 'types/index'
 
 export const CartProducts = () => {
   const { userCart } = useContext(CartContext)
+  const calculated = userCart.reduce((acc: number, cur: Product) => {
+    return acc + cur.price
+  }, 0)
+  const delivery = 3000
+
   return (
     <>
       <div className={styles.container}>
@@ -20,14 +26,19 @@ export const CartProducts = () => {
           <div className={styles.summary}>
             <h5>[기본배송]</h5>
             <div>
-              상품구매금액 {} + 배송비 {}
+              상품구매금액 {calculated.toLocaleString()} + 배송비{' '}
+              {delivery.toLocaleString()}
             </div>
-            <div>합계 : {}원</div>
+            <div>합계 : {(calculated + delivery).toLocaleString()}원</div>
           </div>
           <a>전체선택</a>
         </div>
 
-        <CartSummary />
+        <CartSummary
+          products={calculated.toLocaleString()}
+          delivery={delivery.toLocaleString()}
+          total={(calculated + delivery).toLocaleString()}
+        />
       </div>
     </>
   )
