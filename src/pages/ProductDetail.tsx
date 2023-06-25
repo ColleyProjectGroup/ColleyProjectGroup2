@@ -73,6 +73,11 @@ export const ProductDetail = () => {
 
   const handleAddToCart = () => {
     // 장바구니 기능
+    if (userCart.length === 0) {
+      setUserCart([product])
+    } else {
+      setUserCart([...userCart, product])
+    }
   }
 
   // 위시 리스트 저장 처리
