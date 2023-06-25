@@ -146,7 +146,6 @@ const ProductDetail: React.FC = () => {
                     price: calculateDiscountPrice().toLocaleString(),
                     prevPrice: product.price,
                     discount: product.discountRate
-                    // product: product
                   }
                 })
               }}>
