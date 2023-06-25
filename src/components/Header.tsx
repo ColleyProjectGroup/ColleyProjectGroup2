@@ -58,99 +58,97 @@ export const Header: React.FC = () => {
   }
 
   return (
-    <div className={styles.inner}>
-      <div className={styles.headerTop}>
-        <a href="/">
-          <img
-            src="https://colley.market/web/upload/category/logo/9dec339bd19e5e585ab528ff4c0b5dad_dATXM62tzO_5_top.jpg"
-            alt="logo"
-            className={styles.logo}
-          />
-        </a>
-        <div className={styles.loginTop}>
-          <div className={styles.loginLink}>
-            <div>
-              {isLogined ? (
-                <div>
-                  {checkIsAdmin(userEmail) ? (
-                    <span>
-                      <a href="/admin">ADMIN</a>
-                    </span>
-                  ) : (
-                    <span>
-                      <a href="/mypage">MYPAGE</a>
-                    </span>
-                  )}
-                  <span onClick={logOutId}>LOGOUT</span>
-                </div>
-              ) : (
-                <div>
-                  <span>
-                    <a href="/signup">JOIN</a>
-                  </span>
-                  <span>
-                    <a href="/signin">LOGIN</a>
-                  </span>
-                </div>
-              )}
-            </div>
-            <div>
-              <span>
-                <a href="/mypage/order">ORDER</a>
-              </span>
-              <span>
-                {isLogined ? (
-                  <a href="/cart">CART</a>
-                ) : (
-                  <a href="/signin">CART</a>
-                )}
-              </span>
-            </div>
-          </div>
-          <div className={styles.inputBox}>
-            <input
-              id="SearchInput"
-              type="text"
-              className={styles[hideInput ? 'hide' : 'show']}
-              ref={searchRef}
-              value={searchKeyword}
-              onChange={e => setSearchKeyword(e.target.value)}
-              onKeyPress={onSearchEnter}
+    <div className={styles.header}>
+      <div className={styles.inner}>
+        <div className={styles.headerTop}>
+          <a href="/">
+            <img
+              src="https://colley.market/web/upload/category/logo/9dec339bd19e5e585ab528ff4c0b5dad_dATXM62tzO_5_top.jpg"
+              alt="logo"
+              className={styles.logo}
             />
-            <div
-              className={`material-icons ${styles['icon']} ${
-                styles[hideInput ? 'show' : 'hide']
-              }`}
-              onClick={onClickSearch}>
-              search
+          </a>
+          <div className={styles.loginTop}>
+            <div className={styles.loginLink}>
+              <div>
+                {isLogined ? (
+                  <div>
+                    {checkIsAdmin(userEmail) ? (
+                      <span>
+                        <a href="/admin">ADMIN</a>
+                      </span>
+                    ) : (
+                      <span>
+                        <a href="/mypage">MYPAGE</a>
+                      </span>
+                    )}
+                    <span onClick={logOutId}>LOGOUT</span>
+                  </div>
+                ) : (
+                  <div>
+                    <span>
+                      <a href="/signup">JOIN</a>
+                    </span>
+                    <span>
+                      <a href="/signin">LOGIN</a>
+                    </span>
+                  </div>
+                )}
+              </div>
+              <div>
+                <span>
+                  <a href="/">ORDER</a>
+                </span>
+                <span>
+                  <a href="/cart">CART</a>
+                </span>
+              </div>
+            </div>
+            <div className={styles.inputBox}>
+              <input
+                id="SearchInput"
+                type="text"
+                className={styles[hideInput ? 'hide' : 'show']}
+                ref={searchRef}
+                value={searchKeyword}
+                onChange={e => setSearchKeyword(e.target.value)}
+                onKeyPress={onSearchEnter}
+              />
+              <div
+                className={`material-icons ${styles['icon']} ${
+                  styles[hideInput ? 'show' : 'hide']
+                }`}
+                onClick={onClickSearch}>
+                search
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div className={styles.navigation}>
-        <ul className={styles.navInner}>
-          <li>
-            <a href="/productlist">ALL</a>
-          </li>
-          <li>
-            <a href="/productlist?category=NEW">NEW</a>
-          </li>
-          <li>
-            <a href="/productlist?category=BEST">BEST</a>
-          </li>
-          <li>
-            <a href="/productlist?category=LIVING">Living</a>
-          </li>
-          <li>
-            <a href="/productlist?category=KITCHEN">Kitchen</a>
-          </li>
-          <li>
-            <a href="/productlist?category=STATIONERY">Stationery</a>
-          </li>
-          <li>
-            <a href="/productlist?category=BABY/KIDS">Baby/Kids</a>
-          </li>
-        </ul>
+        <div className={styles.navigation}>
+          <ul className={styles.navInner}>
+            <li>
+              <a href="/productlist">ALL</a>
+            </li>
+            <li>
+              <a href="/productlist?category=NEW">NEW</a>
+            </li>
+            <li>
+              <a href="/productlist?category=BEST">BEST</a>
+            </li>
+            <li>
+              <a href="/productlist?category=LIVING">Living</a>
+            </li>
+            <li>
+              <a href="/productlist?category=KITCHEN">Kitchen</a>
+            </li>
+            <li>
+              <a href="/productlist?category=STATIONERY">Stationery</a>
+            </li>
+            <li>
+              <a href="/productlist?category=BABY/KIDS">Baby/Kids</a>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   )

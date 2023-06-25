@@ -1,0 +1,50 @@
+@import 'src/styles/abstracts/variables';
+
+.itemBox{
+  border:1px solid red;
+  display:flex;
+  input{
+    -webkit-appearance: none;
+    width:15px;
+    height:15px;
+    border:1px solid $color-black-0;
+    &::after{
+      border: solid #fff;
+      border-width: 0 2px 2px 0;
+      content: "";
+      display: none;
+      height: 40%;
+      left: 40%;
+      position: relative;
+      top: 20%;
+      transform: rotate(45deg);
+      width: 15%;
+    }
+    &:checked{
+      background-color: $color-black-0;
+    }
+    &:checked::after{
+      display:block;
+    }
+  }
+  .thumbnail{
+
+  }
+  .productInfo{
+    .name{
+
+    }
+    .price{
+
+    }
+    .amount{
+
+    }
+  }
+  .sumPrice{
+
+  }
+  .delete{
+
+  }
+}

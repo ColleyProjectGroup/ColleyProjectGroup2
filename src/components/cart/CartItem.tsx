@@ -1,19 +1,44 @@
+import styles from 'styles/components/cart/cartItem.module.scss'
+import { useState } from 'react'
+
 export const CartItem = () => {
+  const [number, setNumber] = useState(1)
+
+  const plus = () => {
+    setNumber(number + 1)
+  }
+
+  const minus = () => {
+    if (number === 1) {
+      setNumber(number)
+    } else {
+      setNumber(number - 1)
+    }
+  }
+
   return (
-    <div>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic odio qui
-      tempore excepturi! Ducimus omnis ipsa saepe ab fuga animi eum,
-      praesentium, impedit quibusdam labore repellendus, quam officiis
-      consequatur id! Animi, ut? Vitae tenetur voluptatibus eos, inventore eum
-      laboriosam quasi, esse quibusdam a optio doloribus nostrum, labore porro
-      maxime consequatur dolorem suscipit omnis reiciendis et ad alias beatae
-      quia culpa? Harum ipsam labore ducimus totam reprehenderit omnis earum
-      enim, corporis quia quas vero quod maiores, illum quis ex nobis rerum
-      officia. Dignissimos voluptates recusandae ut omnis. Perferendis ipsam
-      dicta molestias? Voluptates delectus hic commodi cumque amet optio
-      suscipit cupiditate temporibus minima quis, quidem minus vel a omnis,
-      vitae corporis quo ducimus perferendis sunt eveniet nemo fuga consequuntur
-      laudantium quod. Illum!
+    <div className={styles.itemBox}>
+      <input type="checkbox" />
+      <div className={styles.thumbnail}>썸네일</div>
+      <div className={styles.productInfo}>
+        <div className={styles.name}>제품명</div>
+        <div className={styles.price}>가격</div>
+        <div className={styles.amount}>
+          <button
+            className={styles.down}
+            onClick={minus}>
+            -
+          </button>
+          <div className={styles.number}>{number}</div>
+          <button
+            className={styles.up}
+            onClick={plus}>
+            +
+          </button>
+        </div>
+      </div>
+      <div className={styles.sumPrice}>총 가격</div>
+      <span className={styles.delete}>x</span>
     </div>
   )
 }
