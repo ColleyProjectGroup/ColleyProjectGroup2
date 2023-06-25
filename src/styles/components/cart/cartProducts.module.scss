@@ -3,7 +3,22 @@
   display: flex;
   .wrapper {
     flex-grow: 1;
-  }
-  .summary {
+    border-top: 1px solid $color-black-0;
+
+    .heading {
+      position: relative;
+      font-size: 13px;
+      padding: 20px 0;
+      font-weight: bold;
+      line-height: 1.3;
+    }
+    .selected {
+      padding-left: 15px;
+      line-height: 55px;
+      background-color: $color-mypage-background;
+      font-size: 13px;
+    }
+    .summary {
+    }
   }
 }
