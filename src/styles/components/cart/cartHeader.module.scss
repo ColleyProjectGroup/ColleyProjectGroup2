@@ -32,6 +32,7 @@ h2 {
   display: flex;
   justify-content: center;
   color: $color-steps;
+  margin-bottom: 50px;
   :first-child {
     color: $color-black-0;
   }
@@ -51,6 +52,33 @@ h2 {
       border-bottom: 1px solid #e0e0e0;
       -webkit-transform: rotate(-135deg);
       transform: rotate(-135deg);
+    }
+  }
+}
+.tabs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40px;
+
+  .tab {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    font-size: 13px;
+    line-height: 26px;
+    font-weight: 700;
+    box-sizing: border-box;
+
+    &.active {
+      border: 1px solid $color-black-86;
+      border-bottom: none;
+    }
+
+    &.inactive {
+      border-bottom: 1px solid $color-black-86;
     }
   }
 }
