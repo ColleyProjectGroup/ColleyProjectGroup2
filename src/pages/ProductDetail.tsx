@@ -85,11 +85,19 @@ export const ProductDetail = () => {
     const isExist = wishList.find(p => p.id === product.id)
     if (!isExist) {
       setWishList([...wishList, product])
+      setIsModalShow(true)
+      setModalProps({
+        title: '관심상품 등록',
+        content: '관심상품으로 등록되었습니다.',
+        isTwoButton: false,
+        okButtonText: '확인',
+        onClickOkButton: () => setIsModalShow(false)
+      })
     } else {
       setIsModalShow(true)
       setModalProps({
         title: '오류',
-        content: '이미 위시리스트에 추가된 상품입니다.',
+        content: '이미 관심상품으로 등록된 상품입니다.',
         isTwoButton: false,
         okButtonText: '확인',
         onClickOkButton: () => setIsModalShow(false)
@@ -104,7 +112,7 @@ export const ProductDetail = () => {
       // 로그인 안내
       setIsModalShow(true)
       setModalProps({
-        title: '위시리스트 추가',
+        title: '관심상품 등록',
         content: '로그인이 필요한 서비스입니다.',
         isTwoButton: false,
         okButtonText: '확인',
