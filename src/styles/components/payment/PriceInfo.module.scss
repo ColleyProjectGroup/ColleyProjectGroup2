@@ -1,15 +1,53 @@
 @import 'src/styles/abstracts/variables';
 .container {
   background-color: $color-primary;
-  margin: 5px 0;
   padding: 32px;
   width: 900px;
   box-sizing: border-box;
+  margin: 5px 0 0;
+
   h3 {
     font-weight: 600;
     padding-bottom: 20px;
     font-size: 19px;
     color: $color-payment-titles;
     letter-spacing: -1px;
+  }
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    .block {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+      .numbers {
+        font-weight: 700;
+      }
+      .discount {
+        font-weight: 700;
+        color: $color-now;
+        > span {
+          color: $color-black-0;
+        }
+      }
+    }
+  }
+}
+.sum {
+  display: flex;
+  width: 900px;
+  justify-content: space-between;
+  background-color: $color-sum;
+  margin: 0 0 5px;
+  padding: 15px 32px 15px;
+  box-sizing: border-box;
+  .total {
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .totalprice {
+    font-size: 22px;
+    font-weight: 700;
+    color: $color-confirm;
   }
 }

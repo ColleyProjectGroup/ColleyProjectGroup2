@@ -72,8 +72,8 @@ const Products = ({
       }
     }
 
-    // fetchProducts()
-  }, [tagFilter, limit, sortOption, getProductCount, location.search, keyword])
+    fetchProducts()
+  }, [limit, sortOption, getProductCount, location.search, keyword])
 
   const calculateDiscountedPrice = (
     price: number,

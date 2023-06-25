@@ -72,7 +72,6 @@ export const Header: React.FC = () => {
             <div>
               {isLogined ? (
                 <div>
-
                   {checkIsAdmin(userEmail) ? (
                     <span>
                       <a href="/admin">ADMIN</a>
@@ -124,29 +123,31 @@ export const Header: React.FC = () => {
           </div>
         </div>
       </div>
-      <ul className={styles.navigation}>
-        <li>
-          <a href="/productlist">ALL</a>
-        </li>
-        <li>
-          <a href="/productlist?category=NEW">NEW</a>
-        </li>
-        <li>
-          <a href="/productlist?category=BEST">BEST</a>
-        </li>
-        <li>
-          <a href="/productlist?category=LIVING">Living</a>
-        </li>
-        <li>
-          <a href="/productlist?category=KITCHEN">Kitchen</a>
-        </li>
-        <li>
-          <a href="/productlist?category=STATIONERY">Stationery</a>
-        </li>
-        <li>
-          <a href="/productlist?category=BABY/KIDS">Baby/Kids</a>
-        </li>
-      </ul>
+      <div className={styles.navigation}>
+        <ul className={styles.navInner}>
+          <li>
+            <a href="/productlist">ALL</a>
+          </li>
+          <li>
+            <a href="/productlist?category=NEW">NEW</a>
+          </li>
+          <li>
+            <a href="/productlist?category=BEST">BEST</a>
+          </li>
+          <li>
+            <a href="/productlist?category=LIVING">Living</a>
+          </li>
+          <li>
+            <a href="/productlist?category=KITCHEN">Kitchen</a>
+          </li>
+          <li>
+            <a href="/productlist?category=STATIONERY">Stationery</a>
+          </li>
+          <li>
+            <a href="/productlist?category=BABY/KIDS">Baby/Kids</a>
+          </li>
+        </ul>
+      </div>
     </div>
   )
 }

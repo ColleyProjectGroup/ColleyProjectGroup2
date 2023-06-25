@@ -1,5 +1,5 @@
 import styles from 'src/styles/layout/footer.module.scss'
-import icon from 'public/instagramIcon.svg'
+import icon from '/public/instagramIcon.svg'
 
 export const Footer = () => {
   return (
