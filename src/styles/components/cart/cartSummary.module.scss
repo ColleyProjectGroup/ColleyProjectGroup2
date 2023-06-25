@@ -66,5 +66,8 @@
   .orderSelected {
     margin: 10px 0 0;
     border: 1px solid $color-gray-BC;
+    &:hover {
+      border: 1px solid $color-black-0;
+    }
   }
 }
