@@ -17,12 +17,12 @@ export const Footer = () => {
             <span>주식회사 콜리</span>
             <span>
               서울특별시 강남구 논현로 709 (논현동) 로얄토토 논현동사옥 5층 콜리
-              I 사업자번호 : 371-81-01287{' '}
+              I 사업자번호 : 371-81-01287
               <a
                 href="/"
                 className={styles.businessInfo}>
                 [사업자정보확인]
-              </a>{' '}
+              </a>
               I 통신판매업신고 : 2016-서울마포-1355
             </span>
             <span>
@@ -37,16 +37,16 @@ export const Footer = () => {
             </span>
             <ul>
               <li>
-                <a href="">회사소개</a>
+                <a>회사소개</a>
               </li>
               <li>
-                <a href="">이용약관</a>
+                <a>이용약관</a>
               </li>
               <li>
-                <a href="">개인정보처리방침</a>
+                <a>개인정보처리방침</a>
               </li>
               <li>
-                <a href="">이용안내</a>
+                <a>이용안내</a>
               </li>
             </ul>
           </div>
@@ -55,29 +55,29 @@ export const Footer = () => {
           <ul className={styles.community}>
             <li>Community</li>
             <li>
-              <a href="">Notice</a>
+              <a>Notice</a>
             </li>
 
             <li>
-              <a href="">Review</a>
+              <a>Review</a>
             </li>
 
             <li>
-              <a href="">Q&A</a>
+              <a>Q&A</a>
             </li>
           </ul>
           <ul className={styles.shopping}>
             <li>Shopping</li>
             <li>
-              <a href="">My PAGE</a>
+              <a href="/mypage">MY PAGE</a>
             </li>
 
             <li>
-              <a href="">ORDER</a>
+              <a href="/mypage/order">ORDER</a>
             </li>
 
             <li>
-              <a href="">WISHLIST</a>
+              <a href="/mypage/wishlist">WISHLIST</a>
             </li>
           </ul>
           <a href="https://www.instagram.com/colley.kr/">
