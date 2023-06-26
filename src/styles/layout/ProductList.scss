@@ -1,5 +1,4 @@
-
-.ProductList{
+.ProductList {
   a {
     text-decoration: none;
     color: black;
@@ -15,11 +14,11 @@
       font-weight: 400;
     }
   }
-  .Inner{
+  .Inner {
     display: flex;
     justify-content: center;
     align-items: center;
-    .ProductInfo{
+    .ProductInfo {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -34,7 +33,6 @@
         flex-grow: 1;
       }
       .ProductSort {
-        
         ul {
           display: flex;
           justify-content: center;
@@ -48,11 +46,11 @@
       }
     }
   }
-  .Products{
+  .Products {
     display: flex;
     justify-content: center;
     align-items: center;
-    .Inner{
+    .Inner {
       padding-top: 50px;
       padding-bottom: 50px;
       padding-right: 10px;
@@ -63,27 +61,31 @@
         cursor: pointer;
         flex-wrap: wrap;
         gap: 20px;
-        animation: fade-in 1s ease; 
+        animation: fade-in 1s ease;
         .Image {
           img {
             width: 295px;
             height: 295px;
           }
         }
-  
+
         .Title {
-          margin: 10px 0px;
+          padding: 10px 0px 0px;
           font-size: 12px;
+          max-width: 295px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
-  
+
         .Price {
           margin: 10px 0px;
           font-size: 14px;
-  
+
           .OriginalPrice {
             /* Original price styles here */
           }
-  
+
           .DiscountedPrice {
             /* Discounted price styles here */
           }

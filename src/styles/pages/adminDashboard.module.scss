@@ -1,10 +1,11 @@
 @import 'src/styles/common.scss';
 
 .row-title {
-  margin-top: 50px;
+  margin: 50px 0 0;
   font-size: 20px;
   font-weight: 500;
   color: $color-loginlink;
+  display: block;
 }
 
 .row {

@@ -33,7 +33,7 @@ export const AdminCustomerItem = React.memo(
     const gradeColor = useMemo(() => {
       switch (customerGrade) {
         case '실버':
-          return 'grade--siver'
+          return 'grade--silver'
           break
         case '골드':
           return 'grade--gold'
