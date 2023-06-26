@@ -1,4 +1,4 @@
-import { useNavigate, useLocation, Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { checkIsAdmin } from 'utils/index'
 import { LoginedUserContext, LoginContext } from 'contexts/index'
 import React, { useState, useRef, useEffect, useContext } from 'react'
@@ -12,11 +12,33 @@ export const Header: React.FC = () => {
   const [hideInput, setHideInput] = useState<boolean>(true)
   const navigate = useNavigate()
   const [searchKeyword, setSearchKeyword] = useState<string>('')
+  const [scrollY, setScrollY] = useState(0)
+  const [scrollActive, setScrollActive] = useState<boolean>(false)
   const searchRef = useRef<HTMLInputElement | null>(null)
 
   const onClickSearch = () => {
     setHideInput(false)
   }
+
+  const scrollFixed = () => {
+    if (scrollY > 159) {
+      setScrollY(window.pageYOffset)
+      setScrollActive(true)
+    } else {
+      setScrollY(window.pageYOffset)
+      setScrollActive(false)
+    }
+  }
+
+  useEffect(() => {
+    const scrollListener = () => {
+      window.addEventListener('scroll', scrollFixed)
+    }
+    scrollListener()
+    return () => {
+      window.removeEventListener('scroll', scrollFixed)
+    }
+  })
 
   useEffect(() => {
     function handleOutside(e: Event) {
@@ -125,7 +147,10 @@ export const Header: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className={styles.navigation}>
+        <div
+          className={`${styles[scrollActive ? 'fixed' : '']} ${
+            styles['navigation']
+          }`}>
           <ul className={styles.navInner}>
             <li>
               <a href="/productlist">ALL</a>
@@ -137,10 +162,45 @@ export const Header: React.FC = () => {
               <a href="/productlist?category=BEST">BEST</a>
             </li>
             <li>
-              <a href="/productlist?category=LIVING">Living</a>
+              <a href="/productlist?category=LIVING">
+                Living
+                <ul className={styles.dropdown}>
+                  <li>
+                    <a href="/">테이블</a>
+                  </li>
+                  <li>
+                    <a href="/">거실화</a>
+                  </li>
+                  <li>
+                    <a href="/">조명</a>
+                  </li>
+                  <li>
+                    <a href="/">침구</a>
+                  </li>
+                </ul>
+              </a>
             </li>
             <li>
-              <a href="/productlist?category=KITCHEN">Kitchen</a>
+              <a href="/productlist?category=KITCHEN">
+                Kitchen
+                <ul className={styles.dropdown}>
+                  <li>
+                    <a href="/">컵/머그</a>
+                  </li>
+                  <li>
+                    <a href="/">식기</a>
+                  </li>
+                  <li>
+                    <a href="/">쟁반/접시</a>
+                  </li>
+                  <li>
+                    <a href="/">주방잡화</a>
+                  </li>
+                  <li>
+                    <a href="/">도마</a>
+                  </li>
+                </ul>
+              </a>
             </li>
             <li>
               <a href="/productlist?category=STATIONERY">Stationery</a>
