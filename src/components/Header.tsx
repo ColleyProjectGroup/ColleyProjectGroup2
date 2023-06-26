@@ -4,7 +4,6 @@ import { LoginedUserContext, LoginContext, CartContext } from 'contexts/index'
 import React, { useState, useRef, useEffect, useContext } from 'react'
 import { logOut } from 'api/signApi'
 import styles from 'styles/layout/header.module.scss'
-//import { MyPageNav } from 'components/mypage'
 
 export const Header: React.FC = () => {
   const { isLogined, setIsLogined } = useContext(LoginContext)
