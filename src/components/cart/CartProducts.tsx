@@ -3,12 +3,12 @@ import styles from 'styles/components/cart/cartProducts.module.scss'
 import { CartContext } from 'contexts/index'
 import { useContext } from 'react'
 import { Cart } from '@/pages'
-import { Product } from 'types/index'
+import { Product, CartProduct } from 'types/index'
 
 export const CartProducts = () => {
   const { userCart } = useContext(CartContext)
-  const calculated = userCart.reduce((acc: number, cur: Product) => {
-    return acc + cur.price
+  const calculated = userCart.reduce((acc: number, cur: CartProduct) => {
+    return acc + cur.product.price * cur.quantity
   }, 0)
   const delivery = 3000
   return (
@@ -19,10 +19,11 @@ export const CartProducts = () => {
           {/* PRODUCTS QUANTITY */}
           <h4 className={styles.selected}>일반상품 ({userCart.length})</h4>
           {/* MAP */}
-          {userCart.map(product => (
+          {userCart.map(item => (
             <CartItem
-              product={product}
-              key={product.id}
+              product={item.product}
+              quantity={item.quantity}
+              key={item.product.id}
             />
           ))}
           <div className={styles.summary}>

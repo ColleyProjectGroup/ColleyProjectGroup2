@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom'
 import { Header, Badge } from 'components/index'
-import { Product } from 'types/index'
+import { Product, CartProduct } from 'types/index'
 import {
   LoginContext,
   RecentlyContext,
@@ -14,7 +14,10 @@ import { useLocalStorage, useSessionStorage } from 'hooks/index'
 export const App = () => {
   const [isLogined, setIsLogined] = useLocalStorage<boolean>('isLogined', false)
   const [userEmail, setUserEmail] = useLocalStorage<string>('ColleyUser', '')
-  const [userCart, setUserCart] = useLocalStorage<Product[]>('cart-guest', [])
+  const [userCart, setUserCart] = useLocalStorage<CartProduct[]>(
+    'cart-guest',
+    []
+  )
   const [recentlyViewedList, setRecentlyViewedList] = useSessionStorage<
     Product[]
   >('RecentlyViewed', [])
