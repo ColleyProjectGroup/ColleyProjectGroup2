@@ -11,7 +11,6 @@ export const CartProducts = () => {
     return acc + cur.price
   }, 0)
   const delivery = 3000
-
   return (
     <>
       <div className={styles.container}>

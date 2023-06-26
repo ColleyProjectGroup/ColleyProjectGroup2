@@ -1,5 +1,5 @@
 import styles from 'styles/components/cart/cartItem.module.scss'
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { CartContext } from 'contexts/index'
 import { Product } from 'types/index'
 
@@ -20,7 +20,6 @@ export const CartItem = ({ product }: { product: Product }) => {
   }
 
   const sumPrice = number * product.price
-
   const deleteList = () => {
     setUserCart(userCart.filter(p => p !== product))
   }
@@ -34,7 +33,7 @@ export const CartItem = ({ product }: { product: Product }) => {
       />
       <div className={styles.productInfo}>
         <div className={styles.name}>{product.title}</div>
-        <div className={styles.price}>{product.price}</div>
+        <div className={styles.price}>{product.price.toLocaleString()}원</div>
         <div className={styles.amount}>
           <div
             className={styles.down}
@@ -49,7 +48,7 @@ export const CartItem = ({ product }: { product: Product }) => {
           </div>
         </div>
       </div>
-      <div className={styles.sumPrice}>{sumPrice}원</div>
+      <div className={styles.sumPrice}>{sumPrice.toLocaleString()}원</div>
       <span
         className={`material-icons ${styles['delete']}`}
         onClick={deleteList}>
