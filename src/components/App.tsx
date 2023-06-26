@@ -1,5 +1,5 @@
-import { Outlet } from 'react-router-dom'
-import { Header, Badge } from 'components/index'
+import { Outlet, useLocation } from 'react-router-dom'
+import { Header, Badge, MyPageNav } from 'components/index'
 import { Product } from 'types/index'
 import {
   LoginContext,
@@ -13,6 +13,7 @@ import {
   useSessionStorage,
   useCartLocalStorage
 } from 'hooks/index'
+import styles from 'styles/components/mypage/mypage.module.scss'
 
 //App은 Outlet을 통해 슬래시로 페이지 경로 이동시의 최상위 컴포넌트로 설정했습니다
 export const App = () => {
@@ -31,6 +32,8 @@ export const App = () => {
     isLogined
   )
 
+  const path: string = useLocation().pathname
+
   return (
     <>
       <LoginContext.Provider value={{ isLogined, setIsLogined }}>
@@ -41,7 +44,10 @@ export const App = () => {
               <WishListContext.Provider value={{ wishList, setWishList }}>
                 <Header />
                 <Badge />
-                <Outlet />
+                <div className={styles.wrapper}>
+                  {path.includes('/mypage') && isLogined ? <MyPageNav /> : null}
+                  <Outlet />
+                </div>
               </WishListContext.Provider>
             </RecentlyContext.Provider>
           </CartContext.Provider>
