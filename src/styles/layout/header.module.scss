@@ -85,12 +85,56 @@
     .navigation{
       border-top:2px solid $color-white-ed;
       border-bottom:2px solid $color-white-ed;
+      width:1240px;
+      height:60px;
+      &.fixed{
+        position:fixed;
+        top:0;
+        z-index:10;
+      }
       .navInner{
+        background-color: white;
         line-height:20px;
+        height:20px;
         display:flex;
         justify-content: space-evenly;
         font-weight:800;
         padding:20px 100px;
+        >li{
+          width:130px;
+          text-align: center;
+          >a{
+            text-decoration: none;
+            color: $color-black-0;
+            .dropdown{
+              display:none;
+              width:130px;
+              margin-top:20px;
+              border:1px solid $color-white-ed;
+              z-index: 10;
+              li{
+                height:25px;
+                padding:5px;
+                background-color:$color-primary;
+                border:1px solid $color-white-ed;
+                text-align: center;
+                line-height:20px;
+                a{
+                  font-size:13px;
+                  text-decoration: none;
+                  color:$color-black-0;
+                  line-height:25px;
+                }
+                &:hover{
+                  display:block;
+                }
+              }
+            }
+          }
+          &:hover .dropdown{
+            display:block;
+          }
+        }
       }
       a{
         text-decoration: none;
