@@ -1,8 +1,8 @@
 import styles from 'styles/components/cart/cartItem.module.scss'
-import { useState, useContext, useEffect } from 'react'
+import { useState, useContext } from 'react'
 import { CartContext } from 'contexts/index'
-import { Product, CartProduct } from 'types/index'
 import { calculateDiscountedPrice } from 'utils/index'
+import { CartProduct } from 'types/index'
 
 export const CartItem = ({ product, quantity }: CartProduct) => {
   const [number, setNumber] = useState(quantity)
@@ -29,13 +29,19 @@ export const CartItem = ({ product, quantity }: CartProduct) => {
     product.discountRate
   )
   const sumPrice = number * discounted
+
   const deleteList = () => {
     setUserCart(userCart.filter(p => p.product.id !== product.id))
   }
 
   return (
     <div className={styles.itemBox}>
-      <input type="checkbox" />
+      <input
+        type="checkbox"
+        onChange={e => {
+          e.target.checked
+        }}
+      />
       <img
         src={product.thumbnail}
         className={styles.thumbnail}
