@@ -1,9 +1,5 @@
 import { authInstance } from '@/api'
-import {
-  CreateRequest,
-  RemoveRequest,
-  Transaction
-} from '@/types/BankAccounts.interface'
+import { CreateRequest, RemoveRequest, Transaction } from 'types/index'
 
 //선택 가능한 은행 목록 조회
 export const getBankLists = async () => {
