@@ -119,17 +119,19 @@ export const AdminCustomers = () => {
         )
       }
 
-      <div className={'pagination-wrapper'}>
-        <Pagination
-          activePage={page}
-          itemsCountPerPage={10}
-          totalItemsCount={totalCustomerCount}
-          pageRangeDisplayed={5}
-          prevPageText="‹"
-          nextPageText="›"
-          onChange={setPage}
-        />
-      </div>
+      {filteredCustomers.length > 0 ? (
+        <div className={'pagination-wrapper'}>
+          <Pagination
+            activePage={page}
+            itemsCountPerPage={10}
+            totalItemsCount={totalCustomerCount}
+            pageRangeDisplayed={5}
+            prevPageText="‹"
+            nextPageText="›"
+            onChange={setPage}
+          />
+        </div>
+      ) : null}
     </section>
   )
 }

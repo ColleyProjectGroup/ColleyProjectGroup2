@@ -120,18 +120,19 @@ export const AdminSales = () => {
             onClickOrderConfirm={onChangeOrderConfirm}
           />
         ))}
-
-      <div className={'pagination-wrapper'}>
-        <Pagination
-          activePage={page}
-          itemsCountPerPage={10}
-          totalItemsCount={totalSalesCount}
-          pageRangeDisplayed={5}
-          prevPageText="‹"
-          nextPageText="›"
-          onChange={setPage}
-        />
-      </div>
+      {filteredSales.length > 0 ? (
+        <div className={'pagination-wrapper'}>
+          <Pagination
+            activePage={page}
+            itemsCountPerPage={10}
+            totalItemsCount={totalSalesCount}
+            pageRangeDisplayed={5}
+            prevPageText="‹"
+            nextPageText="›"
+            onChange={setPage}
+          />
+        </div>
+      ) : null}
     </section>
   )
 }

@@ -234,17 +234,19 @@ export const AdminProducts = () => {
       })}
 
       {/* Pagination */}
-      <div className={'pagination-wrapper'}>
-        <Pagination
-          activePage={page}
-          itemsCountPerPage={10}
-          totalItemsCount={totalProductsCount}
-          pageRangeDisplayed={5}
-          prevPageText="‹"
-          nextPageText="›"
-          onChange={setPage}
-        />
-      </div>
+      {filteredProducts.length > 0 ? (
+        <div className={'pagination-wrapper'}>
+          <Pagination
+            activePage={page}
+            itemsCountPerPage={10}
+            totalItemsCount={totalProductsCount}
+            pageRangeDisplayed={5}
+            prevPageText="‹"
+            nextPageText="›"
+            onChange={setPage}
+          />
+        </div>
+      ) : null}
 
       {isModalShow && modalProps ? (
         <Modal
