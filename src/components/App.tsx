@@ -14,8 +14,8 @@ import { useLocalStorage, useSessionStorage } from 'hooks/index'
 export const App = () => {
   const [isLogined, setIsLogined] = useLocalStorage<boolean>('isLogined', false)
   const [userEmail, setUserEmail] = useLocalStorage<string>('ColleyUser', '')
-  const [userCart, setUserCart] = useLocalStorage<CartProduct[]>(
-    'cart-guest',
+  const [userCart, setUserCart] = useLocalStorage<Product[]>(
+    `cart-${isLogined ? userEmail : 'guest'}`,
     []
   )
   const [recentlyViewedList, setRecentlyViewedList] = useSessionStorage<
@@ -29,20 +29,20 @@ export const App = () => {
 
   return (
     <>
-        <LoginContext.Provider value={{ isLogined, setIsLogined }}>
-          <LoginedUserContext.Provider value={{ userEmail, setUserEmail }}>
-            <CartContext.Provider value={{ userCart, setUserCart }}>
-              <RecentlyContext.Provider
-                value={{ recentlyViewedList, setRecentlyViewedList }}>
-                <WishListContext.Provider value={{ wishList, setWishList }}>
-                  <Header />
-                  <Badge />
-                  <Outlet />
-                </WishListContext.Provider>
-              </RecentlyContext.Provider>
-            </CartContext.Provider>
-          </LoginedUserContext.Provider>
-        </LoginContext.Provider>
+      <LoginContext.Provider value={{ isLogined, setIsLogined }}>
+        <LoginedUserContext.Provider value={{ userEmail, setUserEmail }}>
+          <CartContext.Provider value={{ userCart, setUserCart }}>
+            <RecentlyContext.Provider
+              value={{ recentlyViewedList, setRecentlyViewedList }}>
+              <WishListContext.Provider value={{ wishList, setWishList }}>
+                <Header />
+                <Badge />
+                <Outlet />
+              </WishListContext.Provider>
+            </RecentlyContext.Provider>
+          </CartContext.Provider>
+        </LoginedUserContext.Provider>
+      </LoginContext.Provider>
       {/* 결제 페이지/회원가입 페이지 등은 footer미적용일 것 같아서 header만 기본으로 outlet과 함께 배치시켰습니다 */}
     </>
   )

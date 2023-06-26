@@ -117,20 +117,21 @@ export const MyOrderList = React.memo(
             ))
           )}
         </ul>
-
-        <div className={'mypage-pagination'}>
-          <Pagination
-            activePage={page}
-            itemsCountPerPage={5}
-            totalItemsCount={orders.length}
-            pageRangeDisplayed={5}
-            prevPageText="〈"
-            nextPageText="〉"
-            firstPageText="〈〈"
-            lastPageText="〉〉"
-            onChange={setPage}
-          />
-        </div>
+        {orders.length !== 0 ? (
+          <div className={'mypage-pagination'}>
+            <Pagination
+              activePage={page}
+              itemsCountPerPage={5}
+              totalItemsCount={orders.length}
+              pageRangeDisplayed={5}
+              prevPageText="〈"
+              nextPageText="〉"
+              firstPageText="〈〈"
+              lastPageText="〉〉"
+              onChange={setPage}
+            />
+          </div>
+        ) : null}
 
         {isModalShow && modalProps ? (
           <Modal
