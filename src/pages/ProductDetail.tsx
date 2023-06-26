@@ -5,8 +5,13 @@ import { Footer, Products, Modal } from 'components/index'
 import { useNavigate } from 'react-router-dom'
 import '../styles/layout/ProductDetail.scss'
 import { Product, RouteParams } from '../types/Products.interface'
-import { ModalProps, CartProduct } from 'types/index'
-import { LoginContext, WishListContext, CartContext } from 'contexts/index'
+import { ModalProps } from 'types/index'
+import {
+  LoginContext,
+  WishListContext,
+  CartContext,
+  CartLoginedContext
+} from 'contexts/index'
 
 export const ProductDetail = () => {
   const { id } = useParams<RouteParams>()
@@ -89,7 +94,6 @@ export const ProductDetail = () => {
     } else {
       setUserCart([...userCart, { product, quantity: quantity }])
       // setUserCart([...userCart, product])
-      console.log(userCart)
     }
     setIsModalShow(true)
     setModalProps({
