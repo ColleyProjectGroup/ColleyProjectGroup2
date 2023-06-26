@@ -17,10 +17,8 @@ form.form-wrapper {
   input {
     box-sizing: border-box;
     margin-left: 2px;
-    // 임시 style
-    // TODO : 공통 스타일 적용 필요
     display: inline-block;
-    max-width: 500px;
+    max-width: 620px;
     height: 40px;
 
     &::-webkit-inner-spin-button {
@@ -43,8 +41,11 @@ form.form-wrapper {
   }
 
   textarea {
-    max-width: 500px;
+    @include inputBox;
+    box-sizing: border-box;
+    max-width: 620px;
     height: 100px;
+    padding: 10px;
   }
 
   button {

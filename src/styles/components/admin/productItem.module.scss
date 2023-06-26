@@ -74,11 +74,12 @@ div.wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 4px 10px;
-  font-size: 14px;
+  padding: 2px 10px 0;
+  font-size: 12px;
   border-radius: 20px;
   color: $color-primary;
   cursor: pointer;
+  line-height: 22px;
 }
 
 .menu-wrapper {

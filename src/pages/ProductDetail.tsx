@@ -5,8 +5,13 @@ import { Footer, Products, Modal } from 'components/index'
 import { useNavigate } from 'react-router-dom'
 import '../styles/layout/ProductDetail.scss'
 import { Product, RouteParams } from '../types/Products.interface'
-import { ModalProps } from 'types/ModalProps.type'
-import { LoginContext, WishListContext, CartContext } from 'contexts/index'
+import { ModalProps } from 'types/index'
+import {
+  LoginContext,
+  WishListContext,
+  CartContext,
+  CartLoginedContext
+} from 'contexts/index'
 
 export const ProductDetail = () => {
   const { id } = useParams<RouteParams>()
@@ -23,6 +28,7 @@ export const ProductDetail = () => {
     const fetchProduct = async () => {
       try {
         const response = await adminInstance.get(`/products/${id}`)
+        // setProduct({ ...response.data, quantity: 1 })
         setProduct(response.data)
         console.log(response.data)
       } catch (error) {
@@ -36,7 +42,7 @@ export const ProductDetail = () => {
   if (!product) {
     return <div>로딩 중...</div>
   }
-  console.log(product.thumbnail)
+  console.log(product)
   const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(event.target.value)
     const nonNegativeValue = value < 1 ? 1 : value
@@ -71,13 +77,32 @@ export const ProductDetail = () => {
     //바로구매 기능
   }
 
+  const PlusQuantity = () => {
+    quantity + 1
+  }
+
   const handleAddToCart = () => {
     // 장바구니 기능
-    if (userCart.length === 0) {
-      setUserCart([product])
+    const findProduct = userCart.find(item => item.product.id === product.id)
+    // if (userCart.length === 0) {
+    //   setUserCart([{ product, quantity: 1 }])
+    // } else
+    if (findProduct) {
+      findProduct.quantity += quantity
+      const filter = userCart.filter(item => item.product.id !== product.id)
+      setUserCart([...filter, findProduct])
     } else {
-      setUserCart([...userCart, product])
+      setUserCart([...userCart, { product, quantity: quantity }])
+      // setUserCart([...userCart, product])
     }
+    setIsModalShow(true)
+    setModalProps({
+      title: '장바구니',
+      content: '장바구니에 추가가 완료되었습니다.',
+      isTwoButton: false,
+      okButtonText: '확인',
+      onClickOkButton: () => setIsModalShow(false)
+    })
   }
 
   // 위시 리스트 저장 처리
@@ -191,12 +216,18 @@ export const ProductDetail = () => {
                 navigate('/payment', {
                   state: {
                     //상품정보 데이터
-                    thumbnail: product.thumbnail,
-                    title: product.title,
-                    quantity: quantity,
-                    price: calculateDiscountPrice().toLocaleString(),
-                    prevPrice: product.price,
-                    discount: product.discountRate
+                    products: [
+                      {
+                        product: product,
+                        quantity: quantity
+                        // thumbnail: product.thumbnail,
+                        // title: product.title,
+                        // quantity: quantity,
+                        // price: calculateDiscountPrice().toLocaleString(),
+                        // prevPrice: product.price,
+                        // discount: product.discountRate
+                      }
+                    ]
                   }
                 })
               }}>

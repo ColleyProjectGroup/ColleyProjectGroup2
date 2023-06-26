@@ -13,18 +13,13 @@ import {
   BankContext,
   AccountNumberContext
 } from 'contexts/index'
-
 import { ModalProps } from '@/types'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import SwiperCore, { Navigation } from 'swiper'
 import 'swiper/scss'
 import 'swiper/scss/navigation'
 import { Bank } from '@/types/BankAccounts.interface'
-import {
-  removeAccount,
-  getAccounts,
-  createAccount
-} from '@/api/paymentRequests'
+import { removeAccount, getAccounts, createAccount } from 'api/index'
 
 export const PaymentMethods = () => {
   const { name } = useContext(UsernameContext)
@@ -35,6 +30,7 @@ export const PaymentMethods = () => {
   const { accountNumber } = useContext(AccountNumberContext)
 
   const [isModalShow, setIsModalShow] = useState<boolean>(false)
+  const [selected, setSelected] = useState<string>('')
   const [modalProps, setModalProps] = useState<ModalProps | null>(null)
   const [accountData, setAccountData] = useState<Bank[]>([])
 
@@ -126,7 +122,7 @@ export const PaymentMethods = () => {
         slidesPerView={1}>
         <SwiperSlide>
           <div
-            className={styles.addAccout}
+            className={styles.addAccount}
             onClick={modalOpenHandler}>
             <span>+</span>
             <span>계좌추가</span>
@@ -138,10 +134,17 @@ export const PaymentMethods = () => {
         {/* 생성된 계좌 */}
         {accountData.map(item => (
           <SwiperSlide key={item.id}>
-            <div className={styles.addAccout}>
+            <div
+              className={
+                selected === item.id
+                  ? styles.addAccountSelected
+                  : styles.addAccount
+              }
+              onDoubleClick={() => {
+                setSelected(item.id)
+              }}>
               <span>
-                {item.bankName}
-                {item.accountNumber}
+                {item.bankName}&nbsp;{item.accountNumber}
                 <a
                   onClick={() => {
                     removeAndRender(item.id)
@@ -149,14 +152,18 @@ export const PaymentMethods = () => {
                   ✖
                 </a>
               </span>
-              <span>{item.balance}</span>
+              <span>{item.balance.toLocaleString()}원</span>
             </div>
+            <span className={styles.addAccoutText}>
+              더블클릭으로 결제를 진행할 계좌를 선택해주세요.
+            </span>
           </SwiperSlide>
         ))}
-        {/* 선택계좌 FOCUS COLOR? */}
       </Swiper>
 
-      <Confirmation />
+      {/* PRODUCTS ID => PROPS */}
+      <Confirmation selected={selected} />
+      {/* MODAL */}
       {phoneNumber.length === 11 && isModalShow && modalProps ? (
         <Modal
           isTwoButton={modalProps.isTwoButton}

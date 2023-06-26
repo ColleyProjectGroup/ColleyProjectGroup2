@@ -4,7 +4,7 @@ export interface Product {
   thumbnail: string
   title: string
   price: number
-  discountRate?: number
+  discountRate?: number | undefined
   tags: string[]
   photo: string
 }

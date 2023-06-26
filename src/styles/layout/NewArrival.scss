@@ -6,7 +6,7 @@
     text-decoration: none;
     color: black;
   }
-  .Inner{
+  .Inner {
     padding-top: 50px;
     padding-bottom: 50px;
     padding-left: 10px;
@@ -32,15 +32,19 @@
       gap: 20px;
       flex-wrap: nowrap;
       cursor: pointer;
-      img{
+      img {
         width: 230px;
         height: 230px;
       }
-      .Title{
-        margin: 10px 0px 10px 0px;
+      .Title {
+        padding: 10px 0px 0px 0px;
         font-size: 12px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 230px;
       }
-      .Price{
+      .Price {
         margin: 10px 0px 10px 0px;
         font-size: 14px;
       }
