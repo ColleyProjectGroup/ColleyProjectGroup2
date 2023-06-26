@@ -75,9 +75,20 @@ export const ProductDetail = () => {
     // 장바구니 기능
     if (userCart.length === 0) {
       setUserCart([product])
+    } else if (userCart.includes(product)) {
+      console.log(userCart)
     } else {
       setUserCart([...userCart, product])
+      console.log(userCart)
     }
+    setIsModalShow(true)
+    setModalProps({
+      title: '장바구니',
+      content: '장바구니에 추가가 완료되었습니다.',
+      isTwoButton: false,
+      okButtonText: '확인',
+      onClickOkButton: () => setIsModalShow(false)
+    })
   }
 
   // 위시 리스트 저장 처리

@@ -1,13 +1,16 @@
 @import 'src/styles/abstracts/variables';
 
 .itemBox{
-  border:1px solid red;
+  //border:1px solid red;
   display:flex;
+  padding-top:30px;
+  border-bottom:1px solid $color-gray-A7;
   input{
     -webkit-appearance: none;
     width:15px;
     height:15px;
     border:1px solid $color-black-0;
+    margin-right:20px;
     cursor: pointer;
     &::after{
       border: solid #fff;
@@ -31,18 +34,24 @@
   .thumbnail{
     width:90px;
     height:90px;
+    margin-right:20px;
   }
   .productInfo{
+    flex-grow:5;
+    height:150px;
     .name{
-
+      font-size:13px;
+      padding-bottom:10px;
     }
     .price{
-
+      font-size:13px;
+      padding-bottom:10px;
     }
     .amount{
       display:flex;
       text-align: center;
       line-height: 30px;
+      padding-top:12px;
       .down{
         width:30px;
         height:30px;
@@ -63,9 +72,12 @@
     }
   }
   .sumPrice{
-
+    flex-grow:1;
+    text-align:center;
+    padding-top:5px;
+    font-weight:bold;
   }
   .delete{
-
+    cursor:pointer;
   }
 }

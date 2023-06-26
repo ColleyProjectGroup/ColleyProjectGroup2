@@ -5,9 +5,7 @@ import { Product } from 'types/index'
 
 export const CartItem = ({ product }: { product: Product }) => {
   const [number, setNumber] = useState(1)
-  const { userCart } = useContext(CartContext)
-
-  console.log(userCart)
+  const { userCart, setUserCart } = useContext(CartContext)
 
   const plus = () => {
     setNumber(number + 1)
@@ -19,6 +17,12 @@ export const CartItem = ({ product }: { product: Product }) => {
     } else {
       setNumber(number - 1)
     }
+  }
+
+  const sumPrice = number * product.price
+
+  const deleteList = () => {
+    setUserCart(userCart.filter(p => p !== product))
   }
 
   return (
@@ -45,8 +49,12 @@ export const CartItem = ({ product }: { product: Product }) => {
           </div>
         </div>
       </div>
-      <div className={styles.sumPrice}>총 가격</div>
-      <span className={styles.delete}>x</span>
+      <div className={styles.sumPrice}>{sumPrice}원</div>
+      <span
+        className={`material-icons ${styles['delete']}`}
+        onClick={deleteList}>
+        close
+      </span>
     </div>
   )
 }
