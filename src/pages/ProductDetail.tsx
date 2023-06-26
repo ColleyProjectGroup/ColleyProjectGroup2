@@ -5,7 +5,7 @@ import { Footer, Products, Modal } from 'components/index'
 import { useNavigate } from 'react-router-dom'
 import '../styles/layout/ProductDetail.scss'
 import { Product, RouteParams } from '../types/Products.interface'
-import { ModalProps } from 'types/ModalProps.type'
+import { ModalProps, CartProduct } from 'types/index'
 import { LoginContext, WishListContext, CartContext } from 'contexts/index'
 
 export const ProductDetail = () => {
@@ -23,6 +23,7 @@ export const ProductDetail = () => {
     const fetchProduct = async () => {
       try {
         const response = await adminInstance.get(`/products/${id}`)
+        // setProduct({ ...response.data, quantity: 1 })
         setProduct(response.data)
         console.log(response.data)
       } catch (error) {
@@ -71,14 +72,23 @@ export const ProductDetail = () => {
     //바로구매 기능
   }
 
+  const PlusQuantity = () => {
+    quantity + 1
+  }
+
   const handleAddToCart = () => {
     // 장바구니 기능
-    if (userCart.length === 0) {
-      setUserCart([product])
-    } else if (userCart.includes(product)) {
-      console.log(userCart)
+    const findProduct = userCart.find(item => item.product.id === product.id)
+    // if (userCart.length === 0) {
+    //   setUserCart([{ product, quantity: 1 }])
+    // } else
+    if (findProduct) {
+      findProduct.quantity += quantity
+      const filter = userCart.filter(item => item.product.id !== product.id)
+      setUserCart([...filter, findProduct])
     } else {
-      setUserCart([...userCart, product])
+      setUserCart([...userCart, { product, quantity: quantity }])
+      // setUserCart([...userCart, product])
       console.log(userCart)
     }
     setIsModalShow(true)

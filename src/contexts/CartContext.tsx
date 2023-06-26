@@ -1,9 +1,9 @@
 import { createContext } from 'react'
-import { Product } from 'types/index'
+import { CartProduct } from 'types/index'
 
 type CartState = {
-  userCart: Product[]
-  setUserCart: (products: Product[]) => void
+  userCart: CartProduct[]
+  setUserCart: (products: CartProduct[]) => void
 }
 
 export const CartContext = createContext<CartState>({} as CartState)

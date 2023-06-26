@@ -1,28 +1,33 @@
 import styles from 'styles/components/cart/cartItem.module.scss'
 import { useState, useContext } from 'react'
 import { CartContext } from 'contexts/index'
-import { Product } from 'types/index'
+import { Product, CartProduct } from 'types/index'
 
-export const CartItem = ({ product }: { product: Product }) => {
-  const [number, setNumber] = useState(1)
+export const CartItem = ({ product, quantity }: CartProduct) => {
+  const [number, setNumber] = useState(quantity)
   const { userCart, setUserCart } = useContext(CartContext)
+
+  const filter = userCart.filter(item => item.product.id !== product.id)
 
   const plus = () => {
     setNumber(number + 1)
+    // 로컬스토리지 동기화
+    setUserCart([...filter, { product: product, quantity: number + 1 }])
   }
 
   const minus = () => {
     if (number === 1) {
-      setNumber(number)
+      return
     } else {
       setNumber(number - 1)
+      setUserCart([...filter, { product: product, quantity: number - 1 }])
     }
   }
 
   const sumPrice = number * product.price
 
   const deleteList = () => {
-    setUserCart(userCart.filter(p => p !== product))
+    setUserCart(userCart.filter(p => p.product.id !== product.id))
   }
 
   return (
