@@ -37,7 +37,7 @@ export const ProductDetail = () => {
   if (!product) {
     return <div>로딩 중...</div>
   }
-  console.log(product.thumbnail)
+  console.log(product)
   const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(event.target.value)
     const nonNegativeValue = value < 1 ? 1 : value
@@ -204,12 +204,18 @@ export const ProductDetail = () => {
                 navigate('/payment', {
                   state: {
                     //상품정보 데이터
-                    thumbnail: product.thumbnail,
-                    title: product.title,
-                    quantity: quantity,
-                    price: calculateDiscountPrice().toLocaleString(),
-                    prevPrice: product.price,
-                    discount: product.discountRate
+                    products: [
+                      {
+                        product: product,
+                        quantity: quantity
+                        // thumbnail: product.thumbnail,
+                        // title: product.title,
+                        // quantity: quantity,
+                        // price: calculateDiscountPrice().toLocaleString(),
+                        // prevPrice: product.price,
+                        // discount: product.discountRate
+                      }
+                    ]
                   }
                 })
               }}>

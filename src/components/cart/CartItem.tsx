@@ -2,13 +2,14 @@ import styles from 'styles/components/cart/cartItem.module.scss'
 import { useState, useContext, useEffect } from 'react'
 import { CartContext } from 'contexts/index'
 import { Product, CartProduct } from 'types/index'
+import { calculateDiscountedPrice } from 'utils/index'
 
 export const CartItem = ({ product, quantity }: CartProduct) => {
   const [number, setNumber] = useState(quantity)
   const { userCart, setUserCart } = useContext(CartContext)
 
   const filter = userCart.filter(item => item.product.id !== product.id)
-
+  console.log(product)
   const plus = () => {
     setNumber(number + 1)
     // 로컬스토리지 동기화
@@ -23,8 +24,11 @@ export const CartItem = ({ product, quantity }: CartProduct) => {
       setUserCart([...filter, { product: product, quantity: number - 1 }])
     }
   }
-
-  const sumPrice = number * product.price
+  const discounted = calculateDiscountedPrice(
+    product.price,
+    product.discountRate
+  )
+  const sumPrice = number * discounted
   const deleteList = () => {
     setUserCart(userCart.filter(p => p.product.id !== product.id))
   }
@@ -38,7 +42,7 @@ export const CartItem = ({ product, quantity }: CartProduct) => {
       />
       <div className={styles.productInfo}>
         <div className={styles.name}>{product.title}</div>
-        <div className={styles.price}>{product.price.toLocaleString()}원</div>
+        <div className={styles.price}>{discounted.toLocaleString()}원</div>
         <div className={styles.amount}>
           <div
             className={styles.down}

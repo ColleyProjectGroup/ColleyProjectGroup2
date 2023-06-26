@@ -4,11 +4,16 @@ import { CartContext } from 'contexts/index'
 import { useContext } from 'react'
 import { Cart } from '@/pages'
 import { Product, CartProduct } from 'types/index'
+import { calculateDiscountedPrice } from 'utils/index'
 
 export const CartProducts = () => {
   const { userCart } = useContext(CartContext)
   const calculated = userCart.reduce((acc: number, cur: CartProduct) => {
-    return acc + cur.product.price * cur.quantity
+    const discounted = calculateDiscountedPrice(
+      cur.product.price,
+      cur.product.discountRate
+    )
+    return acc + discounted * cur.quantity
   }, 0)
   const delivery = 3000
   return (
@@ -16,9 +21,7 @@ export const CartProducts = () => {
       <div className={styles.container}>
         <div className={styles.wrapper}>
           <div className={styles.heading}>장바구니 상품</div>
-          {/* PRODUCTS QUANTITY */}
           <h4 className={styles.selected}>일반상품 ({userCart.length})</h4>
-          {/* MAP */}
           {userCart.map(item => (
             <CartItem
               product={item.product}

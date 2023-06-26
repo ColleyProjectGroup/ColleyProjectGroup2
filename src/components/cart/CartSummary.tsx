@@ -1,7 +1,12 @@
 import styles from 'styles/components/cart/cartSummary.module.scss'
 import { Cart } from 'types/index'
-
+import { useNavigate } from 'react-router-dom'
+import { CartContext } from 'contexts/index'
+import { useContext } from 'react'
 export const CartSummary = ({ total, delivery, products }: Cart) => {
+  const navigate = useNavigate()
+  const { userCart } = useContext(CartContext)
+
   return (
     <div className={styles.container}>
       <div className={styles.total}>
@@ -25,7 +30,18 @@ export const CartSummary = ({ total, delivery, products }: Cart) => {
         </div>
       </div>
       <div className={styles.buttonArea}>
-        <a className={styles.orderAll}>전체상품주문</a>
+        <a
+          className={styles.orderAll}
+          onClick={() => {
+            navigate('/payment', {
+              state: {
+                //상품정보 데이터
+                products: [...userCart]
+              }
+            })
+          }}>
+          전체상품주문
+        </a>
         <a className={styles.orderSelected}>선택상품주문</a>
       </div>
     </div>
