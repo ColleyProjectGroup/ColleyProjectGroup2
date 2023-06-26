@@ -34,6 +34,7 @@ button {
     @include size(100px, 40px);
   }
   &:disabled {
+    border-color: $color-black-D9;
     background-color: $color-black-D9;
   }
 }
@@ -51,6 +52,11 @@ button {
   }
   &.loadMore {
     @include size(300px, 550x);
+  }
+
+  &:disabled {
+    border-color: $color-black-D9;
+    background-color: $color-black-D9;
   }
 }
 
