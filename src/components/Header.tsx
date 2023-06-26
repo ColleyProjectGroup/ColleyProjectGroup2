@@ -118,96 +118,97 @@ export const Header: React.FC = () => {
                   </div>
                 )}
               </div>
-            <div>
-              <span>
-                <a href="/mypage/order">ORDER</a>
-              </span>
-              <span>
-                <a href="/">CART</a>
-              </span>
+              <div>
+                <span>
+                  <a href="/mypage/order">ORDER</a>
+                </span>
+                <span>
+                  <a href="/">CART</a>
+                </span>
+              </div>
+            </div>
+            <div className={styles.inputBox}>
+              <input
+                id="SearchInput"
+                type="text"
+                className={styles[hideInput ? 'hide' : 'show']}
+                ref={searchRef}
+                value={searchKeyword}
+                onChange={e => setSearchKeyword(e.target.value)}
+                onKeyPress={onSearchEnter}
+              />
+              <div
+                className={`material-icons ${styles['icon']} ${
+                  styles[hideInput ? 'show' : 'hide']
+                }`}
+                onClick={onClickSearch}>
+                search
+              </div>
             </div>
           </div>
-          <div className={styles.inputBox}>
-            <input
-              id="SearchInput"
-              type="text"
-              className={styles[hideInput ? 'hide' : 'show']}
-              ref={searchRef}
-              value={searchKeyword}
-              onChange={e => setSearchKeyword(e.target.value)}
-              onKeyPress={onSearchEnter}
-            />
-            <div
-              className={`material-icons ${styles['icon']} ${
-                styles[hideInput ? 'show' : 'hide']
-              }`}
-              onClick={onClickSearch}>
-              search
-            </div>
+          <div
+            className={`${styles[scrollActive ? 'fixed' : '']} ${
+              styles['navigation']
+            }`}>
+            <ul className={styles.navInner}>
+              <li>
+                <a href="/productlist">ALL</a>
+              </li>
+              <li>
+                <a href="/productlist?category=NEW">NEW</a>
+              </li>
+              <li>
+                <a href="/productlist?category=BEST">BEST</a>
+              </li>
+              <li>
+                <a href="/productlist?category=LIVING">
+                  Living
+                  <ul className={styles.dropdown}>
+                    <li>
+                      <a href="/">테이블</a>
+                    </li>
+                    <li>
+                      <a href="/">거실화</a>
+                    </li>
+                    <li>
+                      <a href="/">조명</a>
+                    </li>
+                    <li>
+                      <a href="/">침구</a>
+                    </li>
+                  </ul>
+                </a>
+              </li>
+              <li>
+                <a href="/productlist?category=KITCHEN">
+                  Kitchen
+                  <ul className={styles.dropdown}>
+                    <li>
+                      <a href="/">컵/머그</a>
+                    </li>
+                    <li>
+                      <a href="/">식기</a>
+                    </li>
+                    <li>
+                      <a href="/">쟁반/접시</a>
+                    </li>
+                    <li>
+                      <a href="/">주방잡화</a>
+                    </li>
+                    <li>
+                      <a href="/">도마</a>
+                    </li>
+                  </ul>
+                </a>
+              </li>
+              <li>
+                <a href="/productlist?category=STATIONERY">Stationery</a>
+              </li>
+              <li>
+                <a href="/productlist?category=BABY/KIDS">Baby/Kids</a>
+              </li>
+            </ul>
           </div>
-        </div>
-        <div
-          className={`${styles[scrollActive ? 'fixed' : '']} ${
-            styles['navigation']
-          }`}>
-          <ul className={styles.navInner}>
-            <li>
-              <a href="/productlist">ALL</a>
-            </li>
-            <li>
-              <a href="/productlist?category=NEW">NEW</a>
-            </li>
-            <li>
-              <a href="/productlist?category=BEST">BEST</a>
-            </li>
-            <li>
-              <a href="/productlist?category=LIVING">
-                Living
-                <ul className={styles.dropdown}>
-                  <li>
-                    <a href="/">테이블</a>
-                  </li>
-                  <li>
-                    <a href="/">거실화</a>
-                  </li>
-                  <li>
-                    <a href="/">조명</a>
-                  </li>
-                  <li>
-                    <a href="/">침구</a>
-                  </li>
-                </ul>
-              </a>
-            </li>
-            <li>
-              <a href="/productlist?category=KITCHEN">
-                Kitchen
-                <ul className={styles.dropdown}>
-                  <li>
-                    <a href="/">컵/머그</a>
-                  </li>
-                  <li>
-                    <a href="/">식기</a>
-                  </li>
-                  <li>
-                    <a href="/">쟁반/접시</a>
-                  </li>
-                  <li>
-                    <a href="/">주방잡화</a>
-                  </li>
-                  <li>
-                    <a href="/">도마</a>
-                  </li>
-                </ul>
-              </a>
-            </li>
-            <li>
-              <a href="/productlist?category=STATIONERY">Stationery</a>
-            </li>
-            <li>
-              <a href="/productlist?category=BABY/KIDS">Baby/Kids</a>
-            </li>
-          </ul>
         </div>
       </div>
     </div>
