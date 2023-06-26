@@ -19,7 +19,8 @@ import {
   AdminSales,
   MyOrders,
   Order,
-  Cart
+  Cart,
+  Success
 } from 'pages/index'
 
 export const router = createBrowserRouter([
@@ -71,6 +72,11 @@ export const router = createBrowserRouter([
       {
         path: 'cart',
         element: <Cart />,
+        errorElement: <ErrorComponent />
+      },
+      {
+        path: 'success',
+        element: <Success />,
         errorElement: <ErrorComponent />
       }
     ]

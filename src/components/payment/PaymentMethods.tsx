@@ -13,19 +13,13 @@ import {
   BankContext,
   AccountNumberContext
 } from 'contexts/index'
-import { useLocation } from 'react-router-dom'
-
 import { ModalProps } from '@/types'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import SwiperCore, { Navigation } from 'swiper'
 import 'swiper/scss'
 import 'swiper/scss/navigation'
 import { Bank } from '@/types/BankAccounts.interface'
-import {
-  removeAccount,
-  getAccounts,
-  createAccount
-} from 'api/index'
+import { removeAccount, getAccounts, createAccount } from 'api/index'
 
 export const PaymentMethods = () => {
   const { name } = useContext(UsernameContext)
