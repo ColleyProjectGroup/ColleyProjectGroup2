@@ -1,17 +1,24 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { adminInstance } from '../api/axios'
-import { Footer } from '@/components'
-import { Products } from '../components/Products'
+import { adminInstance } from 'api/index'
+import { Footer, Products, Modal } from 'components/index'
 import { useNavigate } from 'react-router-dom'
 import '../styles/layout/ProductDetail.scss'
 import { Product, RouteParams } from '../types/Products.interface'
+import { ModalProps } from 'types/ModalProps.type'
+import { LoginContext, WishListContext, CartContext } from 'contexts/index'
 
-const ProductDetail: React.FC = () => {
+export const ProductDetail = () => {
   const { id } = useParams<RouteParams>()
   const [product, setProduct] = useState<Product | null>(null)
   const [quantity, setQuantity] = useState(1)
+  const { userCart, setUserCart } = useContext(CartContext)
   const navigate = useNavigate()
+  const { wishList, setWishList } = useContext(WishListContext)
+  const { isLogined } = useContext(LoginContext)
+  const [isModalShow, setIsModalShow] = useState<boolean>(false)
+  const [modalProps, setModalProps] = useState<ModalProps | null>(null)
+
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -61,15 +68,59 @@ const ProductDetail: React.FC = () => {
   }
 
   const handleBuyNow = () => {
-    // 구매하기 기능
+    //바로구매 기능
   }
 
   const handleAddToCart = () => {
     // 장바구니 기능
+    if (userCart.length === 0) {
+      setUserCart([product])
+    } else {
+      setUserCart([...userCart, product])
+    }
+  }
+
+  // 위시 리스트 저장 처리
+  const onSaveWishList = (product: Product) => {
+    const isExist = wishList.find(p => p.id === product.id)
+    if (!isExist) {
+      setWishList([...wishList, product])
+      setIsModalShow(true)
+      setModalProps({
+        title: '관심상품 등록',
+        content: '관심상품으로 등록되었습니다.',
+        isTwoButton: false,
+        okButtonText: '확인',
+        onClickOkButton: () => setIsModalShow(false)
+      })
+    } else {
+      setIsModalShow(true)
+      setModalProps({
+        title: '오류',
+        content: '이미 관심상품으로 등록된 상품입니다.',
+        isTwoButton: false,
+        okButtonText: '확인',
+        onClickOkButton: () => setIsModalShow(false)
+      })
+    }
   }
 
   const handleAddToWishlist = () => {
-    // 위시 리스트 기능
+    if (isLogined) {
+      onSaveWishList(product)
+    } else {
+      // 로그인 안내
+      setIsModalShow(true)
+      setModalProps({
+        title: '관심상품 등록',
+        content: '로그인이 필요한 서비스입니다.',
+        isTwoButton: false,
+        okButtonText: '확인',
+        onClickOkButton: () => {
+          setIsModalShow(false)
+        }
+      })
+    }
   }
 
   return (
@@ -146,7 +197,6 @@ const ProductDetail: React.FC = () => {
                     price: calculateDiscountPrice().toLocaleString(),
                     prevPrice: product.price,
                     discount: product.discountRate
-                    // product: product
                   }
                 })
               }}>
@@ -178,8 +228,18 @@ const ProductDetail: React.FC = () => {
         />
       </div>
       <Footer />
+
+      {isModalShow && modalProps ? (
+        <Modal
+          isTwoButton={modalProps.isTwoButton}
+          title={modalProps.title}
+          content={modalProps.content}
+          okButtonText={modalProps.okButtonText}
+          onClickOkButton={modalProps.onClickOkButton}
+          cancelButtonText={modalProps.cancelButtonText}
+          onClickCancelButton={modalProps.onClickCancelButton}
+        />
+      ) : null}
     </div>
   )
 }
-
-export { ProductDetail }

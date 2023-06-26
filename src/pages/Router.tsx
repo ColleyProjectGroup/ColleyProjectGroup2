@@ -19,7 +19,9 @@ import {
   AdminSales,
   MyOrders,
   ModifyPassword,
-  Order
+  Order,
+  Cart,
+  WishList
 } from 'pages/index'
 
 export const router = createBrowserRouter([
@@ -44,8 +46,13 @@ export const router = createBrowserRouter([
         errorElement: <ErrorComponent />
       },
       {
-        path: '/mypage/order',
+        path: 'mypage/order',
         element: <Order />,
+        errorElement: <ErrorComponent />
+      },
+      {
+        path: 'mypage/wishlist',
+        element: <WishList />,
         errorElement: <ErrorComponent />
       },
       {
@@ -71,6 +78,11 @@ export const router = createBrowserRouter([
       {
         path: 'signin',
         element: <SignInPage />,
+        errorElement: <ErrorComponent />
+      },
+      {
+        path: 'cart',
+        element: <Cart />,
         errorElement: <ErrorComponent />
       }
     ]

@@ -16,6 +16,7 @@ button {
 
 .black {
   background-color: $color-black-0;
+  border: 1px solid $color-black-0;
   color: $color-primary;
   &.buy {
     @include size(580px, 50px);
@@ -39,6 +40,7 @@ button {
 
 .white {
   background-color: $color-primary;
+  border: 1px solid $color-gray-BC;
   color: $color-black-0;
   //장바구니와 위시리스트가 텍스트 제외 스타일이 같아서 우선 이렇게 명명해뒀습니다
   &.toLIst {
