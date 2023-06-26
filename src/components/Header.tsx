@@ -118,32 +118,31 @@ export const Header: React.FC = () => {
                   </div>
                 )}
               </div>
-              <div>
-                <span>
-                  <a href="/">ORDER</a>
-                </span>
-                <span>
-                  <a href="/">CART</a>
-                </span>
-              </div>
+            <div>
+              <span>
+                <a href="/mypage/order">ORDER</a>
+              </span>
+              <span>
+                <a href="/">CART</a>
+              </span>
             </div>
-            <div className={styles.inputBox}>
-              <input
-                id="SearchInput"
-                type="text"
-                className={styles[hideInput ? 'hide' : 'show']}
-                ref={searchRef}
-                value={searchKeyword}
-                onChange={e => setSearchKeyword(e.target.value)}
-                onKeyPress={onSearchEnter}
-              />
-              <div
-                className={`material-icons ${styles['icon']} ${
-                  styles[hideInput ? 'show' : 'hide']
-                }`}
-                onClick={onClickSearch}>
-                search
-              </div>
+          </div>
+          <div className={styles.inputBox}>
+            <input
+              id="SearchInput"
+              type="text"
+              className={styles[hideInput ? 'hide' : 'show']}
+              ref={searchRef}
+              value={searchKeyword}
+              onChange={e => setSearchKeyword(e.target.value)}
+              onKeyPress={onSearchEnter}
+            />
+            <div
+              className={`material-icons ${styles['icon']} ${
+                styles[hideInput ? 'show' : 'hide']
+              }`}
+              onClick={onClickSearch}>
+              search
             </div>
           </div>
         </div>
