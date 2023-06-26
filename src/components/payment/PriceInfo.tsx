@@ -33,7 +33,6 @@ export const PriceInfo = () => {
           <div className={styles.block}>
             <span>할인/부가결제</span>
             <span className={styles.discount}>
-              -{/* EDIT */}
               {(total - discountedPrice).toLocaleString()}
               <span>원</span>
             </span>
@@ -43,7 +42,6 @@ export const PriceInfo = () => {
       <div className={styles.sum}>
         <span className={styles.total}>최종 결제 금액</span>
         <span className={styles.totalprice}>
-          {/* EDIT */}
           {(total - (total - discountedPrice) + delivery).toLocaleString()}원
         </span>
       </div>

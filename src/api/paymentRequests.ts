@@ -2,7 +2,7 @@ import { authInstance } from '@/api'
 import {
   CreateRequest,
   RemoveRequest,
-  Trasaction
+  Transaction
 } from '@/types/BankAccounts.interface'
 
 //선택 가능한 은행 목록 조회
@@ -36,6 +36,8 @@ export const removeAccount = async (req: RemoveRequest) => {
   console.log(res.data)
   return res.data
 }
-export const trasactPayment = async (req: Transaction) => {
-  const res = await authInstance.post('/buy', req)
+//결제
+export const transactPayment = async (req: Transaction) => {
+  const res = await authInstance.post('/products/buy', req)
+  return res
 }
