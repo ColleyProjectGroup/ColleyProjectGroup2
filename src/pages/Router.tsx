@@ -18,7 +18,7 @@ import {
   Payment,
   AdminSales,
   MyOrders,
-  ModifyMyInfo
+  ModifyPassword
 } from 'pages/index'
 
 export const router = createBrowserRouter([
@@ -38,8 +38,8 @@ export const router = createBrowserRouter([
         errorElement: <ErrorComponent />
       },
       {
-        path: '/mypage/modify',
-        element: <ModifyMyInfo />,
+        path: '/mypage/password',
+        element: <ModifyPassword />,
         errorElement: <ErrorComponent />
       },
       {

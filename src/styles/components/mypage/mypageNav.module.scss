@@ -1,9 +1,43 @@
+@import 'src/styles/abstracts/variables.scss';;
+
 nav{
+  padding-top:50px;
   width:200px;
   .title{
-    padding-top:100px;
+    padding:100px 0;
     font-size:30px;
     font-weight:bold;
   }
-  
+  >ul{
+    margin-top:40px;
+    .subtitle{
+      font-size:18px;
+      font-weight:bold;
+      padding:20px 0;
+      div{
+        padding-top:15px;
+        a{
+          font-size:15px;
+          text-decoration:none;
+          color:$color-black-0;
+          font-weight:normal;
+          padding:10px 0;
+        }
+      }
+    }
+    .myInfo{
+      font-size:18px;
+      font-weight:bold;
+      padding:20px 0;
+      li{
+        padding:12px 0;
+        a{
+          font-size:15px;
+          text-decoration:none;
+          color:$color-black-0;
+          font-weight:normal;
+        }
+      }
+    }
+  }
 }
