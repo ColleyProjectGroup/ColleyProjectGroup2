@@ -13,7 +13,7 @@ export const Confirmation = (props: any) => {
   const { setUserCart } = useContext(CartContext)
   const [modalProps, setModalProps] = useState<ModalProps | null>(null)
   const [isModalShow, setIsModalShow] = useState<boolean>(false)
-
+  //receipt - 개별 상품 or 장바구니 상품 정보
   const receipt = useLocation().state.products
   console.log(receipt)
   const total = receipt.reduce((acc: number, cur: CartProduct) => {
@@ -28,8 +28,6 @@ export const Confirmation = (props: any) => {
   }, 0)
   const delivery = 3000
 
-  // productId: string // 거래할 제품 ID (필수!) receipt.product.id
-  // accountId: string // 결제할 사용자 계좌 ID (필수!) - props.selected
   const paymentHandler = (pro: string, acc: string) => {
     transactPayment({ productId: pro, accountId: acc })
   }
@@ -42,7 +40,12 @@ export const Confirmation = (props: any) => {
         content: '결제가 완료되었습니다.',
         okButtonText: '확인',
         onClickOkButton: () => {
-          navigate('/success')
+          navigate('/success', {
+            state: {
+              //상품정보 데이터
+              products: [...receipt]
+            }
+          })
         }
       })
     }
