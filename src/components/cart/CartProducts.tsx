@@ -3,7 +3,7 @@ import styles from 'styles/components/cart/cartProducts.module.scss'
 import { CartContext } from 'contexts/index'
 import { useContext } from 'react'
 import { Cart } from '@/pages'
-import { Product, CartProduct } from 'types/index'
+import { CartProduct } from 'types/index'
 import { calculateDiscountedPrice } from 'utils/index'
 
 export const CartProducts = () => {

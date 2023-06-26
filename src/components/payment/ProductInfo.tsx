@@ -23,7 +23,9 @@ export const ProductInfo = () => {
                 <span className={styles.quantity}>
                   수량: {product.quantity}개
                 </span>
-                <span className={styles.price}>{product.product.price}원</span>
+                <span className={styles.price}>
+                  {product.product.price.toLocaleString()}원
+                </span>
               </div>
             </li>
           )
