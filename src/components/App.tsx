@@ -1,13 +1,12 @@
 import { Outlet } from 'react-router-dom'
 import { Header, Badge } from 'components/index'
-import { Product, CartProduct } from 'types/index'
+import { Product } from 'types/index'
 import {
   LoginContext,
   RecentlyContext,
   LoginedUserContext,
   WishListContext,
-  CartContext,
-  CartLoginedContext
+  CartContext
 } from 'contexts/index'
 import {
   useLocalStorage,

@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { checkIsAdmin } from 'utils/index'
-import { LoginedUserContext, LoginContext } from 'contexts/index'
+import { LoginedUserContext, LoginContext, CartContext } from 'contexts/index'
 import React, { useState, useRef, useEffect, useContext } from 'react'
 import { logOut } from 'api/signApi'
 import styles from 'styles/layout/header.module.scss'
@@ -8,6 +8,7 @@ import styles from 'styles/layout/header.module.scss'
 export const Header: React.FC = () => {
   const { isLogined, setIsLogined } = useContext(LoginContext)
   const { userEmail, setUserEmail } = useContext(LoginedUserContext)
+  const { setUserCart } = useContext(CartContext)
   const [hideInput, setHideInput] = useState<boolean>(true)
   const navigate = useNavigate()
   const [searchKeyword, setSearchKeyword] = useState<string>('')
@@ -36,6 +37,7 @@ export const Header: React.FC = () => {
     logOut().then(isSuccess => {
       if (isSuccess) {
         setUserEmail('')
+        setUserCart([])
         localStorage.removeItem(import.meta.env.VITE_STORAGE_KEY_ACCESSTOKEN)
         setIsLogined(!isLogined)
         navigate('/')

@@ -5,7 +5,7 @@ export function useCartLocalStorage(
   email: string,
   initialState: CartProduct[]
 ) {
-  const [state, setState] = useState<CartProduct[]>(
+  const [state, setState] = useState(
     () =>
       JSON.parse(
         window.localStorage.getItem(
@@ -16,20 +16,30 @@ export function useCartLocalStorage(
 
   useEffect(() => {
     const guestItems = localStorage.getItem('cart-guest')
+    const userCartList = localStorage.getItem(`cart-${email}`)
     if (email === '' && guestItems != null) {
-      window.localStorage.setItem(`cart-guest`, JSON.stringify(state))
+      // 로그인 X + 장바구니에 상품이 있는데 또 추가하는 경우
+      localStorage.setItem(`cart-guest`, JSON.stringify(state))
     } else if (email === '') {
-      window.localStorage.setItem(`cart-guest`, JSON.stringify([]))
+      // 로그인 X + guest 장바구니 초기화
+      localStorage.setItem(`cart-guest`, JSON.stringify([]))
     } else {
-      console.log(guestItems)
       if (guestItems !== null && guestItems.length > 0) {
-        console.log(guestItems)
-        console.log(email)
-
-        window.localStorage.setItem(`cart-${email}`, guestItems)
+        // 로그인 직후 guest 상태에서 장바구니에 상품이 있는 경우
+        // 이전 장바구니와 합쳐서 저장
+        userCartList !== null
+          ? localStorage.setItem(
+              `cart-${email}`,
+              JSON.stringify([
+                ...JSON.parse(userCartList),
+                ...JSON.parse(guestItems)
+              ])
+            )
+          : localStorage.setItem(`cart-${email}`, guestItems)
         delete localStorage['cart-guest']
       } else {
-        window.localStorage.setItem(`cart-${email}`, JSON.stringify(state))
+        // 로그인 후 사용자가 장바구니에 상품을 추가하는 경우
+        localStorage.setItem(`cart-${email}`, JSON.stringify(state))
       }
     }
   }, [email, state])
