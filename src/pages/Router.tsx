@@ -18,7 +18,6 @@ import {
   Payment,
   AdminSales,
   MyOrders,
-  ModifyPassword,
   Order,
   Cart,
   Success,
@@ -37,13 +36,8 @@ export const router = createBrowserRouter([
         errorElement: <ErrorComponent />
       },
       {
-        path: '/mypage',
+        path: 'mypage',
         element: <MyOrders />,
-        errorElement: <ErrorComponent />
-      },
-      {
-        path: '/mypage/password',
-        element: <ModifyPassword />,
         errorElement: <ErrorComponent />
       },
       {
