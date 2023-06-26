@@ -1,7 +1,12 @@
 import { useState, FormEvent, useContext, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getId } from 'api/signApi'
-import { LoginContext, LoginedUserContext } from 'contexts/index'
+import {
+  LoginContext,
+  LoginedUserContext,
+  CartLoginedContext,
+  CartContext
+} from 'contexts/index'
 import { useEffect } from 'react'
 import { Modal } from 'components/Modal'
 import { ModalProps } from 'types/ModalProps.type'
@@ -11,6 +16,7 @@ export const SignInPage = () => {
   const navigate = useNavigate()
   const { isLogined, setIsLogined } = useContext(LoginContext)
   const { setUserEmail } = useContext(LoginedUserContext)
+  //const { userCart, setUserCart } = useContext(CartContext)
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [isValid, setIsValid] = useState<boolean>(false)

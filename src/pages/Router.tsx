@@ -20,6 +20,7 @@ import {
   MyOrders,
   Order,
   Cart,
+  Success,
   WishList
 } from 'pages/index'
 
@@ -77,6 +78,11 @@ export const router = createBrowserRouter([
       {
         path: 'cart',
         element: <Cart />,
+        errorElement: <ErrorComponent />
+      },
+      {
+        path: 'success',
+        element: <Success />,
         errorElement: <ErrorComponent />
       }
     ]

@@ -23,3 +23,8 @@ export interface Bank {
   accountNumber: string // 계좌 번호
   balance: number // 계좌 잔액
 }
+
+export interface Transaction {
+  productId: string // 거래할 제품 ID (필수!)
+  accountId: string // 결제할 사용자 계좌 ID (필수!)
+}

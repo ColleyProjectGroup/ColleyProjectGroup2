@@ -16,13 +16,14 @@
   }
   .wrapper {
     display: flex;
+    margin-bottom: 5px;
     img {
       width: 90px;
       aspect-ratio: 1 / 1;
       border: 2px solid $color-border;
     }
 
-    .info {
+    .product {
       display: flex;
       flex-direction: column;
       margin-left: 20px;
