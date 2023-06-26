@@ -131,6 +131,7 @@ export const SignUpPage = () => {
         </div>
         <button
           type="submit"
+          disabled={!isValid}
           onClick={() => {
             setIsLogined(!isLogined)
             navigate('/')

@@ -1,0 +1,73 @@
+@import 'src/styles/common.scss';
+.container {
+  margin-left: 47px;
+  position: relative;
+  .total {
+    width: 300px;
+    position: sticky;
+    .totalSummary {
+      border: 1px solid $color-black-0;
+      padding: 20px;
+      h3 {
+        font-size: 14px;
+        font-weight: bold;
+        margin: 0 0 20px;
+        padding: 0 0 19px;
+        border-bottom: 1px solid $color-tab;
+      }
+      .contents {
+        border-bottom: 1px solid $color-tab;
+        margin: 0 0 20px;
+        padding: 0 0 19px;
+        .content {
+          display: flex;
+          justify-content: space-between;
+          font-size: 13px;
+          &:first-child {
+            margin: 0 0 15px;
+          }
+        }
+      }
+    }
+    .totalPrice {
+      display: flex;
+      justify-content: space-between;
+      h4 {
+        font-size: 14px;
+        font-weight: bold;
+      }
+      span {
+        font-size: 13px;
+        font-weight: bold;
+      }
+    }
+  }
+  .buttonArea {
+    margin: 20px 0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    a {
+      vertical-align: middle;
+      padding: 14px 26px;
+      height: 50px;
+      min-width: 80px;
+      font-size: 14px;
+      line-height: 18px;
+      font-weight: bold;
+      box-sizing: border-box;
+      cursor: pointer;
+    }
+  }
+  .orderAll {
+    background-color: $color-black-0;
+    color: $color-primary;
+  }
+  .orderSelected {
+    margin: 10px 0 0;
+    border: 1px solid $color-gray-BC;
+    &:hover {
+      border: 1px solid $color-black-0;
+    }
+  }
+}

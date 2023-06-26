@@ -1,4 +1,4 @@
-import styled from 'styles/components/admin/adminSkeleton.module.scss'
+import styled from 'src/styles/components/admin/adminSkeleton.module.scss'
 
 export const AdminCustomerSkeleton = () => {
   return (

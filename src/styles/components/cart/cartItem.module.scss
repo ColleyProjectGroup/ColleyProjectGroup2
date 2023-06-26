@@ -1,0 +1,70 @@
+@import 'src/styles/abstracts/variables';
+
+.itemBox{
+  border:1px solid red;
+  display:flex;
+  input{
+    -webkit-appearance: none;
+    width:15px;
+    height:15px;
+    border:1px solid $color-black-0;
+    cursor: pointer;
+    &::after{
+      border: solid #fff;
+      border-width: 0 2px 2px 0;
+      content: "";
+      display: none;
+      height: 40%;
+      left: 40%;
+      position: relative;
+      top: 20%;
+      transform: rotate(45deg);
+      width: 15%;
+    }
+    &:checked{
+      background-color: $color-black-0;
+    }
+    &:checked::after{
+      display:block;
+    }
+  }
+  .thumbnail{
+
+  }
+  .productInfo{
+    .name{
+
+    }
+    .price{
+
+    }
+    .amount{
+      display:flex;
+      text-align: center;
+      line-height: 30px;
+      .down{
+        width:30px;
+        height:30px;
+        cursor:pointer;
+        border:1px solid $color-tab;
+      }
+      .number{
+        width:45px;
+        height:30px;
+        border:1px solid $color-tab;
+      }
+      .up{
+        width:30px;
+        height:30px;
+        cursor: pointer;
+        border:1px solid $color-tab;
+      }
+    }
+  }
+  .sumPrice{
+
+  }
+  .delete{
+
+  }
+}
