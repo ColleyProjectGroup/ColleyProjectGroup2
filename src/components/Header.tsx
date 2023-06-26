@@ -149,7 +149,7 @@ export const Header: React.FC = () => {
             </div>
           </div>
           <div
-            className={`${styles[scrollActive ? 'fixed' : '']} ${
+            className={`${styles[scrollActive ? styles['fixed'] : '']} ${
               styles['navigation']
             }`}>
             <ul className={styles.navInner}>
