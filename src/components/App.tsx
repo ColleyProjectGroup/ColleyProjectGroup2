@@ -6,18 +6,20 @@ import {
   RecentlyContext,
   LoginedUserContext,
   WishListContext,
-  CartContext
+  CartContext,
+  CartLoginedContext
 } from 'contexts/index'
-import { useLocalStorage, useSessionStorage } from 'hooks/index'
+import {
+  useLocalStorage,
+  useSessionStorage,
+  useCartLocalStorage
+} from 'hooks/index'
 
 //App은 Outlet을 통해 슬래시로 페이지 경로 이동시의 최상위 컴포넌트로 설정했습니다
 export const App = () => {
   const [isLogined, setIsLogined] = useLocalStorage<boolean>('isLogined', false)
   const [userEmail, setUserEmail] = useLocalStorage<string>('ColleyUser', '')
-  const [userCart, setUserCart] = useLocalStorage<CartProduct[]>(
-    'cart-guest',
-    []
-  )
+  const [userCart, setUserCart] = useCartLocalStorage(userEmail, [])
   const [recentlyViewedList, setRecentlyViewedList] = useSessionStorage<
     Product[]
   >('RecentlyViewed', [])

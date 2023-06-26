@@ -1,9 +1,11 @@
 import styles from 'styles/components/cart/cartItem.module.scss'
 import { useState, useContext } from 'react'
 import { CartContext } from 'contexts/index'
-import { Product, CartProduct } from 'types/index'
+import { CartProduct } from 'types/index'
+import { CheckedContext } from 'contexts/index'
 
 export const CartItem = ({ product, quantity }: CartProduct) => {
+  const { isChecked, setIsChecked } = useContext(CheckedContext)
   const [number, setNumber] = useState(quantity)
   const { userCart, setUserCart } = useContext(CartContext)
 
@@ -24,6 +26,10 @@ export const CartItem = ({ product, quantity }: CartProduct) => {
     }
   }
 
+  const CheckedChange = () => {
+    setIsChecked(!isChecked)
+  }
+
   const sumPrice = number * product.price
 
   const deleteList = () => {
@@ -32,7 +38,12 @@ export const CartItem = ({ product, quantity }: CartProduct) => {
 
   return (
     <div className={styles.itemBox}>
-      <input type="checkbox" />
+      <input
+        type="checkbox"
+        onChange={e => {
+          e.target.checked
+        }}
+      />
       <img
         src={product.thumbnail}
         className={styles.thumbnail}

@@ -1,16 +1,22 @@
 import { CartItem, CartSummary } from 'components/cart/index'
 import styles from 'styles/components/cart/cartProducts.module.scss'
 import { CartContext } from 'contexts/index'
-import { useContext } from 'react'
+import { useState, useCallback, useContext } from 'react'
 import { Cart } from '@/pages'
-import { Product, CartProduct } from 'types/index'
+import { CartProduct } from 'types/index'
+import { CheckedContext } from 'contexts/index'
 
 export const CartProducts = () => {
+  const { isChecked, setIsChecked } = useContext(CheckedContext)
   const { userCart } = useContext(CartContext)
   const calculated = userCart.reduce((acc: number, cur: CartProduct) => {
     return acc + cur.product.price * cur.quantity
   }, 0)
   const delivery = 3000
+
+  const CheckChanged = () => {
+    setIsChecked(true)
+  }
 
   return (
     <>
@@ -35,7 +41,7 @@ export const CartProducts = () => {
             </div>
             <div>합계 : {(calculated + delivery).toLocaleString()}원</div>
           </div>
-          <a>전체선택</a>
+          <a onClick={CheckChanged}>전체선택</a>
         </div>
 
         <CartSummary
