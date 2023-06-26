@@ -5,7 +5,7 @@ import { calculateDiscountedPrice } from 'utils/index'
 
 export const PriceInfo = () => {
   const receipt = useLocation().state.products
-  const total = receipt.reduce((acc, cur) => {
+  const total = receipt.reduce((acc: number, cur: CartProduct) => {
     return acc + cur.product.price * cur.quantity
   }, 0)
   const discountedPrice = receipt.reduce((acc: number, cur: CartProduct) => {

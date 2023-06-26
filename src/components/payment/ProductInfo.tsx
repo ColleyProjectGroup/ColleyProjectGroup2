@@ -13,7 +13,9 @@ export const ProductInfo = () => {
       <ul>
         {chosenProduct.map(product => {
           return (
-            <li className={styles.wrapper}>
+            <li
+              className={styles.wrapper}
+              key={product.product.id}>
               <img
                 src={product.product.thumbnail}
                 alt=""

@@ -1,8 +1,21 @@
 import styles from 'src/styles/components/payment/Confirmation.module.scss'
 import { useLocation } from 'react-router-dom'
+import { CartProduct } from 'types/index'
+import { calculateDiscountedPrice } from 'utils/index'
 
 export const Confirmation = (props: any) => {
-  const receipt = useLocation().state
+  const receipt = useLocation().state.products
+  const total = receipt.reduce((acc: number, cur: CartProduct) => {
+    return acc + cur.product.price * cur.quantity
+  }, 0)
+  const discountedPrice = receipt.reduce((acc: number, cur: CartProduct) => {
+    const discounted = calculateDiscountedPrice(
+      cur.product.price,
+      cur.product.discountRate
+    )
+    return acc + discounted * cur.quantity
+  }, 0)
+  const delivery = 3000
 
   return (
     <div className={styles.container}>
@@ -13,11 +26,8 @@ export const Confirmation = (props: any) => {
       <button
         className={styles.confirm}
         onClick={props.confirm}>
-        {(
-          receipt.prevPrice * (1 - receipt.discount / 100) +
-          3000
-        ).toLocaleString()}
-        원 결제하기
+        {(total - (total - discountedPrice) + delivery).toLocaleString()}원
+        결제하기
       </button>
     </div>
   )
