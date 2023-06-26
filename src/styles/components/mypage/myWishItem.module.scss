@@ -3,12 +3,16 @@
 .product {
   width: 100%;
   display: flex;
-  align-items: center;
+  align-items: start;
   padding: 25px 20px;
   gap: 20px;
   justify-content: space-between;
   box-sizing: border-box;
   border-bottom: 1px solid $color-border;
+
+  input[type='checkbox'] {
+    @include colley-checkbox;
+  }
 
   &.last {
     border: none;

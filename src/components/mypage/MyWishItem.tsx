@@ -4,9 +4,10 @@ import { calculateDiscountedPrice } from 'utils/index'
 import styled from 'styles/components/mypage/myWishItem.module.scss'
 import { Link } from 'react-router-dom'
 import { WishListContext } from 'contexts/index'
+import { on } from 'events'
 
 export const MyWishrItem = React.memo(
-  ({ product, isLast }: MyWishItemProps) => {
+  ({ product, isLast, isChecked, onChange }: MyWishItemProps) => {
     const { wishList, setWishList } = useContext(WishListContext)
 
     const productPrice = useMemo(
@@ -19,8 +20,17 @@ export const MyWishrItem = React.memo(
       setWishList(wishList.filter(item => item.id !== product.id))
     }
 
+    const handleCheckedChange = () => {
+      onChange(product.id)
+    }
+
     return (
       <li className={`${styled['product']} ${isLast ? styled['last'] : null} `}>
+        <input
+          type="checkbox"
+          checked={isChecked}
+          onChange={handleCheckedChange}
+        />
         <Link to={`/products/${product.id}`}>
           <img
             src={product.thumbnail || 'public/images/no-photo.png'}
