@@ -1,4 +1,4 @@
-import { useNavigate, Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { checkIsAdmin } from 'utils/index'
 import { LoginedUserContext, LoginContext, CartContext } from 'contexts/index'
 import React, { useState, useRef, useEffect, useContext } from 'react'
@@ -63,7 +63,7 @@ export const Header: React.FC = () => {
         setUserCart([])
         localStorage.removeItem(import.meta.env.VITE_STORAGE_KEY_ACCESSTOKEN)
         setIsLogined(!isLogined)
-        navigate('/')
+        alert('로그아웃되었습니다.')
       } else {
         // 예외처리
       }
@@ -84,8 +84,8 @@ export const Header: React.FC = () => {
 
   return (
     <div className={styles.header}>
-      <div className={styles.inner}>
-        <div className={styles.headerTop}>
+      <div className={styles.headerTop}>
+        <div className={styles.inner}>
           <a href="/">
             <img
               src="https://colley.market/web/upload/category/logo/9dec339bd19e5e585ab528ff4c0b5dad_dATXM62tzO_5_top.jpg"
@@ -149,69 +149,114 @@ export const Header: React.FC = () => {
             </div>
           </div>
         </div>
-        <div
-          className={`${scrollActive ? styles['fixed'] : ''} ${
-            styles['navigation']
-          }`}>
-          <ul className={styles.navInner}>
-            <li>
-              <a href="/productlist">ALL</a>
-            </li>
-            <li>
-              <a href="/productlist?category=NEW">NEW</a>
-            </li>
-            <li>
-              <a href="/productlist?category=BEST">BEST</a>
-            </li>
-            <li>
-              <a href="/productlist?category=LIVING">
-                Living
-                <ul className={styles.dropdown}>
-                  <li>
-                    <a href="/">테이블</a>
-                  </li>
-                  <li>
-                    <a href="/">거실화</a>
-                  </li>
-                  <li>
-                    <a href="/">조명</a>
-                  </li>
-                  <li>
-                    <a href="/">침구</a>
-                  </li>
-                </ul>
-              </a>
-            </li>
-            <li>
-              <a href="/productlist?category=KITCHEN">
-                Kitchen
-                <ul className={styles.dropdown}>
-                  <li>
-                    <a href="/">컵/머그</a>
-                  </li>
-                  <li>
-                    <a href="/">식기</a>
-                  </li>
-                  <li>
-                    <a href="/">쟁반/접시</a>
-                  </li>
-                  <li>
-                    <a href="/">주방잡화</a>
-                  </li>
-                  <li>
-                    <a href="/">도마</a>
-                  </li>
-                </ul>
-              </a>
-            </li>
-            <li>
-              <a href="/productlist?category=STATIONERY">Stationery</a>
-            </li>
-            <li>
-              <a href="/productlist?category=BABY/KIDS">Baby/Kids</a>
-            </li>
-          </ul>
-        </div>
+      </div>
+      <div
+        className={`${scrollActive ? styles['fixed'] : ''} ${
+          styles['navigation']
+        }`}>
+        <ul className={styles.navInner}>
+          <li>
+            <a href="/productlist">ALL</a>
+          </li>
+          <li>
+            <a href="/productlist?category=NEW">NEW</a>
+          </li>
+          <li>
+            <a href="/productlist?category=BEST">BEST</a>
+          </li>
+          <li>
+            <a href="/productlist?category=LIVING">
+              Living
+              <ul className={styles.dropdown}>
+                <li>
+                  <div
+                    onClick={() => {
+                      navigate('/')
+                    }}>
+                    테이블
+                  </div>
+                </li>
+                <li>
+                  <div
+                    onClick={() => {
+                      navigate('/')
+                    }}>
+                    거실화
+                  </div>
+                </li>
+                <li>
+                  <div
+                    onClick={() => {
+                      navigate('/')
+                    }}>
+                    조명
+                  </div>
+                </li>
+                <li>
+                  <div
+                    onClick={() => {
+                      navigate('/')
+                    }}>
+                    침구
+                  </div>
+                </li>
+              </ul>
+            </a>
+          </li>
+          <li>
+            <a href="/productlist?category=KITCHEN">
+              Kitchen
+              <ul className={styles.dropdown}>
+                <li>
+                  <div
+                    onClick={() => {
+                      navigate('/')
+                    }}>
+                    컵/머그
+                  </div>
+                </li>
+                <li>
+                  <div
+                    onClick={() => {
+                      navigate('/')
+                    }}>
+                    식기
+                  </div>
+                </li>
+                <li>
+                  <div
+                    onClick={() => {
+                      navigate('/')
+                    }}>
+                    쟁반/접시
+                  </div>
+                </li>
+                <li>
+                  <div
+                    onClick={() => {
+                      navigate('/')
+                    }}>
+                    주방잡화
+                  </div>
+                </li>
+                <li>
+                  <div
+                    onClick={() => {
+                      navigate('/')
+                    }}>
+                    도마
+                  </div>
+                </li>
+              </ul>
+            </a>
+          </li>
+          <li>
+            <a href="/productlist?category=STATIONERY">Stationery</a>
+          </li>
+          <li>
+            <a href="/productlist?category=BABY/KIDS">Baby/Kids</a>
+          </li>
+        </ul>
       </div>
     </div>
   )
