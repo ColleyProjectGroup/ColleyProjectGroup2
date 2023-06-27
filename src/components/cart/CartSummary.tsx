@@ -1,11 +1,12 @@
 import styles from 'styles/components/cart/cartSummary.module.scss'
 import { Cart } from 'types/index'
 import { useNavigate } from 'react-router-dom'
-import { CartContext } from 'contexts/index'
+import { CartContext, LoginContext } from 'contexts/index'
 import { useContext } from 'react'
 export const CartSummary = ({ total, delivery, products }: Cart) => {
   const navigate = useNavigate()
   const { userCart } = useContext(CartContext)
+  const { isLogined } = useContext(LoginContext)
 
   return (
     <div className={styles.container}>
@@ -33,12 +34,16 @@ export const CartSummary = ({ total, delivery, products }: Cart) => {
         <a
           className={styles.orderAll}
           onClick={() => {
-            navigate('/payment', {
-              state: {
-                //상품정보 데이터
-                products: [...userCart]
-              }
-            })
+            if (isLogined) {
+              navigate('/payment', {
+                state: {
+                  //상품정보 데이터
+                  products: [...userCart]
+                }
+              })
+            } else {
+              navigate('/signin')
+            }
           }}>
           전체상품주문
         </a>
