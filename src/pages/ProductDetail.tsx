@@ -30,7 +30,6 @@ export const ProductDetail = () => {
         const response = await adminInstance.get(`/products/${id}`)
         // setProduct({ ...response.data, quantity: 1 })
         setProduct(response.data)
-        console.log(response.data)
       } catch (error) {
         console.error('상품을 불러오는 중에 오류가 발생했습니다.', error)
       }
@@ -42,7 +41,6 @@ export const ProductDetail = () => {
   if (!product) {
     return <div>로딩 중...</div>
   }
-  console.log(product)
   const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(event.target.value)
     const nonNegativeValue = value < 1 ? 1 : value
@@ -213,23 +211,24 @@ export const ProductDetail = () => {
           <div className="Buttons1">
             <button
               onClick={() => {
-                navigate('/payment', {
-                  state: {
-                    //상품정보 데이터
-                    products: [
-                      {
-                        product: product,
-                        quantity: quantity
-                        // thumbnail: product.thumbnail,
-                        // title: product.title,
-                        // quantity: quantity,
-                        // price: calculateDiscountPrice().toLocaleString(),
-                        // prevPrice: product.price,
-                        // discount: product.discountRate
-                      }
-                    ]
-                  }
-                })
+                if (isLogined) {
+                  navigate('/payment', {
+                    state: {
+                      //상품정보 데이터
+                      products: [
+                        {
+                          product: product,
+                          quantity: quantity
+                        }
+                      ]
+                    }
+                  })
+                } else {
+                  alert(
+                    '로그인이 필요한 서비스입니다. 로그인 페이지로 이동합니다.'
+                  )
+                  navigate('/signin')
+                }
               }}>
               바로 구매
             </button>

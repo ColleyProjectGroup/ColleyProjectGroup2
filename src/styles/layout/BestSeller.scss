@@ -1,12 +1,14 @@
-.BESTSELLER {
+.bestseller {
   display: flex;
   justify-content: center;
   align-items: center;
+
   a {
     text-decoration: none;
     color: black;
   }
-  .Inner {
+
+  .inner {
     padding-top: 50px;
     padding-bottom: 50px;
     padding-right: 10px;
@@ -22,12 +24,12 @@
       text-align: center;
     }
 
-    .Tabs {
+    .tabs {
       display: flex;
       align-items: center;
       justify-content: center;
 
-      .Tab {
+      .tab {
         width: 200px;
         border: none;
         background-color: transparent;
@@ -45,43 +47,45 @@
         }
       }
 
-      .Active {
+      .active {
         border-bottom: 2px solid black;
       }
     }
 
-    .TabContent {
-      .Products {
-        
-        .Inner {
-          .Product {
+    .tab-container {
+      .products {
+        .inner {
+          .product {
             cursor: pointer;
             display: flex;
             gap: 20px;
             animation: fade-in 1s ease;
-            .Image {
+            .image {
               img {
                 width: 230px;
                 height: 230px;
               }
             }
 
-            .Title {
-              margin: 10px 0px;
+            .title {
+              padding: 10px 0px 0px 0px;
               font-size: 12px;
-              text-decoration: none;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              max-width: 230px;
             }
 
-            .Price {
+            .price {
               margin: 10px 0px;
               font-size: 14px;
               text-decoration: none;
 
-              .OriginalPrice {
+              .originalPrice {
                 /* Original price styles here */
               }
 
-              .DiscountedPrice {
+              .discountedPrice {
                 /* Discounted price styles here */
               }
             }
