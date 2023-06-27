@@ -12,7 +12,7 @@ import {
   AccountNumberContext
 } from 'contexts/index'
 
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import styles from 'styles/components/payment/Payment.module.scss'
 
 export const Payment = () => {
