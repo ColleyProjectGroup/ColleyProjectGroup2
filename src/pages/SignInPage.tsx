@@ -72,7 +72,10 @@ export const SignInPage = () => {
       },
       error => {
         const errorMessage = error.response.data
-        if (errorMessage === '유효한 사용자가 아닙니다.') {
+        if (
+          errorMessage === '유효한 사용자가 아닙니다.' ||
+          errorMessage === '이메일 혹은 비밀번호가 일치하지 않습니다.'
+        ) {
           setIsModalShow(true)
           setModalProps({
             title: '로그인 오류',

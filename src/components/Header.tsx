@@ -1,4 +1,4 @@
-import { useNavigate, Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { checkIsAdmin } from 'utils/index'
 import { LoginedUserContext, LoginContext, CartContext } from 'contexts/index'
 import React, { useState, useRef, useEffect, useContext } from 'react'
@@ -63,7 +63,7 @@ export const Header: React.FC = () => {
         setUserCart([])
         localStorage.removeItem(import.meta.env.VITE_STORAGE_KEY_ACCESSTOKEN)
         setIsLogined(!isLogined)
-        navigate('/')
+        alert('로그아웃되었습니다.')
       } else {
         // 예외처리
       }
