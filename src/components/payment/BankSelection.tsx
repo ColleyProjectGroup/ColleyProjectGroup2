@@ -1,13 +1,14 @@
 import { AccountNumberContext, BankContext } from 'contexts/index'
 import { useEffect, useRef } from 'react'
 import { useContext, useReducer } from 'react'
+import { childProps } from 'types/index'
 
 import styles from 'styles/components/payment/BankSelection.module.scss'
 
-export const BankSelection = ({ setValid }) => {
+export const BankSelection = ({ setValid }: childProps) => {
   const { bank, setBank } = useContext(BankContext)
   const { accountNumber, setAccountNumber } = useContext(AccountNumberContext)
-  const accountMax = useRef()
+  const accountMax = useRef<HTMLInputElement>(null)
 
   const accountNumberHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const acc = e.currentTarget.value.toString()
@@ -18,7 +19,7 @@ export const BankSelection = ({ setValid }) => {
   const bankSelectionHandler = async (
     e: React.ChangeEvent<HTMLSelectElement>
   ) => {
-    await setBank(e.currentTarget.value)
+    setBank(e.currentTarget.value)
   }
 
   function reducer(state: number, action: string) {
@@ -46,9 +47,8 @@ export const BankSelection = ({ setValid }) => {
     dispatch(bank)
   }, [bank])
   useEffect(() => {
-    if (accountMax.current.maxLength === accountNumber.length) {
+    if (accountMax.current?.maxLength === accountNumber.length) {
       setValid(true)
-      console.log('true')
     } else {
       setValid(false)
     }
