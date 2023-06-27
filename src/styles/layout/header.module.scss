@@ -17,8 +17,8 @@
           height: 90px;
         }
       }
-      .loginTop{
-        height:130px;
+      .loginTop {
+        height: 130px;
         display: flex;
         flex-direction: column;
         align-items: flex-end;
@@ -28,20 +28,20 @@
           align-items: center;
           margin-top: 20px;
           position: relative;
-          input{
-            margin-right:10px;
-            font-size:15px;
-            outline:none;
-            padding:5px 5px 5px 10px;
+          input {
+            margin-right: 10px;
+            font-size: 15px;
+            outline: none;
+            padding: 5px 5px 5px 10px;
             border-radius: 4px;
-            transition:all 1s;
-            &.show{
-              position:absolute;
-              top:0px;
-              right:0px;
-              border:1px solid #D0d4d9;
-              background-color:$color-primary;
-              opacity:1;
+            transition: all 1s;
+            &.show {
+              position: absolute;
+              top: 0px;
+              right: 0px;
+              border: 1px solid #d0d4d9;
+              background-color: $color-primary;
+              opacity: 1;
             }
             &.hide {
               position: absolute;
