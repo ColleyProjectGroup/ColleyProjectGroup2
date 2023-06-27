@@ -1,10 +1,12 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import { UserAddressContext } from 'contexts/index'
 import styles from 'src/styles/components/payment/DaumPostCode.module.scss'
 import { useDaumPostcodePopup } from 'react-daum-postcode'
 
 export const DaumPostCode = () => {
-  const [address, setAddress] = useState<string>('')
+  const { address, setAddress } = useContext(UserAddressContext)
   const [zoneCode, setZoneCode] = useState<string>('')
+  console.log(address)
 
   const open = useDaumPostcodePopup() //미입력시 기본값 => 우편번호 스크립트 주소
 
@@ -24,8 +26,6 @@ export const DaumPostCode = () => {
       }
       fullAddress += extraAddress !== '' ? ` (${extraAddress})` : ''
     }
-    console.log(data)
-    console.log(fullAddress) // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
     setAddress(fullAddress)
     setZoneCode(data.zonecode)
   }
@@ -52,6 +52,7 @@ export const DaumPostCode = () => {
         <span>주소</span>
         <input
           defaultValue={address}
+          className={address ? styles.address : styles.empty}
           placeholder="도로명 주소가 입력됩니다."
         />
       </label>

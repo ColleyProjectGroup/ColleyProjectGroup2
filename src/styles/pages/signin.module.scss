@@ -1,48 +1,47 @@
 @import 'src/styles/common.scss';
 
-.loginForm{
-  width:600px;
-  height:400px;
-  margin:70px auto;
+.loginForm {
+  width: 600px;
+  height: 400px;
+  margin: 70px auto;
   text-align: center;
-  display:flex;
+  display: flex;
   flex-direction: column;
   justify-content: space-between;
-  .title{
-    margin-top:50px;
-    font-weight:bold;
+  .title {
+    margin-top: 50px;
+    font-weight: bold;
   }
-  form{
-    display:flex;
+  form {
+    display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    width:360px;
-    height:200px;
-    margin:auto;
-    input{
-      width:338px;
-      height:50px;
-      outline:none;
-      padding-left:10px;
-      border:none;
-      background-color:#EDEFF2;
-      font-size:16px;
-      &:focus{
-        width:350px;
+    width: 360px;
+    height: 200px;
+    margin: auto;
+    input {
+      width: 338px;
+      height: 50px;
+      outline: none;
+      padding-left: 10px;
+      border: none;
+      background-color: #edeff2;
+      font-size: 16px;
+      &:focus {
+        width: 350px;
         background-color: $color-primary;
-        border:1px solid #D0d4d9;
-        box-sizing:border-box;
+        border: 1px solid #d0d4d9;
+        box-sizing: border-box;
       }
     }
-    button{
-      width:180px;
-      height:45px;
-      font-size:16px;
+    button {
+      width: 180px;
+      height: 45px;
+      font-size: 16px;
     }
   }
-  .title{
-    font-size:30px;
+  .title {
+    font-size: 30px;
   }
-
 }

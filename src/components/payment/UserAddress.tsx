@@ -3,12 +3,11 @@ import { useContext, useState } from 'react'
 import { UsernameContext } from 'contexts/UsernameContext'
 import { UseremailContext } from 'contexts/UseremailContext'
 import { PhoneNumberContext } from 'contexts/PhoneNumberContext'
-
 import { DaumPostCode } from 'components/payment/index'
 
 export const UserAddress = () => {
   const { name, setName } = useContext(UsernameContext)
-  const { email, setEmail } = useContext(UseremailContext)
+  const { setEmail } = useContext(UseremailContext)
   const { phoneNumber, setPhoneNumber } = useContext(PhoneNumberContext)
   const [isValidEmail, setIsValidEmail] = useState(false)
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(false)
@@ -25,8 +24,6 @@ export const UserAddress = () => {
   // PHONE NUMBER
   const numberCheckHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const phone = e.currentTarget.value.toString()
-    // /^010-\d{4}-\d{4}$/
-    // 010시작 추가?
     if (phone === '' || /^[0-9\b]+$/.test(phone)) {
       setPhoneNumber(phone)
       setIsValidPhoneNumber(false)
@@ -39,16 +36,15 @@ export const UserAddress = () => {
   const emailCheckHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const emailRegEx =
       /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/i
-
+    const input = e.target.value
     const emailCheck = (username: string) => {
       return emailRegEx.test(username) //형식에 맞을 경우, true 리턴
     }
-    if (emailCheck(e.target.value)) {
-      setEmail(e.target.value)
+    if (emailCheck(input)) {
+      setEmail(input)
       setIsValidEmail(true)
     } else {
       setIsValidEmail(false)
-      console.log('state => input border color 변경 ')
     }
   }
 
@@ -86,7 +82,8 @@ export const UserAddress = () => {
         />
       </label>
       <label>
-        <input />
+        <span>배송 요청사항</span>
+        <input placeholder="선택 입력 사항입니다." />
       </label>
     </div>
   )
