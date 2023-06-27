@@ -7,8 +7,6 @@ import { Modal } from 'components/index'
 import { Confirmation, BankSelection } from 'components/payment/index'
 import styles from 'src/styles/components/payment/PaymentMethods.module.scss'
 import {
-  UsernameContext,
-  UseremailContext,
   PhoneNumberContext,
   BankContext,
   AccountNumberContext
@@ -22,9 +20,6 @@ import { Bank } from '@/types/BankAccounts.interface'
 import { removeAccount, getAccounts, createAccount } from 'api/index'
 
 export const PaymentMethods = () => {
-  const { name } = useContext(UsernameContext)
-  const { email } = useContext(UseremailContext)
-  // ###결제완료 요청시 함께 전송 데이터
   const { phoneNumber } = useContext(PhoneNumberContext)
   const { bank } = useContext(BankContext)
   const { accountNumber } = useContext(AccountNumberContext)
@@ -33,6 +28,7 @@ export const PaymentMethods = () => {
   const [selected, setSelected] = useState<string>('')
   const [modalProps, setModalProps] = useState<ModalProps | null>(null)
   const [accountData, setAccountData] = useState<Bank[]>([])
+  const [valid, setValid] = useState<boolean>(false)
 
   SwiperCore.use([Navigation])
 
@@ -51,8 +47,8 @@ export const PaymentMethods = () => {
   // ACCOUNTS FUNCTIONS
   const createAndRender = useCallback(async () => {
     await createAccount({
-      bankCode: bank, //BankSelection => options (useContext)
-      accountNumber: accountNumber, //BankSelection => input (useContext)
+      bankCode: bank,
+      accountNumber: accountNumber,
       phoneNumber: phoneNumber,
       signature: true
     })
@@ -69,6 +65,7 @@ export const PaymentMethods = () => {
     await getAccounts().then(response => {
       setAccountData(response)
     })
+    alert('계좌가 삭제되었습니다.')
   }
 
   // ######TOSS PAYMENTS WIDGET
@@ -76,7 +73,7 @@ export const PaymentMethods = () => {
   const customerKey = 'YbX2HuSlsC9uVJW6NMRMj'
 
   const paymentWidgetRef = useRef<PaymentWidgetInstance | null>(null) //인스턴스 저장 - useRef
-  const price = 50_000 //결제정보 => 최종상품가격 연동
+  const price = 50_000
 
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-extra-semi
@@ -102,14 +99,24 @@ export const PaymentMethods = () => {
         isTwoButton: true,
         okButtonText: '추가',
         onClickOkButton: () => {
-          // *********ACCOUNT NUMBER VALIDATION REQUIRED*********
-          createAndRender()
+          if (valid) {
+            createAndRender()
+              .then(() => {
+                alert('계좌가 추가되었습니다.')
+                setIsModalShow(false)
+              })
+              .catch(error =>
+                alert(`계좌 추가에 실패했습니다. ERROR : ${error}`)
+              )
+          } else {
+            alert('계좌 추가에 실패했습니다. 계좌번호를 끝까지 입력해주세요.')
+          }
         },
         cancelButtonText: '취소',
         onClickCancelButton: modalCancelHandler
       })
     }
-  }, [bank, accountNumber, phoneNumber, createAndRender])
+  }, [bank, accountNumber, phoneNumber, createAndRender, valid])
 
   return (
     <div className={styles.container}>
@@ -172,7 +179,7 @@ export const PaymentMethods = () => {
           onClickOkButton={modalProps.onClickOkButton}
           cancelButtonText={modalProps.cancelButtonText}
           onClickCancelButton={modalProps.onClickCancelButton}>
-          <BankSelection />
+          <BankSelection setValid={setValid} />
         </Modal>
       ) : null}
     </div>

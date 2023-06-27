@@ -1,12 +1,13 @@
 import { AccountNumberContext, BankContext } from 'contexts/index'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { useContext, useReducer } from 'react'
 
 import styles from 'styles/components/payment/BankSelection.module.scss'
 
-export const BankSelection = () => {
+export const BankSelection = ({ setValid }) => {
   const { bank, setBank } = useContext(BankContext)
   const { accountNumber, setAccountNumber } = useContext(AccountNumberContext)
+  const accountMax = useRef()
 
   const accountNumberHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const acc = e.currentTarget.value.toString()
@@ -44,6 +45,14 @@ export const BankSelection = () => {
   useEffect(() => {
     dispatch(bank)
   }, [bank])
+  useEffect(() => {
+    if (accountMax.current.maxLength === accountNumber.length) {
+      setValid(true)
+      console.log('true')
+    } else {
+      setValid(false)
+    }
+  }, [setValid, bank, accountMax, accountNumber])
 
   return (
     <div className={styles.container}>
@@ -71,6 +80,7 @@ export const BankSelection = () => {
         <input
           type="text"
           value={accountNumber}
+          ref={accountMax}
           maxLength={max}
           onChange={accountNumberHandler}
           required
