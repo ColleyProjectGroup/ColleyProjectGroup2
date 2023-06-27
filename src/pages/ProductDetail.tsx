@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { adminInstance } from 'api/index'
 import { Footer, Products, Modal } from 'components/index'
-import '/styles/layout/ProductDetail.scss'
+import 'styles/layout/ProductDetail.scss'
 import { Product, RouteParams } from 'types/index'
 import { ModalProps } from 'types/index'
 import { LoginContext, WishListContext, CartContext } from 'contexts/index'
@@ -147,24 +147,24 @@ export const ProductDetail = () => {
   }
 
   return (
-    <div className="ProductDetail">
-      <div className="Inner">
-        <div className="Image">
+    <div className="product-detail">
+      <div className="detailInner">
+        <div className="image">
           <img
             src={product.thumbnail}
             alt={product.title}
           />
         </div>
-        <div className="Info">
-          <div className="Title">{product.title}</div>
-          <div className="Price">
+        <div className="info">
+          <div className="title">{product.title}</div>
+          <div className="price">
             <div className="infoInner">
               <div className="infoleft">
-                <span className="OriginalPrice">소비자가:</span>
+                <span className="originalPrice">소비자가:</span>
               </div>
               <div>{product.price.toLocaleString()}원</div>
             </div>
-            <div className="infoInner DiscountedPrice">
+            <div className="infoInner discount-price">
               <div className="infoleft">
                 <span>판매가:</span>
               </div>
@@ -190,11 +190,11 @@ export const ProductDetail = () => {
               <span>(최소주문수량 1개 이상)</span>
             </div>
           </div>
-          <div className="Quantity">
-            <div className="QantityTitle">
+          <div className="quantity">
+            <div className="qantityTitle">
               <label htmlFor="quantity">{product.title}</label>
             </div>
-            <div className="QuantityControl">
+            <div className="quantityControl">
               <button onClick={handleDecreaseQuantity}>-</button>
               <input
                 id="quantity"
@@ -204,21 +204,21 @@ export const ProductDetail = () => {
               <button onClick={handleIncreaseQuantity}>+</button>
             </div>
           </div>
-          <div className="TotalPrice">
+          <div className="totalPrice">
             <div>TOTAL:</div>
             <div>{calculateTotalPrice().toLocaleString()}원</div>
           </div>
-          <div className="Buttons1">
+          <div className="button--now">
             <button onClick={handleBuyNow}>바로 구매</button>
           </div>
-          <div className="Buttons2">
+          <div className="button--cart">
             <button onClick={handleAddToCart}>장바구니</button>
             <button onClick={handleAddToWishlist}>위시 리스트</button>
           </div>
         </div>
       </div>
-      <div className="Details">
-        <div className="Inner">
+      <div className="details">
+        <div className="inner">
           <img
             src={product.photo}
             alt={product.title}

@@ -1,38 +1,45 @@
-.ProductDetail {
+.product-detail {
   a {
     text-decoration: none;
     color: black;
   }
-  .Inner {
+
+  .detailInner {
     display: flex;
     justify-content: center;
     align-items: center;
-    .Image {
+
+    .image {
       img {
         width: 580px;
         height: 580px;
       }
     }
-    .Info {
+
+    .info {
       width: 580px;
       padding: 30px;
-      .Title {
+
+      .title {
         display: block;
         font-size: 24px;
         font-weight: 600;
         line-height: 2;
         margin: 20px;
       }
-      .Price {
+
+      .price {
         font-size: 12px;
         margin: 20px;
         display: block;
         line-height: 3;
-        .DiscountedPrice {
+
+        .discount-price {
           font-size: 13px;
           font-weight: 800;
           color: cornflowerblue;
         }
+
         .infoInner {
           display: flex;
           .infoleft {
@@ -41,18 +48,20 @@
           }
         }
       }
-      .Quantity {
+      .quantity {
         margin: 20px;
         font-size: 13px;
         display: flex;
         justify-content: start;
         align-items: center;
         gap: 20px;
-        .QantityTitle {
+
+        .qantityTitle {
           width: 80%;
           font-size: 16px;
         }
-        .QuantityControl {
+
+        .quantityControl {
           display: flex;
         }
 
@@ -74,14 +83,15 @@
           font-weight: 300;
         }
       }
-      .TotalPrice {
+
+      .totalPrice {
         display: flex;
         justify-content: space-between;
         margin: 30px 20px 30px 20px;
         font-size: 18px;
         font-weight: 800;
       }
-      .Buttons1 {
+      .button--now {
         background-color: chartreuse;
         margin: 20px;
         display: flex;
@@ -96,7 +106,8 @@
           cursor: pointer;
         }
       }
-      .Buttons2 {
+
+      .button--cart {
         margin: 20px;
         display: flex;
         gap: 10px;
@@ -115,13 +126,15 @@
       }
     }
   }
-  .Details {
+
+  .details {
     margin-top: 50px;
     margin-bottom: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
-    .Inner {
+
+    .inner {
       width: 1240px;
       img {
         text-align: center;
@@ -143,34 +156,41 @@
       color: gray;
     }
   }
-  .Products {
+
+  .products {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 50px;
-    .Inner {
+
+    .inner {
       padding-top: 50px;
       padding-bottom: 50px;
       padding-right: 10px;
       box-sizing: border-box;
-      .Product {
+
+      .product {
         width: 1240px;
         display: flex;
         cursor: pointer;
         flex-wrap: wrap;
         gap: 20px;
         animation: fade-in 1s ease;
-        .Image {
+        .image {
           img {
             width: 295px;
             height: 295px;
           }
         }
-        .Title {
-          margin: 10px 0px;
+        .title {
+          padding: 10px 0px 0px 0px;
           font-size: 12px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          max-width: 295px;
         }
-        .Price {
+        .price {
           margin: 10px 0px;
           font-size: 14px;
         }
