@@ -18,10 +18,7 @@ import {
 export const App = () => {
   const [isLogined, setIsLogined] = useLocalStorage<boolean>('isLogined', false)
   const [userEmail, setUserEmail] = useLocalStorage<string>('ColleyUser', '')
-  const [userCart, setUserCart] = useLocalStorage<Product[]>(
-    `cart-${isLogined ? userEmail : 'guest'}`,
-    []
-  )
+  const [userCart, setUserCart] = useCartLocalStorage(userEmail, [])
   const [recentlyViewedList, setRecentlyViewedList] = useSessionStorage<
     Product[]
   >('RecentlyViewed', [])
