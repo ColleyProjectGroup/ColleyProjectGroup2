@@ -1,17 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { adminInstance } from 'api/index'
 import { Footer, Products, Modal } from 'components/index'
-import { useNavigate } from 'react-router-dom'
-import '../styles/layout/ProductDetail.scss'
-import { Product, RouteParams } from '../types/Products.interface'
+import '/styles/layout/ProductDetail.scss'
+import { Product, RouteParams } from 'types/index'
 import { ModalProps } from 'types/index'
-import {
-  LoginContext,
-  WishListContext,
-  CartContext,
-  CartLoginedContext
-} from 'contexts/index'
+import { LoginContext, WishListContext, CartContext } from 'contexts/index'
 
 export const ProductDetail = () => {
   const { id } = useParams<RouteParams>()
@@ -28,7 +22,6 @@ export const ProductDetail = () => {
     const fetchProduct = async () => {
       try {
         const response = await adminInstance.get(`/products/${id}`)
-        // setProduct({ ...response.data, quantity: 1 })
         setProduct(response.data)
       } catch (error) {
         console.error('상품을 불러오는 중에 오류가 발생했습니다.', error)
@@ -72,26 +65,33 @@ export const ProductDetail = () => {
   }
 
   const handleBuyNow = () => {
-    //바로구매 기능
-  }
-
-  const PlusQuantity = () => {
-    quantity + 1
+    if (isLogined) {
+      navigate('/payment', {
+        state: {
+          //상품정보 데이터
+          products: [
+            {
+              product: product,
+              quantity: quantity
+            }
+          ]
+        }
+      })
+    } else {
+      alert('로그인이 필요한 서비스입니다. 로그인 페이지로 이동합니다.')
+      navigate('/signin')
+    }
   }
 
   const handleAddToCart = () => {
     // 장바구니 기능
     const findProduct = userCart.find(item => item.product.id === product.id)
-    // if (userCart.length === 0) {
-    //   setUserCart([{ product, quantity: 1 }])
-    // } else
     if (findProduct) {
       findProduct.quantity += quantity
       const filter = userCart.filter(item => item.product.id !== product.id)
       setUserCart([...filter, findProduct])
     } else {
       setUserCart([...userCart, { product, quantity: quantity }])
-      // setUserCart([...userCart, product])
     }
     setIsModalShow(true)
     setModalProps({
@@ -209,29 +209,7 @@ export const ProductDetail = () => {
             <div>{calculateTotalPrice().toLocaleString()}원</div>
           </div>
           <div className="Buttons1">
-            <button
-              onClick={() => {
-                if (isLogined) {
-                  navigate('/payment', {
-                    state: {
-                      //상품정보 데이터
-                      products: [
-                        {
-                          product: product,
-                          quantity: quantity
-                        }
-                      ]
-                    }
-                  })
-                } else {
-                  alert(
-                    '로그인이 필요한 서비스입니다. 로그인 페이지로 이동합니다.'
-                  )
-                  navigate('/signin')
-                }
-              }}>
-              바로 구매
-            </button>
+            <button onClick={handleBuyNow}>바로 구매</button>
           </div>
           <div className="Buttons2">
             <button onClick={handleAddToCart}>장바구니</button>
