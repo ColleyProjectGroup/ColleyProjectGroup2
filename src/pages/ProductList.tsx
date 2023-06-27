@@ -1,12 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { Products } from '../components/Products'
 import { Footer } from '../components'
-import '../styles/layout/ProductList.scss'
-
-interface ProductListProps {
-  keyword?: string
-}
+import 'styles/layout/ProductList.scss'
 
 const ProductList = () => {
   const location = useLocation()
@@ -43,14 +39,14 @@ const ProductList = () => {
   }
 
   return (
-    <div className="ProductList">
-      <div className="Category">
-        <div className="Title">{category || 'ALL'}</div>
+    <div className="product-list">
+      <div className="category">
+        <div className="title">{category || 'ALL'}</div>
       </div>
-      <div className="Inner">
-        <div className="ProductInfo">
-          <div className="ProductCount">등록 제품: {productCount}개</div>
-          <div className="ProductSort">
+      <div className="list-inner">
+        <div className="product-info">
+          <div className="product-count">등록 제품: {productCount}개</div>
+          <div className="product-sort">
             <ul>
               <li>
                 <a

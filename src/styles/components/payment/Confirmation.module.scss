@@ -22,7 +22,6 @@
   }
   .confirm {
     display: block;
-    // width: 900px;
     border: none;
     padding: 15px;
     margin: 30px;
@@ -30,5 +29,8 @@
     background-color: $color-confirm;
     color: $color-primary;
     cursor: pointer;
+    span {
+      font-weight: 700;
+    }
   }
 }

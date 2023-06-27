@@ -28,3 +28,7 @@ export interface Transaction {
   productId: string // 거래할 제품 ID (필수!)
   accountId: string // 결제할 사용자 계좌 ID (필수!)
 }
+
+export interface childProps {
+  setValid: React.Dispatch<React.SetStateAction<boolean>>
+}

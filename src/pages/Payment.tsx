@@ -9,7 +9,9 @@ import {
   PhoneNumberContext,
   UseremailContext,
   BankContext,
-  AccountNumberContext
+  AccountNumberContext,
+  UserAddressContext,
+  AddressDetailContext
 } from 'contexts/index'
 
 import { useState } from 'react'
@@ -21,24 +23,30 @@ export const Payment = () => {
   const [phoneNumber, setPhoneNumber] = useState('010')
   const [bank, setBank] = useState('004')
   const [accountNumber, setAccountNumber] = useState('')
+  const [address, setAddress] = useState<string>('')
+  const [addressDetail, setAddressDetail] = useState<string>('')
 
   return (
-    <BankContext.Provider value={{ bank, setBank }}>
-      <PhoneNumberContext.Provider value={{ phoneNumber, setPhoneNumber }}>
-        <AccountNumberContext.Provider
-          value={{ accountNumber, setAccountNumber }}>
-          <UseremailContext.Provider value={{ email, setEmail }}>
-            <UsernameContext.Provider value={{ name, setName }}>
-              <div className={styles.container}>
-                <ProductInfo />
-                <UserAddress />
-                <PriceInfo />
-                <PaymentMethods />
-              </div>
-            </UsernameContext.Provider>
-          </UseremailContext.Provider>
-        </AccountNumberContext.Provider>
-      </PhoneNumberContext.Provider>
-    </BankContext.Provider>
+    <AddressDetailContext.Provider value={{ addressDetail, setAddressDetail }}>
+      <UserAddressContext.Provider value={{ address, setAddress }}>
+        <BankContext.Provider value={{ bank, setBank }}>
+          <PhoneNumberContext.Provider value={{ phoneNumber, setPhoneNumber }}>
+            <AccountNumberContext.Provider
+              value={{ accountNumber, setAccountNumber }}>
+              <UseremailContext.Provider value={{ email, setEmail }}>
+                <UsernameContext.Provider value={{ name, setName }}>
+                  <div className={styles.container}>
+                    <ProductInfo />
+                    <UserAddress />
+                    <PriceInfo />
+                    <PaymentMethods />
+                  </div>
+                </UsernameContext.Provider>
+              </UseremailContext.Provider>
+            </AccountNumberContext.Provider>
+          </PhoneNumberContext.Provider>
+        </BankContext.Provider>
+      </UserAddressContext.Provider>
+    </AddressDetailContext.Provider>
   )
 }

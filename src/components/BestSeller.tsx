@@ -13,28 +13,28 @@ const BestSeller = () => {
   }
 
   return (
-    <div className="BESTSELLER">
-      <div className="Inner">
+    <div className="bestseller">
+      <div className="inner">
         <h2>BEST SELLER</h2>
-        <div className="Tabs">
+        <div className="tabs">
           <button
-            className={`Tab ${activeTab === 'Home' ? 'Active' : ''}`}
+            className={`tab ${activeTab === 'Home' ? 'Active' : ''}`}
             onClick={() => handleTabClick('Home')}>
             Home
           </button>
           <button
-            className={`Tab ${activeTab === 'Stationery' ? 'Active' : ''}`}
+            className={`tab ${activeTab === 'Stationery' ? 'Active' : ''}`}
             onClick={() => handleTabClick('Stationery')}>
             Stationery
           </button>
           <button
-            className={`Tab ${activeTab === 'Baby/Kids' ? 'Active' : ''}`}
+            className={`tab ${activeTab === 'Baby/Kids' ? 'Active' : ''}`}
             onClick={() => handleTabClick('Baby/Kids')}>
             Baby/Kids
           </button>
         </div>
-        <div className="TabContent">
-          <div className={`TabPane ${activeTab === 'Home' ? 'Active' : ''}`}>
+        <div className="tab-container">
+          <div className={`TabPane ${activeTab === 'Home' ? 'active' : ''}`}>
             {activeTab === 'Home' && (
               <Products
                 key="Home"
@@ -44,7 +44,7 @@ const BestSeller = () => {
             )}
           </div>
           <div
-            className={`TabPane ${activeTab === 'Stationery' ? 'Active' : ''}`}>
+            className={`TabPane ${activeTab === 'Stationery' ? 'active' : ''}`}>
             {activeTab === 'Stationery' && (
               <Products
                 key="Stationery"
@@ -55,7 +55,7 @@ const BestSeller = () => {
             )}
           </div>
           <div
-            className={`TabPane ${activeTab === 'Baby/Kids' ? 'Active' : ''}`}>
+            className={`TabPane ${activeTab === 'Baby/Kids' ? 'active' : ''}`}>
             {activeTab === 'Baby/Kids' && (
               <Products
                 key="Baby/Kids"
