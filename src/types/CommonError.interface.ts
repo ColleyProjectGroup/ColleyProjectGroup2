@@ -1,4 +1,5 @@
 export interface CommonError {
-  status: number // Error status code
+  status: number | undefined // Error status code
   message: string // Error message
+  isShowModal: boolean
 }

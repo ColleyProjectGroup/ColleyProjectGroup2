@@ -4,7 +4,6 @@ import { calculateDiscountedPrice } from 'utils/index'
 import styled from 'styles/components/mypage/myWishItem.module.scss'
 import { Link } from 'react-router-dom'
 import { WishListContext } from 'contexts/index'
-import { on } from 'events'
 
 export const MyWishrItem = React.memo(
   ({ product, isLast, isChecked, onChange }: MyWishItemProps) => {

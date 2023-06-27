@@ -67,7 +67,7 @@ export const SignUpPage = () => {
         })
       },
       error => {
-        const errorMessage = error.response.data
+        const errorMessage = error.message
         if (
           errorMessage === '유효한 이메일이 아닙니다.' ||
           errorMessage === '유효한 사용자 이름이 아닙니다.' ||

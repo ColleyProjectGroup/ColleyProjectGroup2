@@ -73,7 +73,7 @@ export const Header: React.FC = () => {
       })
       .catch((error: CommonError) => {
         if (error.status === 401) {
-          handleLogout()
+          navigate('/')
         }
       })
   }
