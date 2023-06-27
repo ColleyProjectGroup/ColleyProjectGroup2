@@ -90,13 +90,12 @@ export const SignUpPage = () => {
     )
 
     postInfo(bodyInfo).then(res => {
+      event.preventDefault()
       setUserEmail(res.user.email)
       localStorage.setItem(
         import.meta.env.VITE_STORAGE_KEY_ACCESSTOKEN,
         res.accessToken
       )
-      console.log(res.accessToken)
-      navigate('/')
     })
   }
 
@@ -131,11 +130,7 @@ export const SignUpPage = () => {
         </div>
         <button
           type="submit"
-          disabled={!isValid}
-          onClick={() => {
-            setIsLogined(!isLogined)
-            navigate('/')
-          }}>
+          disabled={!isValid}>
           회원가입
         </button>
       </form>

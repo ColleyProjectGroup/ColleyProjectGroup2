@@ -1,11 +1,10 @@
-import { useNavigate, Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { checkIsAdmin } from 'utils/index'
 import { LoginedUserContext, LoginContext, CartContext } from 'contexts/index'
 import React, { useState, useRef, useEffect, useContext } from 'react'
-import { logOut } from 'api/signApi'
+import { logOut } from 'api/index'
 import styles from 'styles/layout/header.module.scss'
-import { CommonError } from '@/types'
-//import { MyPageNav } from 'components/mypage'
+import { CommonError } from 'types/index'
 
 export const Header: React.FC = () => {
   const { isLogined, setIsLogined } = useContext(LoginContext)
@@ -69,6 +68,7 @@ export const Header: React.FC = () => {
       .then(isSuccess => {
         if (isSuccess) {
           handleLogout()
+          alert('로그아웃되었습니다.')
         }
       })
       .catch((error: CommonError) => {
