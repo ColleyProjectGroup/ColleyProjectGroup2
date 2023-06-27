@@ -1,7 +1,8 @@
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
-import { useState, useEffect } from 'react'
-import { Header, Badge, Modal } from 'components/index'
+import { Header, Badge, MyPageNav, Modal } from 'components/index'
 import { CommonError, Product, ModalProps } from 'types/index'
+import { useState, useEffect } from 'react'
+
 import {
   LoginContext,
   RecentlyContext,
@@ -15,10 +16,10 @@ import {
   useCartLocalStorage,
   useAxiosInterceptor
 } from 'hooks/index'
+import styles from 'src/styles/components/mypage/mypage.module.scss'
 
 //App은 Outlet을 통해 슬래시로 페이지 경로 이동시의 최상위 컴포넌트로 설정했습니다
 export const App = () => {
-  const path: string = useLocation().pathname
   const navigate = useNavigate()
   const [isModalShow, setIsModalShow] = useState<boolean>(false)
   const [modalProps, setModalProps] = useState<ModalProps | null>(null)
@@ -34,6 +35,7 @@ export const App = () => {
     isLogined
   )
 
+  const path: string = useLocation().pathname
   useEffect(() => {
     if (path === '/mypage') {
       if (isLogined === false) {
@@ -98,7 +100,14 @@ export const App = () => {
               <WishListContext.Provider value={{ wishList, setWishList }}>
                 <Header />
                 <Badge />
-                <Outlet />
+                {path.includes('/mypage') && isLogined ? (
+                  <div className={styles.wrapper}>
+                    <MyPageNav />
+                    <Outlet />
+                  </div>
+                ) : (
+                  <Outlet />
+                )}
                 {isModalShow && modalProps ? (
                   <Modal
                     isTwoButton={modalProps.isTwoButton}
@@ -116,16 +125,6 @@ export const App = () => {
         </LoginedUserContext.Provider>
       </LoginContext.Provider>
       {/* 결제 페이지/회원가입 페이지 등은 footer미적용일 것 같아서 header만 기본으로 outlet과 함께 배치시켰습니다 */}
-
-      {isModalShow && modalProps ? (
-        <Modal
-          isTwoButton={modalProps.isTwoButton}
-          title={modalProps.title}
-          content={modalProps.content}
-          okButtonText={modalProps.okButtonText}
-          onClickOkButton={modalProps.onClickOkButton}
-        />
-      ) : null}
     </>
   )
 }

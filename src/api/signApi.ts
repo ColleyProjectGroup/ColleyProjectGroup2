@@ -1,5 +1,5 @@
 import { baseInstance, authInstance } from 'api/axios'
-import { BodyInfo, IdInfo } from 'types/index'
+import { BodyInfo, IdInfo, RequestBody } from 'types/index'
 
 export const postInfo = async (bodyInfo: BodyInfo) => {
   const res = await baseInstance.post('/auth/signup', bodyInfo)
@@ -13,5 +13,10 @@ export const getId = async (idInfo: IdInfo) => {
 
 export const logOut = async () => {
   const res = await authInstance.post('/auth/logout')
+  return res.data
+}
+
+export const InfoModify = async (RequestBody: RequestBody) => {
+  const res = await authInstance.put('/auth/user', RequestBody)
   return res.data
 }

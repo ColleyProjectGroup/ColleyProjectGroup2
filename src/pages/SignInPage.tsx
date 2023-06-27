@@ -80,7 +80,6 @@ export const SignInPage = () => {
               setIsModalShow(false)
             }
           })
-          console.log(error.response.data)
         }
       }
     )
