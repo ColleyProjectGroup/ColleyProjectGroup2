@@ -4,6 +4,7 @@ import { LoginedUserContext, LoginContext, CartContext } from 'contexts/index'
 import React, { useState, useRef, useEffect, useContext } from 'react'
 import { logOut } from 'api/signApi'
 import styles from 'styles/layout/header.module.scss'
+import { CommonError } from '@/types'
 //import { MyPageNav } from 'components/mypage'
 
 export const Header: React.FC = () => {
@@ -55,19 +56,26 @@ export const Header: React.FC = () => {
     }
   }, [searchRef, hideInput])
 
+  const handleLogout = () => {
+    setUserEmail('')
+    setUserCart([])
+    localStorage.removeItem(import.meta.env.VITE_STORAGE_KEY_ACCESSTOKEN)
+    setIsLogined(!isLogined)
+    navigate('/')
+  }
+
   const logOutId = () => {
-    // event.preventDefault() // 통합 테스트 때 확인 필요
-    logOut().then(isSuccess => {
-      if (isSuccess) {
-        setUserEmail('')
-        setUserCart([])
-        localStorage.removeItem(import.meta.env.VITE_STORAGE_KEY_ACCESSTOKEN)
-        setIsLogined(!isLogined)
-        navigate('/')
-      } else {
-        // 예외처리
-      }
-    })
+    logOut()
+      .then(isSuccess => {
+        if (isSuccess) {
+          handleLogout()
+        }
+      })
+      .catch((error: CommonError) => {
+        if (error.status === 401) {
+          handleLogout()
+        }
+      })
   }
 
   const onSearchEnter = (event: React.KeyboardEvent<HTMLInputElement>) => {

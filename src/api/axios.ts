@@ -1,4 +1,6 @@
 import axios, { AxiosError, AxiosInstance } from 'axios'
+import { CommonError } from 'types/index'
+import { networkErrors } from 'constants/index'
 
 const authInterceptors = (instance: AxiosInstance): AxiosInstance => {
   instance.interceptors.request.use(
@@ -16,6 +18,31 @@ const authInterceptors = (instance: AxiosInstance): AxiosInstance => {
     },
     (error: AxiosError): Promise<AxiosError> => {
       return Promise.reject(error)
+    }
+  )
+
+  instance.interceptors.response.use(
+    response => response,
+    (error: AxiosError): Promise<CommonError> | void => {
+      if (
+        error.request?.responseURL &&
+        error.request?.responseURL.includes('logout')
+      ) {
+        return Promise.reject(networkErrors.EXPIRE_TOKEN)
+      }
+
+      if (error?.response?.status === 401) {
+        alert('로그인 세션이 만료되었습니다. 다시 로그인해주세요.')
+        location.replace('/signin')
+        // TODO 로그아웃 처리
+      } else if (error?.response?.status === 500) {
+        return Promise.reject(networkErrors.SERVER_ERROR)
+      } else {
+        return Promise.reject({
+          status: error?.response?.status,
+          message: error?.response?.data
+        })
+      }
     }
   )
 
