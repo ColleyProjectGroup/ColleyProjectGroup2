@@ -5,6 +5,7 @@ import React, { useState, useRef, useEffect, useContext } from 'react'
 import { logOut } from 'api/index'
 import styles from 'styles/layout/header.module.scss'
 import { CommonError } from 'types/index'
+import { useInView } from 'react-intersection-observer'
 
 export const Header: React.FC = () => {
   const { isLogined, setIsLogined } = useContext(LoginContext)
@@ -13,33 +14,21 @@ export const Header: React.FC = () => {
   const [hideInput, setHideInput] = useState<boolean>(true)
   const navigate = useNavigate()
   const [searchKeyword, setSearchKeyword] = useState<string>('')
-  const [scrollY, setScrollY] = useState(0)
   const [scrollActive, setScrollActive] = useState<boolean>(false)
   const searchRef = useRef<HTMLInputElement | null>(null)
+  const { ref, inView } = useInView()
 
   const onClickSearch = () => {
     setHideInput(false)
   }
 
-  const scrollFixed = () => {
-    if (scrollY > 159) {
-      setScrollY(window.pageYOffset)
-      setScrollActive(true)
-    } else {
-      setScrollY(window.pageYOffset)
-      setScrollActive(false)
-    }
-  }
-
   useEffect(() => {
-    const scrollListener = () => {
-      window.addEventListener('scroll', scrollFixed)
+    if (inView) {
+      setScrollActive(false)
+    } else {
+      setScrollActive(true)
     }
-    scrollListener()
-    return () => {
-      window.removeEventListener('scroll', scrollFixed)
-    }
-  })
+  }, [inView])
 
   useEffect(() => {
     function handleOutside(e: Event) {
@@ -92,7 +81,9 @@ export const Header: React.FC = () => {
 
   return (
     <div className={styles.header}>
-      <div className={styles.headerTop}>
+      <div
+        className={styles.headerTop}
+        ref={ref}>
         <div className={styles.inner}>
           <a href="/">
             <img
