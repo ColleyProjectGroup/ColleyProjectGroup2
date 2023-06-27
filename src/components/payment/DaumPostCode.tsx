@@ -1,12 +1,13 @@
 import { useState, useContext } from 'react'
-import { UserAddressContext } from 'contexts/index'
+import { UserAddressContext, AddressDetailContext } from 'contexts/index'
 import styles from 'src/styles/components/payment/DaumPostCode.module.scss'
 import { useDaumPostcodePopup } from 'react-daum-postcode'
 
 export const DaumPostCode = () => {
   const { address, setAddress } = useContext(UserAddressContext)
+  const { addressDetail, setAddressDetail } = useContext(AddressDetailContext)
+
   const [zoneCode, setZoneCode] = useState<string>('')
-  console.log(address)
 
   const open = useDaumPostcodePopup() //미입력시 기본값 => 우편번호 스크립트 주소
 
@@ -33,14 +34,18 @@ export const DaumPostCode = () => {
   const handleClick = () => {
     open({ onComplete: handleComplete }) //onComplete: 사용자 선택정보 수신 콜백
   }
+  const handleAddressDetail = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setAddressDetail(e.target.value)
+  }
   return (
     <div>
       <label>
         <span>우편번호</span>
         <input
-          defaultValue={zoneCode}
+          value={zoneCode}
           placeholder="주소를 검색해주세요."
           className={styles.zonecode}
+          readOnly
         />
         <button
           type="button"
@@ -51,14 +56,18 @@ export const DaumPostCode = () => {
       <label>
         <span>주소</span>
         <input
-          defaultValue={address}
+          value={address}
           className={address !== '' ? styles.address : styles.empty}
           placeholder="도로명 주소가 입력됩니다."
+          readOnly
         />
       </label>
       <label>
         <span>상세주소</span>
-        <input placeholder="상세주소를 입력해주세요." />
+        <input
+          placeholder="상세주소를 입력해주세요."
+          onChange={handleAddressDetail}
+        />
       </label>
     </div>
   )

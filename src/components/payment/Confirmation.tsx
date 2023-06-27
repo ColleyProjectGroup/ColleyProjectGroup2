@@ -7,7 +7,9 @@ import {
   CartContext,
   UseremailContext,
   UsernameContext,
-  UserAddressContext
+  UserAddressContext,
+  PhoneNumberContext,
+  AddressDetailContext
 } from 'contexts/index'
 import { useState, useContext, useEffect } from 'react'
 import { Modal } from 'components/index'
@@ -18,7 +20,9 @@ export const Confirmation = (props: any) => {
   const { setUserCart } = useContext(CartContext)
   const { address } = useContext(UserAddressContext)
   const { name } = useContext(UsernameContext)
+  const { phoneNumber } = useContext(PhoneNumberContext)
   const { email } = useContext(UseremailContext)
+  const { addressDetail } = useContext(AddressDetailContext)
 
   const [modalProps, setModalProps] = useState<ModalProps | null>(null)
   const [isModalShow, setIsModalShow] = useState<boolean>(false)
@@ -51,7 +55,12 @@ export const Confirmation = (props: any) => {
           navigate('/success', {
             state: {
               //상품정보 데이터
-              products: [...receipt]
+              products: [...receipt],
+              address: address,
+              name: name,
+              email: email,
+              phoneNumber: phoneNumber,
+              addressDetail: addressDetail
             }
           })
         }
@@ -68,7 +77,8 @@ export const Confirmation = (props: any) => {
       <button
         className={styles.confirm}
         onClick={() => {
-          if (props.selected && name && email && address) {
+          //계좌정보 / 사용자명 / 이메일 / 주소 / 휴대전화
+          if (props.selected && name && email && address && phoneNumber) {
             receipt.map((item: CartProduct) => {
               paymentHandler(item.product.id, props.selected)
             })
@@ -78,8 +88,10 @@ export const Confirmation = (props: any) => {
             alert('필수입력정보를 다시 확인해주세요.')
           }
         }}>
-        {(total - (total - discountedPrice) + delivery).toLocaleString()}원
-        결제하기
+        <span>
+          {(total - (total - discountedPrice) + delivery).toLocaleString()}
+        </span>
+        원 결제하기
       </button>
       {/* MODAL */}
       {isModalShow && modalProps ? (

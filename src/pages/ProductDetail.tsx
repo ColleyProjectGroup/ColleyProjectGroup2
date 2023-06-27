@@ -30,7 +30,6 @@ export const ProductDetail = () => {
         const response = await adminInstance.get(`/products/${id}`)
         // setProduct({ ...response.data, quantity: 1 })
         setProduct(response.data)
-        console.log(response.data)
       } catch (error) {
         console.error('상품을 불러오는 중에 오류가 발생했습니다.', error)
       }
@@ -42,7 +41,6 @@ export const ProductDetail = () => {
   if (!product) {
     return <div>로딩 중...</div>
   }
-  console.log(product)
   const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(event.target.value)
     const nonNegativeValue = value < 1 ? 1 : value

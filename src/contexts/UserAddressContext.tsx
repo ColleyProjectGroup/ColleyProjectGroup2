@@ -8,3 +8,11 @@ type UserAddressState = {
 export const UserAddressContext = createContext<UserAddressState>(
   {} as UserAddressState
 )
+type AddressDetailState = {
+  addressDetail: string
+  setAddressDetail: (value: string) => void
+}
+
+export const AddressDetailContext = createContext<AddressDetailState>(
+  {} as AddressDetailState
+)
