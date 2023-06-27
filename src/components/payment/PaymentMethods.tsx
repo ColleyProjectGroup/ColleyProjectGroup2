@@ -109,7 +109,7 @@ export const PaymentMethods = () => {
         onClickCancelButton: modalCancelHandler
       })
     }
-  }, [bank, accountNumber, phoneNumber])
+  }, [bank, accountNumber, phoneNumber, createAndRender])
 
   return (
     <div className={styles.container}>

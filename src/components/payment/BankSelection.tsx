@@ -1,20 +1,49 @@
-import { AccountNumberContext,BankContext } from 'contexts/index'
-import { useContext } from 'react'
+import { AccountNumberContext, BankContext } from 'contexts/index'
+import { useEffect } from 'react'
+import { useContext, useReducer } from 'react'
+
 import styles from 'styles/components/payment/BankSelection.module.scss'
 
 export const BankSelection = () => {
   const { bank, setBank } = useContext(BankContext)
   const { accountNumber, setAccountNumber } = useContext(AccountNumberContext)
+
+  const accountNumberHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const acc = e.currentTarget.value.toString()
+    if (acc === '' || /^[0-9\b]+$/.test(acc)) {
+      setAccountNumber(e.currentTarget.value)
+    }
+  }
   const bankSelectionHandler = async (
     e: React.ChangeEvent<HTMLSelectElement>
   ) => {
-    setBank(e.currentTarget.value)
-    console.log(bank)
+    await setBank(e.currentTarget.value)
   }
-  const accountNumberHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setAccountNumber(e.currentTarget.value)
-    console.log(accountNumber)
+
+  function reducer(state: number, action: string) {
+    switch (action) {
+      case '004':
+        return (state = 12)
+      case '088':
+        return (state = 12)
+      case '020':
+        return (state = 13)
+      case '081':
+        return (state = 14)
+      case '089':
+        return (state = 12)
+      case '090':
+        return (state = 13)
+      case '011':
+        return (state = 13)
+      default:
+        return (state = 12)
+    }
   }
+  const [max, dispatch] = useReducer(reducer, 12)
+  useEffect(() => {
+    dispatch(bank)
+  }, [bank])
 
   return (
     <div className={styles.container}>
@@ -42,6 +71,7 @@ export const BankSelection = () => {
         <input
           type="text"
           value={accountNumber}
+          maxLength={max}
           onChange={accountNumberHandler}
           required
         />
