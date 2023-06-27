@@ -1,22 +1,16 @@
 import { useState, FormEvent, useContext, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { getId } from 'api/signApi'
-import {
-  LoginContext,
-  LoginedUserContext,
-  CartLoginedContext,
-  CartContext
-} from 'contexts/index'
+import { getId } from 'api/index'
+import { LoginContext, LoginedUserContext } from 'contexts/index'
 import { useEffect } from 'react'
-import { Modal } from 'components/Modal'
-import { ModalProps } from 'types/ModalProps.type'
+import { Modal } from 'components/index'
+import { ModalProps } from 'types/index'
 import styles from 'styles/pages/signin.module.scss'
 
 export const SignInPage = () => {
   const navigate = useNavigate()
   const { isLogined, setIsLogined } = useContext(LoginContext)
   const { setUserEmail } = useContext(LoginedUserContext)
-  //const { userCart, setUserCart } = useContext(CartContext)
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [isValid, setIsValid] = useState<boolean>(false)
@@ -71,8 +65,11 @@ export const SignInPage = () => {
         }
       },
       error => {
-        const errorMessage = error.response.data
-        if (errorMessage === '유효한 사용자가 아닙니다.') {
+        const errorMessage = error.message
+        if (
+          errorMessage === '유효한 사용자가 아닙니다.' ||
+          errorMessage === '이메일 혹은 비밀번호가 일치하지 않습니다.'
+        ) {
           setIsModalShow(true)
           setModalProps({
             title: '로그인 오류',

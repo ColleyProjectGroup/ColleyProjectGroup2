@@ -2,9 +2,9 @@ import { useNavigate } from 'react-router-dom'
 import { checkIsAdmin } from 'utils/index'
 import { LoginedUserContext, LoginContext, CartContext } from 'contexts/index'
 import React, { useState, useRef, useEffect, useContext } from 'react'
-import { logOut } from 'api/signApi'
+import { logOut } from 'api/index'
 import styles from 'styles/layout/header.module.scss'
-//import { MyPageNav } from 'components/mypage'
+import { CommonError } from 'types/index'
 
 export const Header: React.FC = () => {
   const { isLogined, setIsLogined } = useContext(LoginContext)
@@ -55,19 +55,27 @@ export const Header: React.FC = () => {
     }
   }, [searchRef, hideInput])
 
+  const handleLogout = () => {
+    setUserEmail('')
+    setUserCart([])
+    localStorage.removeItem(import.meta.env.VITE_STORAGE_KEY_ACCESSTOKEN)
+    setIsLogined(!isLogined)
+    navigate('/')
+  }
+
   const logOutId = () => {
-    // event.preventDefault() // 통합 테스트 때 확인 필요
-    logOut().then(isSuccess => {
-      if (isSuccess) {
-        setUserEmail('')
-        setUserCart([])
-        localStorage.removeItem(import.meta.env.VITE_STORAGE_KEY_ACCESSTOKEN)
-        setIsLogined(!isLogined)
-        alert('로그아웃되었습니다.')
-      } else {
-        // 예외처리
-      }
-    })
+    logOut()
+      .then(isSuccess => {
+        if (isSuccess) {
+          handleLogout()
+          alert('로그아웃되었습니다.')
+        }
+      })
+      .catch((error: CommonError) => {
+        if (error.status === 401) {
+          navigate('/')
+        }
+      })
   }
 
   const onSearchEnter = (event: React.KeyboardEvent<HTMLInputElement>) => {

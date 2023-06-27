@@ -3,7 +3,14 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { CartProduct } from 'types/index'
 import { calculateDiscountedPrice } from 'utils/index'
 import { transactPayment } from 'api/paymentRequests'
-import { CartContext } from 'contexts/index'
+import {
+  CartContext,
+  UseremailContext,
+  UsernameContext,
+  UserAddressContext,
+  PhoneNumberContext,
+  AddressDetailContext
+} from 'contexts/index'
 import { useState, useContext, useEffect } from 'react'
 import { Modal } from 'components/index'
 import { ModalProps } from '@/types'
@@ -11,11 +18,16 @@ import { ModalProps } from '@/types'
 export const Confirmation = (props: any) => {
   const navigate = useNavigate()
   const { setUserCart } = useContext(CartContext)
+  const { address } = useContext(UserAddressContext)
+  const { name } = useContext(UsernameContext)
+  const { phoneNumber } = useContext(PhoneNumberContext)
+  const { email } = useContext(UseremailContext)
+  const { addressDetail } = useContext(AddressDetailContext)
+
   const [modalProps, setModalProps] = useState<ModalProps | null>(null)
   const [isModalShow, setIsModalShow] = useState<boolean>(false)
   //receipt - 개별 상품 or 장바구니 상품 정보
   const receipt = useLocation().state.products
-  console.log(receipt)
   const total = receipt.reduce((acc: number, cur: CartProduct) => {
     return acc + cur.product.price * cur.quantity
   }, 0)
@@ -43,13 +55,18 @@ export const Confirmation = (props: any) => {
           navigate('/success', {
             state: {
               //상품정보 데이터
-              products: [...receipt]
+              products: [...receipt],
+              address: address,
+              name: name,
+              email: email,
+              phoneNumber: phoneNumber,
+              addressDetail: addressDetail
             }
           })
         }
       })
     }
-  }, [isModalShow, navigate])
+  }, [isModalShow, navigate, receipt])
 
   return (
     <div className={styles.container}>
@@ -60,14 +77,21 @@ export const Confirmation = (props: any) => {
       <button
         className={styles.confirm}
         onClick={() => {
-          receipt.map((item: CartProduct) => {
-            paymentHandler(item.product.id, props.selected)
-          })
-          setIsModalShow(true)
-          setUserCart([])
+          //계좌정보 / 사용자명 / 이메일 / 주소 / 휴대전화
+          if (props.selected && name && email && address && phoneNumber) {
+            receipt.map((item: CartProduct) => {
+              paymentHandler(item.product.id, props.selected)
+            })
+            setIsModalShow(true)
+            setUserCart([])
+          } else {
+            alert('필수입력정보를 다시 확인해주세요.')
+          }
         }}>
-        {(total - (total - discountedPrice) + delivery).toLocaleString()}원
-        결제하기
+        <span>
+          {(total - (total - discountedPrice) + delivery).toLocaleString()}
+        </span>
+        원 결제하기
       </button>
       {/* MODAL */}
       {isModalShow && modalProps ? (

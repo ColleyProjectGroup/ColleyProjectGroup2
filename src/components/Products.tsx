@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom'
 import { RecentlyContext } from 'contexts/index'
 
 const API_ENDPOINT = '/products'
-const PRODUCTS_CLASSNAME = 'Product'
 
 const Products = ({
   tagFilter = [],
@@ -101,9 +100,9 @@ const Products = ({
   }
 
   return (
-    <div className="Products">
-      <div className="Inner">
-        <div className={PRODUCTS_CLASSNAME}>
+    <div className="products">
+      <div className="inner">
+        <div className="product">
           {products.length > 0 ? (
             products.map(product => (
               <div key={product.id}>
@@ -112,20 +111,20 @@ const Products = ({
                   onClick={() => {
                     onSaveProductRecently(product)
                   }}>
-                  <div className="Image">
+                  <div className="image">
                     <img
                       src={product.thumbnail}
                       alt={product.title}
                     />
                   </div>
-                  <div className="Title">{product.title}</div>
-                  <div className="Price">
+                  <div className="title">{product.title}</div>
+                  <div className="price">
                     {product.discountRate ? (
                       <>
-                        <span className="OriginalPrice">
+                        <span className="originalPrice">
                           <del>{product.price.toLocaleString()}원</del>
                         </span>{' '}
-                        <span className="DiscountedPrice">
+                        <span className="discountedPrice">
                           {calculateDiscountedPrice(
                             product.price,
                             product.discountRate

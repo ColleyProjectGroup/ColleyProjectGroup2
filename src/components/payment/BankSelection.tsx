@@ -1,20 +1,58 @@
-import { AccountNumberContext,BankContext } from 'contexts/index'
-import { useContext } from 'react'
+import { AccountNumberContext, BankContext } from 'contexts/index'
+import { useEffect, useRef } from 'react'
+import { useContext, useReducer } from 'react'
+import { childProps } from 'types/index'
+
 import styles from 'styles/components/payment/BankSelection.module.scss'
 
-export const BankSelection = () => {
+export const BankSelection = ({ setValid }: childProps) => {
   const { bank, setBank } = useContext(BankContext)
   const { accountNumber, setAccountNumber } = useContext(AccountNumberContext)
+  const accountMax = useRef<HTMLInputElement>(null)
+
+  const accountNumberHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const acc = e.currentTarget.value.toString()
+    if (acc === '' || /^[0-9\b]+$/.test(acc)) {
+      setAccountNumber(e.currentTarget.value)
+    }
+  }
   const bankSelectionHandler = async (
     e: React.ChangeEvent<HTMLSelectElement>
   ) => {
     setBank(e.currentTarget.value)
-    console.log(bank)
   }
-  const accountNumberHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setAccountNumber(e.currentTarget.value)
-    console.log(accountNumber)
+
+  function reducer(state: number, action: string) {
+    switch (action) {
+      case '004':
+        return (state = 12)
+      case '088':
+        return (state = 12)
+      case '020':
+        return (state = 13)
+      case '081':
+        return (state = 14)
+      case '089':
+        return (state = 12)
+      case '090':
+        return (state = 13)
+      case '011':
+        return (state = 13)
+      default:
+        return (state = 12)
+    }
   }
+  const [max, dispatch] = useReducer(reducer, 12)
+  useEffect(() => {
+    dispatch(bank)
+  }, [bank])
+  useEffect(() => {
+    if (accountMax.current?.maxLength === accountNumber.length) {
+      setValid(true)
+    } else {
+      setValid(false)
+    }
+  }, [setValid, bank, accountMax, accountNumber])
 
   return (
     <div className={styles.container}>
@@ -42,6 +80,8 @@ export const BankSelection = () => {
         <input
           type="text"
           value={accountNumber}
+          ref={accountMax}
+          maxLength={max}
           onChange={accountNumberHandler}
           required
         />

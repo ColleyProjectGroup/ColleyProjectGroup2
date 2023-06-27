@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { adminInstance } from '../api/axios'
-import '../styles/layout/NewArrival.scss'
+import 'styles/layout/NewArrival.scss'
 import { Link } from 'react-router-dom'
 import { RecentlyContext } from 'contexts/index'
 import { Product } from 'types/index'
@@ -48,31 +48,31 @@ const NewArrival = () => {
   }
 
   return (
-    <div className="NewArrival">
-      <div className="Inner">
-        <h2 className="Title">NEW ARRIVAL</h2>
-        <h3 className="SubTitle">콜리에 새롭게 들어온 제품을 소개합니다.</h3>
-        <div className="Products">
+    <div className="new-arrival">
+      <div className="inner">
+        <h2 className="title">NEW ARRIVAL</h2>
+        <h3 className="sub-title">콜리에 새롭게 들어온 제품을 소개합니다.</h3>
+        <div className="products">
           {newProducts.map(product => (
             <div key={product.id}>
               <Link
                 to={`/products/${product.id}`}
                 onClick={() => onSaveProductRecently(product)}>
-                <div className="Image">
+                <div className="image">
                   <img
                     src={product.thumbnail}
                     alt={product.title}
                   />
                 </div>
-                <div className="Title">{product.title}</div>
+                <div className="title">{product.title}</div>
               </Link>
-              <div className="Price">
+              <div className="price">
                 {product.discountRate ? (
                   <>
-                    <span className="OriginalPrice">
+                    <span className="originalPrice">
                       <del>{product.price.toLocaleString()}원</del>
                     </span>{' '}
-                    <span className="DiscountedPrice">
+                    <span className="discountedPrice">
                       {calculateDiscountedPrice(
                         product.price,
                         product.discountRate

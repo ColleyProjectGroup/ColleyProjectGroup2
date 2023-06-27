@@ -32,20 +32,10 @@
       }
     }
     .valid {
-      border: 1px solid $color-error;
+      border: 1px solid $color-admin-sale;
     }
     .invalid {
-      border: 1px solid $color-now;
+      border: 1px solid $color-admin-primary;
     }
-    // .findAddress {
-    //   all: unset;
-    //   cursor: pointer;
-    //   border: 1px solid $color-gray-A7;
-    //   font-size: 14px;
-    //   height: 28px;
-    // }
-    // .zonecode {
-    //   border: 1px solid black;
-    // }
   }
 }
