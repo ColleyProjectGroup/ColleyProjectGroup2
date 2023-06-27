@@ -52,13 +52,13 @@ export const DaumPostCode = () => {
         <span>주소</span>
         <input
           defaultValue={address}
-          className={address ? styles.address : styles.empty}
+          className={address !== '' ? styles.address : styles.empty}
           placeholder="도로명 주소가 입력됩니다."
         />
       </label>
       <label>
         <span>상세주소</span>
-        <input />
+        <input placeholder="상세주소를 입력해주세요." />
       </label>
     </div>
   )

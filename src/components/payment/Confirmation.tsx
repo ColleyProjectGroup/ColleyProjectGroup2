@@ -57,7 +57,7 @@ export const Confirmation = (props: any) => {
         }
       })
     }
-  }, [isModalShow, navigate])
+  }, [isModalShow, navigate, receipt])
 
   return (
     <div className={styles.container}>
