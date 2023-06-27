@@ -160,19 +160,19 @@ export const ProductDetail = () => {
           <div className="price">
             <div className="infoInner">
               <div className="infoleft">
-                <span className="originalPrice">소비자가:</span>
+                <span className="originalPrice">소비자가</span>
               </div>
               <div>{product.price.toLocaleString()}원</div>
             </div>
             <div className="infoInner discount-price">
               <div className="infoleft">
-                <span>판매가:</span>
+                <span>판매가</span>
               </div>
               <div>{calculateDiscountPrice().toLocaleString()}원</div>
             </div>
             <div className="infoInner">
               <div className="infoleft">
-                <span>배송방법:</span>
+                <span>배송방법</span>
               </div>
               <div className="infoleft">
                 <span>국내 배송</span>
@@ -180,7 +180,7 @@ export const ProductDetail = () => {
             </div>
             <div className="infoInner">
               <div className="infoleft">
-                <span>배송비:</span>
+                <span>배송비</span>
               </div>
               <div>
                 <span>3,000원</span>
@@ -191,15 +191,13 @@ export const ProductDetail = () => {
             </div>
           </div>
           <div className="quantity">
-            <div className="qantityTitle">
-              <label htmlFor="quantity">{product.title}</label>
-            </div>
             <div className="quantityControl">
               <button onClick={handleDecreaseQuantity}>-</button>
               <input
                 id="quantity"
                 value={quantity}
                 onChange={handleQuantityChange}
+                disabled={true}
               />
               <button onClick={handleIncreaseQuantity}>+</button>
             </div>
