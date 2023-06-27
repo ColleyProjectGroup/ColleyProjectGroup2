@@ -26,7 +26,8 @@ const authInterceptors = (instance: AxiosInstance): AxiosInstance => {
     (error: AxiosError): Promise<CommonError> | void => {
       if (
         error.request?.responseURL &&
-        error.request?.responseURL.includes('logout')
+        error.request?.responseURL.includes('logout') &&
+        error?.response?.status === 401
       ) {
         return Promise.reject(networkErrors.EXPIRE_TOKEN)
       }
