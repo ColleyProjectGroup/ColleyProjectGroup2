@@ -1,6 +1,7 @@
+import { useState } from 'react'
 import { Outlet } from 'react-router-dom'
-import { Header, Badge } from 'components/index'
-import { Product } from 'types/index'
+import { Header, Badge, Modal } from 'components/index'
+import { CommonError, Product, ModalProps } from 'types/index'
 import {
   LoginContext,
   RecentlyContext,
@@ -13,6 +14,7 @@ import {
   useSessionStorage,
   useCartLocalStorage
 } from 'hooks/index'
+import { useAxiosInterceptor } from 'hooks/index'
 
 //App은 Outlet을 통해 슬래시로 페이지 경로 이동시의 최상위 컴포넌트로 설정했습니다
 export const App = () => {
@@ -28,6 +30,31 @@ export const App = () => {
     isLogined
   )
 
+  const [isModalShow, setIsModalShow] = useState<boolean>(false)
+  const [modalProps, setModalProps] = useState<ModalProps | null>(null)
+
+  const handleLogout = () => {
+    setIsLogined(false)
+    setUserEmail('')
+    setUserCart([])
+    localStorage.removeItem(import.meta.env.VITE_STORAGE_KEY_ACCESSTOKEN)
+  }
+
+  const handleErrorModal = (error: CommonError) => {
+    setIsModalShow(true)
+    setModalProps({
+      title: '오류',
+      content: error.message,
+      isTwoButton: false,
+      okButtonText: '확인',
+      onClickOkButton: () => {
+        setIsModalShow(false)
+      }
+    })
+  }
+
+  useAxiosInterceptor(handleLogout, handleErrorModal)
+
   return (
     <>
       <LoginContext.Provider value={{ isLogined, setIsLogined }}>
@@ -39,6 +66,17 @@ export const App = () => {
                 <Header />
                 <Badge />
                 <Outlet />
+                {isModalShow && modalProps ? (
+                  <Modal
+                    isTwoButton={modalProps.isTwoButton}
+                    title={modalProps.title}
+                    content={modalProps.content}
+                    okButtonText={modalProps.okButtonText}
+                    onClickOkButton={modalProps.onClickOkButton}
+                    cancelButtonText={modalProps.cancelButtonText}
+                    onClickCancelButton={modalProps.onClickCancelButton}
+                  />
+                ) : null}
               </WishListContext.Provider>
             </RecentlyContext.Provider>
           </CartContext.Provider>
