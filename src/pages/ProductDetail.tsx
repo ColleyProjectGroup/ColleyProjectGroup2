@@ -1,10 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { adminInstance } from 'api/index'
-import { Footer, Products, Modal } from 'components/index'
+import { Footer, Products, Modal, ProductDetailInfoTab } from 'components/index'
 import 'styles/layout/ProductDetail.scss'
-import { Product, RouteParams } from 'types/index'
-import { ModalProps } from 'types/index'
+import { Product, RouteParams, ModalProps } from 'types/index'
 import { LoginContext, WishListContext, CartContext } from 'contexts/index'
 
 export const ProductDetail = () => {
@@ -217,22 +216,29 @@ export const ProductDetail = () => {
       </div>
       <div className="details">
         <div className="inner">
-          <img
-            src={product.photo}
-            alt={product.title}
+          <ProductDetailInfoTab
+            child={
+              <>
+                <img
+                  src={product.photo}
+                  alt={product.title}
+                />
+                <div>
+                  <div className="etcProducts">
+                    <h2>YOU MAY ALSO LIKE</h2>
+                    <h3>함께 구매하면 좋을 관련 상품</h3>
+                  </div>
+                  <Products
+                    tagFilter={product.tags}
+                    limit={4}
+                  />
+                </div>
+              </>
+            }
           />
         </div>
       </div>
-      <div>
-        <div className="etcProducts">
-          <h2>YOU MAY ALSO LIKE</h2>
-          <h3>함께 구매하면 좋을 관련 상품</h3>
-        </div>
-        <Products
-          tagFilter={product.tags}
-          limit={4}
-        />
-      </div>
+
       <Footer />
 
       {isModalShow && modalProps ? (
