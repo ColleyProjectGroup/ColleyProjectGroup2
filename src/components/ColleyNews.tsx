@@ -1,5 +1,4 @@
-import React from "react";
-import "../styles/layout/ColleyNews.scss";
+import '../styles/layout/ColleyNews.scss'
 
 const ColleyNews = () => {
   return (
@@ -56,7 +55,7 @@ const ColleyNews = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export { ColleyNews };
+export { ColleyNews }
