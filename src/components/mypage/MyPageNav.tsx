@@ -7,7 +7,7 @@ import { CommonError } from 'types/index'
 
 export const MyPageNav = () => {
   const { isLogined, setIsLogined } = useContext(LoginContext)
-  const { userEmail, setUserEmail } = useContext(LoginedUserContext)
+  const { setUserEmail } = useContext(LoginedUserContext)
   const { setUserCart } = useContext(CartContext)
   const navigate = useNavigate()
 
