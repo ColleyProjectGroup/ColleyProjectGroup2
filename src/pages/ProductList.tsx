@@ -40,9 +40,9 @@ const ProductList = () => {
 
   return (
     <div className="product-list">
-      <div className="category">
+      {/* <div className="category">
         <div className="title">{category || 'ALL'}</div>
-      </div>
+      </div> */}
       <div className="list-inner">
         <div className="product-info">
           <div className="product-count">등록 제품: {productCount}개</div>

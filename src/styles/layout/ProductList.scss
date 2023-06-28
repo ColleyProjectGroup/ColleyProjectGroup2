@@ -17,10 +17,15 @@
     }
   }
 
+  .inner {
+    padding: 50px 0 !important;
+  }
+
   .list-inner {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 30px;
 
     .product-info {
       display: flex;
@@ -57,11 +62,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
     .inner {
       padding-top: 50px;
       padding-bottom: 50px;
       padding-right: 10px;
       box-sizing: border-box;
+
       .product {
         width: 1240px;
         display: flex;
