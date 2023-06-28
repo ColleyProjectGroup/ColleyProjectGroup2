@@ -26,16 +26,6 @@ export const CartSummary = ({ total, delivery, products }: Cart) => {
     }
   }
 
-  // HERE
-  useEffect(() => {
-    setFiltered(userCart.filter(item => checkedItems.has(item.product.id)))
-    // userCart.map(item => {
-    //   if (Array.from(checkedItems).includes(item.product.id)) {
-    //     setFiltered(...filtered, item)
-    //   }
-    // })
-  }, [userCart, checkedItems])
-
   const orderSelectedHandler = useCallback(() => {
     console.log(filtered)
     if (isLogined && userCart.length !== 0) {
