@@ -1,7 +1,39 @@
-import { Link } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
+import { logOut } from 'api/index'
+import { useContext } from 'react'
 import styles from 'styles/components/mypage/mypageNav.module.scss'
+import { LoginContext, LoginedUserContext, CartContext } from 'contexts/index'
+import { CommonError } from 'types/index'
 
 export const MyPageNav = () => {
+  const { isLogined, setIsLogined } = useContext(LoginContext)
+  const { userEmail, setUserEmail } = useContext(LoginedUserContext)
+  const { setUserCart } = useContext(CartContext)
+  const navigate = useNavigate()
+
+  const handleLogout = () => {
+    setUserEmail('')
+    setUserCart([])
+    localStorage.removeItem(import.meta.env.VITE_STORAGE_KEY_ACCESSTOKEN)
+    setIsLogined(!isLogined)
+    navigate('/')
+  }
+
+  const logOutId = () => {
+    logOut()
+      .then(isSuccess => {
+        if (isSuccess) {
+          handleLogout()
+          alert('로그아웃되었습니다.')
+        }
+      })
+      .catch((error: CommonError) => {
+        if (error.status === 401) {
+          navigate('/')
+        }
+      })
+  }
+
   return (
     <nav>
       <span className={styles.title}>My Page</span>
@@ -25,7 +57,11 @@ export const MyPageNav = () => {
               <Link to="/mypage/password">비밀번호 변경</Link>
             </li>
             <li>
-              <Link to="/">로그아웃</Link>
+              <a
+                className={styles.logout}
+                onClick={logOutId}>
+                로그아웃
+              </a>
             </li>
           </ul>
         </li>
