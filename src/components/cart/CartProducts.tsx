@@ -23,10 +23,9 @@ export const CartProducts = () => {
   }
 
   //전체선택 기능
-  const allCheckedHandler = ({
-    target
-  }: React.ChangeEvent<HTMLInputElement>) => {
-    if (target.checked) {
+  const allCheckedHandler = (e: React.MouseEvent<HTMLInputElement>) => {
+    const target = e.target as HTMLInputElement
+    if (target.checked as boolean) {
       setCheckedItems(new Set(userCart.map(({ product }) => product.id)))
       setIsAllChecked(true)
     } else {
@@ -35,7 +34,6 @@ export const CartProducts = () => {
       setIsAllChecked(false)
     }
   }
-  const checkAll = (e: React.MouseEvent) => allCheckedHandler(e)
   //총액 계산
   const calculated = userCart.reduce((acc: number, cur: CartProduct) => {
     const discounted = calculateDiscountedPrice(
@@ -75,7 +73,7 @@ export const CartProducts = () => {
               전체선택
               <input
                 type="checkbox"
-                onClick={checkAll}
+                onClick={allCheckedHandler}
               />
             </label>
           </div>
