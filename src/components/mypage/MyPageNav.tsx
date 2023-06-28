@@ -9,7 +9,7 @@ export const MyPageNav = () => {
         <li className={styles.subtitle}>
           쇼핑 정보
           <div>
-            <Link to="/">주문내역 조회</Link>
+            <Link to="/mypage/order">주문내역 조회</Link>
           </div>
         </li>
         <li className={styles.subtitle}>
