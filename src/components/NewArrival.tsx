@@ -84,6 +84,14 @@ const NewArrival = () => {
                   <>{product.price.toLocaleString()}원</>
                 )}
               </div>
+              <div className="product__tags">
+                {product.tags.includes('NEW') ? (
+                  <div className="product__new">NEW</div>
+                ) : null}
+                {product.tags.includes('BEST') ? (
+                  <div className="product__best">HOT</div>
+                ) : null}
+              </div>
             </div>
           ))}
         </div>
