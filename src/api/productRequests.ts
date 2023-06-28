@@ -7,3 +7,8 @@ export const fetchAllProducts = async () => {
   })
   return res.data
 }
+
+export const getPorductDetail = async (id: string) => {
+  const res = await baseInstance.get(`/products/${id}`)
+  return res.data
+}

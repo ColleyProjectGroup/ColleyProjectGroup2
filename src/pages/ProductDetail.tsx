@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { adminInstance } from 'api/index'
+import { getPorductDetail } from 'api/index'
 import { Footer, Products, Modal, ProductDetailInfoTab } from 'components/index'
 import 'styles/layout/ProductDetail.scss'
 import { Product, RouteParams, ModalProps } from 'types/index'
@@ -10,6 +10,7 @@ export const ProductDetail = () => {
   const { id } = useParams<RouteParams>()
   const [product, setProduct] = useState<Product | null>(null)
   const [quantity, setQuantity] = useState(1)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const { userCart, setUserCart } = useContext(CartContext)
   const navigate = useNavigate()
   const { wishList, setWishList } = useContext(WishListContext)
@@ -18,21 +19,23 @@ export const ProductDetail = () => {
   const [modalProps, setModalProps] = useState<ModalProps | null>(null)
 
   useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        const response = await adminInstance.get(`/products/${id}`)
-        setProduct(response.data)
-      } catch (error) {
-        console.error('상품을 불러오는 중에 오류가 발생했습니다.', error)
-      }
+    if (id) {
+      setIsLoading(true)
+      getPorductDetail(id)
+        .then(res => setProduct(res))
+        .finally(() => {
+          const onLoaded = setTimeout(() => {
+            setIsLoading(false)
+            clearTimeout(onLoaded)
+          }, 500)
+        })
     }
-
-    fetchProduct()
   }, [id])
 
   if (!product) {
-    return <div>로딩 중...</div>
+    return <></>
   }
+
   const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(event.target.value)
     const nonNegativeValue = value < 1 ? 1 : value
@@ -50,11 +53,11 @@ export const ProductDetail = () => {
   }
 
   const calculateDiscountPrice = () => {
-    if (product.discountRate) {
+    if (product && product.discountRate) {
       const discountRate = product.discountRate / 100
       return product.price * (1 - discountRate)
     }
-    return product.price
+    return product?.price ?? 0
   }
 
   const calculateTotalPrice = () => {
@@ -149,32 +152,50 @@ export const ProductDetail = () => {
     <div className="product-detail">
       <div className="detailInner">
         <div className="image">
-          <img
-            src={product.thumbnail}
-            alt={product.title}
-          />
+          {isLoading ? (
+            <div className="skeleton" />
+          ) : (
+            <img
+              src={product.thumbnail}
+              alt={product.title}
+            />
+          )}
         </div>
         <div className="info">
-          <div className="title">{product.title}</div>
+          <div className="title">
+            {isLoading ? <div className="skeleton" /> : product.title}
+          </div>
           <div className="price">
             <div className="infoInner">
               <div className="infoleft">
                 <span className="originalPrice">소비자가</span>
               </div>
-              <div>{product.price.toLocaleString()}원</div>
+              {isLoading ? (
+                <div className="skeleton" />
+              ) : (
+                <div>{product.price.toLocaleString()}원</div>
+              )}
             </div>
             <div className="infoInner discount-price">
               <div className="infoleft">
                 <span>판매가</span>
               </div>
-              <div>{calculateDiscountPrice().toLocaleString()}원</div>
+              {isLoading ? (
+                <div className="skeleton" />
+              ) : (
+                <div>{calculateDiscountPrice().toLocaleString()}원</div>
+              )}
             </div>
             <div className="infoInner">
               <div className="infoleft">
                 <span>배송방법</span>
               </div>
               <div className="infoleft">
-                <span>국내 배송</span>
+                {isLoading ? (
+                  <div className="skeleton" />
+                ) : (
+                  <span>국내 배송</span>
+                )}
               </div>
             </div>
             <div className="infoInner">
@@ -182,7 +203,11 @@ export const ProductDetail = () => {
                 <span>배송비</span>
               </div>
               <div>
-                <span>3,000원</span>
+                {isLoading ? (
+                  <div className="skeleton" />
+                ) : (
+                  <span>3,000원</span>
+                )}
               </div>
             </div>
             <div>
@@ -203,7 +228,11 @@ export const ProductDetail = () => {
           </div>
           <div className="totalPrice">
             <div>TOTAL:</div>
-            <div>{calculateTotalPrice().toLocaleString()}원</div>
+            {isLoading ? (
+              <div className="skeleton" />
+            ) : (
+              <div>{calculateTotalPrice().toLocaleString()}원</div>
+            )}
           </div>
           <div className="button--now">
             <button onClick={handleBuyNow}>바로 구매</button>
@@ -214,30 +243,33 @@ export const ProductDetail = () => {
           </div>
         </div>
       </div>
-      <div className="details">
-        <div className="inner">
-          <ProductDetailInfoTab
-            child={
-              <>
-                <img
-                  src={product.photo}
-                  alt={product.title}
-                />
-                <div>
-                  <div className="etcProducts">
-                    <h2>YOU MAY ALSO LIKE</h2>
-                    <h3>함께 구매하면 좋을 관련 상품</h3>
-                  </div>
-                  <Products
-                    tagFilter={product.tags}
-                    limit={4}
+
+      {!isLoading && (
+        <div className="details">
+          <div className="inner">
+            <ProductDetailInfoTab
+              child={
+                <>
+                  <img
+                    src={product.photo}
+                    alt={product.title}
                   />
-                </div>
-              </>
-            }
-          />
+                  <div>
+                    <div className="etcProducts">
+                      <h2>YOU MAY ALSO LIKE</h2>
+                      <h3>함께 구매하면 좋을 관련 상품</h3>
+                    </div>
+                    <Products
+                      tagFilter={product.tags}
+                      limit={4}
+                    />
+                  </div>
+                </>
+              }
+            />
+          </div>
         </div>
-      </div>
+      )}
 
       <Footer />
 
