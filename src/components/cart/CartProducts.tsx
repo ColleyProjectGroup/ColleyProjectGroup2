@@ -8,16 +8,14 @@ import { calculateDiscountedPrice } from 'utils/index'
 export const CartProducts = () => {
   const { userCart } = useContext(CartContext)
   // 하나의 요소가 체크됐을 경우, 요소를 Set에 추가
-  const [checkedItems, setCheckedItems] = useState(new Set())
+  const [checkedItems, setCheckedItems] = useState(new Set<string>())
   // 전체선택에 대한 상태값
   const [isAllChecked, setIsAllChecked] = useState(false)
 
   // 하나의 요소를 선택할 때의 상태관리 함수 => props(CartItem)
   const checkedItemHandler = (id: string, isChecked: boolean) => {
     if (isChecked) {
-      checkedItems.add(id)
-      setCheckedItems(checkedItems)
-      console.log(checkedItems)
+      setCheckedItems(new Set([...checkedItems, id]))
 
       // 선택됐던 것이 해제된경우
     } else if (!isChecked && checkedItems.has(id)) {

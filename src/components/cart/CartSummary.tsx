@@ -26,32 +26,25 @@ export const CartSummary = ({ total, delivery, products }: Cart) => {
     }
   }
 
-  // HERE
   useEffect(() => {
     setFiltered(userCart.filter(item => checkedItems.has(item.product.id)))
-    // userCart.map(item => {
-    //   if (Array.from(checkedItems).includes(item.product.id)) {
-    //     setFiltered(...filtered, item)
-    //   }
-    // })
   }, [userCart, checkedItems])
 
   const orderSelectedHandler = useCallback(() => {
-    console.log(filtered)
-    if (isLogined && userCart.length !== 0) {
+    if (isLogined && filtered.length !== 0) {
       navigate('/payment', {
         state: {
           //상품정보 데이터
           products: [...filtered]
         }
       })
-    } else if (isLogined && userCart.length === 0) {
+    } else if (isLogined && filtered.length === 0) {
       alert('장바구니에 상품을 추가 후 다시 시도해주세요.')
     } else {
       alert('로그인이 필요한 서비스입니다. 로그인 페이지로 이동합니다.')
       navigate('/signin')
     }
-  }, [filtered])
+  }, [filtered, userCart, isLogined])
 
   return (
     <div className={styles.container}>
