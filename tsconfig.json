@@ -19,7 +19,7 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "removeComments": true, //컴파일시 주석제거
-
+    "noImplicitAny": false,
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
@@ -35,10 +35,6 @@
       "hooks/*": ["src/hooks/*"],
       "contexts/*": ["src/contexts/*"],
       "styles/*": ["src/styles/*"],
-      // "abstracts/*": ["src/styles/abstracts/*"],
-      // "stylesComponents/*": ["src/styles/components/*"],
-      // "layout/*": ["src/styles/layoyt/*"],
-      // "stylesPages/*": ["src/styles/pages/*"],
       "types/*": ["src/types/*"],
       "utils/*": ["src/utils/*"],
       "api/*": ["src/api/*"],

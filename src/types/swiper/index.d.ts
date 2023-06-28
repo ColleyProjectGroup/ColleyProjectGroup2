@@ -1,5 +1,5 @@
-declare module "swiper/core" {
-  import Swiper from "swiper";
+declare module 'swiper/core' {
+  import Swiper from 'swiper'
 
-  export default Swiper;
+  export default Swiper
 }

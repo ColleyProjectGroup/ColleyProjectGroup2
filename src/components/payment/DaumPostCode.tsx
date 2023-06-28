@@ -5,13 +5,13 @@ import { useDaumPostcodePopup } from 'react-daum-postcode'
 
 export const DaumPostCode = () => {
   const { address, setAddress } = useContext(UserAddressContext)
-  const { addressDetail, setAddressDetail } = useContext(AddressDetailContext)
+  const { setAddressDetail } = useContext(AddressDetailContext)
 
   const [zoneCode, setZoneCode] = useState<string>('')
 
   const open = useDaumPostcodePopup() //미입력시 기본값 => 우편번호 스크립트 주소
-
   const handleComplete = (data: any) => {
+    console.log(data)
     let fullAddress = data.address
     let extraAddress = ''
 
