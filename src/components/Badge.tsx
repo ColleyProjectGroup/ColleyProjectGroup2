@@ -17,7 +17,7 @@ export const Badge = React.memo(() => {
   return (
     <div className={styled.badge}>
       <div className={styled.cart}>
-        <span>CART</span>
+        <a href="/cart">CART</a>
         <div className={styled['cart__count']}>{userCart.length}</div>
       </div>
       {recentlyViewedList.length !== 0 ? (
