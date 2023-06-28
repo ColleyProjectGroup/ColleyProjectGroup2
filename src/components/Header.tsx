@@ -79,6 +79,11 @@ export const Header: React.FC = () => {
     }
   }
 
+  const navigateDetail = (path: string) => {
+    event?.preventDefault()
+    navigate(`/productlist?category=${path}`)
+  }
+
   return (
     <div className={styles.header}>
       <div
@@ -170,7 +175,7 @@ export const Header: React.FC = () => {
                 <li>
                   <div
                     onClick={() => {
-                      navigate('/')
+                      navigateDetail('TABLE')
                     }}>
                     테이블
                   </div>
@@ -178,7 +183,7 @@ export const Header: React.FC = () => {
                 <li>
                   <div
                     onClick={() => {
-                      navigate('/')
+                      navigateDetail('ROOM')
                     }}>
                     거실화
                   </div>
@@ -186,7 +191,7 @@ export const Header: React.FC = () => {
                 <li>
                   <div
                     onClick={() => {
-                      navigate('/')
+                      navigateDetail('LIGHT')
                     }}>
                     조명
                   </div>
@@ -194,7 +199,7 @@ export const Header: React.FC = () => {
                 <li>
                   <div
                     onClick={() => {
-                      navigate('/')
+                      navigateDetail('BED')
                     }}>
                     침구
                   </div>
@@ -209,7 +214,7 @@ export const Header: React.FC = () => {
                 <li>
                   <div
                     onClick={() => {
-                      navigate('/')
+                      navigateDetail('CUP')
                     }}>
                     컵/머그
                   </div>
@@ -217,7 +222,7 @@ export const Header: React.FC = () => {
                 <li>
                   <div
                     onClick={() => {
-                      navigate('/')
+                      navigateDetail('DISHES')
                     }}>
                     식기
                   </div>
@@ -225,7 +230,7 @@ export const Header: React.FC = () => {
                 <li>
                   <div
                     onClick={() => {
-                      navigate('/')
+                      navigateDetail('PLATE')
                     }}>
                     쟁반/접시
                   </div>
@@ -233,7 +238,7 @@ export const Header: React.FC = () => {
                 <li>
                   <div
                     onClick={() => {
-                      navigate('/')
+                      navigateDetail('GOODS')
                     }}>
                     주방잡화
                   </div>
@@ -241,7 +246,7 @@ export const Header: React.FC = () => {
                 <li>
                   <div
                     onClick={() => {
-                      navigate('/')
+                      navigateDetail('CUTTING_BOARD')
                     }}>
                     도마
                   </div>
