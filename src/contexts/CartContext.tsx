@@ -7,3 +7,10 @@ type CartState = {
 }
 
 export const CartContext = createContext<CartState>({} as CartState)
+
+type CheckedState = {
+  checkedItems: Set<string>
+  setCheckedItems: (products: Set<string>) => void
+}
+
+export const CheckedContext = createContext<CheckedState>({} as CheckedState)

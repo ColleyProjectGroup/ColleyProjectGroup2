@@ -14,12 +14,11 @@ export const CartItem = ({
   const { userCart, setUserCart } = useContext(CartContext)
   const [checked, setChecked] = useState(false)
   // checkHandler - 개별 상품에서 체크 상태관리
-  // checkedItemHandler -상위컴포넌트(=상품 목록)에서 개별 상품 체크 상태관리
+  // checkedItemHandler - 상위컴포넌트(=CartProducts)에서 개별 상품 체크 상태관리
   const checkHandler = ({ target }) => {
     setChecked(!checked)
     checkedItemHandler(product.id, target.checked)
   }
-  console.log(checked)
 
   const filter = userCart.filter(item => item.product.id !== product.id)
 

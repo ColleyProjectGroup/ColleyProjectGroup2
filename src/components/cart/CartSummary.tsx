@@ -1,12 +1,57 @@
 import styles from 'styles/components/cart/cartSummary.module.scss'
-import { Cart } from 'types/index'
+import { Cart, CartProduct } from 'types/index'
 import { useNavigate } from 'react-router-dom'
-import { CartContext, LoginContext } from 'contexts/index'
-import { useContext } from 'react'
+import { CartContext, LoginContext, CheckedContext } from 'contexts/index'
+import { useContext, useEffect, useState, useCallback } from 'react'
 export const CartSummary = ({ total, delivery, products }: Cart) => {
   const navigate = useNavigate()
   const { userCart } = useContext(CartContext)
   const { isLogined } = useContext(LoginContext)
+  const { checkedItems, setCheckedItems } = useContext(CheckedContext)
+  const [filtered, setFiltered] = useState<CartProduct[]>([])
+
+  const orderAllHandler = () => {
+    if (isLogined && userCart.length !== 0) {
+      navigate('/payment', {
+        state: {
+          //상품정보 데이터
+          products: [...userCart]
+        }
+      })
+    } else if (isLogined && userCart.length === 0) {
+      alert('장바구니에 상품을 추가 후 다시 시도해주세요.')
+    } else {
+      alert('로그인이 필요한 서비스입니다. 로그인 페이지로 이동합니다.')
+      navigate('/signin')
+    }
+  }
+
+  // HERE
+  useEffect(() => {
+    setFiltered(userCart.filter(item => checkedItems.has(item.product.id)))
+    // userCart.map(item => {
+    //   if (Array.from(checkedItems).includes(item.product.id)) {
+    //     setFiltered(...filtered, item)
+    //   }
+    // })
+  }, [userCart, checkedItems])
+
+  const orderSelectedHandler = useCallback(() => {
+    console.log(filtered)
+    if (isLogined && userCart.length !== 0) {
+      navigate('/payment', {
+        state: {
+          //상품정보 데이터
+          products: [...filtered]
+        }
+      })
+    } else if (isLogined && userCart.length === 0) {
+      alert('장바구니에 상품을 추가 후 다시 시도해주세요.')
+    } else {
+      alert('로그인이 필요한 서비스입니다. 로그인 페이지로 이동합니다.')
+      navigate('/signin')
+    }
+  }, [filtered])
 
   return (
     <div className={styles.container}>
@@ -16,7 +61,6 @@ export const CartSummary = ({ total, delivery, products }: Cart) => {
           <div className={styles.contents}>
             <div className={styles.content}>
               <h4>총 상품금액</h4>
-              {/* PRICE.toLocaleString()원 */}
               <span>{products}원</span>
             </div>
             <div className={styles.content}>
@@ -33,24 +77,14 @@ export const CartSummary = ({ total, delivery, products }: Cart) => {
       <div className={styles.buttonArea}>
         <a
           className={styles.orderAll}
-          onClick={() => {
-            if (isLogined && userCart.length !== 0) {
-              navigate('/payment', {
-                state: {
-                  //상품정보 데이터
-                  products: [...userCart]
-                }
-              })
-            } else if (isLogined && userCart.length === 0) {
-              alert('장바구니에 상품을 추가 후 다시 시도해주세요.')
-            } else {
-              alert('로그인이 필요한 서비스입니다. 로그인 페이지로 이동합니다.')
-              navigate('/signin')
-            }
-          }}>
+          onClick={orderAllHandler}>
           전체상품주문
         </a>
-        <a className={styles.orderSelected}>선택상품주문</a>
+        <a
+          className={styles.orderSelected}
+          onClick={orderSelectedHandler}>
+          선택상품주문
+        </a>
       </div>
     </div>
   )
