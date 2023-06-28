@@ -6,12 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import '../styles/layout/ProductDetail.scss'
 import { Product, RouteParams } from '../types/Products.interface'
 import { ModalProps } from 'types/index'
-import {
-  LoginContext,
-  WishListContext,
-  CartContext,
-  CartLoginedContext
-} from 'contexts/index'
+import { LoginContext, WishListContext, CartContext } from 'contexts/index'
 
 export const ProductDetail = () => {
   const { id } = useParams<RouteParams>()
@@ -28,7 +23,6 @@ export const ProductDetail = () => {
     const fetchProduct = async () => {
       try {
         const response = await adminInstance.get(`/products/${id}`)
-        // setProduct({ ...response.data, quantity: 1 })
         setProduct(response.data)
       } catch (error) {
         console.error('상품을 불러오는 중에 오류가 발생했습니다.', error)
@@ -82,16 +76,12 @@ export const ProductDetail = () => {
   const handleAddToCart = () => {
     // 장바구니 기능
     const findProduct = userCart.find(item => item.product.id === product.id)
-    // if (userCart.length === 0) {
-    //   setUserCart([{ product, quantity: 1 }])
-    // } else
     if (findProduct) {
       findProduct.quantity += quantity
       const filter = userCart.filter(item => item.product.id !== product.id)
       setUserCart([...filter, findProduct])
     } else {
       setUserCart([...userCart, { product, quantity: quantity }])
-      // setUserCart([...userCart, product])
     }
     setIsModalShow(true)
     setModalProps({
