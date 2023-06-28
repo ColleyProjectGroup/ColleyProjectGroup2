@@ -1,3 +1,5 @@
+@import 'src/styles/abstracts/variables';
+
 .new-arrival {
   display: flex;
   justify-content: center;
@@ -5,7 +7,7 @@
 
   a {
     text-decoration: none;
-    color: black;
+    color: $color-black-0;
   }
 }
 
@@ -56,8 +58,34 @@
     }
 
     .price {
-      margin: 10px 0px 10px 0px;
+      margin: 10px 0px 4px 0px;
       font-size: 14px;
     }
+  }
+}
+
+.product__tags {
+  display: flex;
+  gap: 4px;
+  max-width: 200px;
+  height: 16px;
+  font-size: 10px;
+  line-height: 16px;
+  font-weight: 500;
+
+  .product__new {
+    color: $color-primary;
+    background-color: $color-item-yellow;
+    text-align: center;
+    padding: 0 4px;
+    box-sizing: border-box;
+  }
+
+  .product__best {
+    color: $color-item-red;
+    border: 1px solid $color-item-red;
+    text-align: center;
+    padding: 0 4px;
+    box-sizing: border-box;
   }
 }
