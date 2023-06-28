@@ -29,22 +29,22 @@
     width: 500px;
     height: 60px;
     border-radius: 10px 10px 0 0;
+    text-align: center;
     span {
       color: $color-primary;
       font-size: 20px;
       font-weight: 400;
       text-align: left;
       line-height: 60px;
-      margin-left: 40px;
     }
   }
 
   .content {
     margin-top: 40px;
-    margin-left: 40px;
     font-size: 20px;
     flex-grow: 1;
     white-space: pre-line;
+    text-align: center;
   }
 
   .buttons {
