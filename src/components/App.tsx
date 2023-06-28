@@ -1,6 +1,6 @@
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { Header, Badge, MyPageNav, Modal } from 'components/index'
-import { CommonError, Product, ModalProps } from 'types/index'
+import { CommonError, Product, ModalProps, CartProduct } from 'types/index'
 import { useState, useEffect } from 'react'
 
 import {
@@ -33,6 +33,10 @@ export const App = () => {
     `wish-${userEmail}`,
     [],
     isLogined
+  )
+
+  userCart.sort((a: CartProduct, b: CartProduct) =>
+    a.product.id.toLowerCase() < b.product.id.toLowerCase() ? -1 : 1
   )
 
   const path: string = useLocation().pathname

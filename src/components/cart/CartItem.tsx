@@ -1,15 +1,17 @@
 import styles from 'styles/components/cart/cartItem.module.scss'
-import { useState, useContext } from 'react'
+import { useState, useContext, useRef } from 'react'
 import { CartContext } from 'contexts/index'
 import { calculateDiscountedPrice } from 'utils/index'
 import { CartProduct } from 'types/index'
 
 export const CartItem = ({ product, quantity }: CartProduct) => {
+  const [isClicked, setIsClicked] = useState<boolean>(false)
   const [number, setNumber] = useState(quantity)
   const { userCart, setUserCart } = useContext(CartContext)
+  const checkboxRef = useRef()
 
   const filter = userCart.filter(item => item.product.id !== product.id)
-  console.log(product)
+
   const plus = () => {
     setNumber(number + 1)
     // 로컬스토리지 동기화
@@ -34,13 +36,16 @@ export const CartItem = ({ product, quantity }: CartProduct) => {
     setUserCart(userCart.filter(p => p.product.id !== product.id))
   }
 
+  const checked = () => {
+    setIsClicked(!isClicked)
+  }
+
+  console.log(isClicked)
   return (
     <div className={styles.itemBox}>
       <input
         type="checkbox"
-        onChange={e => {
-          e.target.checked
-        }}
+        onClick={checked}
       />
       <img
         src={product.thumbnail}
