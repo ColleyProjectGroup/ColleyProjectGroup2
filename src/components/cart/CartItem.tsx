@@ -17,7 +17,7 @@ export const CartItem = ({
   // checkedItemHandler - 상위컴포넌트(=CartProducts)에서 개별 상품 체크 상태관리
   const checkHandler = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(!checked)
-    checkedItemHandler(product.id as string, target.checked as boolean)
+    checkedItemHandler?.(product.id as string, target.checked as boolean)
   }
 
   const filter = userCart.filter(item => item.product.id !== product.id)

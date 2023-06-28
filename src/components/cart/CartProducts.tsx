@@ -13,7 +13,7 @@ export const CartProducts = () => {
   const [isAllChecked, setIsAllChecked] = useState(false)
 
   // 하나의 요소를 선택할 때의 상태관리 함수 => props(CartItem)
-  const checkedItemHandler = (id: string, isChecked: boolean) => {
+  const checkedItemHandler = (id: string, isChecked: boolean): void => {
     if (isChecked) {
       setCheckedItems(new Set([...checkedItems, id]))
       // 선택됐던 것이 해제된경우
