@@ -1,0 +1,46 @@
+@import 'src/styles/abstracts/variables';
+
+.tabs {
+  width: 100%;
+  display: flex;
+
+  li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    height: 40px;
+    border-bottom: 1px solid $color-border;
+    color: $color-gray-BC;
+    margin-bottom: 30px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+
+    &.selected {
+      border-bottom: 2px solid $color-black-0;
+      color: $color-black-0;
+    }
+  }
+}
+
+.tab__content {
+  color: $color-black-0;
+  min-height: 300px;
+
+  .tab__data {
+    margin-bottom: 20px;
+    font-size: 12px;
+
+    .data__title {
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .data__content {
+      white-space: break-spaces;
+      line-height: 1.4;
+      padding-left: 4px;
+    }
+  }
+}

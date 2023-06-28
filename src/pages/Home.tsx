@@ -4,6 +4,9 @@ import { ImageSlider } from '@/components/ImageSlider'
 import { NewArrival } from '@/components/NewArrival'
 import { PromotionSlider } from '@/components/PromotionSlider'
 import { Footer } from 'components/index'
+import { fetchAllProducts } from 'api/index'
+import { Product } from 'types/index'
+import { useEffect, useState } from 'react'
 const sliderImages = [
   'https://colley.market/web/upload/category/editor/2023/02/17/b020ca816a613a9b0aa0c68a5b9fee67.jpg',
   'https://colley.market/web/upload/category/editor/2023/02/17/8938f65bbf94293194e031791ad24c72.jpg',
@@ -16,13 +19,21 @@ const promotionImages = [
 ]
 
 export const Home = () => {
+  const [prodcuts, setProdcuts] = useState<Product[]>([])
+  useEffect(() => {
+    fetchAllProducts().then(res => {
+      setProdcuts(res)
+      console.log(res)
+    })
+  }, [])
+
   return (
     <div>
       <ImageSlider sliderImages={sliderImages} />
       <ColleyNews />
       <NewArrival />
       <PromotionSlider promotionImages={promotionImages} />
-      <BestSeller />
+      <BestSeller products={prodcuts} />
       <Footer />
     </div>
   )
