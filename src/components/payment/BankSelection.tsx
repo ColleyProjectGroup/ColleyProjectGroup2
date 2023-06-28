@@ -1,6 +1,7 @@
 import { AccountNumberContext, BankContext } from 'contexts/index'
 import { useEffect, useRef } from 'react'
-import { useContext, useReducer } from 'react'
+import { useContext, useReducer, Reducer } from 'react'
+
 import { childProps } from 'types/index'
 
 import styles from 'styles/components/payment/BankSelection.module.scss'
@@ -22,24 +23,24 @@ export const BankSelection = ({ setValid }: childProps) => {
     setBank(e.currentTarget.value)
   }
 
-  function reducer(state: number, action: string) {
+  const reducer: Reducer<number, string> = (state: number, action: string) => {
     switch (action) {
       case '004':
-        return (state = 12)
+        return 12
       case '088':
-        return (state = 12)
+        return 12
       case '020':
-        return (state = 13)
+        return 13
       case '081':
-        return (state = 14)
+        return 14
       case '089':
-        return (state = 12)
+        return 12
       case '090':
-        return (state = 13)
+        return 13
       case '011':
-        return (state = 13)
+        return 13
       default:
-        return (state = 12)
+        return state
     }
   }
   const [max, dispatch] = useReducer(reducer, 12)

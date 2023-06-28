@@ -37,7 +37,7 @@ export const removeAccount = async (req: RemoveRequest) => {
   }
 }
 //결제
-export const transactPayment = async (req: Transaction) => {
+export const transactPayment = async (req: Transaction): Promise<any> => {
   try {
     const res = await authInstance.post('/products/buy', req)
     return res

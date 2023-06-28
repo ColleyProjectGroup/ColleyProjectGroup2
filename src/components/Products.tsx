@@ -66,14 +66,21 @@ const Products = React.memo(
           }
 
           setProducts(searchedProducts)
-          getProductCount(searchedProducts.length) // TODO 수정필요
+          if (getProductCount) getProductCount(searchedProducts.length)
         } catch (error) {
           console.error('상품을 가져오는 중 오류 발생', error)
         }
       }
 
       fetchProducts()
-    }, [limit, sortOption, getProductCount, location.search, keyword])
+    }, [
+      limit,
+      sortOption,
+      getProductCount,
+      location.search,
+      keyword,
+      getProductCount
+    ])
 
     const calculateDiscountedPrice = (
       price: number,
