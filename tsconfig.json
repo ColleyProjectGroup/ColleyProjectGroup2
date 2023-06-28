@@ -19,7 +19,7 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "removeComments": true, //컴파일시 주석제거
-
+    "noImplicitAny": false,
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
