@@ -1,16 +1,15 @@
 import styles from 'src/styles/components/payment/ProductInfo.module.scss'
 import { useLocation } from 'react-router-dom'
-import { useContext } from 'react'
-import { CartContext } from 'contexts/index'
+import { CartProduct } from 'types/index'
 
 export const ProductInfo = () => {
-  const { userCart } = useContext(CartContext)
   const chosenProduct = useLocation().state.products
+  console.log(chosenProduct)
   return (
     <div className={styles.container}>
       <h3>상품정보</h3>
       <ul>
-        {chosenProduct.map(product => {
+        {chosenProduct.map((product: CartProduct) => {
           return (
             <li
               className={styles.wrapper}
