@@ -1,5 +1,6 @@
 import styles from 'styles/components/cart/cartItem.module.scss'
 import { useState, useContext, useEffect } from 'react'
+import { useNavigate } from 'react-router'
 import { CartContext } from 'contexts/index'
 import { calculateDiscountedPrice } from 'utils/index'
 import { CartProduct } from 'types/index'
@@ -18,6 +19,12 @@ export const CartItem = ({
   const checkHandler = ({ target }) => {
     setChecked(!checked)
     checkedItemHandler(product.id, target.checked)
+  }
+  const navigate = useNavigate()
+
+  const naviagteDetail = () => {
+    event?.preventDefault()
+    navigate(`/products/${product.id}`)
   }
 
   const filter = userCart.filter(item => item.product.id !== product.id)
@@ -59,9 +66,14 @@ export const CartItem = ({
       <img
         src={product.thumbnail}
         className={styles.thumbnail}
+        onClick={naviagteDetail}
       />
       <div className={styles.productInfo}>
-        <div className={styles.name}>{product.title}</div>
+        <div
+          className={styles.name}
+          onClick={naviagteDetail}>
+          {product.title}
+        </div>
         <div className={styles.price}>{discounted.toLocaleString()}원</div>
         <div className={styles.amount}>
           <div
