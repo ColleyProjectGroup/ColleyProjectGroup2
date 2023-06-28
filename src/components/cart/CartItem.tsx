@@ -1,5 +1,5 @@
 import styles from 'styles/components/cart/cartItem.module.scss'
-import { useState, useContext, useEffect } from 'react'
+import { useState, useContext, useEffect, useCallback } from 'react'
 import { useNavigate } from 'react-router'
 import { CartContext } from 'contexts/index'
 import { calculateDiscountedPrice } from 'utils/index'
@@ -13,13 +13,14 @@ export const CartItem = ({
 }: CartProduct) => {
   const [number, setNumber] = useState(quantity)
   const { userCart, setUserCart } = useContext(CartContext)
-  const [checked, setChecked] = useState(false)
+  const [checked, setChecked] = useState<boolean>(false)
   // checkHandler - 개별 상품에서 체크 상태관리
   // checkedItemHandler - 상위컴포넌트(=CartProducts)에서 개별 상품 체크 상태관리
-  const checkHandler = ({ target }) => {
+  const checkHandler = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(!checked)
-    checkedItemHandler(product.id, target.checked)
+    checkedItemHandler?.(product.id as string, target.checked as boolean)
   }
+
   const navigate = useNavigate()
 
   const naviagteDetail = () => {
@@ -35,8 +36,11 @@ export const CartItem = ({
     setUserCart([...filter, { product: product, quantity: number + 1 }])
   }
 
-  const allCheckHandler = () => setChecked(isAllChecked)
-  useEffect(() => allCheckHandler(), [isAllChecked])
+  const allCheckHandler = useCallback(
+    () => setChecked(isAllChecked as boolean),
+    [setChecked, isAllChecked]
+  )
+  useEffect(() => allCheckHandler(), [isAllChecked, allCheckHandler])
 
   const minus = () => {
     if (number === 1) {

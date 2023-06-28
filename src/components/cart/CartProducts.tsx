@@ -13,7 +13,7 @@ export const CartProducts = () => {
   const [isAllChecked, setIsAllChecked] = useState(false)
 
   // 하나의 요소를 선택할 때의 상태관리 함수 => props(CartItem)
-  const checkedItemHandler = (id: string, isChecked: boolean) => {
+  const checkedItemHandler = (id: string, isChecked: boolean): void => {
     if (isChecked) {
       setCheckedItems(new Set([...checkedItems, id]))
       // 선택됐던 것이 해제된경우
@@ -23,10 +23,9 @@ export const CartProducts = () => {
   }
 
   //전체선택 기능
-  const allCheckedHandler = ({
-    target
-  }: React.ChangeEvent<HTMLInputElement>) => {
-    if (target.checked) {
+  const allCheckedHandler = (e: React.MouseEvent<HTMLInputElement>) => {
+    const target = e.target as HTMLInputElement
+    if (target.checked as boolean) {
       setCheckedItems(new Set(userCart.map(({ product }) => product.id)))
       setIsAllChecked(true)
     } else {
@@ -35,7 +34,6 @@ export const CartProducts = () => {
       setIsAllChecked(false)
     }
   }
-  const checkAll = (e: React.MouseEvent) => allCheckedHandler(e)
   //총액 계산
   const calculated = userCart.reduce((acc: number, cur: CartProduct) => {
     const discounted = calculateDiscountedPrice(
@@ -75,7 +73,7 @@ export const CartProducts = () => {
               전체선택
               <input
                 type="checkbox"
-                onClick={checkAll}
+                onClick={allCheckedHandler}
               />
             </label>
           </div>
