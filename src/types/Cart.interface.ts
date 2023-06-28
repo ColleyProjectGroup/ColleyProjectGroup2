@@ -8,4 +8,6 @@ export interface Cart {
 export interface CartProduct {
   product: Product
   quantity: number // 저장되어있는 수량
+  checkedItemHandler?: (id: string, isChecked: boolean) => void
+  isAllChecked?: boolean | undefined
 }

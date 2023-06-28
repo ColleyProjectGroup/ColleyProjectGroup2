@@ -1,14 +1,25 @@
 import styles from 'styles/components/cart/cartItem.module.scss'
-import { useState, useContext, useRef } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { CartContext } from 'contexts/index'
 import { calculateDiscountedPrice } from 'utils/index'
 import { CartProduct } from 'types/index'
 
-export const CartItem = ({ product, quantity }: CartProduct) => {
-  const [isClicked, setIsClicked] = useState<boolean>(false)
+export const CartItem = ({
+  product,
+  quantity,
+  checkedItemHandler,
+  isAllChecked
+}: CartProduct) => {
   const [number, setNumber] = useState(quantity)
   const { userCart, setUserCart } = useContext(CartContext)
-  const checkboxRef = useRef()
+  const [checked, setChecked] = useState(false)
+  // checkHandler - 개별 상품에서 체크 상태관리
+  // checkedItemHandler -상위컴포넌트(=상품 목록)에서 개별 상품 체크 상태관리
+  const checkHandler = ({ target }) => {
+    setChecked(!checked)
+    checkedItemHandler(product.id, target.checked)
+  }
+  console.log(checked)
 
   const filter = userCart.filter(item => item.product.id !== product.id)
 
@@ -17,6 +28,9 @@ export const CartItem = ({ product, quantity }: CartProduct) => {
     // 로컬스토리지 동기화
     setUserCart([...filter, { product: product, quantity: number + 1 }])
   }
+
+  const allCheckHandler = () => setChecked(isAllChecked)
+  useEffect(() => allCheckHandler(), [isAllChecked])
 
   const minus = () => {
     if (number === 1) {
@@ -36,16 +50,12 @@ export const CartItem = ({ product, quantity }: CartProduct) => {
     setUserCart(userCart.filter(p => p.product.id !== product.id))
   }
 
-  const checked = () => {
-    setIsClicked(!isClicked)
-  }
-
-  console.log(isClicked)
   return (
     <div className={styles.itemBox}>
       <input
         type="checkbox"
-        onClick={checked}
+        checked={checked}
+        onChange={e => checkHandler(e)}
       />
       <img
         src={product.thumbnail}
