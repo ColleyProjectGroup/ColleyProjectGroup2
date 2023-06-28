@@ -1,58 +1,91 @@
-.ProductDetail {
+@import 'src/styles/common.scss';
+
+.product-detail {
   a {
     text-decoration: none;
-    color: black;
+    color: $color-black-0;
   }
-  .Inner {
+
+  .detailInner {
     display: flex;
     justify-content: center;
     align-items: center;
-    .Image {
+    padding: 30px;
+    gap: 50px;
+
+    .image {
+      .skeleton {
+        @include skeleton;
+        @include size(580px, 580px);
+      }
+
       img {
         width: 580px;
         height: 580px;
       }
     }
-    .Info {
+
+    .info {
       width: 580px;
-      padding: 30px;
-      .Title {
+      height: 580px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .title {
+        border-top: 2px solid $color-black-0;
+        border-bottom: 1px solid $color-border;
         display: block;
         font-size: 24px;
         font-weight: 600;
         line-height: 2;
-        margin: 20px;
+        padding: 20px 0;
+
+        .skeleton {
+          @include skeleton;
+          @include size(250px, 24px);
+        }
       }
-      .Price {
+
+      .price {
         font-size: 12px;
-        margin: 20px;
+        margin: 20px 0;
         display: block;
         line-height: 3;
-        .DiscountedPrice {
+
+        .discount-price {
           font-size: 13px;
           font-weight: 800;
-          color: cornflowerblue;
+          color: $color-price;
         }
+
         .infoInner {
           display: flex;
+
           .infoleft {
             text-align: left;
             width: 15%;
           }
+
+          .skeleton {
+            @include skeleton;
+            @include size(100px, 16px);
+            margin: 10px 0;
+          }
         }
       }
-      .Quantity {
-        margin: 20px;
+
+      .quantity {
+        border-top: 1px solid $color-border;
+        border-bottom: 1px solid $color-border;
+        padding: 10px;
         font-size: 13px;
         display: flex;
-        justify-content: start;
+        justify-content: end;
         align-items: center;
         gap: 20px;
-        .QantityTitle {
-          width: 80%;
-          font-size: 16px;
-        }
-        .QuantityControl {
+
+        .quantityControl {
           display: flex;
         }
 
@@ -63,67 +96,85 @@
           font-size: 12px;
           text-align: center;
           border: 1px solid gray;
+
+          &:disabled {
+            background-color: $color-primary;
+            color: $color-black-0;
+          }
         }
+
         button {
           width: 35px;
           height: 35px;
           box-sizing: border-box;
-          background-color: white;
+          background-color: $color-primary;
           border: 1px solid gray;
           font-size: 18px;
           font-weight: 300;
         }
       }
-      .TotalPrice {
+
+      .totalPrice {
         display: flex;
         justify-content: space-between;
-        margin: 30px 20px 30px 20px;
+        margin: 30px 0;
         font-size: 18px;
         font-weight: 800;
+
+        .skeleton {
+          @include skeleton;
+          @include size(150px, 18px);
+        }
       }
-      .Buttons1 {
-        background-color: chartreuse;
-        margin: 20px;
+
+      .button--now {
+        margin: 20px 0 10px;
         display: flex;
         flex-direction: column;
+
         button,
         a {
           height: 50px;
-          background-color: black;
+          background-color: $color-black-0;
           border: none;
-          color: white;
+          color: $color-primary;
           font-weight: 600;
           cursor: pointer;
         }
       }
-      .Buttons2 {
-        margin: 20px;
+
+      .button--cart {
         display: flex;
         gap: 10px;
+
         button {
           width: 100%;
           height: 50px;
-          background-color: white;
+          background-color: $color-primary;
           border: 1px solid rgb(177, 177, 177);
-          color: black;
+          color: $color-black-0;
           font-weight: 600;
           cursor: pointer;
         }
         button:hover {
-          border: 1px solid black;
+          border: 1px solid $color-black-0;
         }
       }
     }
   }
-  .Details {
+
+  .details {
     margin-top: 50px;
     margin-bottom: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
-    .Inner {
+
+    .inner {
       width: 1240px;
+
       img {
+        width: 100%;
         text-align: center;
       }
     }
@@ -143,35 +194,42 @@
       color: gray;
     }
   }
-  .Products {
+
+  .products {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 50px;
-    .Inner {
+
+    .inner {
       padding-top: 50px;
       padding-bottom: 50px;
       padding-right: 10px;
       box-sizing: border-box;
-      .Product {
+
+      .product {
         width: 1240px;
         display: flex;
         cursor: pointer;
         flex-wrap: wrap;
         gap: 20px;
         animation: fade-in 1s ease;
-        .Image {
+        .image {
           img {
             width: 295px;
             height: 295px;
           }
         }
-        .Title {
-          margin: 10px 0px;
+        .title {
+          padding: 10px 0px 0px 0px;
           font-size: 12px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          max-width: 295px;
         }
-        .Price {
-          margin: 10px 0px;
+        .price {
+          margin: 10px 0px 4px;
           font-size: 14px;
         }
       }

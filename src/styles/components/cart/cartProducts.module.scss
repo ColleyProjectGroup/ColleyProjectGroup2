@@ -30,7 +30,7 @@
         margin: 0 0 10px;
       }
     }
-    a {
+    .pseudo {
       padding: 10px 20px;
       height: 32px;
       font-size: 12px;
@@ -42,6 +42,9 @@
       word-spacing: -0.5px;
       &:hover {
         border: 1px solid $color-black-0;
+      }
+      input {
+        display: none;
       }
     }
   }

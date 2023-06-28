@@ -1,15 +1,31 @@
 import styles from 'styles/components/cart/cartItem.module.scss'
-import { useState, useContext, useRef } from 'react'
+import { useState, useContext, useEffect } from 'react'
+import { useNavigate } from 'react-router'
 import { CartContext } from 'contexts/index'
 import { calculateDiscountedPrice } from 'utils/index'
 import { CartProduct } from 'types/index'
 
-export const CartItem = ({ product, quantity }: CartProduct) => {
-  const [isClicked, setIsClicked] = useState<boolean>(false)
-  const [checkedItems, setCheckedItems] = useState(new Set())
+export const CartItem = ({
+  product,
+  quantity,
+  checkedItemHandler,
+  isAllChecked
+}: CartProduct) => {
   const [number, setNumber] = useState(quantity)
   const { userCart, setUserCart } = useContext(CartContext)
-  const inputRef = useRef()
+  const [checked, setChecked] = useState(false)
+  // checkHandler - 개별 상품에서 체크 상태관리
+  // checkedItemHandler - 상위컴포넌트(=CartProducts)에서 개별 상품 체크 상태관리
+  const checkHandler = ({ target }) => {
+    setChecked(!checked)
+    checkedItemHandler(product.id, target.checked)
+  }
+  const navigate = useNavigate()
+
+  const naviagteDetail = () => {
+    event?.preventDefault()
+    navigate(`/products/${product.id}`)
+  }
 
   const filter = userCart.filter(item => item.product.id !== product.id)
 
@@ -18,6 +34,9 @@ export const CartItem = ({ product, quantity }: CartProduct) => {
     // 로컬스토리지 동기화
     setUserCart([...filter, { product: product, quantity: number + 1 }])
   }
+
+  const allCheckHandler = () => setChecked(isAllChecked)
+  useEffect(() => allCheckHandler(), [isAllChecked])
 
   const minus = () => {
     if (number === 1) {
@@ -37,22 +56,24 @@ export const CartItem = ({ product, quantity }: CartProduct) => {
     setUserCart(userCart.filter(p => p.product.id !== product.id))
   }
 
-  const checkboxClicked = () => {
-    setIsClicked(!isClicked)
-  }
-
   return (
     <div className={styles.itemBox}>
       <input
         type="checkbox"
-        onChange={checkboxClicked}
+        checked={checked}
+        onChange={e => checkHandler(e)}
       />
       <img
         src={product.thumbnail}
         className={styles.thumbnail}
+        onClick={naviagteDetail}
       />
       <div className={styles.productInfo}>
-        <div className={styles.name}>{product.title}</div>
+        <div
+          className={styles.name}
+          onClick={naviagteDetail}>
+          {product.title}
+        </div>
         <div className={styles.price}>{discounted.toLocaleString()}원</div>
         <div className={styles.amount}>
           <div
