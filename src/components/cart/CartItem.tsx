@@ -1,5 +1,5 @@
 import styles from 'styles/components/cart/cartItem.module.scss'
-import { useState, useContext, useEffect } from 'react'
+import { useState, useContext, useEffect, useCallback } from 'react'
 import { useNavigate } from 'react-router'
 import { CartContext } from 'contexts/index'
 import { calculateDiscountedPrice } from 'utils/index'
