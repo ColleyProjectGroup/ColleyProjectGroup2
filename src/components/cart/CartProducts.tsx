@@ -18,7 +18,8 @@ export const CartProducts = () => {
   const delivery = 3000
 
   const buttonClicked = () => {
-    setIsClicked(!isClicked)
+    setIsClicked(true)
+    console.log(isClicked)
   }
   return (
     <>

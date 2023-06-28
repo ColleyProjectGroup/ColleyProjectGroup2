@@ -6,9 +6,10 @@ import { CartProduct } from 'types/index'
 
 export const CartItem = ({ product, quantity }: CartProduct) => {
   const [isClicked, setIsClicked] = useState<boolean>(false)
+  const [checkedItems, setCheckedItems] = useState(new Set())
   const [number, setNumber] = useState(quantity)
   const { userCart, setUserCart } = useContext(CartContext)
-  const checkboxRef = useRef()
+  const inputRef = useRef()
 
   const filter = userCart.filter(item => item.product.id !== product.id)
 
@@ -36,16 +37,15 @@ export const CartItem = ({ product, quantity }: CartProduct) => {
     setUserCart(userCart.filter(p => p.product.id !== product.id))
   }
 
-  const checked = () => {
+  const checkboxClicked = () => {
     setIsClicked(!isClicked)
   }
 
-  console.log(isClicked)
   return (
     <div className={styles.itemBox}>
       <input
         type="checkbox"
-        onClick={checked}
+        onChange={checkboxClicked}
       />
       <img
         src={product.thumbnail}
