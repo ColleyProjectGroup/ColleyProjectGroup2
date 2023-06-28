@@ -53,43 +53,42 @@
     }
 
     .tab-container {
-      .products {
-        .inner {
-          .product {
-            cursor: pointer;
-            display: flex;
-            gap: 20px;
-            animation: fade-in 1s ease;
-            .image {
-              img {
-                width: 230px;
-                height: 230px;
-              }
-            }
+      .tabPane {
+        display: flex;
+        padding-top: 50px;
+        padding-bottom: 50px;
+        padding-right: 10px;
+        width: 1240px;
+        box-sizing: border-box;
+        gap: 20px;
+      }
 
-            .title {
-              padding: 10px 0px 0px 0px;
-              font-size: 12px;
-              white-space: nowrap;
-              overflow: hidden;
-              text-overflow: ellipsis;
-              max-width: 230px;
-            }
+      .product {
+        cursor: pointer;
+        display: flex;
+        gap: 20px;
+        // animation: fade-in 1s ease;
 
-            .price {
-              margin: 10px 0px 4px;
-              font-size: 14px;
-              text-decoration: none;
-
-              .originalPrice {
-                /* Original price styles here */
-              }
-
-              .discountedPrice {
-                /* Discounted price styles here */
-              }
-            }
+        .image {
+          img {
+            width: 230px;
+            height: 230px;
           }
+        }
+
+        .title {
+          padding: 10px 0px 0px 0px;
+          font-size: 12px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          max-width: 230px;
+        }
+
+        .price {
+          margin: 10px 0px 4px;
+          font-size: 14px;
+          text-decoration: none;
         }
       }
     }
