@@ -23,36 +23,36 @@ export const BankSelection = ({ setValid }: childProps) => {
     setBank(e.currentTarget.value)
   }
 
-  const reducer: Reducer<number, string> = (state: number, action: string) => {
-    switch (action) {
-      case '004':
-        return 12
-      case '088':
-        return 12
-      case '020':
-        return 13
-      case '081':
-        return 14
-      case '089':
-        return 12
-      case '090':
-        return 13
-      case '011':
-        return 13
-      default:
-        return state
+  const reducer: Reducer<number, string> = (
+    state: number,
+    action: string
+  ): number => {
+    const actionHandlers = new Map<string, number>()
+      .set('004', 12)
+      .set('088', 12)
+      .set('020', 13)
+      .set('081', 14)
+      .set('089', 12)
+      .set('090', 13)
+      .set('011', 13)
+
+    if (actionHandlers.has(action)) {
+      return actionHandlers.get(action) as number
     }
+
+    return state
   }
+
   const [max, dispatch] = useReducer(reducer, 12)
+
   useEffect(() => {
     dispatch(bank)
   }, [bank])
+
   useEffect(() => {
-    if (accountMax.current?.maxLength === accountNumber.length) {
-      setValid(true)
-    } else {
-      setValid(false)
-    }
+    accountMax.current?.maxLength === accountNumber.length
+      ? setValid(true)
+      : setValid(false)
   }, [setValid, bank, accountMax, accountNumber])
 
   return (
