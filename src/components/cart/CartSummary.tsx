@@ -1,17 +1,19 @@
 import styles from 'styles/components/cart/cartSummary.module.scss'
 import { CartProduct } from 'types/index'
 import { useNavigate } from 'react-router-dom'
-import { CartContext, LoginContext, CheckedContext } from 'contexts/index'
-import { useContext, useEffect, useState, useCallback, useMemo } from 'react'
-import { calculateDiscountedPrice } from 'utils/index'
+import { CartContext, LoginContext } from 'contexts/index'
+import { useContext, useCallback } from 'react'
 
-export const CartSummary = () => {
+export const CartSummary = ({
+  total,
+  filtered
+}: {
+  total: number
+  filtered: CartProduct[]
+}) => {
   const navigate = useNavigate()
   const { userCart } = useContext(CartContext)
   const { isLogined } = useContext(LoginContext)
-  const { checkedItems } = useContext(CheckedContext)
-  const [filtered, setFiltered] = useState<CartProduct[]>([])
-
   const orderAllHandler = () => {
     if (!isLogined) {
       alert('로그인이 필요한 서비스입니다. 로그인 페이지로 이동합니다.')
@@ -28,10 +30,6 @@ export const CartSummary = () => {
         })
       : alert('장바구니에 상품을 추가 후 다시 시도해주세요.')
   }
-
-  useEffect(() => {
-    setFiltered(userCart.filter(item => checkedItems.has(item.product.id)))
-  }, [userCart, checkedItems])
 
   const orderSelectedHandler = useCallback(() => {
     if (!isLogined) {
@@ -51,15 +49,6 @@ export const CartSummary = () => {
       : alert('장바구니에 상품을 선택 후 다시 시도해주세요.')
   }, [filtered, isLogined, navigate])
 
-  const total = useMemo((): any => {
-    return filtered.reduce((acc: number, cur: CartProduct): any => {
-      const discounted = calculateDiscountedPrice(
-        cur.product.price,
-        cur.product.discountRate
-      )
-      return acc + discounted * cur.quantity
-    }, 0)
-  }, [filtered])
   const delivery = 3000
 
   return (
