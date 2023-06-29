@@ -51,9 +51,12 @@ export const PaymentMethods = () => {
       accountNumber: accountNumber,
       phoneNumber: phoneNumber,
       signature: true
-    })
-    await getAccounts().then(response => {
-      setAccountData(response)
+    }).then(async res => {
+      if (res.status === 200) {
+        await getAccounts().then(response => {
+          setAccountData(response)
+        })
+      }
     })
   }, [bank, accountNumber, phoneNumber])
 
@@ -67,6 +70,17 @@ export const PaymentMethods = () => {
     })
     alert('계좌가 삭제되었습니다.')
   }
+
+  const addAccountHandler = useCallback(() => {
+    if (valid) {
+      createAndRender().then(() => {
+        alert('계좌가 추가되었습니다.')
+        setIsModalShow(false)
+      })
+    } else {
+      alert('계좌 추가에 실패했습니다. 계좌번호를 끝까지 입력해주세요.')
+    }
+  }, [createAndRender, valid])
 
   // ######TOSS PAYMENTS WIDGET
   const clientKey = 'test_ck_P24xLea5zVAxXyyGMxb3QAMYNwW6'
@@ -98,25 +112,19 @@ export const PaymentMethods = () => {
         title: '계좌 추가',
         isTwoButton: true,
         okButtonText: '추가',
-        onClickOkButton: () => {
-          if (valid) {
-            createAndRender()
-              .then(() => {
-                alert('계좌가 추가되었습니다.')
-                setIsModalShow(false)
-              })
-              .catch(error =>
-                alert(`계좌 추가에 실패했습니다. ERROR : ${error}`)
-              )
-          } else {
-            alert('계좌 추가에 실패했습니다. 계좌번호를 끝까지 입력해주세요.')
-          }
-        },
+        onClickOkButton: addAccountHandler,
         cancelButtonText: '취소',
         onClickCancelButton: modalCancelHandler
       })
     }
-  }, [bank, accountNumber, phoneNumber, createAndRender, valid])
+  }, [
+    bank,
+    accountNumber,
+    phoneNumber,
+    createAndRender,
+    valid,
+    addAccountHandler
+  ])
 
   return (
     <div className={styles.container}>
