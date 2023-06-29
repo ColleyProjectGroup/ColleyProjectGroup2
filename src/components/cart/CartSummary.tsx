@@ -11,19 +11,19 @@ export const CartSummary = ({ total, delivery, products }: Cart) => {
   const [filtered, setFiltered] = useState<CartProduct[]>([])
 
   const orderAllHandler = () => {
-    if (isLogined && userCart.length !== 0) {
-      navigate('/payment', {
-        state: {
-          //상품정보 데이터
-          products: [...userCart]
-        }
-      })
-    } else if (isLogined && userCart.length === 0) {
-      alert('장바구니에 상품을 추가 후 다시 시도해주세요.')
-    } else {
+    if (!isLogined) {
       alert('로그인이 필요한 서비스입니다. 로그인 페이지로 이동합니다.')
       navigate('/signin')
     }
+
+    isLogined && userCart.length !== 0
+      ? navigate('/payment', {
+          state: {
+            //장바구니 내 상품정보 데이터
+            products: [...userCart]
+          }
+        })
+      : alert('장바구니에 상품을 추가 후 다시 시도해주세요.')
   }
 
   useEffect(() => {
@@ -31,19 +31,19 @@ export const CartSummary = ({ total, delivery, products }: Cart) => {
   }, [userCart, checkedItems])
 
   const orderSelectedHandler = useCallback(() => {
-    if (isLogined && filtered.length !== 0) {
-      navigate('/payment', {
-        state: {
-          //상품정보 데이터
-          products: [...filtered]
-        }
-      })
-    } else if (isLogined && filtered.length === 0) {
-      alert('장바구니에 상품을 추가 후 다시 시도해주세요.')
-    } else {
+    if (!isLogined) {
       alert('로그인이 필요한 서비스입니다. 로그인 페이지로 이동합니다.')
       navigate('/signin')
     }
+
+    isLogined && filtered.length !== 0
+      ? navigate('/payment', {
+          state: {
+            //상품정보 데이터
+            products: [...filtered]
+          }
+        })
+      : alert('장바구니에 상품을 추가 후 다시 시도해주세요.')
   }, [filtered, isLogined, navigate])
 
   return (
