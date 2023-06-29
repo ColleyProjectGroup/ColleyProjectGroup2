@@ -9,7 +9,7 @@ import styles from 'styles/pages/signin.module.scss'
 
 export const SignInPage = () => {
   const navigate = useNavigate()
-  const { isLogined, setIsLogined } = useContext(LoginContext)
+  const { setIsLogined } = useContext(LoginContext)
   const { setUserEmail } = useContext(LoginedUserContext)
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
