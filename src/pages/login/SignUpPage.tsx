@@ -14,7 +14,7 @@ export const SignUpPage = () => {
   const [isValid, setIsValid] = useState<boolean>(false)
   const [isModalShow, setIsModalShow] = useState<boolean>(false)
   const [modalProps, setModalProps] = useState<ModalProps | null>(null)
-  const { isLogined, setIsLogined } = useContext(LoginContext)
+  const { setIsLogined } = useContext(LoginContext)
   const { setUserEmail } = useContext(LoginedUserContext)
 
   //유효성 검사
@@ -61,7 +61,12 @@ export const SignUpPage = () => {
           okButtonText: '확인',
           onClickOkButton: () => {
             setIsModalShow(false)
-            setIsLogined(!isLogined)
+            setIsLogined(true)
+            setUserEmail(res.user.email)
+            localStorage.setItem(
+              import.meta.env.VITE_STORAGE_KEY_ACCESSTOKEN,
+              res.accessToken
+            )
             navigate('/', { replace: true })
           }
         })
@@ -88,15 +93,6 @@ export const SignUpPage = () => {
         console.log(errorMessage)
       }
     )
-
-    postInfo(bodyInfo).then(res => {
-      event.preventDefault()
-      setUserEmail(res.user.email)
-      localStorage.setItem(
-        import.meta.env.VITE_STORAGE_KEY_ACCESSTOKEN,
-        res.accessToken
-      )
-    })
   }
 
   return (
@@ -109,6 +105,7 @@ export const SignUpPage = () => {
             value={email}
             onChange={e => setEmail(e.target.value)}
             ref={inputRef}
+            placeholder="이메일 형식으로 입력해주세요."
           />
         </div>
         <div className={styles.inputbox}>
@@ -118,6 +115,7 @@ export const SignUpPage = () => {
             value={password}
             onChange={e => setPassword(e.target.value)}
             ref={inputRef}
+            placeholder="8자 이상 입력해주세요."
           />
         </div>
         <div className={styles.inputbox}>
@@ -126,6 +124,7 @@ export const SignUpPage = () => {
             value={displayName}
             onChange={e => setDisplayName(e.target.value)}
             ref={inputRef}
+            placeholder="20자 이내로 입력해주세요."
           />
         </div>
         <button
