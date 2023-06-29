@@ -83,7 +83,27 @@ export const Confirmation = ({
     name,
     email
   ])
-
+  const validateAndPay = () => {
+    //계좌정보 / 사용자명 / 이메일 / 주소 / 휴대전화
+    if (selected && name && email && address && phoneNumber) {
+      // 계좌 목록 중 선택된 계좌를 찾아 '상품가격' 과 '선택된 계좌의 자산'을 비교
+      const accountBalance = accountData.find(
+        account => account.id === selected
+      )?.balance
+      if ((accountBalance as number) > total) {
+        receipt.map((item: CartProduct) => {
+          paymentHandler(item.product.id, selected)
+        })
+        setIsModalShow(true)
+        setUserCart([])
+      }
+      if ((accountBalance as number) < total) {
+        alert('계좌의 잔액이 부족합니다.')
+      }
+    } else {
+      alert('필수입력정보를 다시 확인해주세요.')
+    }
+  }
   return (
     <div className={styles.container}>
       <div className={styles.agree}>구매조건 확인 및 결제진행 동의</div>
@@ -92,27 +112,7 @@ export const Confirmation = ({
       </div>
       <button
         className={styles.confirm}
-        onClick={() => {
-          //계좌정보 / 사용자명 / 이메일 / 주소 / 휴대전화
-          if (selected && name && email && address && phoneNumber) {
-            // 계좌 목록 중 선택된 계좌를 찾아 '상품가격' 과 '선택된 계좌의 자산'을 비교
-            const accountBalance = accountData.find(
-              account => account.id === selected
-            )?.balance
-            if ((accountBalance as number) > total) {
-              receipt.map((item: CartProduct) => {
-                paymentHandler(item.product.id, selected)
-              })
-              setIsModalShow(true)
-              setUserCart([])
-            }
-            if ((accountBalance as number) < total) {
-              alert('계좌의 잔액이 부족합니다.')
-            }
-          } else {
-            alert('필수입력정보를 다시 확인해주세요.')
-          }
-        }}>
+        onClick={validateAndPay}>
         <span>
           {(total - (total - discountedPrice) + delivery).toLocaleString()}
         </span>
