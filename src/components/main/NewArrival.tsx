@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from 'react'
-import { adminInstance } from '../api/axios'
+import { adminInstance } from '../../api/axios'
 import 'styles/layout/NewArrival.scss'
 import { Link } from 'react-router-dom'
 import { RecentlyContext } from 'contexts/index'
