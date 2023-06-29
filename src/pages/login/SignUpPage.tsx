@@ -144,6 +144,7 @@ export const SignUpPage = () => {
             onChange={passwordValidCheck}
             ref={inputRef}
             placeholder="8자 이상 입력해주세요."
+            minLength={8}
           />
         </div>
         <div className={styles.inputbox}>
@@ -153,6 +154,7 @@ export const SignUpPage = () => {
             onChange={nameValidCheck}
             ref={inputRef}
             placeholder="20자 이내로 입력해주세요."
+            maxLength={20}
           />
         </div>
         <button

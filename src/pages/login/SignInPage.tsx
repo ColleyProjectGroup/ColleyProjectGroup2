@@ -127,6 +127,7 @@ export const SignInPage = () => {
             onChange={passwordValidCheck}
             placeholder="비밀번호"
             ref={inputRef}
+            minLength={8}
           />
           <button
             type="submit"
