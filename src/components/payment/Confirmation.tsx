@@ -14,8 +14,15 @@ import {
 import { useState, useContext, useEffect } from 'react'
 import { Modal } from 'components/index'
 import { ModalProps } from '@/types'
+import { Bank } from 'types/index'
 
-export const Confirmation = (props: any) => {
+export const Confirmation = ({
+  accountData,
+  selected
+}: {
+  accountData: Bank[]
+  selected: string
+}) => {
   const navigate = useNavigate()
   const { setUserCart } = useContext(CartContext)
   const { address } = useContext(UserAddressContext)
@@ -43,7 +50,7 @@ export const Confirmation = (props: any) => {
   const paymentHandler = (pro: string, acc: string) => {
     transactPayment({ productId: pro, accountId: acc })
   }
-
+  // console.log(receipt)
   useEffect(() => {
     if (isModalShow) {
       setModalProps({
@@ -87,14 +94,21 @@ export const Confirmation = (props: any) => {
         className={styles.confirm}
         onClick={() => {
           //계좌정보 / 사용자명 / 이메일 / 주소 / 휴대전화
-          if (props.selected && name && email && address && phoneNumber) {
-            // IF (TOTAL & BALANCE COMPARISON) {RECEIPT.MAP}
-            // IF (!TOTAL & BALANCE COMPARISON) { ALERT('BALANCE UNDER TOTAL') }
-            receipt.map((item: CartProduct) => {
-              paymentHandler(item.product.id, props.selected)
-            })
-            setIsModalShow(true)
-            setUserCart([])
+          if (selected && name && email && address && phoneNumber) {
+            // 계좌 목록 중 선택된 계좌를 찾아 '상품가격' 과 '선택된 계좌의 자산'을 비교
+            const accountBalance = accountData.find(
+              account => account.id === selected
+            )?.balance
+            if ((accountBalance as number) > total) {
+              receipt.map((item: CartProduct) => {
+                paymentHandler(item.product.id, selected)
+              })
+              setIsModalShow(true)
+              setUserCart([])
+            }
+            if ((accountBalance as number) < total) {
+              alert('계좌의 잔액이 부족합니다.')
+            }
           } else {
             alert('필수입력정보를 다시 확인해주세요.')
           }

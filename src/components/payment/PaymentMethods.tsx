@@ -178,7 +178,10 @@ export const PaymentMethods = () => {
       </Swiper>
 
       {/* PRODUCTS ID => PROPS */}
-      <Confirmation selected={selected} />
+      <Confirmation
+        selected={selected}
+        accountData={accountData}
+      />
       {/* MODAL */}
       {phoneNumber.length === 11 && isModalShow && modalProps ? (
         <Modal
