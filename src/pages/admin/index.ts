@@ -1,0 +1,5 @@
+export * from 'pages/admin/AdminDashboard'
+export * from 'pages/admin/AdminProducts'
+export * from 'pages/admin/AdminProductAdd'
+export * from 'pages/admin/AdminCustomers'
+export * from 'pages/admin/AdminSales'

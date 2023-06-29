@@ -1,10 +1,9 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
 import React, { useState, useContext, useMemo } from 'react'
 import { BestProduct } from 'components/index'
 import { Product } from 'types/index'
 import { RecentlyContext } from 'contexts/index'
 import { tags } from 'constants/index'
-import '../styles/layout/BestSeller.scss'
+import 'styles/layout/BestSeller.scss'
 
 export const BestSeller = React.memo(
   ({ products }: { products: Product[] }) => {

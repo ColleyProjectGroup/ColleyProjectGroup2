@@ -1,0 +1,5 @@
+export * from 'components/common/Footer'
+export * from 'components/common/Header'
+export * from 'components/common/ErrorComponent'
+export * from 'components/common/Modal'
+export * from 'components/common/NotFound'

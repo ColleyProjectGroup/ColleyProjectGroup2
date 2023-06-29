@@ -1,4 +1,4 @@
-import '../styles/layout/ColleyNews.scss'
+import 'styles/layout/ColleyNews.scss'
 
 const ColleyNews = () => {
   return (

@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { useLocation } from 'react-router-dom'
-import { adminInstance } from '../api/axios' // TODO : 수정 필요
+import { adminInstance } from 'api/index'
 import 'styles/layout/NewArrival.scss'
 import { ProductsProps, Product } from 'types/index'
 import { Link } from 'react-router-dom'
