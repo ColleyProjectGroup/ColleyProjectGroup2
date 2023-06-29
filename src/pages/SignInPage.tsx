@@ -49,6 +49,7 @@ export const SignInPage = () => {
     getId(idInfo).then(
       res => {
         event.preventDefault()
+        setIsLogined(true)
         setUserEmail(res.user.email)
         localStorage.setItem(
           import.meta.env.VITE_STORAGE_KEY_ACCESSTOKEN,
@@ -59,9 +60,8 @@ export const SignInPage = () => {
           navigate('/admin')
           setIsLogined(!isLogined)
         } else {
-          //navigate('/', { replace: true })
           location.replace(document.referrer)
-          setIsLogined(!isLogined)
+          setIsLogined(true)
         }
       },
       error => {

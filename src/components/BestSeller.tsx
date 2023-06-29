@@ -62,6 +62,7 @@ export const BestSeller = React.memo(
                 className={`tabPane ${activeTab === 'Home' ? 'active' : ''}`}>
                 {bestProducts.slice(0, 4).map(product => (
                   <BestProduct
+                    key={product.id}
                     product={product}
                     onSaveProductRecently={onSaveProductRecently}
                   />
@@ -78,6 +79,7 @@ export const BestSeller = React.memo(
                   .slice(0, 4)
                   .map(product => (
                     <BestProduct
+                      key={product.id}
                       product={product}
                       onSaveProductRecently={onSaveProductRecently}
                     />
@@ -94,6 +96,7 @@ export const BestSeller = React.memo(
                   .slice(0, 4)
                   .map(product => (
                     <BestProduct
+                      key={product.id}
                       product={product}
                       onSaveProductRecently={onSaveProductRecently}
                     />
