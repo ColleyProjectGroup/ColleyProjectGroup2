@@ -4,17 +4,14 @@ import styled from 'styles/components/product/productDetailInfoTab.module.scss'
 
 export const ProductDetailInfoTab = ({ child }: { child: JSX.Element }) => {
   const [isSelectedTab, setIsSelectedTab] = useState<number>(0)
+  const tabItemMap = new Map()
+    .set(1, tabItems.PAYMENT_INFO)
+    .set(2, tabItems.PRODUCT_REVIEW)
+    .set(3, tabItems.PRODUCT_QaA)
+
   const tabItem = useMemo(() => {
-    if (isSelectedTab === 1) {
-      return tabItems.PAYMENT_INFO
-    } else if (isSelectedTab === 2) {
-      return tabItems.PRODUCT_REVIEW
-    } else if (isSelectedTab === 3) {
-      return tabItems.PRODUCT_QaA
-    } else {
-      return null
-    }
-  }, [isSelectedTab])
+    return tabItemMap.get(isSelectedTab) || null
+  }, [isSelectedTab, tabItemMap])
 
   return (
     <>

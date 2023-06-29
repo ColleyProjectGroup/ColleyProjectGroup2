@@ -3,7 +3,7 @@ import { Product } from 'types/index'
 import SwiperCore, { Navigation } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Link } from 'react-router-dom'
-import styled from 'styles/components/recentlyList.module.scss'
+import styled from 'styles/components/main/recentlyList.module.scss'
 import 'swiper/scss'
 import 'swiper/scss/navigation'
 

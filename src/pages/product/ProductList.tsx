@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
-import { Products } from '../components/Products'
-import { Footer } from '../components'
+import { Products, Footer } from 'components/index'
 import 'styles/layout/ProductList.scss'
 
 const ProductList = () => {

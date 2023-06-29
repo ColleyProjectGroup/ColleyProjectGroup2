@@ -2,7 +2,7 @@ import { useState, FormEvent, useContext, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { postInfo } from 'api/signApi'
 import { LoginContext, LoginedUserContext } from 'contexts/index'
-import { Modal } from 'components/Modal'
+import { Modal } from 'components/index'
 import { ModalProps } from 'types/ModalProps.type'
 import styles from 'styles/pages/signup.module.scss'
 
