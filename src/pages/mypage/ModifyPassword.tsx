@@ -1,6 +1,6 @@
 import styles from 'styles/pages/modifyPassword.module.scss'
 import { InfoModify } from 'api/index'
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router'
 import { Modal } from 'components/index'
 import { ModalProps } from 'types/index'
@@ -11,6 +11,48 @@ export const ModifyPassword = () => {
   const [oldPassword, setOldPassword] = useState('')
   const [isModalShow, setIsModalShow] = useState<boolean>(false)
   const [modalProps, setModalProps] = useState<ModalProps | null>(null)
+  const [isValid, setIsValid] = useState<boolean>(false)
+
+  //유효성 검사
+  useEffect(() => {
+    if (newPassword && oldPassword) {
+      setIsValid(true)
+    } else {
+      setIsValid(false)
+    }
+  }, [newPassword, oldPassword])
+
+  const inputRef = useRef<HTMLInputElement | null>(null)
+  useEffect(() => {
+    function handleOutside(e: Event) {
+      // current.contains(e.target) : 컴포넌트 특정 영역 외 클릭 감지를 위해 사용
+      if (inputRef.current && !inputRef.current.contains(e.target as Node)) {
+        inputRef.current.blur()
+      }
+    }
+    document.addEventListener('mousedown', handleOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleOutside)
+    }
+  }, [inputRef])
+
+  const oldValidCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const passwordValue = e.target.value
+    if (passwordValue.includes(' ')) {
+      alert('띄어쓰기는 사용할 수 없습니다.')
+    } else {
+      setOldPassword(passwordValue)
+    }
+  }
+
+  const newValidCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const passwordValue = e.target.value
+    if (passwordValue.includes(' ')) {
+      alert('띄어쓰기는 사용할 수 없습니다.')
+    } else {
+      setNewPassword(passwordValue)
+    }
+  }
 
   const Modify = () => {
     event?.preventDefault()
@@ -45,9 +87,9 @@ export const ModifyPassword = () => {
             <input
               type="password"
               value={oldPassword}
-              onChange={e => {
-                setOldPassword(e.target.value)
-              }}
+              minLength={8}
+              onChange={oldValidCheck}
+              placeholder="8자리 이상 입력해주세요"
             />
           </div>
         </div>
@@ -57,13 +99,17 @@ export const ModifyPassword = () => {
             <input
               type="password"
               value={newPassword}
-              onChange={e => {
-                setNewPassword(e.target.value)
-              }}
+              minLength={8}
+              onChange={newValidCheck}
+              placeholder="8자리 이상 입력해주세요"
             />
           </div>
         </div>
-        <button type="submit">변경</button>
+        <button
+          type="submit"
+          disabled={!isValid}>
+          변경
+        </button>
       </form>
 
       {isModalShow && modalProps ? (
