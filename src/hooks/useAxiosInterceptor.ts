@@ -54,10 +54,11 @@ export const useAxiosInterceptor = (
         return Promise.reject(errorObj)
       }
     } else {
-      const showModal = !error.request?.responseURL.includes(
-        '/auth/login',
-        '/auth/signup'
-      )
+      const url = error.request?.responseURL ?? ''
+      const showModal =
+        !url.includes('/auth/login') &&
+        !url.includes('/auth/signup') &&
+        !url.includes('/products/transactions/details')
 
       if (
         error.request?.responseURL &&
