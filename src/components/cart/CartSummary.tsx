@@ -2,7 +2,7 @@ import styles from 'styles/components/cart/cartSummary.module.scss'
 import { CartProduct } from 'types/index'
 import { useNavigate } from 'react-router-dom'
 import { CartContext, LoginContext, CheckedContext } from 'contexts/index'
-import { useContext, useEffect, useState, useCallback } from 'react'
+import { useContext, useEffect, useState, useCallback, useMemo } from 'react'
 import { calculateDiscountedPrice } from 'utils/index'
 
 export const CartSummary = () => {
@@ -51,13 +51,15 @@ export const CartSummary = () => {
       : alert('장바구니에 상품을 선택 후 다시 시도해주세요.')
   }, [filtered, isLogined, navigate])
 
-  const total = filtered.reduce((acc: number, cur: CartProduct) => {
-    const discounted = calculateDiscountedPrice(
-      cur.product.price,
-      cur.product.discountRate
-    )
-    return acc + discounted * cur.quantity
-  }, 0)
+  const total = useMemo((): any => {
+    return filtered.reduce((acc: number, cur: CartProduct): any => {
+      const discounted = calculateDiscountedPrice(
+        cur.product.price,
+        cur.product.discountRate
+      )
+      return acc + discounted * cur.quantity
+    }, 0)
+  }, [filtered])
   const delivery = 3000
 
   return (
