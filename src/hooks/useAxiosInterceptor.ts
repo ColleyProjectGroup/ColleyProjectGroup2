@@ -56,7 +56,8 @@ export const useAxiosInterceptor = (
     } else {
       const showModal = !error.request?.responseURL.includes(
         '/auth/login',
-        '/auth/signup'
+        '/auth/signup',
+        'products/transactions/details'
       )
 
       if (
