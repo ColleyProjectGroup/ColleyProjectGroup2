@@ -67,7 +67,6 @@ export const SignInPage = () => {
           location.replace('/admin')
           setIsLogined(true)
         } else {
-          //navigate('/', { replace: true })
           location.replace(document.referrer)
           setIsLogined(true)
         }

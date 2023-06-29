@@ -49,7 +49,7 @@ export const AdminSalesItem = React.memo(
             <button
               className={styled['back']}
               onClick={handleOrderCancelBackClick}>
-              주문철회
+              취소철회
             </button>
           ) : !detail.done ? (
             <button
