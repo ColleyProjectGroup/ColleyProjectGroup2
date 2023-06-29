@@ -41,7 +41,7 @@ export const App = () => {
 
   const path: string = useLocation().pathname
   useEffect(() => {
-    if (path === '/mypage') {
+    if (path === '/mypage' || path === '/mypage/order') {
       if (isLogined === false) {
         setIsModalShow(true)
         setModalProps({
