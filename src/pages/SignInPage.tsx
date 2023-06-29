@@ -40,6 +40,15 @@ export const SignInPage = () => {
     }
   }, [inputRef])
 
+  useEffect(() => {
+    const token = localStorage.getItem(
+      import.meta.env.VITE_STORAGE_KEY_ACCESSTOKEN
+    )
+    if (token) {
+      navigate('/') // Redirect to the main page if the user is already logged in
+    }
+  }, [])
+
   const submitId = (event: FormEvent) => {
     event.preventDefault()
     const idInfo = {
@@ -48,7 +57,6 @@ export const SignInPage = () => {
     }
     getId(idInfo).then(
       res => {
-        event.preventDefault()
         setUserEmail(res.user.email)
         localStorage.setItem(
           import.meta.env.VITE_STORAGE_KEY_ACCESSTOKEN,
@@ -56,12 +64,12 @@ export const SignInPage = () => {
         )
         const adminEmail = res.user.email
         if (adminEmail === import.meta.env.VITE_ADMIN_EMAIL) {
-          navigate('/admin')
-          setIsLogined(!isLogined)
+          location.replace('/admin')
+          setIsLogined(true)
         } else {
           //navigate('/', { replace: true })
           location.replace(document.referrer)
-          setIsLogined(!isLogined)
+          setIsLogined(true)
         }
       },
       error => {
