@@ -14,7 +14,7 @@ export const SignUpPage = () => {
   const [isValid, setIsValid] = useState<boolean>(false)
   const [isModalShow, setIsModalShow] = useState<boolean>(false)
   const [modalProps, setModalProps] = useState<ModalProps | null>(null)
-  const { isLogined, setIsLogined } = useContext(LoginContext)
+  const { setIsLogined } = useContext(LoginContext)
   const { setUserEmail } = useContext(LoginedUserContext)
 
   //유효성 검사
