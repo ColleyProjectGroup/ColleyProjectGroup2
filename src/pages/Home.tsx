@@ -23,7 +23,6 @@ export const Home = () => {
   useEffect(() => {
     fetchAllProducts().then(res => {
       setProdcuts(res)
-      console.log(res)
     })
   }, [])
 

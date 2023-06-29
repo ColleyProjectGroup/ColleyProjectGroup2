@@ -6,7 +6,7 @@ import { LoginContext, LoginedUserContext, CartContext } from 'contexts/index'
 import { CommonError } from 'types/index'
 
 export const MyPageNav = () => {
-  const { isLogined, setIsLogined } = useContext(LoginContext)
+  const { setIsLogined } = useContext(LoginContext)
   const { setUserEmail } = useContext(LoginedUserContext)
   const { setUserCart } = useContext(CartContext)
   const navigate = useNavigate()
@@ -15,7 +15,7 @@ export const MyPageNav = () => {
     setUserEmail('')
     setUserCart([])
     localStorage.removeItem(import.meta.env.VITE_STORAGE_KEY_ACCESSTOKEN)
-    setIsLogined(!isLogined)
+    setIsLogined(false)
     navigate('/')
   }
 

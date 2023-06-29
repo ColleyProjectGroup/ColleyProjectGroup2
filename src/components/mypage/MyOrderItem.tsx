@@ -4,6 +4,7 @@ import { MyOrderItemProps } from 'types/index'
 import { calculateDiscountedPrice } from 'utils/index'
 import styled from 'styles/components/mypage/myOrderItem.module.scss'
 import { Link } from 'react-router-dom'
+import noImage from 'public/no-photo.png'
 
 export const MyOrderItem = React.memo(
   ({ detail, isLast, onClickConfirm, onClickCancel }: MyOrderItemProps) => {
@@ -34,7 +35,7 @@ export const MyOrderItem = React.memo(
         <Link to={`/products/${detail.product.productId}`}>
           <span className={styled['timestamp']}>{paidDate}</span>
           <img
-            src={detail.product.thumbnail || 'public/images/no-photo.png'}
+            src={detail.product.thumbnail || noImage}
             alt=""
           />
           <p>{detail.product.title}</p>

@@ -41,7 +41,7 @@ export const App = () => {
 
   const path: string = useLocation().pathname
   useEffect(() => {
-    if (path === '/mypage') {
+    if (path === '/mypage' || path === '/mypage/order') {
       if (isLogined === false) {
         setIsModalShow(true)
         setModalProps({
@@ -52,20 +52,6 @@ export const App = () => {
           onClickOkButton: () => {
             setIsModalShow(false)
             navigate('/signin')
-          }
-        })
-      }
-    } else if (path === '/signin' || path === '/signup') {
-      if (isLogined === true) {
-        setIsModalShow(true)
-        setModalProps({
-          title: '로그인',
-          content: '이미 로그인되었습니다.',
-          isTwoButton: false,
-          okButtonText: '확인',
-          onClickOkButton: () => {
-            setIsModalShow(false)
-            navigate('/')
           }
         })
       }
