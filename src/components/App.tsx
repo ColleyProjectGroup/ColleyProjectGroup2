@@ -55,20 +55,6 @@ export const App = () => {
           }
         })
       }
-    } else if (path === '/signin' || path === '/signup') {
-      if (isLogined === true) {
-        setIsModalShow(true)
-        setModalProps({
-          title: '로그인',
-          content: '이미 로그인되었습니다.',
-          isTwoButton: false,
-          okButtonText: '확인',
-          onClickOkButton: () => {
-            setIsModalShow(false)
-            navigate('/')
-          }
-        })
-      }
     }
   }, [path])
 

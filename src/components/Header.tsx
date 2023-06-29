@@ -48,7 +48,7 @@ export const Header: React.FC = () => {
     setUserEmail('')
     setUserCart([])
     localStorage.removeItem(import.meta.env.VITE_STORAGE_KEY_ACCESSTOKEN)
-    setIsLogined(!isLogined)
+    setIsLogined(false)
     navigate('/')
   }
 
