@@ -26,30 +26,33 @@ export const Order = () => {
     fetchOrders()
   }, [])
 
-  return
-  {
-    isLogined ? (
-      <div className={styled.container}>
-        <div className={styled.path}>
-          <Link to="/">홈</Link>
-          <span>/</span>
-          <Link to="/mypage">마이쇼핑</Link>
-          <span>/ 주문조회</span>
-        </div>
-        <h4>주문 조회</h4>
-        <div className={styled.tabs}>
-          <div className={`${styled.tab} ${styled.active}`}>
-            주문내역조회 ({orders.length.toLocaleString()})
+  return (
+    <>
+      {isLogined ? (
+        <div className={styled.container}>
+          <div className={styled.path}>
+            <Link to="/">홈</Link>
+            <span>/</span>
+            <Link to="/mypage">마이쇼핑</Link>
+            <span>/ 주문조회</span>
           </div>
-          <div className={`${styled.tab} ${styled.inactive}`}></div>
+          <h4>주문 조회</h4>
+          <div className={styled.tabs}>
+            <div className={`${styled.tab} ${styled.active}`}>
+              주문내역조회 ({orders.length.toLocaleString()})
+            </div>
+            <div className={`${styled.tab} ${styled.inactive}`}></div>
+          </div>
+          <MyOrderList
+            title={''}
+            orders={orders}
+            onFetch={fetchOrders}
+            isLoading={isLoading}
+          />
         </div>
-        <MyOrderList
-          title={''}
-          orders={orders}
-          onFetch={fetchOrders}
-          isLoading={isLoading}
-        />
-      </div>
-    ) : null
-  }
+      ) : (
+        <div></div>
+      )}
+    </>
+  )
 }

@@ -4,6 +4,7 @@ import { calculateDiscountedPrice } from 'utils/index'
 import styled from 'styles/components/mypage/myWishItem.module.scss'
 import { Link } from 'react-router-dom'
 import { WishListContext } from 'contexts/index'
+import noImage from 'public/no-photo.png'
 
 export const MyWishrItem = React.memo(
   ({ product, isLast, isChecked, onChange }: MyWishItemProps) => {
@@ -32,7 +33,7 @@ export const MyWishrItem = React.memo(
         />
         <Link to={`/products/${product.id}`}>
           <img
-            src={product.thumbnail || 'public/images/no-photo.png'}
+            src={product.thumbnail || noImage}
             alt=""
           />
           <div className={styled['product__info']}>

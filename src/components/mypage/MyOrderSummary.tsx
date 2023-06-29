@@ -2,6 +2,9 @@ import React, { useMemo } from 'react'
 import { TransactionDetail } from 'types/index'
 import { calculateDiscountedPrice } from 'utils/index'
 import styled from 'styles/components/mypage/myOrderSummary.module.scss'
+import iconWon from '/public/ico_won.png'
+import iconCoupon from '/public/ico_coupon.png'
+import iconOrder from '/public/ico_orders.png'
 
 export const MyOrderSummary = React.memo(
   ({
@@ -35,7 +38,7 @@ export const MyOrderSummary = React.memo(
         <div className={styled['summary__item']}>
           <img
             className={styled['summary__icon']}
-            src="/public/images/ico_won.png"
+            src={iconWon}
             alt="적립금"
           />
           {isLoading ? (
@@ -50,7 +53,7 @@ export const MyOrderSummary = React.memo(
         <div className={styled['summary__item']}>
           <img
             className={styled['summary__icon']}
-            src="/public/images/ico_coupon.png"
+            src={iconCoupon}
             alt="쿠폰"
           />
           {isLoading ? (
@@ -63,7 +66,7 @@ export const MyOrderSummary = React.memo(
         <div className={styled['summary__item']}>
           <img
             className={styled['summary__icon']}
-            src="/public/images/ico_orders.png"
+            src={iconOrder}
             alt="주문"
           />
           {isLoading ? (
