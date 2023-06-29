@@ -53,6 +53,7 @@ export const SignUpPage = () => {
           import.meta.env.VITE_STORAGE_KEY_ACCESSTOKEN,
           res.accessToken
         )
+        setUserEmail(res.user.email)
         setIsModalShow(true)
         setModalProps({
           title: '회원가입',
@@ -88,15 +89,6 @@ export const SignUpPage = () => {
         console.log(errorMessage)
       }
     )
-
-    postInfo(bodyInfo).then(res => {
-      event.preventDefault()
-      setUserEmail(res.user.email)
-      localStorage.setItem(
-        import.meta.env.VITE_STORAGE_KEY_ACCESSTOKEN,
-        res.accessToken
-      )
-    })
   }
 
   return (
