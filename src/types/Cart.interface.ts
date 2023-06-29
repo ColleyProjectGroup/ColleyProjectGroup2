@@ -1,9 +1,9 @@
 import { Product } from 'types/index'
-export interface Cart {
-  total: string
-  delivery: string
-  products: string
-}
+// export interface Cart {
+//   total: string
+//   delivery: string
+//   products: string
+// }
 
 export interface CartProduct {
   product: Product

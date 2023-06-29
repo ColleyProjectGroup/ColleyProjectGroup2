@@ -66,7 +66,16 @@ export const Confirmation = (props: any) => {
         }
       })
     }
-  }, [isModalShow, navigate, receipt])
+  }, [
+    isModalShow,
+    navigate,
+    receipt,
+    address,
+    addressDetail,
+    phoneNumber,
+    name,
+    email
+  ])
 
   return (
     <div className={styles.container}>
@@ -79,6 +88,8 @@ export const Confirmation = (props: any) => {
         onClick={() => {
           //계좌정보 / 사용자명 / 이메일 / 주소 / 휴대전화
           if (props.selected && name && email && address && phoneNumber) {
+            // IF (TOTAL & BALANCE COMPARISON) {RECEIPT.MAP}
+            // IF (!TOTAL & BALANCE COMPARISON) { ALERT('BALANCE UNDER TOTAL') }
             receipt.map((item: CartProduct) => {
               paymentHandler(item.product.id, props.selected)
             })

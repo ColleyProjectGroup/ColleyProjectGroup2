@@ -11,12 +11,12 @@ import {
   BankContext,
   AccountNumberContext
 } from 'contexts/index'
-import { ModalProps } from '@/types'
+import { ModalProps } from 'types/index'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import SwiperCore, { Navigation } from 'swiper'
 import 'swiper/scss'
 import 'swiper/scss/navigation'
-import { Bank } from '@/types/BankAccounts.interface'
+import { Bank } from 'types/index'
 import { removeAccount, getAccounts, createAccount } from 'api/index'
 
 export const PaymentMethods = () => {
