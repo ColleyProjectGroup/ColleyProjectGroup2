@@ -144,7 +144,7 @@ export const ProductAddForm = ({ product, onSubmit }: ProductAddFormProps) => {
         <input
           value={title}
           type="text"
-          placeholder="상품명 입력"
+          placeholder="상품명 입력 *"
           onChange={e => setTitle(e.target.value)}
         />
       </label>
@@ -152,7 +152,7 @@ export const ProductAddForm = ({ product, onSubmit }: ProductAddFormProps) => {
         상품설명
         <textarea
           value={description}
-          placeholder="상품설명 입력"
+          placeholder="상품설명 입력 *"
           onChange={e => setDescription(e.target.value)}
           maxLength={100}
         />
@@ -162,7 +162,7 @@ export const ProductAddForm = ({ product, onSubmit }: ProductAddFormProps) => {
         <input
           value={tagStr}
           type="text"
-          placeholder="태그는 , 로 구분하여 입력"
+          placeholder="태그는 , 로 구분하여 입력 *"
           onChange={e => setTagStr(e.target.value)}
         />
       </label>
@@ -172,7 +172,7 @@ export const ProductAddForm = ({ product, onSubmit }: ProductAddFormProps) => {
           <input
             value={price ?? ''}
             type="number"
-            placeholder="가격 입력"
+            placeholder="가격 입력 *"
             onChange={e => setPrice(e.target.value.trim())}
           />
         </label>
@@ -181,7 +181,8 @@ export const ProductAddForm = ({ product, onSubmit }: ProductAddFormProps) => {
           <input
             value={discountRate ?? ''}
             type="number"
-            placeholder="할인율 입력"
+            placeholder="할인율 입력(0~99)"
+            max={99}
             onChange={e => setDiscountRate(e.target.value.trim())}
           />
         </label>
