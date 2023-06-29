@@ -31,7 +31,7 @@ export const PaymentMethods = () => {
   const [selected, setSelected] = useState<string>('')
   const [accountData, setAccountData] = useState<Bank[]>([])
   const [valid, setValid] = useState<boolean>(false)
-  // console.log(accountData)
+
   SwiperCore.use([Navigation])
 
   //MODAL HANDLERS
