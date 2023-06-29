@@ -21,6 +21,7 @@ export const BankSelection = ({ setValid }: childProps) => {
     e: React.ChangeEvent<HTMLSelectElement>
   ) => {
     setBank(e.currentTarget.value)
+    setAccountNumber('')
   }
 
   const reducer: Reducer<number, string> = (

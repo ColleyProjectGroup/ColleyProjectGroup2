@@ -20,16 +20,18 @@ import { Bank } from '@/types/BankAccounts.interface'
 import { removeAccount, getAccounts, createAccount } from 'api/index'
 
 export const PaymentMethods = () => {
+  // USER INFO
   const { phoneNumber } = useContext(PhoneNumberContext)
   const { bank } = useContext(BankContext)
   const { accountNumber } = useContext(AccountNumberContext)
-
+  // MODAL
   const [isModalShow, setIsModalShow] = useState<boolean>(false)
-  const [selected, setSelected] = useState<string>('')
   const [modalProps, setModalProps] = useState<ModalProps | null>(null)
+  // ACCOUNT
+  const [selected, setSelected] = useState<string>('')
   const [accountData, setAccountData] = useState<Bank[]>([])
   const [valid, setValid] = useState<boolean>(false)
-
+  // console.log(accountData)
   SwiperCore.use([Navigation])
 
   //MODAL HANDLERS
@@ -51,36 +53,35 @@ export const PaymentMethods = () => {
       accountNumber: accountNumber,
       phoneNumber: phoneNumber,
       signature: true
-    }).then(async res => {
-      if (res.status === 200) {
-        await getAccounts().then(response => {
-          setAccountData(response)
-        })
-      }
     })
   }, [bank, accountNumber, phoneNumber])
 
-  const removeAndRender = async (val: string) => {
+  const removeAndAlert = async (val: string) => {
     await removeAccount({
       accountId: val,
       signature: true
-    })
-    await getAccounts().then(response => {
-      setAccountData(response)
     })
     alert('계좌가 삭제되었습니다.')
   }
 
   const addAccountHandler = useCallback(() => {
-    if (valid) {
+    if (!valid) {
+      alert('계좌 추가에 실패했습니다. 계좌번호를 끝까지 입력해주세요.')
+    }
+    const accountExists = accountData.some(account =>
+      account.bankCode.includes(bank)
+    )
+    if (valid && accountExists) {
+      alert('이미 존재하는 계좌입니다.')
+    }
+
+    if (valid && !accountExists) {
       createAndRender().then(() => {
         alert('계좌가 추가되었습니다.')
         setIsModalShow(false)
       })
-    } else {
-      alert('계좌 추가에 실패했습니다. 계좌번호를 끝까지 입력해주세요.')
     }
-  }, [createAndRender, valid])
+  }, [createAndRender, valid, accountData, bank])
 
   // ######TOSS PAYMENTS WIDGET
   const clientKey = 'test_ck_P24xLea5zVAxXyyGMxb3QAMYNwW6'
@@ -104,7 +105,7 @@ export const PaymentMethods = () => {
     getAccounts().then(response => {
       setAccountData(response)
     })
-  }, [])
+  }, [accountData])
 
   useEffect(() => {
     if (phoneNumber.length === 11) {
@@ -162,7 +163,7 @@ export const PaymentMethods = () => {
                 {item.bankName}&nbsp;{item.accountNumber}
                 <a
                   onClick={() => {
-                    removeAndRender(item.id)
+                    removeAndAlert(item.id)
                   }}>
                   ✖
                 </a>
