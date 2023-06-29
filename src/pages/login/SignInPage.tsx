@@ -49,6 +49,24 @@ export const SignInPage = () => {
     }
   }, [])
 
+  const emailValidCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const emailValue = e.target.value
+    if (emailValue.includes(' ')) {
+      alert('띄어쓰기는 사용할 수 없습니다.')
+    } else {
+      setEmail(emailValue)
+    }
+  }
+
+  const passwordValidCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const passwordValue = e.target.value
+    if (passwordValue.includes(' ')) {
+      alert('띄어쓰기는 사용할 수 없습니다.')
+    } else {
+      setPassword(passwordValue)
+    }
+  }
+
   const submitId = (event: FormEvent) => {
     event.preventDefault()
     const idInfo = {
@@ -99,16 +117,17 @@ export const SignInPage = () => {
         <form onSubmit={submitId}>
           <input
             value={email}
-            onChange={e => setEmail(e.target.value)}
+            onChange={emailValidCheck}
             placeholder="이메일"
             ref={inputRef}
           />
           <input
             type="password"
             value={password}
-            onChange={e => setPassword(e.target.value)}
+            onChange={passwordValidCheck}
             placeholder="비밀번호"
             ref={inputRef}
+            minLength={8}
           />
           <button
             type="submit"

@@ -40,6 +40,33 @@ export const SignUpPage = () => {
     }
   }, [inputRef])
 
+  const emailValidCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const emailValue = e.target.value
+    if (emailValue.includes(' ')) {
+      alert('띄어쓰기는 사용할 수 없습니다.')
+    } else {
+      setEmail(emailValue)
+    }
+  }
+
+  const passwordValidCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const passwordValue = e.target.value
+    if (passwordValue.includes(' ')) {
+      alert('띄어쓰기는 사용할 수 없습니다.')
+    } else {
+      setPassword(passwordValue)
+    }
+  }
+
+  const nameValidCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const nameValue = e.target.value
+    if (nameValue.includes(' ')) {
+      alert('띄어쓰기는 사용할 수 없습니다.')
+    } else {
+      setDisplayName(nameValue)
+    }
+  }
+
   const submitBodyInfo = (event: FormEvent) => {
     event.preventDefault()
     const bodyInfo = {
@@ -53,6 +80,7 @@ export const SignUpPage = () => {
           import.meta.env.VITE_STORAGE_KEY_ACCESSTOKEN,
           res.accessToken
         )
+        setUserEmail(res.user.email)
         setIsModalShow(true)
         setModalProps({
           title: '회원가입',
@@ -103,7 +131,7 @@ export const SignUpPage = () => {
           <div className={styles.text}>이메일</div>
           <input
             value={email}
-            onChange={e => setEmail(e.target.value)}
+            onChange={emailValidCheck}
             ref={inputRef}
             placeholder="이메일 형식으로 입력해주세요."
           />
@@ -113,18 +141,20 @@ export const SignUpPage = () => {
           <input
             type="password"
             value={password}
-            onChange={e => setPassword(e.target.value)}
+            onChange={passwordValidCheck}
             ref={inputRef}
             placeholder="8자 이상 입력해주세요."
+            minLength={8}
           />
         </div>
         <div className={styles.inputbox}>
-          <div className={styles.text}>이름</div>
+          <div className={styles.text}>회원명</div>
           <input
             value={displayName}
-            onChange={e => setDisplayName(e.target.value)}
+            onChange={nameValidCheck}
             ref={inputRef}
             placeholder="20자 이내로 입력해주세요."
+            maxLength={20}
           />
         </div>
         <button
