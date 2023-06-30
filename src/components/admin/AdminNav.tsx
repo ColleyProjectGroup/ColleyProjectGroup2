@@ -25,6 +25,9 @@ export const AdminNav = () => {
         <li className={path === '/admin/sales' ? styled.active : ''}>
           <Link to="/admin/sales">Sales</Link>
         </li>
+        <li className={styled.home}>
+          <Link to="/">Home</Link>
+        </li>
       </ul>
     </nav>
   )

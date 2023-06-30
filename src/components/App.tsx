@@ -31,7 +31,9 @@ export const App = () => {
   >('RecentlyViewed', [])
   const [wishList, setWishList] = useLocalStorage<Product[]>(
     `wish-${userEmail}`,
-    [],
+    isLogined
+      ? JSON.parse(localStorage.getItem('wish-${userEmail}') as string)
+      : [],
     isLogined
   )
 
@@ -41,7 +43,11 @@ export const App = () => {
 
   const path: string = useLocation().pathname
   useEffect(() => {
-    if (path === '/mypage' || path === '/mypage/order') {
+    if (
+      path === '/mypage' ||
+      path === '/mypage/order' ||
+      path === '/mypage/wishlist'
+    ) {
       if (isLogined === false) {
         setIsModalShow(true)
         setModalProps({
