@@ -12,7 +12,6 @@ export const SignUpPage = () => {
   const [password, setPassword] = useState<string>('')
   const [displayName, setDisplayName] = useState<string>('')
   const [isValid, setIsValid] = useState<boolean>(false)
-  const [emailIsValid, setEmailIsValid] = useState<boolean>(false)
   const [isModalShow, setIsModalShow] = useState<boolean>(false)
   const [modalProps, setModalProps] = useState<ModalProps | null>(null)
   const { setIsLogined } = useContext(LoginContext)
@@ -63,8 +62,7 @@ export const SignUpPage = () => {
     const emailRegEx = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
     const testEmail = emailRegEx.test(email)
     if (testEmail) {
-      setEmailIsValid(true)
-      return
+      return true
     } else {
       setIsModalShow(true)
       setModalProps({
@@ -76,6 +74,7 @@ export const SignUpPage = () => {
           setIsModalShow(false)
         }
       })
+      return false
     }
   }
 
@@ -104,7 +103,7 @@ export const SignUpPage = () => {
       password,
       displayName
     }
-    if (emailIsValid) {
+    if (emailValidCheck()) {
       postInfo(bodyInfo).then(
         res => {
           localStorage.setItem(
@@ -122,11 +121,7 @@ export const SignUpPage = () => {
               setIsModalShow(false)
               setIsLogined(true)
               setUserEmail(res.user.email)
-              localStorage.setItem(
-                import.meta.env.VITE_STORAGE_KEY_ACCESSTOKEN,
-                res.accessToken
-              )
-              location.replace('/')
+              navigate('/', { replace: true })
             }
           })
         },
@@ -191,7 +186,6 @@ export const SignUpPage = () => {
         </div>
         <button
           type="submit"
-          onClick={emailValidCheck}
           disabled={!isValid}>
           회원가입
         </button>

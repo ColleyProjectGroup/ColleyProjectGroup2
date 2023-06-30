@@ -18,7 +18,7 @@ export function useLocalStorage<T>(
     // 위시리스트 재로그인 예외처리
     if (key.includes('wish') && state) {
       const wishList = JSON.parse(localStorage.getItem(key) as string)
-      if (wishList.length > 0 && state.length === 0) {
+      if (wishList && wishList.length > 0 && state.length === 0) {
         localStorage.setItem(key, JSON.stringify([...wishList]))
         return
       }
