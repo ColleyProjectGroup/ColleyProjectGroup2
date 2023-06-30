@@ -18,6 +18,15 @@ export const SignUpPage = () => {
   const { setIsLogined } = useContext(LoginContext)
   const { setUserEmail } = useContext(LoginedUserContext)
 
+  useEffect(() => {
+    const token = localStorage.getItem(
+      import.meta.env.VITE_STORAGE_KEY_ACCESSTOKEN
+    )
+    if (token) {
+      navigate('/') // Redirect to the main page if the user is already logged in
+    }
+  }, [])
+
   //유효성 검사
   useEffect(() => {
     if (email && password && displayName) {
@@ -117,7 +126,7 @@ export const SignUpPage = () => {
                 import.meta.env.VITE_STORAGE_KEY_ACCESSTOKEN,
                 res.accessToken
               )
-              navigate('/', { replace: true })
+              location.replace('/')
             }
           })
         },
