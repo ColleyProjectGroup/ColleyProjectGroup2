@@ -63,7 +63,9 @@ export const adminFetchCustomers = async () => {
         const customerInfos: CustomerInfo[] = customers.map(
           (customer: Customer) => {
             const customerTransactions = orders.filter(
-              (order: TransactionDetail) => order.user.email === customer.email
+              (order: TransactionDetail) =>
+                order.user.email === customer.email &&
+                (order.done || !order.isCanceled)
             )
             return {
               user: customer,
