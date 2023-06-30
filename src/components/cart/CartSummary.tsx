@@ -14,6 +14,7 @@ export const CartSummary = ({
   const navigate = useNavigate()
   const { userCart } = useContext(CartContext)
   const { isLogined } = useContext(LoginContext)
+  console.log(isLogined)
   const orderAllHandler = () => {
     if (!isLogined) {
       alert('로그인이 필요한 서비스입니다. 로그인 페이지로 이동합니다.')
@@ -21,14 +22,18 @@ export const CartSummary = ({
     }
 
     const itemsInCart = userCart.length !== 0
-    isLogined && itemsInCart
-      ? navigate('/payment', {
-          state: {
-            //장바구니 내 상품정보 데이터
-            products: [...userCart]
-          }
-        })
-      : alert('장바구니에 상품을 추가 후 다시 시도해주세요.')
+
+    if (isLogined && itemsInCart) {
+      navigate('/payment', {
+        state: {
+          //장바구니 내 상품정보 데이터
+          products: [...userCart]
+        }
+      })
+    }
+    if (isLogined && !itemsInCart) {
+      alert('장바구니에 상품을 추가 후 다시 시도해주세요.')
+    }
   }
 
   const orderSelectedHandler = useCallback(() => {
@@ -39,14 +44,17 @@ export const CartSummary = ({
 
     const filteredItemsInCart = filtered.length !== 0
 
-    isLogined && filteredItemsInCart
-      ? navigate('/payment', {
-          state: {
-            //상품정보 데이터
-            products: [...filtered]
-          }
-        })
-      : alert('장바구니에 상품을 선택 후 다시 시도해주세요.')
+    if (isLogined && filteredItemsInCart) {
+      navigate('/payment', {
+        state: {
+          //상품정보 데이터
+          products: [...filtered]
+        }
+      })
+    }
+    if (isLogined && !filteredItemsInCart) {
+      alert('장바구니에 상품을 선택 후 다시 시도해주세요.')
+    }
   }, [filtered, isLogined, navigate])
 
   const delivery = 3000
@@ -55,7 +63,7 @@ export const CartSummary = ({
     <div className={styles.container}>
       <div className={styles.total}>
         <div className={styles.totalSummary}>
-          <h3>주문상품</h3>
+          <h3>선택상품</h3>
           <div className={styles.contents}>
             <div className={styles.content}>
               <h4>총 상품금액</h4>
