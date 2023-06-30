@@ -49,7 +49,7 @@ export const SignInPage = () => {
     }
   }, [])
 
-  const emailValidCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const emailSpacingCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
     const emailValue = e.target.value
     if (emailValue.includes(' ')) {
       alert('띄어쓰기는 사용할 수 없습니다.')
@@ -58,7 +58,7 @@ export const SignInPage = () => {
     }
   }
 
-  const passwordValidCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const passwordSpacingCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
     const passwordValue = e.target.value
     if (passwordValue.includes(' ')) {
       alert('띄어쓰기는 사용할 수 없습니다.')
@@ -117,14 +117,14 @@ export const SignInPage = () => {
         <form onSubmit={submitId}>
           <input
             value={email}
-            onChange={emailValidCheck}
-            placeholder="이메일"
+            onChange={emailSpacingCheck}
+            placeholder="abc123@naver.com"
             ref={inputRef}
           />
           <input
             type="password"
             value={password}
-            onChange={passwordValidCheck}
+            onChange={passwordSpacingCheck}
             placeholder="비밀번호"
             ref={inputRef}
             minLength={8}
