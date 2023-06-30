@@ -11,12 +11,12 @@ import {
   BankContext,
   AccountNumberContext
 } from 'contexts/index'
-import { ModalProps } from '@/types'
+import { ModalProps } from 'types/index'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import SwiperCore, { Navigation } from 'swiper'
 import 'swiper/scss'
 import 'swiper/scss/navigation'
-import { Bank } from '@/types/BankAccounts.interface'
+import { Bank } from 'types/index'
 import { removeAccount, getAccounts, createAccount } from 'api/index'
 
 export const PaymentMethods = () => {
@@ -31,7 +31,7 @@ export const PaymentMethods = () => {
   const [selected, setSelected] = useState<string>('')
   const [accountData, setAccountData] = useState<Bank[]>([])
   const [valid, setValid] = useState<boolean>(false)
-  // console.log(accountData)
+
   SwiperCore.use([Navigation])
 
   //MODAL HANDLERS
@@ -178,7 +178,10 @@ export const PaymentMethods = () => {
       </Swiper>
 
       {/* PRODUCTS ID => PROPS */}
-      <Confirmation selected={selected} />
+      <Confirmation
+        selected={selected}
+        accountData={accountData}
+      />
       {/* MODAL */}
       {phoneNumber.length === 11 && isModalShow && modalProps ? (
         <Modal
