@@ -12,6 +12,7 @@
     min-height: 100%;
     padding-top: 50px;
     background-color: $color-primary;
+    position: relative;
 
     h1 {
       color: $color-admin-primary;
@@ -46,6 +47,16 @@
           a {
             color: $color-admin-primary;
           }
+        }
+
+        &.home {
+          a {
+            color: $color-admin-primary;
+            font-weight: 500;
+          }
+
+          position: absolute;
+          bottom: 100px;
         }
       }
     }
