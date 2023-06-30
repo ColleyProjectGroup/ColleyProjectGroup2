@@ -12,6 +12,7 @@ export const SignUpPage = () => {
   const [password, setPassword] = useState<string>('')
   const [displayName, setDisplayName] = useState<string>('')
   const [isValid, setIsValid] = useState<boolean>(false)
+  const [emailIsValid, setEmailIsValid] = useState<boolean>(false)
   const [isModalShow, setIsModalShow] = useState<boolean>(false)
   const [modalProps, setModalProps] = useState<ModalProps | null>(null)
   const { setIsLogined } = useContext(LoginContext)
@@ -40,7 +41,7 @@ export const SignUpPage = () => {
     }
   }, [inputRef])
 
-  const emailValidCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const emailSpacingCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
     const emailValue = e.target.value
     if (emailValue.includes(' ')) {
       alert('띄어쓰기는 사용할 수 없습니다.')
@@ -49,7 +50,27 @@ export const SignUpPage = () => {
     }
   }
 
-  const passwordValidCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const emailValidCheck = () => {
+    const emailRegEx = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+    const testEmail = emailRegEx.test(email)
+    if (testEmail) {
+      setEmailIsValid(true)
+      return
+    } else {
+      setIsModalShow(true)
+      setModalProps({
+        title: '로그인 오류',
+        content: '유효한 형식의 이메일이 아닙니다.',
+        isTwoButton: false,
+        okButtonText: '확인',
+        onClickOkButton: () => {
+          setIsModalShow(false)
+        }
+      })
+    }
+  }
+
+  const passwordSpacingCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
     const passwordValue = e.target.value
     if (passwordValue.includes(' ')) {
       alert('띄어쓰기는 사용할 수 없습니다.')
@@ -58,7 +79,7 @@ export const SignUpPage = () => {
     }
   }
 
-  const nameValidCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const nameSpacingCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
     const nameValue = e.target.value
     if (nameValue.includes(' ')) {
       alert('띄어쓰기는 사용할 수 없습니다.')
@@ -74,53 +95,55 @@ export const SignUpPage = () => {
       password,
       displayName
     }
-    postInfo(bodyInfo).then(
-      res => {
-        localStorage.setItem(
-          import.meta.env.VITE_STORAGE_KEY_ACCESSTOKEN,
-          res.accessToken
-        )
-        setUserEmail(res.user.email)
-        setIsModalShow(true)
-        setModalProps({
-          title: '회원가입',
-          content: '회원가입을 축하합니다.',
-          isTwoButton: false,
-          okButtonText: '확인',
-          onClickOkButton: () => {
-            setIsModalShow(false)
-            setIsLogined(true)
-            setUserEmail(res.user.email)
-            localStorage.setItem(
-              import.meta.env.VITE_STORAGE_KEY_ACCESSTOKEN,
-              res.accessToken
-            )
-            navigate('/', { replace: true })
-          }
-        })
-      },
-      error => {
-        const errorMessage = error.message
-        if (
-          errorMessage === '유효한 이메일이 아닙니다.' ||
-          errorMessage === '유효한 사용자 이름이 아닙니다.' ||
-          errorMessage === '유효한 비밀번호가 아닙니다.' ||
-          errorMessage === '이미 존재하는 사용자입니다.'
-        ) {
+    if (emailIsValid) {
+      postInfo(bodyInfo).then(
+        res => {
+          localStorage.setItem(
+            import.meta.env.VITE_STORAGE_KEY_ACCESSTOKEN,
+            res.accessToken
+          )
+          setUserEmail(res.user.email)
           setIsModalShow(true)
           setModalProps({
-            title: '회원가입 오류',
-            content: errorMessage,
+            title: '회원가입',
+            content: '회원가입을 축하합니다.',
             isTwoButton: false,
             okButtonText: '확인',
             onClickOkButton: () => {
               setIsModalShow(false)
+              setIsLogined(true)
+              setUserEmail(res.user.email)
+              localStorage.setItem(
+                import.meta.env.VITE_STORAGE_KEY_ACCESSTOKEN,
+                res.accessToken
+              )
+              navigate('/', { replace: true })
             }
           })
+        },
+        error => {
+          const errorMessage = error.message
+          if (
+            errorMessage === '유효한 이메일이 아닙니다.' ||
+            errorMessage === '유효한 사용자 이름이 아닙니다.' ||
+            errorMessage === '유효한 비밀번호가 아닙니다.' ||
+            errorMessage === '이미 존재하는 사용자입니다.'
+          ) {
+            setIsModalShow(true)
+            setModalProps({
+              title: '회원가입 오류',
+              content: errorMessage,
+              isTwoButton: false,
+              okButtonText: '확인',
+              onClickOkButton: () => {
+                setIsModalShow(false)
+              }
+            })
+          }
+          console.log(errorMessage)
         }
-        console.log(errorMessage)
-      }
-    )
+      )
+    }
   }
 
   return (
@@ -131,7 +154,7 @@ export const SignUpPage = () => {
           <div className={styles.text}>이메일</div>
           <input
             value={email}
-            onChange={emailValidCheck}
+            onChange={emailSpacingCheck}
             ref={inputRef}
             placeholder="이메일 형식으로 입력해주세요."
           />
@@ -141,7 +164,7 @@ export const SignUpPage = () => {
           <input
             type="password"
             value={password}
-            onChange={passwordValidCheck}
+            onChange={passwordSpacingCheck}
             ref={inputRef}
             placeholder="8자 이상 입력해주세요."
             minLength={8}
@@ -151,7 +174,7 @@ export const SignUpPage = () => {
           <div className={styles.text}>회원명</div>
           <input
             value={displayName}
-            onChange={nameValidCheck}
+            onChange={nameSpacingCheck}
             ref={inputRef}
             placeholder="20자 이내로 입력해주세요."
             maxLength={20}
@@ -159,6 +182,7 @@ export const SignUpPage = () => {
         </div>
         <button
           type="submit"
+          onClick={emailValidCheck}
           disabled={!isValid}>
           회원가입
         </button>
