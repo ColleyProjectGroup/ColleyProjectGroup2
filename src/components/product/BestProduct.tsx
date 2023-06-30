@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import { BestProductProps } from 'types/index'
 import { calculateDiscountedPrice } from 'utils/index'
 import 'styles/layout/BestSeller.scss'
+import noImage from 'public/no-photo.png'
+
 export const BestProduct = React.memo(
   ({ product, onSaveProductRecently }: BestProductProps) => {
     return (
@@ -16,7 +18,7 @@ export const BestProduct = React.memo(
           }}>
           <div className="image">
             <img
-              src={product.thumbnail}
+              src={product.thumbnail || noImage}
               alt={product.title}
             />
           </div>

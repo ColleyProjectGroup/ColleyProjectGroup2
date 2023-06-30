@@ -1,9 +1,10 @@
 import { useEffect, useState, useContext } from 'react'
-import { adminInstance } from '../../api/axios'
+import { adminInstance } from 'api/index'
 import 'styles/layout/NewArrival.scss'
 import { Link } from 'react-router-dom'
 import { RecentlyContext } from 'contexts/index'
 import { Product } from 'types/index'
+import noImage from 'public/no-photo.png'
 
 const NewArrival = () => {
   const [newProducts, setNewProducts] = useState<Product[]>([])
@@ -60,7 +61,7 @@ const NewArrival = () => {
                 onClick={() => onSaveProductRecently(product)}>
                 <div className="image">
                   <img
-                    src={product.thumbnail}
+                    src={product.thumbnail || noImage}
                     alt={product.title}
                   />
                 </div>

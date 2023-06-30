@@ -5,6 +5,7 @@ import { Footer, Products, Modal, ProductDetailInfoTab } from 'components/index'
 import 'styles/layout/ProductDetail.scss'
 import { Product, RouteParams, ModalProps } from 'types/index'
 import { LoginContext, WishListContext, CartContext } from 'contexts/index'
+import noImage from 'public/no-photo.png'
 
 export const ProductDetail = () => {
   const { id } = useParams<RouteParams>()
@@ -156,7 +157,7 @@ export const ProductDetail = () => {
             <div className="skeleton" />
           ) : (
             <img
-              src={product.thumbnail}
+              src={product.thumbnail || noImage}
               alt={product.title}
             />
           )}
@@ -250,10 +251,13 @@ export const ProductDetail = () => {
             <ProductDetailInfoTab
               child={
                 <>
-                  <img
-                    src={product.photo}
-                    alt={product.title}
-                  />
+                  {product.photo && (
+                    <img
+                      src={product.photo}
+                      alt={product.title}
+                    />
+                  )}
+
                   <div>
                     <div className="etcProducts">
                       <h2>YOU MAY ALSO LIKE</h2>

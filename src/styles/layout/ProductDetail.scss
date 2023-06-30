@@ -34,12 +34,17 @@
 
       .title {
         border-top: 2px solid $color-black-0;
-        border-bottom: 1px solid $color-border;
+
         display: block;
         font-size: 24px;
         font-weight: 600;
-        line-height: 2;
-        padding: 20px 0;
+        line-height: 1.5;
+        padding-top: 20px;
+        white-space: pre-wrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        height: 67px;
+        box-sizing: content-box;
 
         .skeleton {
           @include skeleton;
@@ -48,8 +53,10 @@
       }
 
       .price {
+        border-top: 1px solid $color-border;
         font-size: 12px;
-        margin: 20px 0;
+        margin: 20px 0 10px;
+        padding-top: 10px;
         display: block;
         line-height: 3;
 

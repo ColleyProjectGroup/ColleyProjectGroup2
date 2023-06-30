@@ -5,6 +5,7 @@ import 'styles/layout/NewArrival.scss'
 import { ProductsProps, Product } from 'types/index'
 import { Link } from 'react-router-dom'
 import { RecentlyContext } from 'contexts/index'
+import noImage from 'public/no-photo.png'
 
 const API_ENDPOINT = '/products'
 
@@ -121,7 +122,7 @@ const Products = React.memo(
                     }}>
                     <div className="image">
                       <img
-                        src={product.thumbnail}
+                        src={product.thumbnail || noImage}
                         alt={product.title}
                       />
                     </div>
