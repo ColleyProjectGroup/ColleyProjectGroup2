@@ -17,6 +17,7 @@ export const AdminSales = () => {
   const onChangeSearch = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       setSearch(event.target.value.trim())
+      setPage(1)
     },
     []
   )
