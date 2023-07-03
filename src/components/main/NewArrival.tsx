@@ -14,9 +14,11 @@ const NewArrival = () => {
       try {
         const response = await adminInstance.get('/products')
 
-        const filteredProducts = response.data.filter(
-          (product: { tags: string | string[] }) => product.tags.includes('NEW')
-        )
+        const filteredProducts = response.data
+          .filter((product: { tags: string | string[] }) =>
+            product.tags.includes('NEW')
+          )
+          .slice(0, 5)
         setNewProducts(filteredProducts)
       } catch (error) {
         console.error('Error fetching products', error)
